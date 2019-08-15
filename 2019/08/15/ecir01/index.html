@@ -188,9 +188,9 @@ var _hmt = _hmt || [];
 <h2 id="提供的主要方法和贡献"><a href="#提供的主要方法和贡献" class="headerlink" title="提供的主要方法和贡献"></a>提供的主要方法和贡献</h2><ul>
 <li>将数据抽象为一个无向图，节点是数据，边是数据之间的距离；</li>
 <li>解决的两个问题：<img src="/assets/demoImg/ecir01.png" alt="解决的两个问题" title="解决的两个问题"></li>
-<li>KNN两步异常点检测算法：输入$G^+(O_{train} + v， D_{train}+d(v, O_{train}))$，和测试数据v，离群阈值T；输出v是否为离群点和v的K个邻居。遍历每个训练数据，计算每个数据的第K个邻居的距离$Ndist^+<em>{v,k}$，如果大于等于$D</em>{iv}$，则加入M(v)，遍历结束后判断如果$len(M(v))&lt;T$则判定为异常,邻居节点由$Ndist^+_{v,k}$决定。</li>
+<li>KNN两步异常点检测算法：输入$G^+(O<em>{train} + v， D</em>{train}+d(v, O<em>{train}))$，和测试数据v，离群阈值T；输出v是否为离群点和v的K个邻居。遍历每个训练数据，计算每个数据的第K个邻居的距离$Ndist^+</em>{v,k}$，如果大于等于$D<em>{iv}$，则加入M(v)，遍历结束后判断如果$len(M(v))&lt;T$则判定为异常,邻居节点由$Ndist^+</em>{v,k}$决定。</li>
 <li>上下文敏感的强KNN算法：主要为了解决不同数据集密度不同的问题，可提供检测异常。输入图$G^+$和测试数据v；输出v是否为异常点和少于K个临近点；遍历测试数据，计算每个数据的第k个邻居的距离，如果数据i在v的k个邻居内且v到数据i的距离小于i到第k个邻居的距离则将i放入N(v)中，结束遍历，如果N(v)为空则说明v是异常点，返回N(v)为v的邻居点。</li>
-<li>高效的强KNN算法：在上一个算法的基础上对时间复杂度进行改进，适应于测试数据变化的情况。输入G和测试集合V={v,…};输出测试数据的是否为异常点以及邻居节点。训练阶段，计算出G中所有节点的$Ndist_{i,K-1}$和$Ndist_{i,k}$，时间复杂度为$O(K^2N)$，测试阶段，遍历每一个测试数据v，得到新的图$G^+$，对于每一个测试数据i，如果$Ndist_{i,K-1} == Ndist_{i,K}$，则$Ndist^+<em>{i,K} = Ndist</em>{i,K}$，否则$Ndist^+<em>{i,K} = min(Ndist</em>{i,K-1}, D^+<em>{iv})$，再计算v的第k个邻居的距离$Ndist^+</em>{v,K}$时间复杂度为$O(KN)$最后和上一算法判断是否为异常点的条件相同。</li>
+<li>高效的强KNN算法：在上一个算法的基础上对时间复杂度进行改进，适应于测试数据变化的情况。输入G和测试集合V={v,…};输出测试数据的是否为异常点以及邻居节点。训练阶段，计算出G中所有节点的$Ndist<em>{i,K-1}$和$Ndist</em>{i,k}$，时间复杂度为$O(K^2N)$，测试阶段，遍历每一个测试数据v，得到新的图$G^+$，对于每一个测试数据i，如果$Ndist<em>{i,K-1} == Ndist</em>{i,K}$，则$Ndist^+<em>{i,K} = Ndist</em>{i,K}$，否则$Ndist^+<em>{i,K} = min(Ndist</em>{i,K-1}, D^+<em>{iv})$，再计算v的第k个邻居的距离$Ndist^+</em>{v,K}$时间复杂度为$O(KN)$最后和上一算法判断是否为异常点的条件相同。</li>
 <li>最后的时间复杂度是$O(KN)$，是线性的。</li>
 <li>可以用来做聚类的种子选择方法。</li>
 <li>使用了文本数据和非文本数据进行了实验，得到了较好的结果。</li>
@@ -414,11 +414,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -430,19 +434,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
             
             <div class="clearfix"></div>
