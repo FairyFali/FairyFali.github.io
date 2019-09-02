@@ -154,6 +154,240 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tensorflow-note" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ul>
+<li>学习链接：<a href="https://www.bilibili.com/video/av20542427/?p=6" target="_blank" rel="noopener">https://www.bilibili.com/video/av20542427/?p=6</a></li>
+<li><p>学习链接2：<a href="https://www.bilibili.com/video/av22530538/?p=29" target="_blank" rel="noopener">https://www.bilibili.com/video/av22530538/?p=29</a></p>
+</li>
+<li><p>TensorFlow基本概念</p>
+<ul>
+<li>使用<strong>图(Graphs)</strong>表示计算任务</li>
+<li>在被称之为<strong>会话(Session)</strong>的<strong>上下文(Context)</strong>中执行图</li>
+<li>使用<strong>tensor</strong>表示数据</li>
+<li>通过<strong>变量（Variable）</strong>维护状态</li>
+<li>使用<strong>feed</strong>和<strong>fetch</strong>可以为任何的变量赋值或获取元素</li>
+</ul>
+</li>
+<li>摘要：TensorFlow是一个编程系统，使用图(Graphs)来表示计算任务，图中的节点(有疑问)称之为op(operation)，一个op获得0个或者多个Tensor，执行计算，产生0个或者多个Tensor。Tensor是张量，看做是一个n维的数据。图在会话(Session)里启动。</li>
+<li>编程<ul>
+<li>TensorFlow存在默认的图</li>
+<li>常量：tf.constant([[],[]])</li>
+<li>矩阵乘法：tf.matmul(c1, c2) </li>
+<li>会话：tf.Session()</li>
+<li>触发op：session.run(op)</li>
+<li>变量：tf.Variable([1,2]) # 一个1维数组<ul>
+<li>变量必须初始化</li>
+<li>session.run(tf.global_variable_initializer())</li>
+</ul>
+</li>
+<li>加法：tf.add(x,y)</li>
+<li>减法：tf.subtract(x,y)</li>
+<li>赋值：tf.assign(newVar, oldVar)</li>
+<li>同时执行多个op：fetch</li>
+<li>占位符：tf.placeholder(tf.float32, [None, 1]) # 可以定义形状，None代表任意</li>
+<li>同时传入多个值：feed<ul>
+<li>session.run(op, feed_dict={input:value})</li>
+</ul>
+</li>
+<li>平方：tf.square(var)</li>
+<li>求平均：tf.reduce_mean(var)<ul>
+<li>tf.reduce_mean(tf.square(var)) # 均方误差</li>
+</ul>
+</li>
+<li>梯度下降优化器：tf.train.GradientDesentOptimizer(lambda)</li>
+<li>生成固定间隔的点：np.linspace(start, end, number) # 生成number个随机点</li>
+<li>array的变量[:, np.newaxis]可以增加维度</li>
+<li>生成符合正态分布的随机点：np.random.normal(0, 0.02, x_data.shape)</li>
+</ul>
+</li>
+<li>手写数字识别<ul>
+<li>MNIST数据集<ul>
+<li>28*28的图片，把每一张图片展开为一个向量，长度就是784，共有60000张训练图像，因此训练数据集的大小就是[60000, 784]的张量，第一个维度数字索引图片，第二个维度数字用来索引图片中的像素点，每个像素点是介于0~1之间。</li>
+<li>测试集有10000张图片</li>
+<li>标签是介于0~9之间的数字，使用One-hot表示，预测标签为[60000, 10]的数字矩阵；</li>
+<li>神经网络做分类</li>
+</ul>
+</li>
+<li>Softmax函数<ul>
+<li>$softmax(x_i)=\frac{exp(x_i)}{\sum_jexp(x_j)}$</li>
+</ul>
+</li>
+<li>一般sigmod输出函数对应交叉熵损失函数，softmax搭配对数似然函数，线性输出搭配均方根误差<ul>
+<li>tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))</li>
+</ul>
+</li>
+<li>解决过拟合的方法<ul>
+<li>增加数据</li>
+<li>正则化方法</li>
+<li>Dropout：drop_out率<ul>
+<li>tf.nn.dropout(L1, drop_out_prop) # L1是隐藏层输出，drop_out_prop为保留概率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优化器Optimizer<ul>
+<li>类型<ul>
+<li>标准梯度下降：累计所有的样本的误差更新权重</li>
+<li>随机梯度下降：随机选择一个样本计算误差更新权重</li>
+<li>批量梯度下降法：折中的方案</li>
+<li>Momentum：当前权值的改变受到上一次权值改变的影响</li>
+<li>NAG：使用预测下一个位置的梯度，对Momentum的改进</li>
+<li>Adagrad：自动学习学习率，适用于数据稀疏的数据集</li>
+<li>RMSprop： 使用前t-1次的梯度，并且自适应梯度</li>
+<li>Adadelta：(一般效果比较好)</li>
+<li>Adam： </li>
+</ul>
+</li>
+<li>tensorflow中的应用<ul>
+<li>tf.train.AdadeltaOptimizer(lambda)</li>
+<li>.AdamOptimizer(lambda)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>98%的例子<ul>
+<li>两层隐藏层：500 and 300</li>
+<li>没有使用dropout</li>
+<li>softmax+交叉熵损失函数</li>
+<li>学习率初始为0.001，随着epoch变化而变小 乘以 $0.95^{epoch}$</li>
+<li>AdamOptimizer优化器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TensorBoard<ul>
+<li>tensorboard绘制网络结构<ul>
+<li>定义命名空间：tf.name-scope(‘name’)</li>
+<li>将placeholder的占位符放在该命名空间下，并且起名字</li>
+<li>在session中加：writer = tf.summary.FileWriter(‘logs/‘, session.graph)</li>
+</ul>
+</li>
+<li>tensorboard网络运行<ul>
+<li>定义函数variable_summaries(var)<ul>
+<li>计算参数的评价值</li>
+<li>tf.summary.scalar(‘name’, name)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tensorflow可视化<ul>
+<li>…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CNN<ul>
+<li>tf.nn.conv2d(input, filter, strides, padding)<ul>
+<li>input tensor 包括四个维度[batch, in_height, in_width, in_channels]# 批次大小，高，宽，深度</li>
+<li>filter tensor为卷积核， 包括四个维度[filter_height, filter_width, in_channels, out_channels] # 卷积核的长宽高，卷积核的数量</li>
+<li>strides为步长，包括四个维度，其中[1,x,1,y]第0和第3个维度是1，第1个维度是x方向的步长，第2个维度为y方向的步长</li>
+<li>padding为填充选项，可以选择same和valid</li>
+</ul>
+</li>
+<li>tf.nn.max_pool(input, ksize, strides, padding)<ul>
+<li>input同上</li>
+<li>ksize为pooling层大小[1,x,y,1]</li>
+<li>strides同上</li>
+<li>padding同上</li>
+</ul>
+</li>
+<li>tf.reshape(input, [-1, in_height, in_width, in_channels])<ul>
+<li>input为输入的二维数组，转换为四维tensor</li>
+<li>-1为batch大小，其余为长宽高</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RNN<ul>
+<li>。。。</li>
+</ul>
+</li>
+<li>保存模型<ul>
+<li>saver = tf.train.Saver()</li>
+<li>saver.save(session, ‘net/my_net.ckpt’)\</li>
+<li>saver.restore(session, ‘path’)</li>
+</ul>
+</li>
+<li>Inception-v3<ul>
+<li>下载模型：</li>
+<li>迁移学习</li>
+</ul>
+</li>
+<li>验证码生成<ul>
+<li><code>pip install captcha</code> </li>
+</ul>
+</li>
+<li>制作数据集<ul>
+<li>tfrecords文件<ul>
+<li>tfrecords文件是一种二进制文件，可先将图片和标签制作成该格式的文件。使用tfrecords进行数据读取，会提高内存利用率。</li>
+<li>用tf.train.Example的协议存储训练数据。训练数据的特征用键值对的形式表示。<ul>
+<li>如：’img_raw’:值, ‘label’:值</li>
+</ul>
+</li>
+<li>用SerializeToString()把数据序列化成字符串存储。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lenet-5<ul>
+<li>第一层5×5×1×32的卷积核，步长为1，padding：vaild</li>
+<li>pooling，2×2，步长为2</li>
+<li>第二层5×5×32×64，步长为1，padding：same</li>
+<li>pooling，2×2，步长为2</li>
+<li>全连接层，拉直(7×7×64)×10</li>
+</ul>
+</li>
+<li>利用已有网络，实现特定应用（迁移网络？）<ul>
+<li>VGG网络的源码：<a href="https://www.cs.toronto.edu/~frossard/post/vgg16/" target="_blank" rel="noopener">https://www.cs.toronto.edu/~frossard/post/vgg16/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/02/tensorflow-note/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ecir01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -694,7 +928,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,23 +952,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
             
             <div class="clearfix"></div>
@@ -847,5 +1081,21 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
