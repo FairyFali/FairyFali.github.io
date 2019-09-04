@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>论文阅读：高效的上下文敏感的KNN搜索 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 Efficient Context-Aware K-Nearest Neighbor Search 高效的上下文感知K近邻搜索 ECIR:CCF C类会议、CORE A类会议 论文集链接：https://link.springer.com/book/10.1007/978-3-319-76941-7 论文链接：下载  解决的主要问题 普通的KNN方法无法处理离群点和密度的影响，本文提出的">
-<meta name="keywords" content="信息检索,KNN">
+  <meta name="description" content="论文题目 显示，关注和讲述：视觉关注的神经网络生成图像标题 ICML：A类会议，机器学习顶会 论文链接：https://arxiv.org/pdf/1502.03044.pdf  作者介绍 一作Kelvin Xu，目前是加州伯克利分校的博士生，导师为Sergey Levine，曾在Google的Brain Residency Peogram(now AI Residency), 在Yoshua B">
+<meta name="keywords" content="ICML,计算机视觉,Image Caption,Attention">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读：高效的上下文敏感的KNN搜索">
-<meta property="og:url" content="fairyfali.github.io/2019/08/15/ecir01/index.html">
+<meta property="og:title" content="论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention">
+<meta property="og:url" content="fairyfali.github.io/2019/09/04/icml01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 Efficient Context-Aware K-Nearest Neighbor Search 高效的上下文感知K近邻搜索 ECIR:CCF C类会议、CORE A类会议 论文集链接：https://link.springer.com/book/10.1007/978-3-319-76941-7 论文链接：下载  解决的主要问题 普通的KNN方法无法处理离群点和密度的影响，本文提出的">
+<meta property="og:description" content="论文题目 显示，关注和讲述：视觉关注的神经网络生成图像标题 ICML：A类会议，机器学习顶会 论文链接：https://arxiv.org/pdf/1502.03044.pdf  作者介绍 一作Kelvin Xu，目前是加州伯克利分校的博士生，导师为Sergey Levine，曾在Google的Brain Residency Peogram(now AI Residency), 在Yoshua B">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:image" content="/assets/blogImg/ecir01.png">
-<meta property="og:updated_time" content="2019-08-15T07:36:30.085Z">
+<meta property="og:image" content="/assets/blogImg/kelvin_xu.jpg">
+<meta property="og:image" content="/assets/blogImg/lstm.png">
+<meta property="og:updated_time" content="2019-09-04T02:04:22.301Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读：高效的上下文敏感的KNN搜索">
-<meta name="twitter:description" content="论文题目 Efficient Context-Aware K-Nearest Neighbor Search 高效的上下文感知K近邻搜索 ECIR:CCF C类会议、CORE A类会议 论文集链接：https://link.springer.com/book/10.1007/978-3-319-76941-7 论文链接：下载  解决的主要问题 普通的KNN方法无法处理离群点和密度的影响，本文提出的">
-<meta name="twitter:image" content="/assets/blogImg/ecir01.png">
+<meta name="twitter:title" content="论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention">
+<meta name="twitter:description" content="论文题目 显示，关注和讲述：视觉关注的神经网络生成图像标题 ICML：A类会议，机器学习顶会 论文链接：https://arxiv.org/pdf/1502.03044.pdf  作者介绍 一作Kelvin Xu，目前是加州伯克利分校的博士生，导师为Sergey Levine，曾在Google的Brain Residency Peogram(now AI Residency), 在Yoshua B">
+<meta name="twitter:image" content="/assets/blogImg/kelvin_xu.jpg">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -155,53 +156,61 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ecir01" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-icml01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      论文阅读：高效的上下文敏感的KNN搜索
+      论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention
     </h1>
   
 
         
-        <a href="/2019/08/15/ecir01/" class="archive-article-date">
-  	<time datetime="2019-08-15T07:21:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
+        <a href="/2019/09/04/icml01/" class="archive-article-date">
+  	<time datetime="2019-09-04T01:28:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h2><ul>
-<li>Efficient Context-Aware K-Nearest Neighbor Search</li>
-<li>高效的上下文感知K近邻搜索</li>
-<li>ECIR:CCF C类会议、CORE A类会议</li>
-<li>论文集链接：<a href="https://link.springer.com/book/10.1007/978-3-319-76941-7" target="_blank" rel="noopener">https://link.springer.com/book/10.1007/978-3-319-76941-7</a></li>
-<li>论文链接：<a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-76941-7_35.pdf" target="_blank" rel="noopener">下载</a></li>
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>显示，关注和讲述：视觉关注的神经网络生成图像标题</li>
+<li>ICML：A类会议，机器学习顶会</li>
+<li>论文链接：<a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1502.03044.pdf</a></li>
 </ul>
-<h2 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h2><ul>
-<li>普通的KNN方法无法处理离群点和密度的影响，本文提出的强KNN方法可以在线性时间复杂度内解决这个问题并且与现有的几种方法以及SVM、LR方法进行试验分析得到的最优的结果。</li>
+<h3 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h3><ul>
+<li>一作Kelvin Xu，目前是加州伯克利分校的博士生，导师为Sergey Levine，曾在Google的Brain Residency Peogram(now AI Residency), 在Yoshua Bengio和Aaron cpirville 的指导下在蒙特利尔大学的MILA实验室完成了硕士学位。</li>
+<li><img src="/assets/blogImg/kelvin_xu.jpg" alt="kelvin xu"></li>
+<li>Yoshua Bengio为2018年图灵奖获得者，蒙特利尔大学教授，与Hinton和Yann LeCun并称为深度学习三大巨头。</li>
 </ul>
-<h2 id="提供的主要方法和贡献"><a href="#提供的主要方法和贡献" class="headerlink" title="提供的主要方法和贡献"></a>提供的主要方法和贡献</h2><ul>
-<li>将数据抽象为一个无向图，节点是数据，边是数据之间的距离；</li>
-<li>解决的两个问题：<img src="/assets/blogImg/ecir01.png" alt="解决的两个问题" title="解决的两个问题"></li>
-<li>KNN两步异常点检测算法：输入$G^+(O_{train} + v,D_{train}+d(v, O_{train}))$，和测试数据v，离群阈值T；输出v是否为离群点和v的K个邻居。遍历每个训练数据，计算每个数据的第K个邻居的距离$Ndist^+_{v,k}$，如果大于等于$D_{iv}$，则加入M(v)，遍历结束后判断如果$len(M(v))&lt;T$则判定为异常,邻居节点由$Ndist^+_{v,k}$决定。</li>
-<li>上下文敏感的强KNN算法：主要为了解决不同数据集密度不同的问题，可提供检测异常。输入图$G^+$和测试数据v；输出v是否为异常点和少于K个临近点；遍历测试数据，计算每个数据的第k个邻居的距离，如果数据i在v的k个邻居内且v到数据i的距离小于i到第k个邻居的距离则将i放入N(v)中，结束遍历，如果N(v)为空则说明v是异常点，返回N(v)为v的邻居点。</li>
-<li>高效的强KNN算法：在上一个算法的基础上对时间复杂度进行改进，适应于测试数据变化的情况。输入G和测试集合V={v,…};输出测试数据的是否为异常点以及邻居节点。训练阶段，计算出G中所有节点的$Ndist_{i,K-1}$和$Ndist_{i,k}$，时间复杂度为$O(K^2N)$，测试阶段，遍历每一个测试数据v，得到新的图$G^+$，对于每一个测试数据i，如果$Ndist_{i,K-1} == Ndist_{i,K}$，则$Ndist^+_{i,K} = Ndist_{i,K}$，否则$Ndist^+_{i,K} = min(Ndist_{i,K-1}, D^+_{iv})$，再计算v的第k个邻居的距离$Ndist^+_{v,K}$时间复杂度为$O(KN)$最后和上一算法判断是否为异常点的条件相同。</li>
-<li>最后的时间复杂度是$O(KN)$，是线性的。</li>
-<li>可以用来做聚类的种子选择方法。</li>
-<li>使用了文本数据和非文本数据进行了实验，得到了较好的结果。</li>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ol>
+<li>根据图片生成标题。Image Caption可以分为两个问题：1、解决计算机视觉在物体识别的挑战，和2、获取不同物体之间的关系。</li>
+</ol>
+<h3 id="提供的主要方法和贡献"><a href="#提供的主要方法和贡献" class="headerlink" title="提供的主要方法和贡献"></a>提供的主要方法和贡献</h3><h4 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h4><ol>
+<li>介绍了两种注意力机制的Image Caption生成器，1）软确定性注意力机制通过标准反向传播是可训练的，2）硬随机注意力机制是近似可训练的。</li>
+<li>可视化注意力集中在where和what来可视化注意力结果。</li>
+<li>在Flickr8k、Flickr30k和MS COCO数据集上进行了验证。</li>
+</ol>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ol>
+<li>模型。编码阶段使用vgg的卷积层处理图片获得14×14×512的特征图集合a，解码阶段使用LSTM生成标题，输入包括三个元素$h_{t-1},z_t,Ey_{t-1}$，$h_{t-1}$表示上一细胞的隐藏状态，E表示一个嵌入词向量矩阵，$y_{t-1}$表示上一个输出的单词，$z_t$表示上下文向量，注意的部分，计算使用$h_{t-1}$和$a_i$获取i位置的注意力权重$\alpha_i$，初始化细胞隐藏状态h0和记忆c0使用输出特征图的平均值经过MLP表示。当得到当前时刻的$h_{t}$后，经过$p(y_t|a,y_1^{t-1})=exp(L_0(Ey_{t-1}+L_hh_t+L_zz_t))$得到概率向量，从而可以得到输出的词。作者在MS COCO数据集上跑了3天的时间。<br><img src="/assets/blogImg/lstm.png" alt="lstm图片"></li>
+<li>注意力机制的两种情况，硬随机注意力机制，就是通过概率值采样，但是难以训练，软确定性注意力，得到的$\alpha_{ti}$就是注意力权重值。</li>
+<li>可视化。通过对14×14的特征图进行上采样确定当前输出词对应的区域。</li>
+</ol>
+<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
+<li>卷积层可以使用不同的深度CNN网络做对比；</li>
+<li>没有集成模型的使用；</li>
+<li>标准的的数据集分割。</li>
 </ul>
-<h2 id="对强KNN的理解"><a href="#对强KNN的理解" class="headerlink" title="对强KNN的理解"></a>对强KNN的理解</h2><ul>
-<li>略</li>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>196是L（位置数量），512是D（向量维度）？</li>
+<li>硬注意力的公式没有看懂</li>
+<li>软注意力的权重和不为1？损失函数的x表示输入吗？</li>
 </ul>
-<h2 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h2><ul>
-<li>原论文中有一些个人理解的错误，C类会议的论文水平果然差一点</li>
-<li>对密度进行判断的条件有缺陷，可以选择当前选择的邻居不能出现在之前的邻居的邻域内。</li>
-<li>对密度的判断条件的两个K可以自适应的决定。</li>
+<h3 id="自己的idea"><a href="#自己的idea" class="headerlink" title="自己的idea"></a>自己的idea</h3><ul>
+<li>相当于一个端到端的模型，很多应用都可以抽象为一个端到端的模型</li>
 </ul>
 
       
@@ -216,11 +225,19 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICML</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">KNN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Image Caption</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Attention</a>
         		</li>
       		
 		</ul>
@@ -276,7 +293,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/08/15/ecir01/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/09/04/icml01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,18 +307,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/09/02/tensorflow-note/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Tensor学习整理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/14/sigir01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序</div>
+    <a href="/2019/09/02/tensorflow-note/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Tensor学习整理</div>
       <i class="icon-circle-right"></i>
     </a>
   

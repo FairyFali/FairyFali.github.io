@@ -154,6 +154,127 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-icml01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/04/icml01/">论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/04/icml01/" class="archive-article-date">
+  	<time datetime="2019-09-04T01:28:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>显示，关注和讲述：视觉关注的神经网络生成图像标题</li>
+<li>ICML：A类会议，机器学习顶会</li>
+<li>论文链接：<a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1502.03044.pdf</a></li>
+</ul>
+<h3 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h3><ul>
+<li>一作Kelvin Xu，目前是加州伯克利分校的博士生，导师为Sergey Levine，曾在Google的Brain Residency Peogram(now AI Residency), 在Yoshua Bengio和Aaron cpirville 的指导下在蒙特利尔大学的MILA实验室完成了硕士学位。</li>
+<li><img src="/assets/blogImg/kelvin_xu.jpg" alt="kelvin xu"></li>
+<li>Yoshua Bengio为2018年图灵奖获得者，蒙特利尔大学教授，与Hinton和Yann LeCun并称为深度学习三大巨头。</li>
+</ul>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ol>
+<li>根据图片生成标题。Image Caption可以分为两个问题：1、解决计算机视觉在物体识别的挑战，和2、获取不同物体之间的关系。</li>
+</ol>
+<h3 id="提供的主要方法和贡献"><a href="#提供的主要方法和贡献" class="headerlink" title="提供的主要方法和贡献"></a>提供的主要方法和贡献</h3><h4 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h4><ol>
+<li>介绍了两种注意力机制的Image Caption生成器，1）软确定性注意力机制通过标准反向传播是可训练的，2）硬随机注意力机制是近似可训练的。</li>
+<li>可视化注意力集中在where和what来可视化注意力结果。</li>
+<li>在Flickr8k、Flickr30k和MS COCO数据集上进行了验证。</li>
+</ol>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ol>
+<li>模型。编码阶段使用vgg的卷积层处理图片获得14×14×512的特征图集合a，解码阶段使用LSTM生成标题，输入包括三个元素$h_{t-1},z_t,Ey_{t-1}$，$h_{t-1}$表示上一细胞的隐藏状态，E表示一个嵌入词向量矩阵，$y_{t-1}$表示上一个输出的单词，$z_t$表示上下文向量，注意的部分，计算使用$h_{t-1}$和$a_i$获取i位置的注意力权重$\alpha_i$，初始化细胞隐藏状态h0和记忆c0使用输出特征图的平均值经过MLP表示。当得到当前时刻的$h_{t}$后，经过$p(y_t|a,y_1^{t-1})=exp(L_0(Ey_{t-1}+L_hh_t+L_zz_t))$得到概率向量，从而可以得到输出的词。作者在MS COCO数据集上跑了3天的时间。<br><img src="/assets/blogImg/lstm.png" alt="lstm图片"></li>
+<li>注意力机制的两种情况，硬随机注意力机制，就是通过概率值采样，但是难以训练，软确定性注意力，得到的$\alpha_{ti}$就是注意力权重值。</li>
+<li>可视化。通过对14×14的特征图进行上采样确定当前输出词对应的区域。</li>
+</ol>
+<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
+<li>卷积层可以使用不同的深度CNN网络做对比；</li>
+<li>没有集成模型的使用；</li>
+<li>标准的的数据集分割。</li>
+</ul>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>196是L（位置数量），512是D（向量维度）？</li>
+<li>硬注意力的公式没有看懂</li>
+<li>软注意力的权重和不为1？损失函数的x表示输入吗？</li>
+</ul>
+<h3 id="自己的idea"><a href="#自己的idea" class="headerlink" title="自己的idea"></a>自己的idea</h3><ul>
+<li>相当于一个端到端的模型，很多应用都可以抽象为一个端到端的模型</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICML</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Image Caption</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Attention</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/04/icml01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-tensorflow-note" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -958,22 +1079,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
@@ -990,7 +1095,39 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ICML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机视觉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Image Caption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
             
             <div class="clearfix"></div>
