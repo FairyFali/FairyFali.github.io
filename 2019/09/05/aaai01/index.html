@@ -6,25 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>圣诞到了，帮修改一个头像 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：利用卷积特征和子词信息改进词嵌入 | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="帮忙把这只狐狸塞到圣诞袜子里或者带上圣诞帽~~~~ ——鱼头">
-<meta name="keywords" content="设计,杂谈">
+  <meta name="description" content="论文题目 Improving Word Embeddings with Convolutional Feature Learning and Subword Information 利用卷积特征和子词信息改进词嵌入 发表在AAAI2017，CCF A类会议 论文链接：https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14724  作者介绍">
+<meta name="keywords" content="深度学习,词嵌入,卷积神经网络,embedding">
 <meta property="og:type" content="article">
-<meta property="og:title" content="圣诞到了，帮修改一个头像">
-<meta property="og:url" content="fairyfali.github.io/2018/12/19/a-chrismas-ico/index.html">
+<meta property="og:title" content="论文阅读：利用卷积特征和子词信息改进词嵌入">
+<meta property="og:url" content="fairyfali.github.io/2019/09/05/aaai01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="帮忙把这只狐狸塞到圣诞袜子里或者带上圣诞帽~~~~ ——鱼头">
+<meta property="og:description" content="论文题目 Improving Word Embeddings with Convolutional Feature Learning and Subword Information 利用卷积特征和子词信息改进词嵌入 发表在AAAI2017，CCF A类会议 论文链接：https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14724  作者介绍">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:image" content="/assets/blogImg/xmas_ico0.jpg">
-<meta property="og:image" content="/assets/blogImg/xmas_ico1.jpg">
-<meta property="og:image" content="/assets/blogImg/xmas_ico2.jpg">
-<meta property="og:image" content="/assets/blogImg/xmas_ico3.jpg">
-<meta property="og:updated_time" content="2019-08-14T04:01:12.052Z">
+<meta property="og:image" content="/assets/blogImg/aaai01_1.png">
+<meta property="og:image" content="/assets/blogImg/aaai01_2.png">
+<meta property="og:updated_time" content="2019-09-05T05:14:50.951Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="圣诞到了，帮修改一个头像">
-<meta name="twitter:description" content="帮忙把这只狐狸塞到圣诞袜子里或者带上圣诞帽~~~~ ——鱼头">
-<meta name="twitter:image" content="/assets/blogImg/xmas_ico0.jpg">
+<meta name="twitter:title" content="论文阅读：利用卷积特征和子词信息改进词嵌入">
+<meta name="twitter:description" content="论文题目 Improving Word Embeddings with Convolutional Feature Learning and Subword Information 利用卷积特征和子词信息改进词嵌入 发表在AAAI2017，CCF A类会议 论文链接：https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14724  作者介绍">
+<meta name="twitter:image" content="/assets/blogImg/aaai01_1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -158,32 +156,52 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-a-chrismas-ico" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-aaai01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      圣诞到了，帮修改一个头像
+      论文阅读：利用卷积特征和子词信息改进词嵌入
     </h1>
   
 
         
-        <a href="/2018/12/19/a-chrismas-ico/" class="archive-article-date">
-  	<time datetime="2018-12-19T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
+        <a href="/2019/09/05/aaai01/" class="archive-article-date">
+  	<time datetime="2019-09-05T03:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/assets/blogImg/xmas_ico0.jpg" alt="ico原来的样子">      </p>
-<blockquote>
-<p>帮忙把这只狐狸塞到圣诞袜子里或者带上圣诞帽~~~~ ——鱼头       </p>
-</blockquote>
-<a id="more"></a>
-<p>鱼头君，我终于做好了！花了我整整……好吧，其实是一直偷懒没做我就承认了。<br>按照你的要求，弄成这样的：<br><img src="/assets/blogImg/xmas_ico1.jpg" alt="狐狸妹纸太大我塞不下-_-!"><br>或者这样的：<br><img src="/assets/blogImg/xmas_ico2.jpg" alt="圣诞帽的狐狸妹纸"><br>其实我最喜欢的是这样的：<br><img src="/assets/blogImg/xmas_ico3.jpg" alt="呆萌傻缺才是我得菜好么"><br><strong>Happy Chrismas!</strong></p>
+        <h2 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h2><ul>
+<li>Improving Word Embeddings with Convolutional Feature Learning and Subword Information</li>
+<li>利用卷积特征和子词信息改进词嵌入</li>
+<li>发表在AAAI2017，CCF A类会议</li>
+<li>论文链接：<a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14724" target="_blank" rel="noopener">https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14724</a></li>
+</ul>
+<h3 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h3><ul>
+<li>一作Shaosheng Cao是新加坡科技设计大学助理研究员。</li>
+<li>二作lu Wei是新加坡科技设计大学的副教授，主要做数学模型、机器学习模型应用到数据处理和自然语言处理，个人主页：<a href="https://istd.sutd.edu.sg/people/faculty/lu-wei。" target="_blank" rel="noopener">https://istd.sutd.edu.sg/people/faculty/lu-wei。</a></li>
+</ul>
+<h2 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h2><ul>
+<li>提出了使用卷积网络提取上下文信息和利用词的子词信息对表示词向量，达到对现有词嵌入方法的改进。</li>
+</ul>
+<h2 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h2><ol>
+<li>卷积神经网络。在其他论文中提出卷积神经网络能够提取出比全连接网络更丰富的信息。和其他网络不同，使用卷积神经网络对上下文进行表示得到一个上下文表示向量。<br><img src="/assets/blogImg/aaai01_1.png" alt="模型"></li>
+<li>模型。如上图所示，下侧为单词的向量表示，每一个单词的向量表示分为三个部分，字符tri-grams、词根和词缀、归一化表示，如图所示，<img src="/assets/blogImg/aaai01_2.png" alt>，这里的向量表示应该是对于每一个单元，初始化表示为一个向量，维度是超参数，每一个单词的特征向量做求平均表示，在训练过程中每个单元的表示也可以学习出来。图中”liquid”左侧的词为上下文出现的词，右侧的词为负采样获得的负样本；左上侧为上下文通过卷积层和max-pooling层得到上下文表示c；右中方为两个全连接层获得当前词和负样本词的词嵌入表示w；右上侧为计算w和c的相似度，通过softmax计算当前词在所有词包括负采样词中所占的比重$p(w,c)$。损失函数为对数似然$-log(p)$。</li>
+<li>实验。训练集为enwki9，baseline为Skipgram、char n-gram、GloVe、DSSM，指标为单词可视化、单词相似度和单词类比推理三个指标，其中单词可视化使用t-SNE工具实现，定性指标；单词相似度使用数据集Word-Sim353、MEN、MT、Rell22、RG，使用斯皮尔曼排序系数指标；单词类比推理使用3CosMul函数指标，数据集来自微软和谷歌。上述数据集和代码都在论文中有参考链接，但是源码的链接访问不了了。</li>
+</ol>
+<h2 id="我对本文提出方法的理解"><a href="#我对本文提出方法的理解" class="headerlink" title="我对本文提出方法的理解"></a>我对本文提出方法的理解</h2><ul>
+<li>相比于之前的方法，本文的方法只是在卷积层和向量表示的部分做了改进，进行了实验说明了模型的健壮性、卷积层的作用、在向量的维度和负样本的选择数量上进行了经验性的实验，理论的部分比较少，篇幅也有一点拼凑的感觉，总体感觉不值AAAI的版面。</li>
+</ul>
+<h2 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h2><ul>
+<li>创新点比较少，主要就是围绕题目的两个点。</li>
+<li>只能适用于英文，其他语言比如中文的应用有待开发。</li>
+<li>如果使用其他的神经网络或者Attention机制会不会有好的效果，当前词的表示尝试使用其他的网络结构？</li>
+</ul>
 
       
 
@@ -197,11 +215,19 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">设计</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂谈</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
         		</li>
       		
 		</ul>
@@ -257,7 +283,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2018/12/19/a-chrismas-ico/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/09/05/aaai01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +297,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/14/sigir01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/12/19/c-wuziqi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++五子棋程序设计</div>
+    <a href="/2019/09/04/icml01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</div>
       <i class="icon-circle-right"></i>
     </a>
   
