@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>FairyFali&#39;s Blog</title>
+  <title>论文阅读：Efficient Estimation of Word Representations in Vector Space | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="jiugongge_demo 	 		*{ 			margin:0; 			padding: 0; 		} 		table{ 			margin: 30px; 			border-collapse: collapse; 		} 		#test0{ 			margin: 30px; 			width: 200px; 			height: 200px; 		} 		#test0 div{">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/assets/demo/jiugongge_demo.html">
+  <meta name="description" content="论文题目 有效的向量空间上的词表示 发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议 论文下载：https://arxiv.org/pdf/1301.3781.pdf  作者简介 Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding">
+<meta name="keywords" content="词嵌入,ICLR,word2vec,CBOW,Skip-gram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Efficient Estimation of Word Representations in Vector Space">
+<meta property="og:url" content="fairyfali.github.io/2019/09/16/iclr01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="jiugongge_demo 	 		*{ 			margin:0; 			padding: 0; 		} 		table{ 			margin: 30px; 			border-collapse: collapse; 		} 		#test0{ 			margin: 30px; 			width: 200px; 			height: 200px; 		} 		#test0 div{">
+<meta property="og:description" content="论文题目 有效的向量空间上的词表示 发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议 论文下载：https://arxiv.org/pdf/1301.3781.pdf  作者简介 Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-08-14T03:35:21.403Z">
+<meta property="og:image" content="/assets/blogImg/iclr01-Tomas_Mikolov.jpg">
+<meta property="og:image" content="/assets/blogImg/iclr01-model.png">
+<meta property="og:updated_time" content="2019-09-16T05:43:04.991Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="jiugongge_demo 	 		*{ 			margin:0; 			padding: 0; 		} 		table{ 			margin: 30px; 			border-collapse: collapse; 		} 		#test0{ 			margin: 30px; 			width: 200px; 			height: 200px; 		} 		#test0 div{">
+<meta name="twitter:title" content="论文阅读：Efficient Estimation of Word Representations in Vector Space">
+<meta name="twitter:description" content="论文题目 有效的向量空间上的词表示 发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议 论文下载：https://arxiv.org/pdf/1301.3781.pdf  作者简介 Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding">
+<meta name="twitter:image" content="/assets/blogImg/iclr01-Tomas_Mikolov.jpg">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -153,164 +156,69 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-iclr01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Efficient Estimation of Word Representations in Vector Space
+    </h1>
+  
+
+        
+        <a href="/2019/09/16/iclr01/" class="archive-article-date">
+  	<time datetime="2019-09-16T05:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-<!DOCTYPE HTML>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-	<meta charset="utf-8">
-	<title>jiugongge_demo</title>
-	<style>
-		*{
-			margin:0;
-			padding: 0;
-		}
-		table{
-			margin: 30px;
-			border-collapse: collapse;
-		}
-		#test0{
-			margin: 30px;
-			width: 200px;
-			height: 200px;
-		}
-		#test0 div{
-			width: 50px;
-			height: 50px;
-			float: left;
-			background: #eee;
-			border: 5px solid #00f;
-			text-align: center;
-			line-height: 50px;
-			color: #090;
-			position: relative;
-		}
-		#test0 .lr_indent{
-			margin-left: -5px;
-			margin-right: -5px;
-		}
-		#test0 .tb_indent{
-			margin-top: -5px;
-			margin-bottom: -5px;
-		}
-		#test0 div:hover{
-			border: 5px solid #f00;
-			z-index: 999;
-			background: #eee;
-		}
-		#test1 td{
-			width: 50px;
-			height: 50px;
-			background: #eee;
-			position: relative;
-			border: 5px solid #00f;
-			text-align: center;
-		}
-		#test1 td span{
-			color: #090;
-			display:block;
-			width: 50px;
-			height: 50px;
-			position: absolute;
-			top: 0;
-			left: 0;
-			line-height: 50px;
-		}
-		#test1 td span:hover{
-			border: 5px solid #f00;
-			margin-top:-5px;
-			margin-left: -5px;
-		}
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>有效的向量空间上的词表示</li>
+<li>发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议</li>
+<li>论文下载：<a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1301.3781.pdf</a></li>
+</ul>
+<h3 id="作者简介"><a href="#作者简介" class="headerlink" title="作者简介"></a>作者简介</h3><ul>
+<li>Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding方面做出了杰出的贡献。(<a href="https://en.wikipedia.org/wiki/Tomas_Mikolov" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Tomas_Mikolov</a>)<br><img src="/assets/blogImg/iclr01-Tomas_Mikolov.jpg" alt="图片"></li>
+<li>本篇论文是在谷歌工作期间发表。</li>
+</ul>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
+<li>学习高质量的词向量，不仅能够在相似单词的表示上相近，而且能够达到多种程度的相似，比如能够达到表示空间的子空间能够代表单词部分的相似度。</li>
+</ul>
+<h3 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h3><ul>
+<li>文章设计了一个测试集The test set is available at:www.fit.vutbr.cz/ ̃imikolov/rnnlm/word-test.v1.txt；</li>
+<li>对训练好的词向量公开。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://ronan.collobert.com/senna/</span><br><span class="line">http://metaoptimize.com/projects/wordreprs/</span><br><span class="line">http://www.fit.vutbr.cz/ ̃imikolov/rnnlm/</span><br><span class="line">http://ai.stanford.edu/ ̃ehhuang/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>提出了两种模型结构CBOW和skip-gram。</li>
+<li>讨论了维度和训练数据量如何影响训练时间和准确率。</li>
+<li>源码地址：The code is available at:<a href="https://code.google.com/p/word2vec/" target="_blank" rel="noopener">https://code.google.com/p/word2vec/</a></li>
+</ul>
+<h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ul>
+<li>CBOW（Continuous Bag-of-Words Model）<ul>
+<li>类似于NNLM，存在输入层，为目标词周围的词，移除了非线性隐藏层（因为NNLM的参数主要在这部分），投影层的参数被所有输入的单词共享，如图，输入到投影层参数的数量为$D\times N$，投影层到输出层的参数数量为$D\times log(V)$，训练得到映射矩阵C；</li>
+</ul>
+</li>
+<li>skip-gram<ul>
+<li>类似于CBOW，不同的是根据一个词预测周围词，周围词需要通过采样得到，采样范围是C，采样数量是R，一共采样2R个词作为训练，每一个输出的词都对应一套参数，即每一个单词的输出相当于经过一个网络，一套参数包括$D+D\times log(v)$的参数量。</li>
+</ul>
+</li>
+<li>实验方法：在语义上和语法上进行相似单词的问答，包括8869语义问题和10675语法问题，距离输出计算余弦相似度最近的单词是预测答案，每种问答提出一个问答对，得到的结果和答案完全一致算正确。Skip-gram得到的实验结果更准确，但是训练时间更长(CBOW的训练时间为1天，Skip-gram的训练时间为3天)。同时还对比了增加数据量和增加维度对训练时间和准确率的影响，增加维度会提高更多的训练时间，准确度相差不大。<br><img src="/assets/blogImg/iclr01-model.png" alt="图片"></li>
+</ul>
+<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
+<li>以单词为单位进行实验，没有测试开始说的单词表示的一部分能不能表示单词部分的相似度情况。</li>
+</ul>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>log-bilinear model是什么意思？</li>
+<li>投影层P的维度为什么是N×D？</li>
+<li>skip-gram的采样时如何做的，为什么复杂度是C×，不是R×？</li>
+<li>8周的训练时间是所有模型的吗？</li>
+</ul>
 
-		#test2 td{
-			width: 50px;
-			height: 50px;
-			background: #eee;
-			border: 5px solid #00f;
-			text-align: center;
-			vertical-align: top;
-		}
-		#test2 td div{
-			position:relative;
-			width: 50px;
-			height: 50px;
-		}
-		#test2 td div span{
-			color: #090;
-			display:block;
-			width: 50px;
-			height: 50px;
-			position: absolute;
-			top: 0;
-			left: 0;
-			line-height: 50px;
-		}
-		#test2 td div span:hover{
-			border: 5px solid #f00;
-			margin-left: -5px;
-			margin-top: -5px;
-		}
-	</style>
-</head>
-<body>
-	<h2>1) div+负margin实现</h2>
-	<div id="test0">
-		<div>1</div>
-		<div class="lr_indent">2</div>
-		<div>3</div>
-		<div class="tb_indent">4</div>
-		<div class="lr_indent tb_indent">5</div>
-		<div class="tb_indent">6</div>
-		<div>7</div>
-		<div class="lr_indent">8</div>
-		<div>9</div>
-	</div>
-	<h2>2.1) table border-collapse: collapse实现</h2>
-	<div id="test1">
-		<table>
-			<tr>
-				<td><span>1</span></td>
-				<td><span>2</span></td>
-				<td><span>3</span></td>
-			</tr>
-			<tr>
-				<td><span>4</span></td>
-				<td><span>5</span></td>
-				<td><span>6</span></td>
-			</tr>
-			<tr>
-				<td><span>7</span></td>
-				<td><span>8</span></td>
-				<td><span>9</span></td>
-			</tr>
-		</table>
-	</div>
-	<h2>2.2) table思路改进</h2>
-	<div id="test2">
-		<table>
-			<tr>
-				<td><div><span>1</span></div></td>
-				<td><div><span>2</span></div></td>
-				<td><div><span>3</span></div></td>
-			</tr>
-			<tr>
-				<td><div><span>4</span></div></td>
-				<td><div><span>5</span></div></td>
-				<td><div><span>6</span></div></td>
-			</tr>
-			<tr>
-				<td><div><span>7</span></div></td>
-				<td><div><span>8</span></div></td>
-				<td><div><span>9</span></div></td>
-			</tr>
-		</table>
-	</div>
-</body>
-</html>
       
 
       
@@ -318,6 +226,33 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICLR</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">word2vec</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CBOW</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Skip-gram</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -368,7 +303,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/assets/demo/jiugongge_demo.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/09/16/iclr01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -380,6 +315,16 @@ var _hmt = _hmt || [];
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/11/jmlr01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Smooth neighborhood recommender systems</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -430,7 +375,7 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
