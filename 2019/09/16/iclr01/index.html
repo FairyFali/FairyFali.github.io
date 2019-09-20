@@ -18,7 +18,7 @@
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta property="og:image" content="/assets/blogImg/iclr01-Tomas_Mikolov.jpg">
 <meta property="og:image" content="/assets/blogImg/iclr01-model.png">
-<meta property="og:updated_time" content="2019-09-16T05:43:04.991Z">
+<meta property="og:updated_time" content="2019-09-20T08:35:05.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Efficient Estimation of Word Representations in Vector Space">
 <meta name="twitter:description" content="论文题目 有效的向量空间上的词表示 发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议 论文下载：https://arxiv.org/pdf/1301.3781.pdf  作者简介 Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding">
@@ -207,7 +207,7 @@ var _hmt = _hmt || [];
 <li>类似于CBOW，不同的是根据一个词预测周围词，周围词需要通过采样得到，采样范围是C，采样数量是R，一共采样2R个词作为训练，每一个输出的词都对应一套参数，即每一个单词的输出相当于经过一个网络，一套参数包括$D+D\times log(v)$的参数量。</li>
 </ul>
 </li>
-<li>实验方法：在语义上和语法上进行相似单词的问答，包括8869语义问题和10675语法问题，距离输出计算余弦相似度最近的单词是预测答案，每种问答提出一个问答对，得到的结果和答案完全一致算正确。Skip-gram得到的实验结果更准确，但是训练时间更长(CBOW的训练时间为1天，Skip-gram的训练时间为3天)。同时还对比了增加数据量和增加维度对训练时间和准确率的影响，增加维度会提高更多的训练时间，准确度相差不大。<br><img src="/assets/blogImg/iclr01-model.png" alt="图片"></li>
+<li>实验方法：在语义上和语法上进行相似单词的问答，包括8869语义问题和10675语法问题，距离输出计算余弦相似度最近的单词是预测答案，每种问答提出一个问答对，得到的结果和答案完全一致算正确。Skip-gram得到的实验结果更准确，但是训练时间更长(CBOW的训练时间为1天，Skip-gram的训练时间为3天)。同时还对比了增加数据量和增加维度对训练时间和准确率的影响，增加维度会提高更多的训练时间，准确度相差不大。自己对Skip-gram方法进行了实现：<a href="https://github.com/FairyFali/word2vec" target="_blank" rel="noopener">https://github.com/FairyFali/word2vec</a><br><img src="/assets/blogImg/iclr01-model.png" alt="图片"></li>
 </ul>
 <h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
 <li>以单词为单位进行实验，没有测试开始说的单词表示的一部分能不能表示单词部分的相似度情况。</li>
@@ -503,22 +503,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -532,6 +516,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,6 +551,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -563,11 +567,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color4">LDA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
             
             <div class="clearfix"></div>

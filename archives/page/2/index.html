@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序 | FairyFali&#39;s Blog</title>
+  <title>Archives | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
-<meta name="keywords" content="深度学习,信息检索,强化学习">
-<meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序">
-<meta property="og:url" content="fairyfali.github.io/2019/08/14/sigir01/index.html">
+  <meta name="description" content="梦想做一名科研工作者">
+<meta name="keywords" content="机器学习,信息检索">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FairyFali&#39;s Blog">
+<meta property="og:url" content="fairyfali.github.io/archives/page/2/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
+<meta property="og:description" content="梦想做一名科研工作者">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-08-14T05:15:48.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序">
-<meta name="twitter:description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
+<meta name="twitter:title" content="FairyFali&#39;s Blog">
+<meta name="twitter:description" content="梦想做一名科研工作者">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -153,211 +152,67 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sigir01" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/12/19/a-chrismas-ico/" class="archive-article-date">
+  	<time datetime="2018-12-19T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/12/19/a-chrismas-ico/">圣诞到了，帮修改一个头像</a>
     </h1>
   
 
-        
-        <a href="/2019/08/14/sigir01/" class="archive-article-date">
-  	<time datetime="2019-08-14T02:50:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h2><ul>
-<li>From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks</li>
-<li>从贪心选择到启发式决策：基于策略网络的多样性排序</li>
-<li>原文链接：<a href="https://dl.acm.org/authorize.cfm?key=N652203" target="_blank" rel="noopener">https://dl.acm.org/authorize.cfm?key=N652203</a></li>
-</ul>
-<h2 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h2><ul>
-<li>在信息检索过程中，每个查询可以覆盖许多检索结果，每个检索结果可以属于多个主题，如何选择最小的检索结果覆盖尽可能多的主题是一个NP难的问题。传统的贪心选择方法可以得到一个次优的结果，得益于AlphaGo的成功，作者提出利用蒙特卡洛树搜索(Monte Carlo tree search-MCTS)来改善MDP过程的M2DIV。</li>
-</ul>
-<h2 id="提供的方法和主要贡献"><a href="#提供的方法和主要贡献" class="headerlink" title="提供的方法和主要贡献"></a>提供的方法和主要贡献</h2><ul>
-<li>马尔科夫决策过程MDP：给定States、Action、Policy、Transaction、Value 5个部分即可对检索结果进行决策。其中States为状态，使用三元组(q,Z,X)表示,q为查询、Z为先前t个文档、X为候选文档集合，Action为动作，a∈A(s)表示当前状态下可选的动作，m(a)为对应的原始候选集合中的文档索引；Transaction表示转换函数T(s,a):S×A→S，s=T(s,a)；Value值函数V(s)表示当前状态下预期的回报，使用LSTM计算；Policy为策略函数P(s)，得到的是一个概率分布。</li>
-<li>蒙特卡洛搜索树MCST：如果使用MDP，会陷入次优解，所以使用MCST对策略函数进行改进。MCST分为Selection、Expansion、Evaluation、Back-propagation 4个部分，输入根节点$S_R$、值函数V、策略函数p、搜索次数K、折中因子$\lambda$、标签J、评价函数R，输出改进的策略π。<ol>
-<li>Selection过程：从根节点（初始状态）开始，最大化定义的奖励函数得到当前状态下的动作，从而产出edge(s,a)指向新的孩子节点，对孩子节点进行相同的操作直到新的孩子节点是叶子节点。</li>
-<li>Expansion过程：如果叶子节点是可扩展的，计算所有的p(a|s)初始化先验概率。</li>
-<li>Evaluation评估：使用评价函数对产生的叶子节点的排序文档进行打分。</li>
-<li>Back-propagation回退：从叶子节点回溯，更新边的信息。</li>
-<li>根据边的信息获得新的策略函数π。</li>
-</ol>
-</li>
-<li>训练过程<ul>
-<li>主要训练LSTM的参数</li>
-<li>输入训练数据D={(q,X,J)},学习率$\eta$，搜索次数K，折中因子$\lambda$，评价函数R。</li>
-<li>对查询进行遍历</li>
-<li>初始化状态s</li>
-<li>M为训练集的大小，E为{(s,π)}的选择序列，初始为空</li>
-<li>根据当前状态使用MCTS方法选择一个策略π并保存到E，更新s，迭代M次产生一次输出排序；</li>
-<li>使用R对比标准答案进行评分</li>
-<li>使用梯度下降更新参数，损失函数综合了评分和策略函数两个方面</li>
-<li>迭代直到收敛</li>
-</ul>
-</li>
-<li>线上排序(测试)<ul>
-<li>略</li>
-</ul>
-</li>
-</ul>
-<h2 id="对M2DIV的理解"><a href="#对M2DIV的理解" class="headerlink" title="对M2DIV的理解"></a>对M2DIV的理解</h2><ul>
-<li>作者进行了大量的实验，数据集根据TREC2012~2015，200个查询，45000个类别，进行了5次交叉验证，使用α-NDCG和ERR-IA指标进行评价，对比了已有的8个方法，包括启发式的方法，实验结果表明M2DIV方法优于所有的baseline。</li>
-<li>为什么M2DIV有效？<ol>
-<li>蒙特卡洛树搜索的有效性。在MCTS的指导下生成的位置在α-NDCG指标的比较下，明显高于原生的策略p。</li>
-<li>排序函数使用π策略函数而是不V值函数。可能的原因是V值函数很难快速地评估准确，尤其是在早期。</li>
-</ol>
-</li>
-</ul>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><ul>
-<li>数据集的具体选择？</li>
-<li>V值和原生的p是如何计算的？</li>
-</ul>
-<h2 id="不足和缺点"><a href="#不足和缺点" class="headerlink" title="不足和缺点"></a>不足和缺点</h2><ul>
-<li>个人感觉是一篇学术价值很高的论文，但是有点小题大做。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">设计</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂谈</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/08/14/sigir01/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/15/ecir01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          论文阅读：高效的上下文敏感的KNN搜索
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/12/19/c-wuziqi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++五子棋程序设计</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -381,8 +236,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序 | FairyFali&#39;s Blog</title>
+  <title>论文阅读LDA：Latent Dirichlet Allocation | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
-<meta name="keywords" content="深度学习,信息检索,强化学习">
+  <meta name="description" content="论文题目 潜在狄利克雷分配模型，或者，LDA话题模型 发表在JMLR2003，和NIPS2002上 论文下载：http://www.jmlr.org/papers/v3/blei03a.html 第一次看没看懂多少东西，知道是对PLSI的改进。  作者简介 David M. Blei，教授，目前任教于哥伦比亚大学计算机科学和统计系，也是哥伦比亚数据科学研究所的成员，从事机器学习和贝叶斯统计学领域工">
+<meta name="keywords" content="信息检索,LDA,主题模型,无监督学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序">
-<meta property="og:url" content="fairyfali.github.io/2019/08/14/sigir01/index.html">
+<meta property="og:title" content="论文阅读LDA：Latent Dirichlet Allocation">
+<meta property="og:url" content="fairyfali.github.io/2019/09/20/nips01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
+<meta property="og:description" content="论文题目 潜在狄利克雷分配模型，或者，LDA话题模型 发表在JMLR2003，和NIPS2002上 论文下载：http://www.jmlr.org/papers/v3/blei03a.html 第一次看没看懂多少东西，知道是对PLSI的改进。  作者简介 David M. Blei，教授，目前任教于哥伦比亚大学计算机科学和统计系，也是哥伦比亚数据科学研究所的成员，从事机器学习和贝叶斯统计学领域工">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-08-14T05:15:48.045Z">
+<meta property="og:image" content="/assert/blogImg/nips01_2.jpg">
+<meta property="og:image" content="/asserts/blogImg/nips01_1.png">
+<meta property="og:updated_time" content="2019-09-20T08:32:33.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序">
-<meta name="twitter:description" content="论文题目 From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks 从贪心选择到启发式决策：基于策略网络的多样性排序 原文链接：https://dl.acm.org/authorize.cfm?key=N652203  解决的主要问题 在信息检索过程中，每个查询可">
+<meta name="twitter:title" content="论文阅读LDA：Latent Dirichlet Allocation">
+<meta name="twitter:description" content="论文题目 潜在狄利克雷分配模型，或者，LDA话题模型 发表在JMLR2003，和NIPS2002上 论文下载：http://www.jmlr.org/papers/v3/blei03a.html 第一次看没看懂多少东西，知道是对PLSI的改进。  作者简介 David M. Blei，教授，目前任教于哥伦比亚大学计算机科学和统计系，也是哥伦比亚数据科学研究所的成员，从事机器学习和贝叶斯统计学领域工">
+<meta name="twitter:image" content="/assert/blogImg/nips01_2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -153,75 +156,59 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sigir01" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-nips01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序
+      论文阅读LDA：Latent Dirichlet Allocation
     </h1>
   
 
         
-        <a href="/2019/08/14/sigir01/" class="archive-article-date">
-  	<time datetime="2019-08-14T02:50:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/2019/09/20/nips01/" class="archive-article-date">
+  	<time datetime="2019-09-20T08:27:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h2><ul>
-<li>From Greedy Selection to Exploratory Decision-Making: Diverse Ranking with Policy-Value Networks</li>
-<li>从贪心选择到启发式决策：基于策略网络的多样性排序</li>
-<li>原文链接：<a href="https://dl.acm.org/authorize.cfm?key=N652203" target="_blank" rel="noopener">https://dl.acm.org/authorize.cfm?key=N652203</a></li>
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>潜在狄利克雷分配模型，或者，LDA话题模型</li>
+<li>发表在JMLR2003，和NIPS2002上</li>
+<li>论文下载：<a href="http://www.jmlr.org/papers/v3/blei03a.html" target="_blank" rel="noopener">http://www.jmlr.org/papers/v3/blei03a.html</a></li>
+<li>第一次看没看懂多少东西，知道是对PLSI的改进。</li>
 </ul>
-<h2 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h2><ul>
-<li>在信息检索过程中，每个查询可以覆盖许多检索结果，每个检索结果可以属于多个主题，如何选择最小的检索结果覆盖尽可能多的主题是一个NP难的问题。传统的贪心选择方法可以得到一个次优的结果，得益于AlphaGo的成功，作者提出利用蒙特卡洛树搜索(Monte Carlo tree search-MCTS)来改善MDP过程的M2DIV。</li>
+<h3 id="作者简介"><a href="#作者简介" class="headerlink" title="作者简介"></a>作者简介</h3><ul>
+<li><strong>David M. Blei</strong>，教授，目前任教于哥伦比亚大学计算机科学和统计系，也是哥伦比亚数据科学研究所的成员，从事机器学习和贝叶斯统计学领域工作。个人主页：<a href="http://www.cs.columbia.edu/~blei/publications.html" target="_blank" rel="noopener">http://www.cs.columbia.edu/~blei/publications.html</a></li>
 </ul>
-<h2 id="提供的方法和主要贡献"><a href="#提供的方法和主要贡献" class="headerlink" title="提供的方法和主要贡献"></a>提供的方法和主要贡献</h2><ul>
-<li>马尔科夫决策过程MDP：给定States、Action、Policy、Transaction、Value 5个部分即可对检索结果进行决策。其中States为状态，使用三元组(q,Z,X)表示,q为查询、Z为先前t个文档、X为候选文档集合，Action为动作，a∈A(s)表示当前状态下可选的动作，m(a)为对应的原始候选集合中的文档索引；Transaction表示转换函数T(s,a):S×A→S，s=T(s,a)；Value值函数V(s)表示当前状态下预期的回报，使用LSTM计算；Policy为策略函数P(s)，得到的是一个概率分布。</li>
-<li>蒙特卡洛搜索树MCST：如果使用MDP，会陷入次优解，所以使用MCST对策略函数进行改进。MCST分为Selection、Expansion、Evaluation、Back-propagation 4个部分，输入根节点$S_R$、值函数V、策略函数p、搜索次数K、折中因子$\lambda$、标签J、评价函数R，输出改进的策略π。<ol>
-<li>Selection过程：从根节点（初始状态）开始，最大化定义的奖励函数得到当前状态下的动作，从而产出edge(s,a)指向新的孩子节点，对孩子节点进行相同的操作直到新的孩子节点是叶子节点。</li>
-<li>Expansion过程：如果叶子节点是可扩展的，计算所有的p(a|s)初始化先验概率。</li>
-<li>Evaluation评估：使用评价函数对产生的叶子节点的排序文档进行打分。</li>
-<li>Back-propagation回退：从叶子节点回溯，更新边的信息。</li>
-<li>根据边的信息获得新的策略函数π。</li>
+<p><img src="/assert/blogImg/nips01_2.jpg" style="zoom:10%; text-align:left;display:inline;"></p>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
+<li>根据文档的内部词的分布情况，来拟合两类分布doc-top、top-word，能够应用到文本模型、协同过滤和文本分类中。</li>
+</ul>
+<h3 id="提出的主要方法和贡献"><a href="#提出的主要方法和贡献" class="headerlink" title="提出的主要方法和贡献"></a>提出的主要方法和贡献</h3><ul>
+<li>文档集D作为输入，训练两类分布doc-top和top-word，每一个doc对应一个top的多项式分布$\theta_d<p_{t1},...,p_{tk}>$,ti表示第i个主题，$p_{ti}=\frac{n_{ti}}{n}$,同理对于每一个主题top对应一个word的多项式分布$\varphi_t<p_{w1},...,p_{wm}>$.</p_{w1},...,p_{wm}></p_{t1},...,p_{tk}></li>
+<li><p>训练过程：</p>
+<ol>
+<li>随机初始化$\theta,\varphi$，按照先验概率p(d)选择一篇文档$d_i$；</li>
+<li>从Dirichlet分布$\alpha$中<strong>取样</strong>生成文档$d_i$的主题分布$\theta_i$；</li>
+<li>从主题的多项式分布$\theta_i$中取样生成文档$d_i$的第$j$个词主题$z_{i,j}$；</li>
+<li>从Dirichlet分布$\beta$中取样生成主题$z_{i,j}$对应的词语分布$\varphi_{z_{ij}}$；</li>
+<li>从词语多项式分布中生成新词$w_{i,j}$.</li>
 </ol>
 </li>
-<li>训练过程<ul>
-<li>主要训练LSTM的参数</li>
-<li>输入训练数据D={(q,X,J)},学习率$\eta$，搜索次数K，折中因子$\lambda$，评价函数R。</li>
-<li>对查询进行遍历</li>
-<li>初始化状态s</li>
-<li>M为训练集的大小，E为{(s,π)}的选择序列，初始为空</li>
-<li>根据当前状态使用MCTS方法选择一个策略π并保存到E，更新s，迭代M次产生一次输出排序；</li>
-<li>使用R对比标准答案进行评分</li>
-<li>使用梯度下降更新参数，损失函数综合了评分和策略函数两个方面</li>
-<li>迭代直到收敛</li>
-</ul>
-</li>
-<li>线上排序(测试)<ul>
-<li>略</li>
+<li><p>优化过程</p>
+<ul>
+<li>使用了变分推断，看不懂<img src="/asserts/blogImg/nips01_1.png" alt="img"></li>
 </ul>
 </li>
 </ul>
-<h2 id="对M2DIV的理解"><a href="#对M2DIV的理解" class="headerlink" title="对M2DIV的理解"></a>对M2DIV的理解</h2><ul>
-<li>作者进行了大量的实验，数据集根据TREC2012~2015，200个查询，45000个类别，进行了5次交叉验证，使用α-NDCG和ERR-IA指标进行评价，对比了已有的8个方法，包括启发式的方法，实验结果表明M2DIV方法优于所有的baseline。</li>
-<li>为什么M2DIV有效？<ol>
-<li>蒙特卡洛树搜索的有效性。在MCTS的指导下生成的位置在α-NDCG指标的比较下，明显高于原生的策略p。</li>
-<li>排序函数使用π策略函数而是不V值函数。可能的原因是V值函数很难快速地评估准确，尤其是在早期。</li>
-</ol>
-</li>
-</ul>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><ul>
-<li>数据集的具体选择？</li>
-<li>V值和原生的p是如何计算的？</li>
-</ul>
-<h2 id="不足和缺点"><a href="#不足和缺点" class="headerlink" title="不足和缺点"></a>不足和缺点</h2><ul>
-<li>个人感觉是一篇学术价值很高的论文，但是有点小题大做。</li>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>两个分布？</li>
+<li>优化过程</li>
 </ul>
 
       
@@ -236,15 +223,19 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LDA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">主题模型</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">无监督学习</a>
         		</li>
       		
 		</ul>
@@ -300,7 +291,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/08/14/sigir01/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/09/20/nips01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -314,18 +305,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/08/15/ecir01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          论文阅读：高效的上下文敏感的KNN搜索
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/12/19/c-wuziqi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C++五子棋程序设计</div>
+    <a href="/2019/09/16/group01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2019年9月10日论文创作经验分享会</div>
       <i class="icon-circle-right"></i>
     </a>
   
