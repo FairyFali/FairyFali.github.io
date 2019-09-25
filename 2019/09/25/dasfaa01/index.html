@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Tag: 机器学习 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/tags/机器学习/index.html">
+  <meta name="description" content="论文题目 感知话题气泡：基于时空Tweet流的局部话题检测模型 发表在DASFAA 2019，CCF B类会议 论文链接：https://doi.org/10.1007/978-3-030-18579-4_43  作者介绍 是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。  解决的主要问题 在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。 在Twitter数据集上进行实">
+<meta name="keywords" content="话题检测,LDA,表示学习,时空社交媒体挖掘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream">
+<meta property="og:url" content="fairyfali.github.io/2019/09/25/dasfaa01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 感知话题气泡：基于时空Tweet流的局部话题检测模型 发表在DASFAA 2019，CCF B类会议 论文链接：https://doi.org/10.1007/978-3-030-18579-4_43  作者介绍 是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。  解决的主要问题 在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。 在Twitter数据集上进行实">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:updated_time" content="2019-09-25T07:03:17.393Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream">
+<meta name="twitter:description" content="论文题目 感知话题气泡：基于时空Tweet流的局部话题检测模型 发表在DASFAA 2019，CCF B类会议 论文链接：https://doi.org/10.1007/978-3-030-18579-4_43  作者介绍 是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。  解决的主要问题 在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。 在Twitter数据集上进行实">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,68 +153,189 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-dasfaa01" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/11/jmlr01/" class="archive-article-date">
-  	<time datetime="2019-09-11T10:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/11/jmlr01/">论文阅读：Smooth neighborhood recommender systems</a>
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/25/dasfaa01/" class="archive-article-date">
+  	<time datetime="2019-09-25T07:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>感知话题气泡：基于时空Tweet流的局部话题检测模型</li>
+<li>发表在DASFAA 2019，CCF B类会议</li>
+<li>论文链接：<a href="https://doi.org/10.1007/978-3-030-18579-4_43" target="_blank" rel="noopener">https://doi.org/10.1007/978-3-030-18579-4_43</a></li>
+</ul>
+<h4 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h4><ul>
+<li>是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。<ul>
+<li>在Twitter数据集上进行实验，考虑关键词之间的共现关系，考虑时间之间和空间之间的邻近关系。</li>
+<li>自动生成话题的数量，不需要事先指定。</li>
+<li>实时处理tweet流。</li>
+</ul>
+</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ol>
+<li><strong>嵌入的多层异构网络MHC</strong>，将时间、空间和关键词映射到一个隐空间中，同时保留共现关系和邻近关系。<ol>
+<li>将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。</li>
+<li>使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
+</ol>
+</li>
+<li><strong>贝叶斯混合聚类BMC</strong>，无监督，无需事先确定话题数量，类似于LDA，不同的是每一个tweet值表示为一个话题，使用vMF分布在词嵌入向量上进行表示。</li>
+<li>增量更新策略。每次修改窗口的位置，去掉旧的信息，加入新的信息，不需要重头计算。</li>
+</ol>
+<h4 id="我对Bubble模型的理解"><a href="#我对Bubble模型的理解" class="headerlink" title="我对Bubble模型的理解"></a>我对Bubble模型的理解</h4><ul>
+<li>核心模块是异构网络表示，考虑了时间和空间的邻近性后，在原来的LDA的基础上拟合新生成的词嵌入向量，从而生成话题；指标使用词本身的共现度来做评价，体现了话题的内聚度。</li>
+</ul>
+<h4 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h4><ul>
+<li>因为做的局部话题检测，指标本身只是测试了准确率，指标比较少，相当于忽略了召回率，也是考虑时空的一个缺点。</li>
+<li>不能体现出话题的耦合度。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JMLR</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">话题检测</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LDA</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">表示学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">时空社交媒体挖掘</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/09/25/dasfaa01/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/20/nips01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读LDA：Latent Dirichlet Allocation</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +358,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
