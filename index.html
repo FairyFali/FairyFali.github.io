@@ -193,16 +193,8 @@ var _hmt = _hmt || [];
 </ol>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ol>
 <li>针对挑战C1如何采样异构邻居使得采样的邻居和原点v是强相关的。文章提出了<strong>带有重启机制的随机游走</strong>生成节点v的邻居节点，每次游走以概率p返回原点，直到有约束地收集固定长度的<strong>序列RWR(v)</strong>，约束是为了保证所有的类型都被采样到。对采样序列根据类型进行分组，计数，每一个类型t选择top $k_t$的节点作为邻居节点。</li>
-<li>针对挑战C2如何抓住异构的内容信息，比如属性、文本、图片等信息，设计了一个异构节点内容编码器解决内容异构。提取异构内容$C_v$，将节点v的内容编码为固定长度的向量：<ul>
-<li>1、预训练，使用Par2Vec表示文本信息，CNNs表示图片信息。</li>
-<li>2、特征聚集，不同的全连接将不同的类型转换为$d_f$维的向量，使用Bi-LSTM网络生成d维的向量$f_1(v)$，使用均值计算得到一个d维的向量。模型图中的NN-1。</li>
-</ul>
-</li>
-<li>针对挑战C3如何聚集异构邻居节点，考虑不同类型节点的影响力。<ul>
-<li>1、聚集相同类型的邻居。$N_{t}(v)$表示节点v采样的类型t的邻居集合，$f_2^t$网络使用Bi-LSTM得到了一个d维的嵌入向量。模型图中的NN-2。</li>
-<li>2、类型组合。$|O_v|$个嵌入向量对于节点v，使用Attention机制，NN-3图中绿色的向量代表$2d$维向量参数$u$，根据type-i和节点v本身的内容嵌入表示拼接的$2d$维的向量做内积，经过LeakyReLU激活函数和softmax计算得到注意力权重$\alpha_i$，在和type-i加权求和得到最终的嵌入表示。</li>
-</ul>
-</li>
+<li>针对挑战C2如何抓住异构的内容信息，比如属性、文本、图片等信息，设计了一个异构节点内容编码器解决内容异构。提取异构内容$C_v$，将节点v的内容编码为固定长度的向量：<br> 1、预训练，使用Par2Vec表示文本信息，CNNs表示图片信息。<br> 2、特征聚集，不同的全连接将不同的类型转换为$d_f$维的向量，使用Bi-LSTM网络生成d维的向量$f_1(v)$，使用均值计算得到一个d维的向量。模型图中的NN-1。</li>
+<li>针对挑战C3如何聚集异构邻居节点，考虑不同类型节点的影响力。<br> 1、聚集相同类型的邻居。$N_{t}(v)$表示节点v采样的类型t的邻居集合，$f_2^t$网络使用Bi-LSTM得到了一个d维的嵌入向量。模型图中的NN-2。<br> 2、类型组合。$|O_v|$个嵌入向量对于节点v，使用Attention机制，NN-3图中绿色的向量代表$2d$维向量参数$u$，根据type-i和节点v本身的内容嵌入表示拼接的$2d$维的向量做内积，经过LeakyReLU激活函数和softmax计算得到注意力权重$\alpha_i$，在和type-i加权求和得到最终的嵌入表示。</li>
 <li>设计了一个损失函数，使用了负采样的方式，使嵌入表示和邻居的表示相似度越大越好，和负采样的节点相似度越小越好。</li>
 </ol>
 <p><img src="/assets/blogImg/hetgnn.png" alt="hetgnn" style="zoom:74%;"></p>
@@ -311,11 +303,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ol>
-<li><strong>嵌入的多层异构网络MHC</strong>，将时间、空间和关键词映射到一个隐空间中，同时保留共现关系和邻近关系。<ul>
-<li>1、将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。</li>
-<li>2、使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
-</ul>
-</li>
+<li><strong>嵌入的多层异构网络MHC</strong>，将时间、空间和关键词映射到一个隐空间中，同时保留共现关系和邻近关系。<br>1、将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。<br>2、使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
 <li><strong>贝叶斯混合聚类BMC</strong>，无监督，无需事先确定话题数量，类似于LDA，不同的是每一个tweet值表示为一个话题，使用vMF分布在词嵌入向量上进行表示。</li>
 <li>增量更新策略。每次修改窗口的位置，去掉旧的信息，加入新的信息，不需要重头计算。</li>
 </ol>
@@ -1557,14 +1545,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -1578,6 +1558,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1613,14 +1601,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -1637,19 +1617,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ICML</a>
+                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机视觉</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Image Caption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
+                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1673,7 +1645,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">ICML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机视觉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Image Caption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1686,6 +1670,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
             
             <div class="clearfix"></div>
