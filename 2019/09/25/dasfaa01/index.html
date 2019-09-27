@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
 <meta property="og:description" content="论文题目 感知话题气泡：基于时空Tweet流的局部话题检测模型 发表在DASFAA 2019，CCF B类会议 论文链接：https://doi.org/10.1007/978-3-030-18579-4_43  作者介绍 一作是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。  解决的主要问题 在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。 在Twitter数据集上进">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-09-27T06:52:47.638Z">
+<meta property="og:updated_time" content="2019-09-27T06:55:05.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream">
 <meta name="twitter:description" content="论文题目 感知话题气泡：基于时空Tweet流的局部话题检测模型 发表在DASFAA 2019，CCF B类会议 论文链接：https://doi.org/10.1007/978-3-030-18579-4_43  作者介绍 一作是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。  解决的主要问题 在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。 在Twitter数据集上进">
@@ -191,8 +191,8 @@ var _hmt = _hmt || [];
 </ul>
 <h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ol>
 <li><strong>嵌入的多层异构网络MHC</strong>，将时间、空间和关键词映射到一个隐空间中，同时保留共现关系和邻近关系。<ul>
-<li>1.将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。</li>
-<li>2.使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
+<li>1、将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。</li>
+<li>2、使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
 </ul>
 </li>
 <li><strong>贝叶斯混合聚类BMC</strong>，无监督，无需事先确定话题数量，类似于LDA，不同的是每一个tweet值表示为一个话题，使用vMF分布在词嵌入向量上进行表示。</li>
@@ -570,15 +570,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
