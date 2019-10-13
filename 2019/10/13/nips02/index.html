@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Tag: JMLR | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/tags/JMLR/index.html">
+  <meta name="description" content="论文题目 多领域对抗学习在口语理解插槽填充上的应用 论文发表在NIPS2017  论文作者 一作刘冰，目前就职于Facebook AI实验室，CMU博士学位，新加坡南洋理工大学学士学位。个人主页：http://bingliu.me/ 二作IanLane，一作刘冰的博士生导师。  解决的主要问题 口语理解任务SLU的基本任务是将用户的查询分类为某个领域，然后确定用户意图和提取语义框架。分别对应领域分">
+<meta name="keywords" content="SLU,对抗学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding">
+<meta property="og:url" content="fairyfali.github.io/2019/10/13/nips02/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 多领域对抗学习在口语理解插槽填充上的应用 论文发表在NIPS2017  论文作者 一作刘冰，目前就职于Facebook AI实验室，CMU博士学位，新加坡南洋理工大学学士学位。个人主页：http://bingliu.me/ 二作IanLane，一作刘冰的博士生导师。  解决的主要问题 口语理解任务SLU的基本任务是将用户的查询分类为某个领域，然后确定用户意图和提取语义框架。分别对应领域分">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:image" content="/assets/blogImg/slot_filling_model.png">
+<meta property="og:image" content="/assets/blogImg//slot_filling_joint.png">
+<meta property="og:updated_time" content="2019-10-13T11:59:22.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding">
+<meta name="twitter:description" content="论文题目 多领域对抗学习在口语理解插槽填充上的应用 论文发表在NIPS2017  论文作者 一作刘冰，目前就职于Facebook AI实验室，CMU博士学位，新加坡南洋理工大学学士学位。个人主页：http://bingliu.me/ 二作IanLane，一作刘冰的博士生导师。  解决的主要问题 口语理解任务SLU的基本任务是将用户的查询分类为某个领域，然后确定用户意图和提取语义框架。分别对应领域分">
+<meta name="twitter:image" content="/assets/blogImg/slot_filling_model.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,68 +156,174 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nips02" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/11/jmlr01/" class="archive-article-date">
-  	<time datetime="2019-09-11T10:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/11/jmlr01/">论文阅读：Smooth neighborhood recommender systems</a>
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/13/nips02/" class="archive-article-date">
+  	<time datetime="2019-10-13T11:56:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>多领域对抗学习在口语理解插槽填充上的应用</li>
+<li>论文发表在NIPS2017</li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作刘冰，目前就职于Facebook AI实验室，CMU博士学位，新加坡南洋理工大学学士学位。个人主页：<a href="http://bingliu.me/" target="_blank" rel="noopener">http://bingliu.me/</a></li>
+<li>二作IanLane，一作刘冰的博士生导师。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>口语理解任务SLU的基本任务是将用户的查询分类为某个领域，然后确定用户意图和提取语义框架。分别对应<strong>领域分类</strong>、<strong>意图确定</strong>和<strong>插槽填充</strong>三个任务。本文聚焦于插槽填充任务，因为不可能为每一个任务领域的数据进行注释，所以获得多领域通用的特征和结构是值得研究的，文章使用对抗学习的方法获得多领域之间通用的特征和结构。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>利用Bi-LSTM网络对输入的每一个句子的词embedding作为输入，输出每一个词对应的槽概率分布，这就是特定领域的插槽填充的框架。在这个基础上，增加了一个Attention模块，对每一个输出单元使用MLP计算权重后求和，在进行一个softmax计算得到一个领域分类向量，损失函数为最小化槽分类loss并且最大化领域分类loss，对抗的思想体现在这里。</p>
+<p><img src="/assets/blogImg/slot_filling_model.png" alt="image-20191013195317865"></p>
+</li>
+<li><p>最后，联合使用通用领域的插槽填充模型和特定领域的插槽填充模型应用到特定领域上，实验表明也能提高性能。</p>
+<p><img src="/assets/blogImg//slot_filling_joint.png" alt="image-20191013195357864"></p>
+</li>
+</ul>
+<h4 id="我对论文的理解"><a href="#我对论文的理解" class="headerlink" title="我对论文的理解"></a>我对论文的理解</h4><ul>
+<li>论文主要是提供了一个对抗思想损失函数，使得能够是网络参数向着自己期望的方向学习。</li>
+</ul>
+<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><ul>
+<li>输入的w是一个embedding？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JMLR</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SLU</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">对抗学习</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/10/13/nips02/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/27/kdd01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Heterogeneous Graph Neural Network</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +346,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
