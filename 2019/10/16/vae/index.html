@@ -22,7 +22,7 @@
 <meta property="og:image" content="/assets/blogImg/encoder.png">
 <meta property="og:image" content="/assets/blogImg/autoencoder2.png">
 <meta property="og:image" content="/assets/blogImg/vae.png">
-<meta property="og:updated_time" content="2019-10-16T12:37:41.129Z">
+<meta property="og:updated_time" content="2019-10-16T12:40:13.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VAE的原理、数学推导以及在NLP上的应用">
 <meta name="twitter:description" content="学习之前的问题 什么是AE（自编码器）？ 什么是变分推断？ 什么是VAE（变分自编码器）？  什么是AutoEncoder AutoEncoder（自编码器）是一个深度学习领域的生成模型，无监督的学习算法，主要用于特征的提取，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参">
@@ -241,7 +241,7 @@ var _hmt = _hmt || [];
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
 <li>中国科学院大学，王威老师的深度学习课程生成模型I、vae介绍课件</li>
 <li><a href="https://www.bilibili.com/video/av47765788?from=search&amp;seid=5529315817887042875" target="_blank" rel="noopener">VAE损失函数推导</a></li>
-<li>[PaperWeekly第二十七期：VAE在NLP上的应用](</li>
+<li><a href="http://rsarxiv.github.io/2017/03/02/PaperWeekly第二十七期/" target="_blank" rel="noopener">PaperWeekly第二十七期：VAE在NLP上的应用</a></li>
 </ul>
 
       
@@ -479,6 +479,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -495,11 +503,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,14 +524,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,15 +587,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vae</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,11 +603,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vae</a>
               </li>
             
             <div class="clearfix"></div>
@@ -736,5 +736,21 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
