@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Archives: 2019/8 | FairyFali&#39;s Blog</title>
+  <title>VAE的原理、数学推导以及在NLP上的应用 | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/archives/2019/08/index.html">
+  <meta name="description" content="学习之前的问题 什么是AE（自编码器）？ 什么是变分推断？ 什么是VAE（变分自编码器）？  什么是AutoEncoder AutoEncoder（自编码器）是一个深度学习领域的生成模型，无监督的学习算法，主要用于特征的提取，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参">
+<meta name="keywords" content="vae">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VAE的原理、数学推导以及在NLP上的应用">
+<meta property="og:url" content="fairyfali.github.io/2019/10/16/vae/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="学习之前的问题 什么是AE（自编码器）？ 什么是变分推断？ 什么是VAE（变分自编码器）？  什么是AutoEncoder AutoEncoder（自编码器）是一个深度学习领域的生成模型，无监督的学习算法，主要用于特征的提取，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:image" content="/assets/blogImg/autoencoder.png">
+<meta property="og:image" content="/assets/blogImg/decoder.png">
+<meta property="og:image" content="/assets/blogImg/decoder2.png">
+<meta property="og:image" content="/assets/blogImg/encoder.png">
+<meta property="og:image" content="/assets/blogImg/autoencoder2.png">
+<meta property="og:image" content="/assets/blogImg/vae.png">
+<meta property="og:updated_time" content="2019-10-16T12:37:41.129Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="VAE的原理、数学推导以及在NLP上的应用">
+<meta name="twitter:description" content="学习之前的问题 什么是AE（自编码器）？ 什么是变分推断？ 什么是VAE（变分自编码器）？  什么是AutoEncoder AutoEncoder（自编码器）是一个深度学习领域的生成模型，无监督的学习算法，主要用于特征的提取，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参">
+<meta name="twitter:image" content="/assets/blogImg/autoencoder.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,110 +160,208 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vae" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/15/ecir01/" class="archive-article-date">
-  	<time datetime="2019-08-15T07:21:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/ecir01/">论文阅读：高效的上下文敏感的KNN搜索</a>
+    <h1 class="article-title" itemprop="name">
+      VAE的原理、数学推导以及在NLP上的应用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/16/vae/" class="archive-article-date">
+  	<time datetime="2019-10-16T12:35:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="学习之前的问题"><a href="#学习之前的问题" class="headerlink" title="学习之前的问题"></a>学习之前的问题</h4><ul>
+<li>什么是AE（自编码器）？</li>
+<li>什么是变分推断？</li>
+<li>什么是VAE（变分自编码器）？</li>
+</ul>
+<h4 id="什么是AutoEncoder"><a href="#什么是AutoEncoder" class="headerlink" title="什么是AutoEncoder"></a>什么是AutoEncoder</h4><ul>
+<li><p>AutoEncoder（自编码器）是一个深度学习领域的<strong>生成模型</strong>，<strong>无监督</strong>的学习算法，主要用于<strong>特征的提取</strong>，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参数可以使用同一套参数，相当于对参数的一种约束。</p>
+<p><img src="/assets/blogImg/autoencoder.png" alt="image-20191016184437077"></p>
+</li>
+<li><p>其中<strong>前馈神经网络</strong>用于将输入重构为输出。损失函数可以为<script type="math/tex">l(f(x))=-\sum_k(x_klog(\hat{x}_k)+(1-x_k)log(1-\hat{x}_k))</script>，即交叉熵损失函数。</p>
+<h4 id="什么是变分推断"><a href="#什么是变分推断" class="headerlink" title="什么是变分推断"></a>什么是变分推断</h4></li>
+<li>变分推断简单来说是需要根据已有数据推断需要的分布$P$；当$P$不容易表达，不能直接求解时，可以尝试用变分推断的方法。即，**寻找容易表达和求解的分布$Q$，当$Q$和$P$的差距很小的时候，$Q$就可以作为$P$的近似分布代替$P$。</li>
+<li>在推导VAE的损失函数的时候用到的就是变分推断。</li>
+</ul>
+<h4 id="什么是Variational-AutoEncoder"><a href="#什么是Variational-AutoEncoder" class="headerlink" title="什么是Variational AutoEncoder"></a>什么是Variational AutoEncoder</h4><ul>
+<li><p>VAE是深度学习与统计推断相结合，将高维数据X低维表示为Z，与AE相比，X和Z都是<strong>随机变量</strong>。</p>
+</li>
+<li><p>已知输入集合$\{ x_1, x_2,…,x_N \}$，模型参数$\theta$，隐空间$z$</p>
+<ul>
+<li>$z\sim p(z)$</li>
+<li>$x|z \sim p_\theta(x|z)$</li>
+<li>解码器如下：</li>
+</ul>
+<p><img src="/assets/blogImg/decoder.png" alt="image-20191016191947590" style="zoom:50%;"></p>
+<ul>
+<li>为了举例说明，z设置为1维，x设置为2维。</li>
+<li>思路：NN+高斯分布，如下图：</li>
+</ul>
+<p><img src="/assets/blogImg/decoder2.png" alt="image-20191016192226597"></p>
+<ul>
+<li>编码器，如下：</li>
+</ul>
+<p><img src="/assets/blogImg/encoder.png" alt="image-20191016192535334"></p>
+<ul>
+<li><p>完整的auto-encoder如下：</p>
+<p><img src="/assets/blogImg/autoencoder2.png" alt="image-20191016192715439"></p>
+</li>
+<li><p>损失函数的设计：</p>
+<ul>
+<li><p>损失函数是VAE最核心的思想，使用最大似然估计$\varphi,\theta$，以下是损失函数的推导：</p>
+<p><img src="/assets/blogImg/vae.png" alt="image-20191016201302138"></p>
+</li>
+</ul>
+</li>
+<li><p>一些代码例子：</p>
+</li>
+</ul>
+<p><strong>Simple example 2-D distribution</strong> </p>
+<p><strong><a href="https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo-2D.ipynb" target="_blank" rel="noopener">https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo-2D.ipynb</a></strong> </p>
+<p><strong>Simple MNIST Example</strong> </p>
+<p><strong><a href="https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo.ipynb" target="_blank" rel="noopener">https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo.ipynb</a></strong> </p>
+</li>
+</ul>
+<h4 id="在NLP上的应用"><a href="#在NLP上的应用" class="headerlink" title="在NLP上的应用"></a>在NLP上的应用</h4><ul>
+<li>[<strong>Language as a Latent Variable: Discrete Generative Models for Sentence Compression</strong>]：句子压缩：将原有的隐变量z设置为离散变量，这样z也可以写成一个句子。</li>
+<li>[<strong>Variational neural machine translation</strong>]：机器翻译</li>
+<li>[<strong>A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues</strong>]：对话系统</li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li>中国科学院大学，王威老师的深度学习课程生成模型I、vae介绍课件</li>
+<li><a href="https://www.bilibili.com/video/av47765788?from=search&amp;seid=5529315817887042875" target="_blank" rel="noopener">VAE损失函数推导</a></li>
+<li>[PaperWeekly第二十七期：VAE在NLP上的应用](</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">KNN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vae</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/10/16/vae/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/14/sigir01/" class="archive-article-date">
-  	<time datetime="2019-08-14T02:50:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/13/nips02/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/14/sigir01/">论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -278,8 +384,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
