@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Archives | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Semi-supervised Learning with Deep Generative Models  | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/archives/page/2/index.html">
+  <meta name="description" content="论文题目 深度生成模型应用到半监督学习 发表在NIPS2014，引用率1k+ 论文下载：https://arxiv.org/abs/1406.5298  论文作者 Durk Kingma, 阿姆斯特丹大学博士毕业，在谷歌大脑工作，主要从事机器学习的生成模型、变分推断和随机优化等方向，目前生活在旧金山，个人主页：http://www.dpkingma.com/  解决的主要问题 将变分推断生成模型应">
+<meta name="keywords" content="VAE,半监督,生成模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Semi-supervised Learning with Deep Generative Models ">
+<meta property="og:url" content="fairyfali.github.io/2019/10/25/nips03/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 深度生成模型应用到半监督学习 发表在NIPS2014，引用率1k+ 论文下载：https://arxiv.org/abs/1406.5298  论文作者 Durk Kingma, 阿姆斯特丹大学博士毕业，在谷歌大脑工作，主要从事机器学习的生成模型、变分推断和随机优化等方向，目前生活在旧金山，个人主页：http://www.dpkingma.com/  解决的主要问题 将变分推断生成模型应">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:image" content="/assets/blogImg/nlp03_1.png">
+<meta property="og:image" content="/assets/blogImg/nips03_2.png">
+<meta property="og:image" content="/assets/blogImg/nips03_3.png">
+<meta property="og:updated_time" content="2019-10-25T04:52:54.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Semi-supervised Learning with Deep Generative Models ">
+<meta name="twitter:description" content="论文题目 深度生成模型应用到半监督学习 发表在NIPS2014，引用率1k+ 论文下载：https://arxiv.org/abs/1406.5298  论文作者 Durk Kingma, 阿姆斯特丹大学博士毕业，在谷歌大脑工作，主要从事机器学习的生成模型、变分推断和随机优化等方向，目前生活在旧金山，个人主页：http://www.dpkingma.com/  解决的主要问题 将变分推断生成模型应">
+<meta name="twitter:image" content="/assets/blogImg/nlp03_1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,349 +157,188 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nips03" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Semi-supervised Learning with Deep Generative Models 
+    </h1>
+  
+
+        
+        <a href="/2019/10/25/nips03/" class="archive-article-date">
+  	<time datetime="2019-10-25T04:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>深度生成模型应用到半监督学习</li>
+<li>发表在NIPS2014，引用率1k+</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1406.5298" target="_blank" rel="noopener">https://arxiv.org/abs/1406.5298</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Durk Kingma, 阿姆斯特丹大学博士毕业，在谷歌大脑工作，主要从事机器学习的生成模型、变分推断和随机优化等方向，目前生活在旧金山，个人主页：<a href="http://www.dpkingma.com/" target="_blank" rel="noopener">http://www.dpkingma.com/</a></li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>将变分推断生成模型应用到半监督分类任务，在许多数据集的测试上达到了先进的水平。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li>定义：带有标记的数据分布为$\tilde{p}_l(x,y)$,未标记的分布为$\tilde{p}_u(x)$，半监督学习的任务就是利用没有标签数据的属性信息和带有标签的数据使得实验优于只使用带标签的数据得到的性能。</li>
+<li>模型1，隐特征判别模型：（相当于VAE模型）$p(z)=N(z|0,I),p_\theta(x|z)=f(x;z,\theta)$，使用低维特征z作为特征进行分类任务。</li>
+<li>模型2，生成式半监督模型：提出一个概率模型，将标签y加入到隐变量z中，生成过程变成$p(y)=Cat(y|\pi);p(z)=N(z|0,I);p_\theta(x|y,z)=f(x;y,z,\theta)$，其中Cat为多项式分布，如果标签y不存在，则加入的变量就当做一个隐变量。对于无标签数据，可以使用后验分布$p_\theta(y|x)$预测无标签数据的类别。</li>
+<li>模型3，栈式生成半监督模型(模型1+模型2)：论文组合这两种方法，首先应用模型1学习一个隐特征$z_1$，随后应用模型2使用嵌入的$z_1$，代替原来的数据x。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>Github链接：<a href="http://github.com/dpkingma/nips14-ssl" target="_blank" rel="noopener">http://github.com/dpkingma/nips14-ssl</a></li>
+<li>分类任务：在MNIST数字分类任务上，使用半监督的方法，在50000带有标签和没有标签的训练数据集合，并且变化有标签的数据从100到3000，确保所有类别的平衡性，每个类别都有相同数量的带标签的点。对于模型1，使用一个50维的隐变量z，MLPs使用两层，每层600个隐藏单元，使用softplus激活函数，在顶层，使用TSVM。对于模型2，也是用50维的z，MLPs使用一层隐藏层，每层500个神经元，softplus激活函数。实验结果如下：</li>
+</ul>
+<p><img src="/assets/blogImg/nlp03_1.png" alt="image-20191025094710189"></p>
+<ul>
+<li>条件生成：可以根据训练处理的z，调整隐变量y，使得输出相同风格的其他类别的数据。</li>
+</ul>
+<p><img src="/assets/blogImg/nips03_2.png" alt="image-20191025095348475"></p>
+<ul>
+<li>图片分类：实验结果，<img src="/assets/blogImg/nips03_3.png" alt="image-20191025095316080"></li>
+</ul>
+<h4 id="我对论文的理解"><a href="#我对论文的理解" class="headerlink" title="我对论文的理解"></a>我对论文的理解</h4><ul>
+<li>相当于VAE的一种变体，也可以说是CVAE的一种类型，将类别标签y加入到隐变量中得以实现风格转换，同时将原来的没有标签的数据的特征增强了有标签类型的隐变量的学习。</li>
+</ul>
+<h4 id="缺点和补充"><a href="#缺点和补充" class="headerlink" title="缺点和补充"></a>缺点和补充</h4><ul>
+<li>在类别数量呈线性增长的过程中，重新评估每个类别的生成可能性存在昂贵的代价。</li>
+<li>模型的扩展可以到多标签分类任务中。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/05/aaai01/" class="archive-article-date">
-  	<time datetime="2019-09-05T03:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/05/aaai01/">论文阅读：利用卷积特征和子词信息改进词嵌入</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">VAE</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">半监督</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生成模型</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/04/icml01/" class="archive-article-date">
-  	<time datetime="2019-09-04T01:28:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/04/icml01/">论文阅读：Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICML</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机视觉</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Image Caption</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Attention</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/tensorflow-note/" class="archive-article-date">
-  	<time datetime="2019-09-02T02:50:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/tensorflow-note/">Tensor学习整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">TensorFlow</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/15/ecir01/" class="archive-article-date">
-  	<time datetime="2019-08-15T07:21:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/ecir01/">论文阅读：高效的上下文敏感的KNN搜索</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">KNN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/14/sigir01/" class="archive-article-date">
-  	<time datetime="2019-08-14T02:50:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/14/sigir01/">论文阅读：从贪心选择到启发式决策：基于策略网络的多样性排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">强化学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/19/c-wuziqi/" class="archive-article-date">
-  	<time datetime="2018-12-19T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/19/c-wuziqi/">C++五子棋程序设计</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">五子棋</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/10/25/nips03/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/19/a-chrismas-ico/" class="archive-article-date">
-  	<time datetime="2018-12-19T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/21/emnlp01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Controlled Text Generation for Data Augmentation in Intelligent Artificial Agents </div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/19/a-chrismas-ico/">圣诞到了，帮修改一个头像</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">设计</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂谈</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
   
 
 
@@ -518,8 +362,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
