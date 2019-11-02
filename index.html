@@ -154,6 +154,124 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-acl01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/02/acl01/">论文阅读：Learning Discourse-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/02/acl01/" class="archive-article-date">
+  	<time datetime="2019-11-02T08:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>在神经对话领域上使用CVAE学习话语级多样性</li>
+<li>发表在ACL2017</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1703.10960" target="_blank" rel="noopener">https://arxiv.org/abs/1703.10960</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Tiancheng Zhao(赵天成)，2019.5获得CMU.LTI的博士学位，研究领域为深度学习、端到端的对话系统和自然语言处理。个人主页：<a href="http://www.cs.cmu.edu/~tianchez/" target="_blank" rel="noopener">http://www.cs.cmu.edu/~tianchez/</a></li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>通用的编码器解码器模型对于开放的对话存在愚钝和通用响应的问题，使用kgCVAE解决了对话系统中的对话生成的多样性在话语级更加丰富。</li>
+</ul>
+<h4 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h4><ol>
+<li>神经对话模型基于CVAE，能够捕捉到话语级的隐变量。</li>
+<li>知识指导的CVAE(kgCVAE)，能够整合知识和提高可解释性。</li>
+<li>提出了针对自然语言训练过程的优化问题的训练方法。</li>
+</ol>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>符号定义：对话上下文$c$，上下文窗口大小$k-1$，响应话语$x$(第k个utterance)，隐变量$z$。</p>
+</li>
+<li><p>CVAE：$p(x,z|c)=p(x|z,c)p(z|c)$，其中$p(x|z,c)$为response network，$p(z|c)$为z的prior network，另外$q(z|x,c)$为z的recognition netword。损失函数为<script type="math/tex">L(\theta,\phi;x,c)=-KL(q_\phi(z|x,c)||p_\theta(z|c))+E_{q_\phi(z|c,x)}[logp_\theta(x|z,c)] \le logp(x|c)</script>。</p>
+</li>
+<li><p>kgCVAE：加入dialog act $y$，用作指导生成的utterance在限定的主题内，使用SVM利用对话的注释预测语言特征y，加入到CVAE中，公式变为</p>
+<script type="math/tex; mode=display">L(\theta,\phi;x,c,y)=-KL(q_\phi(z|x,c,y)||p_\theta(z|c))</script><script type="math/tex; mode=display">+E_{q_\phi(z|c,x,y)}[logp_\theta(x|z,c,y)]</script><p><script type="math/tex">+E_{p_\phi(z|c,x,y)}[logp_\theta(y|z,c)]</script>。</p>
+</li>
+<li><p>VAE和kgCVAE的结构如下图所示。</p>
+</li>
+</ul>
+<p><img src="/assets/blogImg/acl01_1.png" alt="image-20191102150912731" style="zoom:50%;"></p>
+<ul>
+<li>总体网络结构如下图，Utterance Encoder使用双向GRU网络编码句子为一个utterance向量$u_i$，Context Encoder使用单向GRU为对窗口k-1个句子进行编码得到context向量$[h^c,m]$，Response Decoder使用单层GRU为对隐变量$z$的解码输出产生预测的响应$x$，MLPb的作用是预测一个词典大小的向量，表示每个位置的词出现的可能性，和真实x的差异作为BOW(bag-of-word)损失，解决隐向量消失的问题，在原来的L的基础上改进为：</li>
+</ul>
+<script type="math/tex; mode=display">L'(\theta,\phi;x,c)=L(\theta,\phi;x,c)+E_{q_\phi(z|c,x,y)}[logp(x_{bow}|z,c)]</script><ul>
+<li>在加入蓝色虚线的部分后称为kgCVAE，将输入变为$[x,y]$，输出变为Response Decoder和MLPy，即预测真实的y标签。</li>
+</ul>
+<p><img src="/assets/blogImg/acl01_2.png" alt="image-20191102152202745"></p>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>数据集为Switchboard 1 Release 2 Corpus，embedding size：200，使用Twitter预训练的Glove embedding，utterance encoder：300维，双向GRU：600维，Response network：400维，MLPy有一个隐藏层，400维，z：200维，k：10。</li>
+<li>指标选择为precision和recall，距离函数选择：BLEU1~4、cos、Dialog Act Match。实验结果如下：<br><img src="/assets/blogImg/acl01_3.png" alt="image-20191102161105616" style="zoom:50%;"><h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4></li>
+<li>Dialog manager是什么？</li>
+<li>KL cost是什么意思？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CVAE</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">对话系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/02/acl01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nips03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1170,119 +1288,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-jmlr01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/jmlr01/">论文阅读：Smooth neighborhood recommender systems</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/11/jmlr01/" class="archive-article-date">
-  	<time datetime="2019-09-11T10:34:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
-<li>平滑的基于邻域的推荐系统</li>
-<li>发表在JMLR期刊 2017年，机器学习方向比较好的英文期刊</li>
-<li>论文链接：<a href="http://jmlr.org/papers/volume20/17-629/17-629.pdf" target="_blank" rel="noopener">http://jmlr.org/papers/volume20/17-629/17-629.pdf</a></li>
-</ul>
-<h3 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h3><ul>
-<li>一作应该是一个学生，香港城市大学</li>
-<li>二作是香港城市大学的教授王军辉，毕业于北京大学和明尼苏达大学。(<a href="http://www.cityu.edu.hk/stfprofile/junhwang.htm" target="_blank" rel="noopener">http://www.cityu.edu.hk/stfprofile/junhwang.htm</a>)</li>
-<li>三作Xiaotong Shen.明尼苏达大学教授。(<a href="http://users.stat.umn.edu/~xshen/)\" target="_blank" rel="noopener">http://users.stat.umn.edu/~xshen/)\</a></li>
-<li>四作Annie Qu.伊利诺伊大学香槟分校教授。(<a href="http://publish.illinois.edu/anniequ/" target="_blank" rel="noopener">http://publish.illinois.edu/anniequ/</a>)</li>
-</ul>
-<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
-<li>本文提出了一个基于原有的LFM的改进的平滑邻域推荐方法，可以充分利用用户和商品的内在关系和用户-商品关系来获得更好的两个分解矩阵P和Q，同时可以解决冷启动问题。</li>
-</ul>
-<h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ul>
-<li>通过user-item对改进预测精确度，将user关系网络和item关系网络合并为一个网络user-item网络S，每个节点是一个(u,i)用户商品对，根据原有网络的边确定新的网络的边，从而确定一个$w_{ui,u’i’}$，表示(u,i)和(u’,i’)的相似度；$x_{ui}$表示用户u和商品i的模式(？没太理解，应该是一个向量，表示u和i的交互过程)，使用$x_{ui}$之间的相似度反映w值；K(·)是一个核函数(？不太理解，平滑的作用)；如下公式(3)表示新的损失函数，根据LFM改进，主要考虑了周围邻居的点的作用，$\Omega$表示所有的已存在的索引集合。<script type="math/tex; mode=display">
-\frac{1}{nm}\sum_{u=1}^n\sum_{i=1}^m \left ( \sum_{(u',i')\in \Omega } w_{ui,u'i'}(r_{u'i'}-p_u^Tq_i)^2 \right ) + \lambda_1()+\lambda_2()</script></li>
-<li>上述方法作者说明了3个好处。1、充分利用的用户关系信息和商品关系信息；<strong>2、解决了冷启动的问题，主要是存在用户网络结构，但是不存在用户和商品之间的信息；</strong>3、<strong>？</strong>没明白，无法忽略的丢失可以通过邻居定位，没明白非参数化什么意思。</li>
-<li>数据集，last.fm-2k，是用户收听音乐的信息。具体包括双向的朋友关系、艺术家、用户收听艺术家信息（有weight）、用户对艺术家的tag信息、艺术家tag信息。</li>
-<li>还提出了一种优化方法，其实个人感觉就是普通的优化方法，没有任何创新。在自己的笔记本运行的程序。</li>
-<li>理论部分没有看，第4章，看不懂。</li>
-<li>第5章做了两部分实验，分别是随机化的数据，虚拟的例子；和使用lastfm的数据做了实验，分别都得出了自己的模型sSVD的效果优于所有的baseline。改变不同的超参数说明模型的健壮性，做了交叉验证。</li>
-</ul>
-<h3 id="自己的理解和感受"><a href="#自己的理解和感受" class="headerlink" title="自己的理解和感受"></a>自己的理解和感受</h3><ul>
-<li>文章很多地方没有明白，大体感觉最有创新的点就是利用了用户的网络结构和商品的网络结构优化分解矩阵P和Q，同时可以解决冷启动的问题。其余的公式都没感觉有什么突出点创新性，并且文章啰嗦，文字罗列，读起来很费劲。</li>
-</ul>
-<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
-<li>非参数化？</li>
-<li>平滑？</li>
-<li>last.fm的图？pattern？</li>
-<li>表3中的三种情况是什么意思？</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JMLR</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">推荐系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/11/jmlr01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1405,6 +1410,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -1418,6 +1431,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1437,6 +1458,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
@@ -1445,19 +1474,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1477,11 +1498,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1498,34 +1531,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1546,6 +1551,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
