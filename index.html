@@ -154,6 +154,169 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-emnlp02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/emnlp02/">论文阅读：Zero-shot User Intent Detection via Capsule Neural Networks</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/03/emnlp02/" class="archive-article-date">
+  	<time datetime="2019-12-03T00:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于胶囊网络的未知意图检测</li>
+<li>发表在EMNLP 2018</li>
+<li>论文链接：<a href="https://arxiv.org/abs/1809.00385" target="_blank" rel="noopener">https://arxiv.org/abs/1809.00385</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Congying Xia，PHD student at UIC，个人主页：<a href="https://congyingxia.github.io/" target="_blank" rel="noopener">https://congyingxia.github.io/</a></li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>根据已知意图的自然语言数据进行训练，在未知意图的自然语言数据上进行意图检测任务。</li>
+</ul>
+<h4 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h4><ul>
+<li>扩展胶囊网络到文本数据建模，提取层次化语义特征</li>
+<li>提出新颖、有效的未知意图检测方法</li>
+<li>进行实验验证</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>IntentCapsNet和IntentCapsNet-ZSL模型结构</p>
+<p><img src="/assets/blogImg/zero-shot_intent_detection.png" alt="image-20191202110910192"></p>
+</li>
+<li><p>语义胶囊</p>
+<ul>
+<li>基于双向lstm和多头attention，每一个attention头对应一个语义特征，输入utterance，输出语义矩阵M，维度是$R×2D_H$，每一个$m_r$表示一个语义特征的向量。</li>
+</ul>
+</li>
+<li><p>检测胶囊</p>
+<ul>
+<li>设计了一个<strong>动态路由协议</strong>，为了得到对于每一个意图的向量表示。</li>
+<li>通过$p_{k|r}=m_rW_{k,r}$获得第k个意图在第r个语义特征上的向量表示，维度为$D_p$。</li>
+</ul>
+<p><img src="/assets/blogImg/dynamic_routing_algorithm.png" alt="image-20191202103836916"></p>
+<ul>
+<li>获得每一个意图k的向量表示$v_k$，（意图检测阶段就可以选择$\left | v_k \right |$最大的意图输出）损失函数包括<strong>max-margin loss</strong>和正则化损失两个部分：</li>
+</ul>
+<p><img src="/assets/blogImg/zero_shot_loss_function.png" alt="image-20191202104131383"></p>
+</li>
+</ul>
+<ul>
+<li><p>未知意图检测胶囊</p>
+<ul>
+<li><p>知识转化策略：已知意图和位置意图的相似性可以根据字词表示得到，比如”AddtoPlaylist”和”PlayMusic”的相似性大于与”GetWeather”的相似性，因为“Playlist”和”Play”,”Music”更相似。</p>
+</li>
+<li><p>建立投票向量：$g_{k,r}=c_{kr}p_{k|r}$表示投票向量。</p>
+</li>
+<li><p>未知动态路由协议：计算得到已知意图k和位未知意图l的相似度矩阵$Q \in R^{L\times K}$，相似度计算方式为：</p>
+<p><img src="/assets/blogImg/formula_similiarity_existing_emerging.png" alt="image-20191202105848232" style="zoom: 67%;"></p>
+<ul>
+<li>计算未知意图和语义特征的关系$u_{l|r}=\sum_{k=1}^K q_{lk}g_{k,r}$，表示未知意图$l$和语义特征$r$之间的特征向量。</li>
+<li>将$u_{l|r}$输入到动态路由协议中，计算得到未知预测向量$n_l$，进行未知意图检测$\hat{z}=\underset{z_l \in Z}{argmax}||n_l||$。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><p>两个真实的数据集，SNIPS-NLU和CVA数据集。数据集统计：</p>
+<p><img src="/assets/blogImg/zero-shot_dataset.png" alt="image-20191202111207627"></p>
+</li>
+<li><p>意图检测Baselines</p>
+<ul>
+<li>TFIDF-LR/TFIDF-SVM</li>
+<li>CNN</li>
+<li>RNN/LSTM/GRU</li>
+<li>Self-attention Bi-LSTM</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/zero-shot_experiment1.png" alt="image-20191202111548625"></p>
+<ul>
+<li>未知意图检测Baselines<ul>
+<li>DeviSE</li>
+<li>CMT</li>
+<li>CDSSM</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/zero-shot_experiment2.png" alt="image-20191202111624714"></p>
+<h4 id="我对IntentCapsNet和IntentCapsNet-ZSL模型的理解"><a href="#我对IntentCapsNet和IntentCapsNet-ZSL模型的理解" class="headerlink" title="我对IntentCapsNet和IntentCapsNet-ZSL模型的理解"></a>我对IntentCapsNet和IntentCapsNet-ZSL模型的理解</h4><ul>
+<li>意图检测部分主要使用了胶囊网络对语义特征进行提取，扩展到未知意图检测就是利用已知意图和未知意图在字词上的相关度应用到未知的分类任务，不能够达到已知和未知意图检测混合的情况。</li>
+</ul>
+<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
+<li><p>多头attention模型</p>
+</li>
+<li><p>Result、Interpretability、Conclusions部分还没看</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">意图检测</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">胶囊网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/03/emnlp02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-acl01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1157,137 +1320,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-iclr01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/16/iclr01/">论文阅读：Efficient Estimation of Word Representations in Vector Space</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/16/iclr01/" class="archive-article-date">
-  	<time datetime="2019-09-16T05:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
-<li>有效的向量空间上的词表示</li>
-<li>发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议</li>
-<li>论文下载：<a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1301.3781.pdf</a></li>
-</ul>
-<h3 id="作者简介"><a href="#作者简介" class="headerlink" title="作者简介"></a>作者简介</h3><ul>
-<li>Tomas Mikolov，在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding方面做出了杰出的贡献。(<a href="https://en.wikipedia.org/wiki/Tomas_Mikolov" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Tomas_Mikolov</a>)<br><img src="/assets/blogImg/iclr01-Tomas_Mikolov.jpg" alt="图片"></li>
-<li>本篇论文是在谷歌工作期间发表。</li>
-</ul>
-<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
-<li>学习高质量的词向量，不仅能够在相似单词的表示上相近，而且能够达到多种程度的相似，比如能够达到表示空间的子空间能够代表单词部分的相似度。</li>
-</ul>
-<h3 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h3><ul>
-<li>文章设计了一个测试集The test set is available at:www.fit.vutbr.cz/ ̃imikolov/rnnlm/word-test.v1.txt；</li>
-<li>对训练好的词向量公开。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://ronan.collobert.com/senna/</span><br><span class="line">http://metaoptimize.com/projects/wordreprs/</span><br><span class="line">http://www.fit.vutbr.cz/ ̃imikolov/rnnlm/</span><br><span class="line">http://ai.stanford.edu/ ̃ehhuang/</span><br></pre></td></tr></table></figure>
-<ul>
-<li>提出了两种模型结构CBOW和skip-gram。</li>
-<li>讨论了维度和训练数据量如何影响训练时间和准确率。</li>
-<li>源码地址：The code is available at:<a href="https://code.google.com/p/word2vec/" target="_blank" rel="noopener">https://code.google.com/p/word2vec/</a></li>
-</ul>
-<h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ul>
-<li>CBOW（Continuous Bag-of-Words Model）<ul>
-<li>类似于NNLM，存在输入层，为目标词周围的词，移除了非线性隐藏层（因为NNLM的参数主要在这部分），投影层的参数被所有输入的单词共享，如图，输入到投影层参数的数量为$D\times N$，投影层到输出层的参数数量为$D\times log(V)$，训练得到映射矩阵C；</li>
-</ul>
-</li>
-<li>skip-gram<ul>
-<li>类似于CBOW，不同的是根据一个词预测周围词，周围词需要通过采样得到，采样范围是C，采样数量是R，一共采样2R个词作为训练，每一个输出的词都对应一套参数，即每一个单词的输出相当于经过一个网络，一套参数包括$D+D\times log(v)$的参数量。</li>
-</ul>
-</li>
-<li>实验方法：在语义上和语法上进行相似单词的问答，包括8869语义问题和10675语法问题，距离输出计算余弦相似度最近的单词是预测答案，每种问答提出一个问答对，得到的结果和答案完全一致算正确。Skip-gram得到的实验结果更准确，但是训练时间更长(CBOW的训练时间为1天，Skip-gram的训练时间为3天)。同时还对比了增加数据量和增加维度对训练时间和准确率的影响，增加维度会提高更多的训练时间，准确度相差不大。自己对Skip-gram方法进行了实现：<a href="https://github.com/FairyFali/word2vec" target="_blank" rel="noopener">https://github.com/FairyFali/word2vec</a><br><img src="/assets/blogImg/iclr01-model.png" alt="图片"></li>
-</ul>
-<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
-<li>以单词为单位进行实验，没有测试开始说的单词表示的一部分能不能表示单词部分的相似度情况。</li>
-</ul>
-<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
-<li>log-bilinear model是什么意思？</li>
-<li>投影层P的维度为什么是N×D？</li>
-<li>skip-gram的采样时如何做的，为什么复杂度是C×，不是R×？</li>
-<li>8周的训练时间是所有模型的吗？</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICLR</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">word2vec</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CBOW</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Skip-gram</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/16/iclr01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1410,14 +1442,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -1442,6 +1466,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">话题检测</a>
               </li>
              
@@ -1458,6 +1490,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLG</a>
               </li>
              
@@ -1466,11 +1506,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1498,26 +1538,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICML</a>
               </li>
              
@@ -1534,15 +1554,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+                <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+                <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1554,11 +1590,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
