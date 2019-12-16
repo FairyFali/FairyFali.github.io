@@ -195,6 +195,15 @@ var _hmt = _hmt || [];
 <ul>
 <li>提出的架构，首先将网络的相关文档通过检索的方式获取到，第二，将大量的documents文档分区给多个pods，每个文档对应一个pod，在每个pod中包含所有过滤器。将过滤器进行过滤器分片，第三，将匹配到的文档和过滤器发送给collecter，收集后发送给所有的订阅客户端。过滤器的上传，删除通过一个客户端的管理api进行，扩展性体现在pod的增加和过滤器的动态增加。</li>
 </ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>文章的related work部分介绍了作者提出的爬虫架构的思路来源<ul>
+<li>web crawlers和搜索引擎系统：解决了高吞吐量问题，本文的爬虫的检索模块使用现有的web crawlers，利用了他们的高吞吐量特征。把他们当做一个黑盒。Mercator提出了一个可扩展的crawler(<strong>A. Heydon and M. Najork. Mercator: A scalable, exten- sible web crawler. World Wide Web, 2(4):219–229, 1999.</strong>)。</li>
+<li>发布订阅系统(Publish-subscribe systems)：本文提出的爬虫相当于一个基于内容的发布订阅系统。Le Subscribe(<strong>F.Fabret,A.Jacobsen,F.Llirbat,J.Pereira,K.Ross,and D. Shasha. Filtering algorithms and implementation for very fast publish/subscribe systems. In Proceedings of the 2001 ACM SIGMOD International Conference on Man- agement of Data, Santa Barbara, CA, May 2001.</strong> and <strong>J. Pereira, F. Fabret, F. Llirbat, and D. Shasha. Efficient matching for web-based publish/subscribe systems. In Proceedings of the 7th International Conference on Co- operative Information Systems (CoopIS 2000), Eilat, Is- rael, September 2000.</strong>)和本文的系统最为相近，在设计索引的时候借鉴了pub-sub系统。Google alert系统允许用户订阅关键词，定期地查询搜索引擎，对返回的结果进行过滤，返回最新的结果以邮件的方式返回给用户。Cobra（<strong>I. Rose, R. Murty, P. Pietzuch, J. Ledlie, M. Roussopou- los, and M. Welsh. Cobra: Content-based filtering and aggregation of blogs and RSS feeds. In Proceedings of the 4th USENIX/ACM Symposium on Networked Systems De- sign and Implementation (NSDI 2007), Cambridge, MA, April 2007.</strong>）和本文的方法最相似。</li>
+<li>包过滤和网络入侵检测系统（Packet filters and NIDs）：在处理大量filters和低延迟处理无结构化的数据方面有相同的挑战。NFAs和DFAs关注于防止状态空间爆炸。（<strong>S.Rubin,S.Jha,andB.P.Miller.Protomatchingnetwork traffic for high throughput network intrusion detection. In Proceedings of the 13th ACM conference on Computer and Communications Security (CCS ’06), October 2006.</strong>）关注于内容规范化。</li>
+<li>数据库和信息选择性传播系统(Databases and SDIs)：并行化分布式方面借鉴了数据库的设计，比如Bubba和Gamma。SDIs有相同的目标在对查询进行索引，执行大量filters与单个文档匹配。</li>
+</ul>
+</li>
+</ul>
 <h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
 <li>阅读到第2节结束。</li>
 <li>过滤器如何进行在没有进行爬取的情况下进行过滤？<ul>
@@ -1447,11 +1456,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,6 +1477,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1543,6 +1560,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ICML</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机视觉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Image Caption</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -1563,30 +1596,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ICML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机视觉</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Image Caption</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -1595,7 +1604,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1611,11 +1624,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vae</a>
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1627,11 +1640,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+                <a href="javascript:void(0)" class="js-tag color4">vae</a>
               </li>
             
             <div class="clearfix"></div>
