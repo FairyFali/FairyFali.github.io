@@ -154,6 +154,119 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dasfaa01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/25/dasfaa01/">论文阅读：Perceiving Topic Bubbles: Local Topic Detection in Spatio-Temporal Tweet Stream</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/25/dasfaa01/" class="archive-article-date">
+  	<time datetime="2019-09-25T07:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>感知话题气泡：基于时空Tweet流的局部话题检测模型</li>
+<li>发表在DASFAA 2019，CCF B类会议</li>
+<li>论文链接：<a href="https://doi.org/10.1007/978-3-030-18579-4_43" target="_blank" rel="noopener">https://doi.org/10.1007/978-3-030-18579-4_43</a></li>
+</ul>
+<h3 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h3><ul>
+<li>一作是信工所国重实验室的陈钧莎博士，我原来实验室的师姐。</li>
+</ul>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
+<li>在原有的LDA的基础上，添加了时空信息的考虑，能够无监督地检测局部话题。<ul>
+<li>在Twitter数据集上进行实验，考虑关键词之间的共现关系，考虑时间之间和空间之间的邻近关系。</li>
+<li>自动生成话题的数量，不需要事先指定。</li>
+<li>实时处理tweet流。</li>
+</ul>
+</li>
+</ul>
+<h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ol>
+<li><strong>嵌入的多层异构网络MHC</strong>，将时间、空间和关键词映射到一个隐空间中，同时保留共现关系和邻近关系。<br>1、将300m×300m作为一个空间单元，1小时作为一个时间单元，一个关键词作为一个关键词单元，因此可以将一个时间窗口内的tweet流构造为一个无向网络。<br>2、使用skip-gram的方法对关键词进行词嵌入的表示，损失函数加入时间和空间邻近性的考虑，使得训练出来的词向量在语义上和时空上相近的相似。</li>
+<li><strong>贝叶斯混合聚类BMC</strong>，无监督，无需事先确定话题数量，类似于LDA，不同的是每一个tweet值表示为一个话题，使用vMF分布在词嵌入向量上进行表示。</li>
+<li>增量更新策略。每次修改窗口的位置，去掉旧的信息，加入新的信息，不需要重头计算。</li>
+</ol>
+<h3 id="我对Bubble模型的理解"><a href="#我对Bubble模型的理解" class="headerlink" title="我对Bubble模型的理解"></a>我对Bubble模型的理解</h3><ul>
+<li>核心模块是异构网络表示，考虑了时间和空间的邻近性后，在原来的LDA的基础上拟合新生成的词嵌入向量，从而生成话题；指标使用词本身的共现度来做评价，体现了话题的内聚度。</li>
+</ul>
+<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
+<li>因为做的局部话题检测，指标本身只是测试了准确率，指标比较少，相当于忽略了召回率，也是考虑时空的一个缺点。</li>
+<li>不能体现出话题的耦合度。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">话题检测</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LDA</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">表示学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">时空社交媒体挖掘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/25/dasfaa01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nips01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1337,117 +1450,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-c-wuziqi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/19/c-wuziqi/">C++五子棋程序设计</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/19/c-wuziqi/" class="archive-article-date">
-  	<time datetime="2018-12-19T06:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="五子棋人机对战设计思路"><a href="#五子棋人机对战设计思路" class="headerlink" title="五子棋人机对战设计思路"></a>五子棋人机对战设计思路</h1><h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><h3 id="Game类"><a href="#Game类" class="headerlink" title="Game类"></a>Game类</h3><ul>
-<li><p>开始游戏：初始化玩家列表，根据规则生成先手，先手开始下棋，定时器计时，如果超时，通知裁判调用超时操作，完成后更新棋盘，并更新两个玩家的打分表，裁判根据规则判断是否结束比赛，继续比赛，后手开始下棋，同理继续。</p>
-</li>
-<li><p>暂停/继续：计时器停止计时，设置游戏状态为暂停。</p>
-</li>
-<li><p>更新棋盘：调用棋盘类的更新棋盘方法；</p>
-</li>
-</ul>
-<h3 id="裁判类"><a href="#裁判类" class="headerlink" title="裁判类"></a>裁判类</h3><ul>
-<li><p>判断胜负：调用规则类的判断胜负方法；</p>
-</li>
-<li><p>超时操作：如果超时，结束游戏，判定当前用户输；</p>
-</li>
-</ul>
-<h3 id="规则类"><a href="#规则类" class="headerlink" title="规则类"></a>规则类</h3><ul>
-<li><p>判定胜负：根据当前棋盘的情况，判定当前完成操作的玩家是否有五个棋子在同一条直线上，有则判定游戏结束，当前玩家获胜，否则继续游戏；</p>
-</li>
-<li><p>下一步到谁：根据结束操作的上一个玩家，决定下一个玩家；</p>
-</li>
-</ul>
-<h3 id="玩家类"><a href="#玩家类" class="headerlink" title="玩家类"></a>玩家类</h3><ul>
-<li><p>下棋：如果是普通用户，则根据用户的输入在指定位置下棋；如果是机器用户，则根据用户和机器的打分规则自动选择下一步的位置，将本次打分和下棋位置记录在用户下棋的记录中，更新棋盘；</p>
-</li>
-<li><p>悔棋：只有普通用户可以悔棋，悔棋的操作是将玩家的打分和棋盘位置回退1步，对手的打分和棋盘位置回退1步，继续有当前用户下棋；</p>
-</li>
-</ul>
-<h3 id="棋盘类"><a href="#棋盘类" class="headerlink" title="棋盘类"></a>棋盘类</h3><ul>
-<li>更新棋盘：把下棋的位置置为玩家id；</li>
-</ul>
-<h3 id="定时器类"><a href="#定时器类" class="headerlink" title="定时器类"></a>定时器类</h3><ul>
-<li><p>计时操作：定时器开始计时，如果玩家在截止时间前下棋则计时重新开始，否则调用裁判类的超时操作；</p>
-<p><img src="/assets/blogImg/wuziqi.png" alt="类图" title="类图"></p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">五子棋</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/19/c-wuziqi/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1562,14 +1564,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -1599,6 +1593,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1634,22 +1636,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -1663,6 +1649,34 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分享会</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1691,10 +1705,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1730,11 +1740,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">

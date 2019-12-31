@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>FairyFali&#39;s Blog</title>
+  <title>论文阅读：Constructing Narrative Event Evolutionary Graph for Script Event Prediction | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="*{ 	margin:0; 	padding: 0; } body{ 	overflow: hidden; } #textBox{ 	position: absolute; 	left: 0; 	top: 0; 	z-index: -999; } .showRoll #frame {     border-color: hsl(0,0%,70%);     position: abs">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/assets/demo/pre_css3_demo/demo.html">
+  <meta name="description" content="论文题目 构建Narrative事件演变图的脚本事件预测 论文发表于IJCAI2018 论文下载：https://arxiv.org/abs/1805.05081  论文作者 一作，李忠阳，哈工大在读博士，个人主页：http://ir.hit.edu.cn/~zyli/ 通讯作者，刘挺，哈工大教授、博士生导师，国内自然语言处理（NLP）领域的领军人物，个人主页：http://homepage.hi">
+<meta name="keywords" content="事件预测,GNN,SGNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Constructing Narrative Event Evolutionary Graph for Script Event Prediction">
+<meta property="og:url" content="fairyfali.github.io/2019/12/31/ijcai01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="*{ 	margin:0; 	padding: 0; } body{ 	overflow: hidden; } #textBox{ 	position: absolute; 	left: 0; 	top: 0; 	z-index: -999; } .showRoll #frame {     border-color: hsl(0,0%,70%);     position: abs">
+<meta property="og:description" content="论文题目 构建Narrative事件演变图的脚本事件预测 论文发表于IJCAI2018 论文下载：https://arxiv.org/abs/1805.05081  论文作者 一作，李忠阳，哈工大在读博士，个人主页：http://ir.hit.edu.cn/~zyli/ 通讯作者，刘挺，哈工大教授、博士生导师，国内自然语言处理（NLP）领域的领军人物，个人主页：http://homepage.hi">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-08-14T03:35:21.410Z">
+<meta property="og:image" content="/assets/blogImg/SGNN-Framework.png">
+<meta property="og:updated_time" content="2019-12-31T05:19:44.718Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="*{ 	margin:0; 	padding: 0; } body{ 	overflow: hidden; } #textBox{ 	position: absolute; 	left: 0; 	top: 0; 	z-index: -999; } .showRoll #frame {     border-color: hsl(0,0%,70%);     position: abs">
+<meta name="twitter:title" content="论文阅读：Constructing Narrative Event Evolutionary Graph for Script Event Prediction">
+<meta name="twitter:description" content="论文题目 构建Narrative事件演变图的脚本事件预测 论文发表于IJCAI2018 论文下载：https://arxiv.org/abs/1805.05081  论文作者 一作，李忠阳，哈工大在读博士，个人主页：http://ir.hit.edu.cn/~zyli/ 通讯作者，刘挺，哈工大教授、博士生导师，国内自然语言处理（NLP）领域的领军人物，个人主页：http://homepage.hi">
+<meta name="twitter:image" content="/assets/blogImg/SGNN-Framework.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -153,260 +155,63 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-ijcai01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Constructing Narrative Event Evolutionary Graph for Script Event Prediction
+    </h1>
+  
+
+        
+        <a href="/2019/12/31/ijcai01/" class="archive-article-date">
+  	<time datetime="2019-12-31T05:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-<script type="text/javascript" src="../jquery.js"></script>
-<style type="text/css">
-*{
-	margin:0;
-	padding: 0;
-}
-body{
-	overflow: hidden;
-}
-#textBox{
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: -999;
-}
-.showRoll #frame {
-    border-color: hsl(0,0%,70%);
-    position: absolute;
-}
-#box{
-	width: 641px;
-	height: 483px;
-	background: url(bg.jpg);
-	border: 1px solid #ddd;
-	position: relative;
-	color: #fff;
-	overflow: hidden;
-}
-#frame {
-    width: 70px;
-    height: 92px;
-    left:370px;
-    top:240px;
-    position: absolute;
-    border: 1px solid transparent;
-    background: url(mhxy.png) no-repeat left top;
-    -webkit-animation: anm-down 1s steps(8) infinite;
-       -moz-animation: anm-down 1s steps(8) infinite;
-        -ms-animation: anm-down 1s steps(8) infinite;
-         -o-animation: anm-down 1s steps(8) infinite;
-            animation: anm-down 1s steps(8) infinite;
-}
-@-webkit-keyframes anm-down { 0% { background-position: 0px 0; } 100% { background-position: -560px 0; } }
-   @-moz-keyframes anm-down { 0% { background-position: 0px 0; } 100% { background-position: -560px 0; } }
-    @-ms-keyframes anm-down { 0% { background-position: 0px 0; } 100% { background-position: -560px 0; } }
-     @-o-keyframes anm-down { 0% { background-position: 0px 0; } 100% { background-position: -560px 0; } }
-        @keyframes anm-down { 0% { background-position: 0px 0; } 100% { background-position: -560px 0; } }
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>构建Narrative事件演变图的脚本事件预测</li>
+<li>论文发表于IJCAI2018</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1805.05081" target="_blank" rel="noopener">https://arxiv.org/abs/1805.05081</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作，李忠阳，哈工大在读博士，个人主页：<a href="http://ir.hit.edu.cn/~zyli/" target="_blank" rel="noopener">http://ir.hit.edu.cn/~zyli/</a></li>
+<li>通讯作者，刘挺，哈工大教授、博士生导师，国内自然语言处理（NLP）领域的领军人物，个人主页：<a href="http://homepage.hit.edu.cn/liuting" target="_blank" rel="noopener">http://homepage.hit.edu.cn/liuting</a></li>
+</ul>
+<h4 id="论文解决的主要问题"><a href="#论文解决的主要问题" class="headerlink" title="论文解决的主要问题"></a>论文解决的主要问题</h4><ul>
+<li>类似于完形填空和机器阅读，根据一系列事件发生的序列预测下一个发生的事件。</li>
+</ul>
+<h4 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h4><ul>
+<li>提出使用事件图代替事件对和事件链，在脚本事件预测中；</li>
+<li>提出可扩展的图神经网络，能在大规模有向图上学习事件表示。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ol>
+<li>构造事件图<ol>
+<li>构造事件链：使用08年的论文《Unsupervised Learning of Narrative Event Chains》的提取方法。</li>
+<li>基于事件链构造NEEG：使用简单的predicate-GR方法构造不稀疏的事件图，每个节点由四个元素组成。</li>
+</ol>
+</li>
+<li>SGNN<ol>
+<li>GGNN是根据GNN改进的模型，本文将图信息输入到GGNN中，得到最终的图的邻接矩阵表示，求候选节点和已知节点的相似度求和判断最可能发生的节点，加入一个Attention层判断已知节点对候选节点的贡献程度；</li>
+<li>可扩展的图神经网络，是指只使用构造的图的已知节点和候选节点的子图作为GGNN的输入，这部分称为SGNN。</li>
+</ol>
+</li>
+</ol>
+<p><img src="/assets/blogImg/SGNN-Framework.png" alt="image-20191231130443405"></p>
+<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
+<li>对于正确答案是训练集中不存在的边怎么办？</li>
+<li>节点的表示可以使用其他方式表示。</li>
+<li>子图的扩展，只使用相关的节点的子图进行扩展图结构的信息量可能偏少。</li>
+<li>SGNN中除了使用邻接矩阵，还可以使用二阶的邻接矩阵等等</li>
+<li>如何把GCN应用到该应用上</li>
+</ul>
 
-@-webkit-keyframes anm-left { 0% { background-position: 0px -92px; } 100% { background-position: -560px -92px; } }
-   @-moz-keyframes anm-left { 0% { background-position: 0px -92px; } 100% { background-position: -560px -92px; } }
-    @-ms-keyframes anm-left { 0% { background-position: 0px -92px; } 100% { background-position: -560px -92px; } }
-     @-o-keyframes anm-left { 0% { background-position: 0px -92px; } 100% { background-position: -560px -92px; } }
-        @keyframes anm-left { 0% { background-position: 0px -92px; } 100% { background-position: -560px -92px; } }
-
-@-webkit-keyframes anm-right { 0% { background-position: 0px -184px; } 100% { background-position: -560px -184px; } }
-   @-moz-keyframes anm-right { 0% { background-position: 0px -184px; } 100% { background-position: -560px -184px; } }
-    @-ms-keyframes anm-right { 0% { background-position: 0px -184px; } 100% { background-position: -560px -184px; } }
-     @-o-keyframes anm-right { 0% { background-position: 0px -184px; } 100% { background-position: -560px -184px; } }
-        @keyframes anm-right { 0% { background-position: 0px -184px; } 100% { background-position: -560px -184px; } }
-
-@-webkit-keyframes anm-up { 0% { background-position: 0px -276px; } 100% { background-position: -560px -276px; } }
-   @-moz-keyframes anm-up { 0% { background-position: 0px -276px; } 100% { background-position: -560px -276px; } }
-    @-ms-keyframes anm-up { 0% { background-position: 0px -276px; } 100% { background-position: -560px -276px; } }
-     @-o-keyframes anm-up { 0% { background-position: 0px -276px; } 100% { background-position: -560px -276px; } }
-        @keyframes anm-up { 0% { background-position: 0px -276px; } 100% { background-position: -560px -276px; } }
-
-@-webkit-keyframes anm-ld { 0% { background-position: 0px -368px; } 100% { background-position: -560px -368px; } }
-   @-moz-keyframes anm-ld { 0% { background-position: 0px -368px; } 100% { background-position: -560px -368px; } }
-    @-ms-keyframes anm-ld { 0% { background-position: 0px -368px; } 100% { background-position: -560px -368px; } }
-     @-o-keyframes anm-ld { 0% { background-position: 0px -368px; } 100% { background-position: -560px -368px; } }
-        @keyframes anm-ld { 0% { background-position: 0px -368px; } 100% { background-position: -560px -368px; } }
-
-@-webkit-keyframes anm-rd { 0% { background-position: 0px -460px; } 100% { background-position: -560px -460px; } }
-   @-moz-keyframes anm-rd { 0% { background-position: 0px -460px; } 100% { background-position: -560px -460px; } }
-    @-ms-keyframes anm-rd { 0% { background-position: 0px -460px; } 100% { background-position: -560px -460px; } }
-     @-o-keyframes anm-rd { 0% { background-position: 0px -460px; } 100% { background-position: -560px -460px; } }
-        @keyframes anm-rd { 0% { background-position: 0px -460px; } 100% { background-position: -560px -460px; } }
-
-@-webkit-keyframes anm-lu { 0% { background-position: 0px -552px; } 100% { background-position: -560px -552px; } }
-   @-moz-keyframes anm-lu { 0% { background-position: 0px -552px; } 100% { background-position: -560px -552px; } }
-    @-ms-keyframes anm-lu { 0% { background-position: 0px -552px; } 100% { background-position: -560px -552px; } }
-     @-o-keyframes anm-lu { 0% { background-position: 0px -552px; } 100% { background-position: -560px -552px; } }
-        @keyframes anm-lu { 0% { background-position: 0px -552px; } 100% { background-position: -560px -552px; } }
-
-@-webkit-keyframes anm-ru { 0% { background-position: 0px -644px; } 100% { background-position: -560px -644px; } }
-   @-moz-keyframes anm-ru { 0% { background-position: 0px -644px; } 100% { background-position: -560px -644px; } }
-    @-ms-keyframes anm-ru { 0% { background-position: 0px -644px; } 100% { background-position: -560px -644px; } }
-     @-o-keyframes anm-ru { 0% { background-position: 0px -644px; } 100% { background-position: -560px -644px; } }
-        @keyframes anm-ru { 0% { background-position: 0px -644px; } 100% { background-position: -560px -644px; } }
-
-</style>
-<title>test</title>
-</head>
-<body>
-	<div id="box">
-		<div id="frame"></div>
-		<input id="textBox" type="text">
-	</div>
-    
-    <script type="text/javascript">
-    	function setAnm (str){
-    		switch (str){
-    			case 'left':{
-    				$("#frame").css({"animation":"anm-left 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'right':{
-    				$("#frame").css({"animation":"anm-right 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'up':{
-    				$("#frame").css({"animation":"anm-up 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'down':{
-    				$("#frame").css({"animation":"anm-down 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'lu':{
-    				$("#frame").css({"animation":"anm-lu 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'ld':{
-    				$("#frame").css({"animation":"anm-ld 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'ru':{
-    				$("#frame").css({"animation":"anm-ru 1s steps(8) infinite"});
-    				break;
-    			}
-    			case 'rd':{
-    				$("#frame").css({"animation":"anm-rd 1s steps(8) infinite"});
-    				break;
-    			}
-    		}
-    	}
-    	var data = {
-    		x:0,
-    		y:0,
-    		l:false,
-    		r:false,
-    		u:false,
-    		d:false,
-    		time:null
-    	}
-    	function move(){
-    		trans = "translate("+data.x*50+"px,"+data.y*50+"px)";
-		  	$('#frame').css({"transform":trans,"transition":"all 0.3s linear"});
-    	}
-    	function diff(){
-    		var newTime = +new Date;
-			if(!data.time){
-				data.time = newTime;
-			}
-			var diff = newTime-data.time;
-			return diff;
-    	}
-		$(window).keydown(function(event){
-		  	var keycode = event.which;
-		  	if(keycode==37){
-		  		if(data.l) return;
-		  		var isRun = diff();
-		  		console.log(isRun);
-		  		data.l=true;
-		  		if(data.u){
-		  			setAnm("lu");
-		  			data.x--;
-		  			if(isRun>480)
-		  			data.y--;
-		  		}else if(data.d){
-		  			setAnm("ld");
-		  			data.x--;
-		  			if(isRun>480)
-		  			data.y++;
-		  		}else{
-		  			setAnm("left");
-			  		data.x--;
-		  		}
-		  	}else if(keycode==38){
-		  		if(data.u) return;
-		  		var isRun = diff();
-		  		console.log(isRun);
-		  		data.u=true;
-		  		if(data.l){
-		  			setAnm("lu");
-		  			if(isRun>480)
-		  			data.x--;
-		  			data.y--;
-		  		}else if(data.r){
-		  			setAnm("ru");
-		  			if(isRun>480)
-		  			data.x++;
-		  			data.y--;
-		  		}else{
-		  			setAnm("up");
-			  		data.y--;
-		  		}
-		  	}else if(keycode==39){
-		  		if(data.r) return;
-		  		var isRun = diff();
-		  		console.log(isRun);
-		  		data.r=true;
-		  		if(data.u){
-		  			setAnm("ru");
-		  			data.x++;
-		  			if(isRun>480)
-		  			data.y--;
-		  		}else if(data.d){
-		  			setAnm("rd");
-		  			data.x++;
-		  			if(isRun>480)
-		  			data.y++;
-		  		}else{
-		  			setAnm("right");
-			  		data.x++;
-		  		}
-		  	}else if(keycode==40){
-		  		if(data.d) return;
-		  		var isRun = diff();
-		  		console.log(isRun);
-		  		data.d=true;
-		  		if(data.l){
-		  			setAnm("ld");
-		  			if(isRun>480)
-		  			data.x--;
-		  			data.y++;
-		  		}else if(data.r){
-		  			setAnm("rd");
-		  			if(isRun>480)
-		  			data.x++;
-		  			data.y++;
-		  		}else{
-		  			setAnm("down");
-			  		data.y++;
-		  		}
-		  	}
-		  	move();
-		}).keyup(function(){
-			data.l = data.r = data.u = data.d = false;
-			data.time = null;
-		});
-    </script>
-</body>
-</html>
       
 
       
@@ -414,6 +219,25 @@ body{
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件预测</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GNN</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SGNN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -464,7 +288,7 @@ body{
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/assets/demo/pre_css3_demo/demo.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/12/31/ijcai01/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -476,6 +300,16 @@ body{
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/08/nsid01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：The Architecture and Implementation of an Extensible Web Crawler</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -526,7 +360,7 @@ body{
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
