@@ -154,6 +154,108 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nips02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/13/nips02/">论文阅读：Multi-Domain Adversarial Learning for Slot Filling in Spoken Language Understanding</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/13/nips02/" class="archive-article-date">
+  	<time datetime="2019-10-13T11:56:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>多领域对抗学习在口语理解插槽填充上的应用</li>
+<li>论文发表在NIPS2017</li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作刘冰，目前就职于Facebook AI实验室，CMU博士学位，新加坡南洋理工大学学士学位。个人主页：<a href="http://bingliu.me/" target="_blank" rel="noopener">http://bingliu.me/</a></li>
+<li>二作IanLane，一作刘冰的博士生导师。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>口语理解任务SLU的基本任务是将用户的查询分类为某个领域，然后确定用户意图和提取语义框架。分别对应<strong>领域分类</strong>、<strong>意图确定</strong>和<strong>插槽填充</strong>三个任务。本文聚焦于插槽填充任务，因为不可能为每一个任务领域的数据进行注释，所以获得多领域通用的特征和结构是值得研究的，文章使用对抗学习的方法获得多领域之间通用的特征和结构。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>利用Bi-LSTM网络对输入的每一个句子的词embedding作为输入，输出每一个词对应的槽概率分布，这就是特定领域的插槽填充的框架。在这个基础上，增加了一个Attention模块，对每一个输出单元使用MLP计算权重后求和，在进行一个softmax计算得到一个领域分类向量，损失函数为最小化槽分类loss并且最大化领域分类loss，对抗的思想体现在这里。</p>
+<p><img src="/assets/blogImg/slot_filling_model.png" alt="image-20191013195317865"></p>
+</li>
+<li><p>最后，联合使用通用领域的插槽填充模型和特定领域的插槽填充模型应用到特定领域上，实验表明也能提高性能。</p>
+<p><img src="/assets/blogImg//slot_filling_joint.png" alt="image-20191013195357864"></p>
+</li>
+</ul>
+<h4 id="我对论文的理解"><a href="#我对论文的理解" class="headerlink" title="我对论文的理解"></a>我对论文的理解</h4><ul>
+<li>论文主要是提供了一个对抗思想损失函数，使得能够是网络参数向着自己期望的方向学习。</li>
+</ul>
+<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><ul>
+<li>输入的w是一个embedding？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SLU</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">对抗学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/13/nips02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kdd01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -218,15 +320,15 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GNN</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">异构图</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
         		</li>
       		
 		</ul>
@@ -447,11 +549,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LDA</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LDA</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -661,11 +763,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICLR</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICLR</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -893,7 +995,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -901,7 +1003,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">卷积神经网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
         		</li>
       		
 		</ul>
@@ -1326,111 +1428,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-ecir01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/15/ecir01/">论文阅读：高效的上下文敏感的KNN搜索</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/15/ecir01/" class="archive-article-date">
-  	<time datetime="2019-08-15T07:21:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h2><ul>
-<li>Efficient Context-Aware K-Nearest Neighbor Search</li>
-<li>高效的上下文感知K近邻搜索</li>
-<li>ECIR:CCF C类会议、CORE A类会议</li>
-<li>论文集链接：<a href="https://link.springer.com/book/10.1007/978-3-319-76941-7" target="_blank" rel="noopener">https://link.springer.com/book/10.1007/978-3-319-76941-7</a></li>
-<li>论文链接：<a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-76941-7_35.pdf" target="_blank" rel="noopener">下载</a></li>
-</ul>
-<h2 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h2><ul>
-<li>普通的KNN方法无法处理离群点和密度的影响，本文提出的强KNN方法可以在线性时间复杂度内解决这个问题并且与现有的几种方法以及SVM、LR方法进行试验分析得到的最优的结果。</li>
-</ul>
-<h2 id="提供的主要方法和贡献"><a href="#提供的主要方法和贡献" class="headerlink" title="提供的主要方法和贡献"></a>提供的主要方法和贡献</h2><ul>
-<li>将数据抽象为一个无向图，节点是数据，边是数据之间的距离；</li>
-<li>解决的两个问题：<img src="/assets/blogImg/ecir01.png" alt="解决的两个问题" title="解决的两个问题"></li>
-<li>KNN两步异常点检测算法：输入$G^+(O_{train} + v,D_{train}+d(v, O_{train}))$，和测试数据v，离群阈值T；输出v是否为离群点和v的K个邻居。遍历每个训练数据，计算每个数据的第K个邻居的距离$Ndist^+_{v,k}$，如果大于等于$D_{iv}$，则加入M(v)，遍历结束后判断如果$len(M(v))&lt;T$则判定为异常,邻居节点由$Ndist^+_{v,k}$决定。</li>
-<li>上下文敏感的强KNN算法：主要为了解决不同数据集密度不同的问题，可提供检测异常。输入图$G^+$和测试数据v；输出v是否为异常点和少于K个临近点；遍历测试数据，计算每个数据的第k个邻居的距离，如果数据i在v的k个邻居内且v到数据i的距离小于i到第k个邻居的距离则将i放入N(v)中，结束遍历，如果N(v)为空则说明v是异常点，返回N(v)为v的邻居点。</li>
-<li>高效的强KNN算法：在上一个算法的基础上对时间复杂度进行改进，适应于测试数据变化的情况。输入G和测试集合V={v,…};输出测试数据的是否为异常点以及邻居节点。训练阶段，计算出G中所有节点的$Ndist_{i,K-1}$和$Ndist_{i,k}$，时间复杂度为$O(K^2N)$，测试阶段，遍历每一个测试数据v，得到新的图$G^+$，对于每一个测试数据i，如果$Ndist_{i,K-1} == Ndist_{i,K}$，则$Ndist^+_{i,K} = Ndist_{i,K}$，否则$Ndist^+_{i,K} = min(Ndist_{i,K-1}, D^+_{iv})$，再计算v的第k个邻居的距离$Ndist^+_{v,K}$时间复杂度为$O(KN)$最后和上一算法判断是否为异常点的条件相同。</li>
-<li>最后的时间复杂度是$O(KN)$，是线性的。</li>
-<li>可以用来做聚类的种子选择方法。</li>
-<li>使用了文本数据和非文本数据进行了实验，得到了较好的结果。</li>
-</ul>
-<h2 id="对强KNN的理解"><a href="#对强KNN的理解" class="headerlink" title="对强KNN的理解"></a>对强KNN的理解</h2><ul>
-<li>略</li>
-</ul>
-<h2 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h2><ul>
-<li>原论文中有一些个人理解的错误，C类会议的论文水平果然差一点</li>
-<li>对密度进行判断的条件有缺陷，可以选择当前选择的邻居不能出现在之前的邻居的邻域内。</li>
-<li>对密度的判断条件的两个K可以自适应的决定。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息检索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">KNN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/15/ecir01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1553,11 +1550,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color2">卷积神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1570,6 +1583,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1586,14 +1615,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1621,6 +1642,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICML</a>
               </li>
              
@@ -1634,26 +1671,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1685,15 +1702,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1709,14 +1730,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
@@ -1725,11 +1738,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1738,18 +1751,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">卷积神经网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
             
             <div class="clearfix"></div>
