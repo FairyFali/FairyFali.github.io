@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>论文阅读：The Architecture and Implementation of an Extensible Web Crawler | FairyFali&#39;s Blog</title>
+  <title>Tag: alignment | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 可扩展web爬虫的结构和实现 发表在nsdi2010 论文下载：https://www.usenix.org/legacy/event/nsdi10/tech/  论文作者 Jonathan M. Hsieh，美国华盛顿大学硕士毕业，目前就职于Cloudrea，领英主页：https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/  解决的主">
-<meta name="keywords" content="爬虫">
-<meta property="og:type" content="article">
-<meta property="og:title" content="论文阅读：The Architecture and Implementation of an Extensible Web Crawler">
-<meta property="og:url" content="fairyfali.github.io/2019/12/08/nsid01/index.html">
+  <meta name="description" content="梦想做一名科研工作者">
+<meta name="keywords" content="机器学习,信息检索">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FairyFali&#39;s Blog">
+<meta property="og:url" content="fairyfali.github.io/tags/alignment/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 可扩展web爬虫的结构和实现 发表在nsdi2010 论文下载：https://www.usenix.org/legacy/event/nsdi10/tech/  论文作者 Jonathan M. Hsieh，美国华盛顿大学硕士毕业，目前就职于Cloudrea，领英主页：https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/  解决的主">
+<meta property="og:description" content="梦想做一名科研工作者">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:image" content="/assets/blogImg/xcrawler_architecture.png">
-<meta property="og:updated_time" content="2019-12-16T04:00:13.393Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文阅读：The Architecture and Implementation of an Extensible Web Crawler">
-<meta name="twitter:description" content="论文题目 可扩展web爬虫的结构和实现 发表在nsdi2010 论文下载：https://www.usenix.org/legacy/event/nsdi10/tech/  论文作者 Jonathan M. Hsieh，美国华盛顿大学硕士毕业，目前就职于Cloudrea，领英主页：https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/  解决的主">
-<meta name="twitter:image" content="/assets/blogImg/xcrawler_architecture.png">
+<meta name="twitter:title" content="FairyFali&#39;s Blog">
+<meta name="twitter:description" content="梦想做一名科研工作者">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -155,191 +152,72 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-nsid01" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      论文阅读：The Architecture and Implementation of an Extensible Web Crawler
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/04/08/iclr02/" class="archive-article-date">
+  	<time datetime="2020-04-08T03:11:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/04/08/iclr02/">论文阅读：Neural Machine Translation by Jointly Learning to Align and Translate</a>
     </h1>
   
 
-        
-        <a href="/2019/12/08/nsid01/" class="archive-article-date">
-  	<time datetime="2019-12-08T11:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>可扩展web爬虫的结构和实现</li>
-<li>发表在nsdi2010</li>
-<li>论文下载：<a href="https://www.usenix.org/legacy/event/nsdi10/tech/" target="_blank" rel="noopener">https://www.usenix.org/legacy/event/nsdi10/tech/</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Jonathan M. Hsieh，美国华盛顿大学硕士毕业，目前就职于Cloudrea，领英主页：<a href="https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/" target="_blank" rel="noopener">https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>本文描述了一种原生可扩展爬虫的架构、实现和评估。关注于低延迟、高选择性、和可扩展性。</li>
-<li>在客户端指定<strong>过滤器</strong>，实现高选择性，使用<strong>索引技术</strong>降低过滤器的计算成本；使用<strong>集群技术</strong>实现可扩展性；采取一定<strong>机制</strong>频繁地更新过滤器集，实现低延迟。</li>
-<li>应用：关键词通知、web恶意软件检测、版权侵犯检测、网络度量研究。</li>
-</ul>
-<h4 id="爬虫架构"><a href="#爬虫架构" class="headerlink" title="爬虫架构"></a>爬虫架构</h4><ul>
-<li>目标：高选择性、可索引、效率大于精度、低延迟、可扩展性。</li>
-<li>架构如下：</li>
-</ul>
-<p><img src="/assets/blogImg/xcrawler_architecture.png" alt="image-20191208171929458"></p>
-<ul>
-<li>提出的架构，首先将网络的相关文档通过检索的方式获取到，第二，将大量的documents文档分区给多个pods，每个文档对应一个pod，在每个pod中包含所有过滤器。将过滤器进行过滤器分片，第三，将匹配到的文档和过滤器发送给collecter，收集后发送给所有的订阅客户端。过滤器的上传，删除通过一个客户端的管理api进行，扩展性体现在pod的增加和过滤器的动态增加。</li>
-</ul>
-<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
-<li>文章的related work部分介绍了作者提出的爬虫架构的思路来源<ul>
-<li>web crawlers和搜索引擎系统：解决了高吞吐量问题，本文的爬虫的检索模块使用现有的web crawlers，利用了他们的高吞吐量特征。把他们当做一个黑盒。Mercator提出了一个可扩展的crawler(<strong>A. Heydon and M. Najork. Mercator: A scalable, exten- sible web crawler. World Wide Web, 2(4):219–229, 1999.</strong>)。</li>
-<li>发布订阅系统(Publish-subscribe systems)：本文提出的爬虫相当于一个基于内容的发布订阅系统。Le Subscribe(<strong>F.Fabret,A.Jacobsen,F.Llirbat,J.Pereira,K.Ross,and D. Shasha. Filtering algorithms and implementation for very fast publish/subscribe systems. In Proceedings of the 2001 ACM SIGMOD International Conference on Man- agement of Data, Santa Barbara, CA, May 2001.</strong> and <strong>J. Pereira, F. Fabret, F. Llirbat, and D. Shasha. Efficient matching for web-based publish/subscribe systems. In Proceedings of the 7th International Conference on Co- operative Information Systems (CoopIS 2000), Eilat, Is- rael, September 2000.</strong>)和本文的系统最为相近，在设计索引的时候借鉴了pub-sub系统。Google alert系统允许用户订阅关键词，定期地查询搜索引擎，对返回的结果进行过滤，返回最新的结果以邮件的方式返回给用户。Cobra（<strong>I. Rose, R. Murty, P. Pietzuch, J. Ledlie, M. Roussopou- los, and M. Welsh. Cobra: Content-based filtering and aggregation of blogs and RSS feeds. In Proceedings of the 4th USENIX/ACM Symposium on Networked Systems De- sign and Implementation (NSDI 2007), Cambridge, MA, April 2007.</strong>）和本文的方法最相似。</li>
-<li>包过滤和网络入侵检测系统（Packet filters and NIDs）：在处理大量filters和低延迟处理无结构化的数据方面有相同的挑战。NFAs和DFAs关注于防止状态空间爆炸。（<strong>S.Rubin,S.Jha,andB.P.Miller.Protomatchingnetwork traffic for high throughput network intrusion detection. In Proceedings of the 13th ACM conference on Computer and Communications Security (CCS ’06), October 2006.</strong>）关注于内容规范化。</li>
-<li>数据库和信息选择性传播系统(Databases and SDIs)：并行化分布式方面借鉴了数据库的设计，比如Bubba和Gamma。SDIs有相同的目标在对查询进行索引，执行大量filters与单个文档匹配。</li>
-</ul>
-</li>
-</ul>
-<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
-<li>阅读到第2节结束。</li>
-<li>过滤器如何进行在没有进行爬取的情况下进行过滤？<ul>
-<li>我认为，在过滤器阶段进行文档的爬取，通过过滤器的索引进行匹配；和信息检索不同的是，信息检索的索引建立在文档上，而本文的索引建立在query上。</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Attention</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NMT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">alignment</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2019/12/08/nsid01/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/12/31/ijcai01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          论文阅读：Constructing Narrative Event Evolutionary Graph for Script Event Prediction
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/12/08/security01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">论文阅读：PUBCRAWL: Protecting Users and Businesses from CRAWLers</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -362,9 +240,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
