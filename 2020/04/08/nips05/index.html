@@ -6,19 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Tag: 意图检测 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Sequence to Sequence Learning with Neural Networks | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/tags/意图检测/index.html">
+  <meta name="description" content="论文题目 基于神经网络的序列到序列学习 本文主要用于记录谷歌发表于2014年的一篇神作（引用量上千），现已被广泛使用的Sequence to Sequence模型论文。 发表在NIPS2014 论文下载：http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks  论文作者 一作Ilya S">
+<meta name="keywords" content="seq2seq,MT,lstm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Sequence to Sequence Learning with Neural Networks">
+<meta property="og:url" content="fairyfali.github.io/2020/04/08/nips05/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 基于神经网络的序列到序列学习 本文主要用于记录谷歌发表于2014年的一篇神作（引用量上千），现已被广泛使用的Sequence to Sequence模型论文。 发表在NIPS2014 论文下载：http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks  论文作者 一作Ilya S">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:image" content="/assets/blogImg/sutskever.png">
+<meta property="og:image" content="/assets/blogImg/seq2seq-fig1.png">
+<meta property="og:image" content="/assets/blogImg/seq2seq-tab1-tab2.png">
+<meta property="og:image" content="/assets/blogImg/seq2seq-fig3.png">
+<meta property="og:image" content="/assets/blogImg/seq2seq-fig2.png">
+<meta property="og:updated_time" content="2020-04-08T03:03:37.863Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Sequence to Sequence Learning with Neural Networks">
+<meta name="twitter:description" content="论文题目 基于神经网络的序列到序列学习 本文主要用于记录谷歌发表于2014年的一篇神作（引用量上千），现已被广泛使用的Sequence to Sequence模型论文。 发表在NIPS2014 论文下载：http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks  论文作者 一作Ilya S">
+<meta name="twitter:image" content="/assets/blogImg/sutskever.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,64 +159,259 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nips05" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/03/emnlp02/" class="archive-article-date">
-  	<time datetime="2019-12-03T00:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/03/emnlp02/">论文阅读：Zero-shot User Intent Detection via Capsule Neural Networks</a>
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Sequence to Sequence Learning with Neural Networks
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/04/08/nips05/" class="archive-article-date">
+  	<time datetime="2020-04-08T03:02:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于神经网络的序列到序列学习</li>
+<li>本文主要用于记录谷歌发表于2014年的一篇神作（引用量上千），现已被广泛使用的Sequence to Sequence模型论文。</li>
+<li>发表在NIPS2014</li>
+<li>论文下载：<a href="http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks" target="_blank" rel="noopener">http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Ilya Sutskever，2015 年 12 月，创立了OpenAI，本科就读于多伦多大学，是Hinton的学生，攻读了博士学位，加入了Hinton的小组。2012年和同学Alex Krizhevsky开发了AlexNet。2013年被聘请为Google Brain的研究科学家。2014年和谷歌研究员一起提出了Seq2Seq学习，开启了RNN广泛应用于语言任务的时代。2015 年，麻省理工学院技术评论将 Sutskever 评为 Visionaries 类别的「35 岁以下创新者」。在谷歌大脑团队中，参与了Tensorflow的开发。在谷歌大脑，协助了DeepMind的研究人员开发了划时代的人工智能AlphaGo。</li>
+</ul>
+<blockquote>
+<p><a href="https://www.sohu.com/a/258018819_129720" target="_blank" rel="noopener">https://www.sohu.com/a/258018819_129720</a></p>
+</blockquote>
+<p><img src="/assets/blogImg/sutskever.png" alt="img"></p>
+<p>左一是Sutskever。</p>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>end-to-end和seq2seq是一回事。</li>
+<li>使用多层LSTM。</li>
+<li>英语到法语的机器翻译，在WMT‘ 14数据集上。</li>
+<li>最终score of BLEU是34.8。</li>
+<li>baseline是phrase-based SMT系统，score of BLEU是33.3。</li>
+<li>LSTM能够学习到词序和主动被动语态的保持。</li>
+<li>反转source句子能够显著改善LSTM的性能，因为可以学到短期依赖性，从而使优化问题更简单。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（神经网络的可用性）DNNs能解决非常多的intricate的问题。反向传播总能找到参数的值。</li>
+<li>（挑战，神经网络的限制）尽管DNNs很灵活和很有力量，但是DNNs只能解决那些输入和目标是明确带有固定维度编码的问题。比如语音识别和机器翻译，QA也可以抽象为一个seq2seq任务。</li>
+<li>（展示idea）在本文中，我们展示了一个直观的应用of LSTM结构，能够用来解决通用的seq2seq任务，idea是使用LSTM编码input sequence，使用另一个LSTM提取output sequence。如图所示。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig1.png" alt="image-20200331094534460"></p>
+<ul>
+<li>（实验结果）总WMT’14English to French数据集上得到了34.81的BLEU score，使用5 deep LSTMs（384M参数和8000维状态），数据集单词量80k，使用简单的<strong>beam-search</strong>解码。</li>
+<li>（实验扩展）最后，使用LSTM <strong>rescore</strong>公共可用的1000-best 列表 of the SMT baseline，在这个基础上，得到了36.5的分数。</li>
+<li>（深入研究）意想不到的是，LSTM能在长句子上展示好的结果因为本文在训练集和测试集中reverse source 句子的单词顺序，而不是目标句子。通过这个方法，文章引入了短期依赖性，从而使优化问题变得简单，reverse 单词在source 句子是文章的关键技术贡献之一。</li>
+<li>一个有用的性质of the LSTM是映射变长到一个固定长度的向量。定性评估支持了翻译任务的主张，模型知道单词顺序和主动被动语态保持不变。</li>
+</ul>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
+<li>标准的RNN计算一个inputs$(x_1,…,x_T)$，对应的outputs$(y_1,…,y_T)$，迭代公式如下：$h_t=\sigma(W^{hx}x_t+W^{hh}h_{t-1})$，$y_t=W^{yh}h_t$。RNN能够简单的实现对齐的序列到序列。可是，如何应用不同未知长度的inputs和outputs。</li>
+<li>简单的策略是将序列映射到输入句子到固定长度的向量使用RNN，然后映射这个向量到一个目标序列使用另一个RNN。LSTM能够解决长时依赖的问题，因此采用LSTM作为RNN的基本结构。</li>
+<li>LSTM的目标是评估条件概率$p(y_1,…,y_{T’}|x_1,…,x_T)$,fixed-dimmensional representation v是最后一个隐藏状态，使用一个标准的LSTM-LM公式计算输出序列，使得条件概率$p(y_1,…,y_{T’}|x_1,…,x_T)=\Pi_{t=1}^{T’}p(y_t|v,y_1,…y_{t-1})$。</li>
+<li>在这个公式中，每一个$p(y_t|v,y_1,…y_{t-1})$分布被表示为一个softmax在所有的单词上，注意每一个句子结尾都有一个特殊地结束符”<eos>“。</eos></li>
+<li>文章实际的模型不同于上述在3个重要的方面。第一，使用两个不同的LSTMs，能够利用LSTM同时在多种语言之间。第二，文章发现deep LSTMs显著优于shallow LSTMs。第三，文章发现reverse the order of the words在input句子上是极其有价值的，例如代替使用a,b,c映射到α，β，γ，使用c,b,a来进行映射，使用这种方法，a和α更近，能够是SGD更简单的建立输入和输出之间的交流，文章发现这个简单的数据变换能够极大改善LSTM的性能。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><p>WMT’14 English to French MT task 通过两种方式，不使用SMT系统和使用SMT系统。</p>
+</li>
+<li><p>数据集细节。训练模型在12M句子的子集上，348M法语单词，304M英语单词。使用160000最频繁出现的单词作为vocabulary在source语言上，使用80000最频繁出现的单词作为vocabulary在target语言上。每一个OOV单词被替换为”UNK” token。</p>
+</li>
+<li><p>解码和rescoring。目标函数是$1/|S|\sum_{T,S} logp(T|S)$，使用一个简单的left-to-right beam search解码。还是用LSTM去rescore the 1000-best lists被SMT提供的，</p>
+<ul>
+<li><blockquote>
+<p>beam search：<a href="https://www.zhihu.com/question/54356960" target="_blank" rel="noopener">https://www.zhihu.com/question/54356960</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>reversing the source sentences. 通过这个方式，测试困惑度从5.8降低到4.7，BLEU score从25.9上升到30.6。如果不reverse的话，这个任务有一个大的<strong>“minimal time lag”</strong>问题，reverse之后，minimal time lag大大变小了。论文起初认为reverse句子只会在翻译句子的早期产生更自信的预测，但是，在长句子的翻译上，reverse之后比原来句子上训练的LSTM要好得多，这表明LSTM中reverse输入的结果具有更好的memory利用率。</p>
+</li>
+<li><p>训练细节。LSTM是非常好训练的。使用deep LSTMs带有4层，隐藏层维度1000，1000维word embedding。因此，deep LSTM使用8000个实数表示一个句子。论文发现deep LSTMs是significantly优于shallow LSTMs。使用原始的softmax在80000单词上。参数量384M。其余的细节列举如下：</p>
+<ul>
+<li>初始化所有的参数在-0.08~0.08的uniform分布</li>
+<li>使用SGD without momentum，固定学习率0.7，在5 epochs后，开始减半学习率每半个epoch，论文的模型一共训练了7.5 epochs。</li>
+<li>尽管LSTM趋向于没有梯度消失问题，但是还是有梯度爆炸的可能。因此我们强迫一个硬性限制使得梯度在[10,25]之间scaling。</li>
+<li>每个句子长度不同，但是大多数句子长度是在20到30之间，只有一些句子是很长的（length&gt;100）,为了不让计算资源浪费，我们确保一个batch的所有的句子长度尽可能相同，能够使训练速度加倍。</li>
+</ul>
+</li>
+<li><p>并行化。C++实现的deep LSTM，在单GPU上处理速度约为1700 words per second。文章使用8-GPU并行处理，每一层被不同的GPU计算，剩下的4个GPU计算softmax，最终能够达到6300 words per second with minibatch of 128，训练大概占用10天。</p>
+</li>
+<li><p>实验结果。使用BLEU的变体做评价指标。在baseline上复现了33.3 score 在测试集上，另一个测试集WMT‘14系统上，复现得到37 score，文章提出的方法得到了接近最好的36.5 score。</p>
+</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-tab1-tab2.png" alt="image-20200401090017192"></p>
+<ul>
+<li>在长句子上的performance。意外地发现，LSTM在长句子上做得很好，下图展示了效果。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig3.png" alt="image-20200401090739287"></p>
+<ul>
+<li>模型分析。模型的一个特色就是可以转换一个单词序列为一个固定维度，下图可视化了这些学习的表示。这个图清晰地展示了这个表示是敏感的对于单词顺序，同时也是fairly不敏感的对于主动语态和被动语态的替换。使用PCA得到二维投影。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig2.png" alt="image-20200401091154526"></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>我们展示了一个大的deep LSTM，在一个有限的vocabulary和没有任何假设的前提上，在机器翻译上优于一个标准的SMT系统，which vocabulary没有限制。文章模型的成功可以应用到许多其他的序列学习任务上。</li>
+<li>我们很意外改善的扩展被得到通过reversing the words order 在source 句子，我们推断找到一个问题的最好的短期依赖是很重要的，因为他们优化学习问题非常简单。特别地，尽管文章没有训练标准RNN在non-reversed 在翻译问题上，文章仍然相信一个标准的RNN可以被容易地训练当source sentences are reversed（尽管没有通过实验验证）。</li>
+<li>我们也意外地发现LSTM的能力在翻译长句子。</li>
+<li>最重要的是，我们说明了一个简单的、直观的和相对未优化的方法能够优于SMT系统，因此进一步的工作可能会带来greater accuracies。这个结果说明我们的方法可能会很好的解决具有挑战性的seq2seq问题。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>文章解决的主要问题是一类变长到变长的seq2seq问题。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>提出了使用deep LSTMs做编码解码器的思想。</p>
+</li>
+<li><p>主要的思想，用一句话概括就是:</p>
+<p><strong><em>An encoder network condenses an input sequence into a vector, and a decoder network unfolds that vector into a new sequence.</em></strong> </p>
+</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>这篇文章也出现了rescore这个词，</li>
+<li>We also used the LSTM to rescore the 1000-best lists producedby the baseline system [29].  Torescore an n-best list, we computed the log probability <strong>of every hypothesis with our LSTM and tookan even average with their score and the LSTM’s score</strong>.？？？</li>
+<li>deep LSTM使用8000个实数表示一个句子。为什么</li>
+<li>这里需要讨论的一点是，为什么将输入倒序效果比正序好？参考2给出了见解，是因为对齐和关注点在逆序时更强的问题。</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><a href="https://www.jianshu.com/p/f5c2cc5b661c" target="_blank" rel="noopener">https://www.jianshu.com/p/f5c2cc5b661c</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21272614" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21272614</a></li>
+<li><a href="https://mathpretty.com/10556.html（包含简单的实现）" target="_blank" rel="noopener">https://mathpretty.com/10556.html（包含简单的实现）</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">意图检测</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">seq2seq</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">胶囊网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">lstm</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2020/04/08/nips05/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/08/emnlp03/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -232,9 +434,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
