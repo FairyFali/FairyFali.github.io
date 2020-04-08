@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>FairyFali&#39;s Blog</title>
+  <title>论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="body{ 			background: #fff; 		} 		.bufBox{ 			float: left; 			width: 50px; 			height: 50px; 			background: #ddd; 			border-radius: 5px; 			text-align: center; 			line-height: 50px; 			margin: 0">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/assets/demo/coffee_pc_demo/pro-con.html">
+  <meta name="description" content="论文题目 基于RNN Encoder-Decoder的学习统计机器翻译的短语表示 发表在EMNLP2014 论文下载：https://arxiv.org/abs/1406.1078 真正提出 Seq2Seq 的文章是《Sequence to Sequence Learning with Neural Networks》，但本篇《Learning Phrase Representations usi">
+<meta name="keywords" content="emnlp,RNN encoder-decoder,SMT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation">
+<meta property="og:url" content="fairyfali.github.io/2020/04/08/emnlp03/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="body{ 			background: #fff; 		} 		.bufBox{ 			float: left; 			width: 50px; 			height: 50px; 			background: #ddd; 			border-radius: 5px; 			text-align: center; 			line-height: 50px; 			margin: 0">
+<meta property="og:description" content="论文题目 基于RNN Encoder-Decoder的学习统计机器翻译的短语表示 发表在EMNLP2014 论文下载：https://arxiv.org/abs/1406.1078 真正提出 Seq2Seq 的文章是《Sequence to Sequence Learning with Neural Networks》，但本篇《Learning Phrase Representations usi">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2019-08-14T03:35:21.387Z">
+<meta property="og:image" content="/assets/blogImg/rnn_encoder_decoder.png">
+<meta property="og:image" content="/assets/blogImg/rnn_encoder_decoder2.png">
+<meta property="og:image" content="/assets/blogImg/rnn_encoder_decoder3.png">
+<meta property="og:updated_time" content="2020-04-08T02:59:20.391Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="body{ 			background: #fff; 		} 		.bufBox{ 			float: left; 			width: 50px; 			height: 50px; 			background: #ddd; 			border-radius: 5px; 			text-align: center; 			line-height: 50px; 			margin: 0">
+<meta name="twitter:title" content="论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation">
+<meta name="twitter:description" content="论文题目 基于RNN Encoder-Decoder的学习统计机器翻译的短语表示 发表在EMNLP2014 论文下载：https://arxiv.org/abs/1406.1078 真正提出 Seq2Seq 的文章是《Sequence to Sequence Learning with Neural Networks》，但本篇《Learning Phrase Representations usi">
+<meta name="twitter:image" content="/assets/blogImg/rnn_encoder_decoder.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -153,68 +157,105 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-emnlp03" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation
+    </h1>
+  
+
+        
+        <a href="/2020/04/08/emnlp03/" class="archive-article-date">
+  	<time datetime="2020-04-08T02:56:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-	<style type="text/css">
-		body{
-			background: #fff;
-		}
-		.bufBox{
-			float: left;
-			width: 50px;
-			height: 50px;
-			background: #ddd;
-			border-radius: 5px;
-			text-align: center;
-			line-height: 50px;
-			margin: 0 5px;
-			position:relative;
-			overflow: hidden;
-		}
-		.bufCover{
-			width: 100%;
-			height: 0;
-			background: #f0f;
-			border-radius: 5px;
-			position: absolute;
-		}
-		#buf{
-			height: 60px;
-		}
-		#des p{
-			padding: 4px 0;
-			margin: 0;
-			font-size: 14px;
-		}
-		#des .desPro{
-			color: #333;
-			background: #EEE;
-		}
-		#des .desCon{
-			color: #EEE;
-			background: #333;
-		}
-		#des .desSpe{
-			background: #BBB;
-		}
-	</style>
-	<script type="text/javascript" src="../jquery.js"></script>
-</head>
-<body>
-	<button id="produce">生产</button>
-	<button id="consume">消费</button>
-	<div id="buf">
-	</div>
-	<div id="des"><p></p></div>
-	<script type="text/javascript" src="pro-con.js"></script>
-</body>
-</html>
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于RNN Encoder-Decoder的学习统计机器翻译的短语表示</li>
+<li>发表在EMNLP2014</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1406.1078" target="_blank" rel="noopener">https://arxiv.org/abs/1406.1078</a></li>
+<li>真正提出 Seq2Seq 的文章是《Sequence to Sequence Learning with Neural Networks》，但本篇《Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation》比前者更早使用了 Seq2Seq 模型来解决机器翻译的问题。</li>
+<li>该论文提出了 GRU 的基本结构，为后来的研究奠定了基础。</li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作是Kyunghyun Cho，是纽约大学计算机科学与数据科学助理教授。他是蒙特利尔大学博士后，导师是 Yoshua Bengio。他于2014年初在阿尔托大学获得博士和硕士学位。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>(说明深度学习的有效性和在文章领域的可用性)深度学习在很多领域都展示出了great成功，比如…。在统计机器翻译（SMT）上，深度神经网络也有promising的结果，比如…。</li>
+<li>（说出自己文章的关注点，和主要的解决方法）这篇文章关注新颖的神经网络结构，能够用来作为一个conventional parase-based SMT系统的一部分。本文提出的结构叫做RNN Encoder-Decoder，encoder将一个变长的source序列编码为一个固定长度的向量，解码器map该向量为一个变长的target序列。这两个网络联合训练最大化conditional probability of target sequence given source sequence。此外，文章提出了一个sophisticate隐藏单元为了改善memory容量和训练的简易型。</li>
+<li>（说明模型的目标和评测方法）提出的RNN Encoder-Decoder带有一个新颖的隐藏单元被empirically评估在翻译英语到法语的任务上。文章训练模型学习翻译概率从英语短语到相应的法语短语上。<strong>模型被使用作为标准的 phrase-based SMT的一部分</strong>，打分每一个phrase pair in the phrase table。评估任务reveal RNN Encoder-Decoder改善了翻译性能。</li>
+<li>（文章的实验结果）文章qualitatively分析了训练的RNN Encoder-Decoder 通过比较短语得分和已经存在的翻译模型。定性的分析展示了RNN Encoder-Decoder捕捉语言规律在phrase table是更好的，间接地展示了quantitative 改善在全部的翻译性能上。模型更深远的分析reveals RNN Encoder-Decoder 学习到了一个短语的连续空间表示，能够保存短语的语义和语法结构。</li>
+</ul>
+<h4 id="RNN-Encoder-Decoder模型结构"><a href="#RNN-Encoder-Decoder模型结构" class="headerlink" title="RNN Encoder-Decoder模型结构"></a>RNN Encoder-Decoder模型结构</h4><ul>
+<li><strong>Preliminary：RNN网络</strong>，由一个隐藏状态h和一个可选的输出y组成，在一个变长的序列$x=(x_1,x_2,…,x_T)$。每一个时间step t，隐藏层$h_{\left \langle t \right \rangle}$,被更新$h_t=f(h_{t-1},x_t)$，$f$是一个非线性激活函数。所以可以使用softmax基于当前step的隐藏状态得到输出词的概率分布（多项式分布），从学习到的分布可是很简单的采样出一个序列。</li>
+<li><strong>RNN Encoder-Decoder</strong>，输入长度$T$，输入序列是$x$，输出长度$T’$，输出序列是$y$，RNN读每个symbol of an input sequence x sequentially。序列的结尾由一个特殊地end-of-sequence符号表示，隐藏状态是一个summary c在整个序列上。编码和解码阶段有很大的不同。文章描述的模型结构如图所示。两个RNN组件联合训练最大化似然概率。两种使用方式，一种是根据输入序列输出一个输出序列，另一种是给定输入序列x和输出序列y可以预测发生的概率。</li>
+</ul>
+<p><img src="/assets/blogImg/rnn_encoder_decoder.png" alt="image-20200324194624385"></p>
+<ul>
+<li>能够记忆和遗忘的隐藏单元。文章基于LSTM隐藏单元的motivated，提出了一种novel单元类型，更加简单和易于实现，如下图所示。$[.]_j$表示一个向量的第j个元素，$z_j$是更新门，$r_j$是重置门。更新门控制着多少信息来自于之前的hidden state，相当于控制着长时记忆。因为每个隐藏单元（就是一个元素）都有独立的reset gate 和 update gate，所以，每个hidden unit都会捕捉到不同时间范围的依赖关系。实验结果表明如果使用不加任何gate的tanh，不能够得到有意义的结果。<br><img src="/assets/blogImg/rnn_encoder_decoder2.png" alt="image-20200324200318249"><h4 id="统计机器翻译"><a href="#统计机器翻译" class="headerlink" title="统计机器翻译"></a>统计机器翻译</h4></li>
+<li>统计机器翻译SMT，是找到一个翻译f given a source sentence，使p(f|e)概率最大化，p(e|f)叫做翻译模型，p(f)叫做语言模型。</li>
+<li>2002年介绍的phrase-based SMT架构，翻译模型log p(e|f)被分解为source和target中匹配短语的翻译概率。</li>
+<li>2003年提出神经网络语言模型。神经网络在SMT上被广泛应用。</li>
+<li>使用RNN Encoder-Decoder打分短语对。<strong>这里不太了解，什么是phrase-based SMT架构</strong>，我的理解就是以短语为单位，短语表本身有一个统计信息的表，使用RNN Encoder-Decoder重新打分。</li>
+<li>相关方法：机器翻译中的神经网络。很多引用和介绍，跳过。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>文章评估方法在英语/法语翻译任务上，在WMT14 workshop上。</li>
+<li>双语corpora组成。The  bilingual corpora include Europarl (61M words), news commentary  (5.5M),  UN  (421M),  and  two  crawled corpora  of  90M  and  780M  words  respectively.</li>
+<li>除了给定的corpora，还爬取了新闻材料712M words。</li>
+<li>直接concatenation往往不会获取最好的performance。Instead，应该focus on 更相关的subset。本文使用其他文章提出的<strong>selection method</strong>，选择了418M words的subset作为语言模型的corpora，选择了348M words 的subset作为RNN Encoder-Decoder的训练corpora。使用newstest2013和2013作为数据selection和权重tuning with MERT，newstest2014作为测试集。每个set都有超过70k words和一个独立的参考翻译。</li>
+<li>使用top 15000 words作为vocabulary，其他的单词都使用[UNK]表示。</li>
+<li>baseline是phrase-based SMT，指标是BLEU，开发集和测试集分别得到了30.64和33.3 分数。</li>
+</ul>
+<p><img src="/assets/blogImg/rnn_encoder_decoder3.png" alt="image-20200325150750940"></p>
+<ul>
+<li><p>RNN Encoder-Decoder有1000个隐藏单元，隐藏单元和输入$x_t$之间使用lower-rank 矩阵（我理解的就是embedding），输出矩阵类似，使用rank 100的矩阵。RNN Encoder-Decoder的详情在附录页。</p>
+</li>
+<li><p>后面的没有太看懂。</p>
+</li>
+</ul>
+<h4 id="附录：RNN-Encoder-Decoder"><a href="#附录：RNN-Encoder-Decoder" class="headerlink" title="附录：RNN Encoder-Decoder"></a>附录：RNN Encoder-Decoder</h4><ul>
+<li>这部分介绍了RNN Encoder-Decoder的细节。</li>
+<li>源phrase 为 $X=(x_1,x_2,…,x_N)$，目标phrase为$Y=(y_1,y_2,…,y_M)$。每个phrase使用one-hot编码。</li>
+<li>每个源phrase被编码为500-dimensional 向量，隐藏层使用1000个隐藏单元。</li>
+<li>这部分介绍的很详细，一看就懂。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>为了解决一类变长到变长序列的问题。</li>
+</ul>
+<h4 id="使用的主要方法"><a href="#使用的主要方法" class="headerlink" title="使用的主要方法"></a>使用的主要方法</h4><ul>
+<li>提出了RNN Encoder-Decoder结构。</li>
+<li>提出一种类似LSTM的GRU结构，并且具有比LSTM更少的参数，更不容易过拟合。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>本篇论文算是为 Seq2Seq 的研究开了先河，而且其提出的 GRU 结构也为后来的研究做好了铺垫，得到了广泛应用，非常值得一读。</li>
+<li>在文章中，提出了一种新型神经网络架构，称为RNN Encoder-Decoder，它能学习将一个任意长度的序列映射到另一个任意长度序列（可能来自不同数据集）。</li>
+<li>所提出的RNN Encoder-Decoder能够给一对序列（以条件概率表示）打分或产生给定源序列的目标序列。</li>
+<li>随着新架构，我们提出了一个新颖的hidden unit，包括一个复位门和一个更新门，自适应地控制每个hidden unit在读取/生成序列时记住或遗忘多少。</li>
+<li>文章用统计机器翻译的任务评估了所提出的模型，其中使用RNN Encoder-Decoder对短语表中的每个短语对进行评分。定性上，我们能够表明新模型能够很好地捕获短语对中的语言规律，并且RNN Encoder-Decoder能够生成符合语法规则的目标短语。</li>
+<li>文章发现RNN Encoder-Decoder可以在BLEU分数方面提高整体翻译效果。 </li>
+<li>此外，发现RNN Encoder-Decoder的贡献正交于（orthogonal）SMT系统中神经网络的现有使用方法，因此可以同时使用RNN Encoder- Decoder和神经网络语言模型来提高性能。</li>
+<li>文章对训练完的模型的定性分析表明，它确实捕捉了多个层面的语言规律，例如词级和短语层面。 这表明可能会有更多自然语言相关的应用受益于RNN Encoder-Decoder。</li>
+<li>该架构具有巨大潜力可进一步改进和分析。 <strong>本文未研究的其中一种方法是让RNN Encoder-Decoder生成目标短语来代替整个或部分短语表。</strong>（没懂） </li>
+<li>另外，值得注意的是此模型并不局限于用在书面语言上，所以将该架构应用于语音转录等其他应用将是未来重要的研究。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>如何使用文章提出的RNN Encoder-Decoder进行短语对的重新打分？</li>
+<li>这里没有用到Attention。</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21279072" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21279072</a></li>
+<li><a href="https://cuiqingcai.com/5873.html" target="_blank" rel="noopener">https://cuiqingcai.com/5873.html</a></li>
+<li><a href="https://blog.csdn.net/u010555997/article/details/76474533" target="_blank" rel="noopener">https://blog.csdn.net/u010555997/article/details/76474533</a></li>
+</ul>
+
       
 
       
@@ -222,6 +263,25 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">emnlp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RNN encoder-decoder</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SMT</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -272,7 +332,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/assets/demo/coffee_pc_demo/pro-con.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2020/04/08/emnlp03/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,6 +344,16 @@ var _hmt = _hmt || [];
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/08/nips04/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：Distributed Representations of Words and Phrasesand their Compositionality</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -334,7 +404,7 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
