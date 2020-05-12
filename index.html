@@ -154,6 +154,203 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-acl03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/acl03/">论文阅读：Universal Language Model Fine-tuning for Text Classification</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/12/acl03/" class="archive-article-date">
+  	<time datetime="2020-05-12T12:43:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>题目翻译：用于文本分类的通用语言模型微调</li>
+<li>发表在ACL 2018 </li>
+<li>论文提出了通用的微调方法<strong>ULMFiT</strong></li>
+<li>论文下载：<a href="https://arxiv.org/abs/1801.06146" target="_blank" rel="noopener">https://arxiv.org/abs/1801.06146</a></li>
+<li>CODE：<a href="http://nlp.fast.ai/ulmfit，https://github.com/fastai/fastai" target="_blank" rel="noopener">http://nlp.fast.ai/ulmfit，https://github.com/fastai/fastai</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Jeremy Howard（杰里米·霍华德），fast.ai和南佛罗里达大学的研究员，此前：Enlitic的创始首席执行官； 前Kaggle总裁，曾经是国际机器学习竞赛中排名最高的参与者。； FastMail.FM和Optimal Decisions的创始人； 哲学系学生。Kaggle主页：<a href="https://www.kaggle.com/jhoward/competitions，领英主页：https://www.linkedin.com/in/howardjeremy/，个人主页：https://www.usfca.edu/faculty/jeremy-howard" target="_blank" rel="noopener">https://www.kaggle.com/jhoward/competitions，领英主页：https://www.linkedin.com/in/howardjeremy/，个人主页：https://www.usfca.edu/faculty/jeremy-howard</a></li>
+<li>二作Sebastian Ruder（塞巴斯蒂安·鲁德），是伦敦DeepMind的研究科学家。在位于都柏林的文字分析初创公司AYLIEN担任研究科学家的同时，在数据分析洞察研究中心完成了自然语言处理和深度学习博士学位。此前，已经研究计算语言学在德国海德堡大学和都柏林三一学院。在学习期间，曾与Microsoft，IBM的Extreme Blue，Google Summer of Code和SAP等合作。对NLP的迁移学习以及使ML和NLP更易于使用感兴趣。个人主页：<a href="https://ruder.io/" target="_blank" rel="noopener">https://ruder.io/</a></li>
+<li>PS：本文的两位作者已经在学术界和工业界都有一定人气，Jeremy Howard 开创了 fast.ai，而 Sebastian Ruder 的博客也广为人知。</li>
+</ul>
+<h4 id="论文解决的主要问题"><a href="#论文解决的主要问题" class="headerlink" title="论文解决的主要问题"></a>论文解决的主要问题</h4><h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>归纳迁移学习已经极大的影响了计算机视觉，但是NLP中现有的方法仍然需要从头开始进行特定任务的训练。因此文章提出一种通用的语言模型微调（ULMFiT）,这是一种可以有效地引用到任何NLP任务。文章的方法应用到6个文本分类任务，大大地超过了最新技术，将大多数数据集的错误减少了18%~24%。此外，仅用100个标记的示例，它与从头开始100倍多数据进行训练的性能相匹配。文章将预训练的模型开源：<a href="http://nlp.fast.ai/ulmfit。" target="_blank" rel="noopener">http://nlp.fast.ai/ulmfit。</a><h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4></li>
+<li>（背景，计算机视觉上的应用）归纳迁移学习已经有了非常大的影响在计算机视觉上。CV模型很少从头训练，而是从已经在ImageNet，MS-COCO和其他数据集上进行了预训练的模型上进行微调。</li>
+<li>（文本分类的背景）文本分类是自然语言处理的一个应用，具有现实应用，比如垃圾邮件，欺诈和bot检测，商业文件分类，例如法律发现。</li>
+<li>（迁移学习的背景）深度学习模型已经实现了SOTA在许多NLP任务上，这些模型从头开始训练，需要大量数据集和训练时间。NLP的研究主要集中在<strong>transductive</strong>迁移上。对于<strong>inductive</strong>迁移，微调预训练的词嵌入，是一种针对模型第一层的简单迁移技术，在实践中产生了很大的影响，并在大多数最新模型中使用。</li>
+<li>（挑战）考虑到预训练的好处，应该比随机初始化模型的其余参数有更好的表现。然而对于NLP而言，通过微调进行归纳迁移是不成功的。后来提出了微调语言模型的方法，但是需要许多领域内的文档来实现好的性能，严重限制了可用性。</li>
+<li>（具体的挑战）文章表明，不是LM微调不好，而是缺乏如何有效地训练知识，这阻碍了更广泛的使用。LM会对小数据集过拟合，在使用分类器时会遭受灾难性的损失。与CV相比，NLP通常更慢，因此需要不同的微调方法。</li>
+<li>（提出的方法）文章提出一种新的通用的语言模型微调（ULMFiT）方法，该方法可以解决这些问题并为任何NLP任务提供强大的归纳迁移学习，类似于对ImageNet模型的微调：相同的3层LSTM结构，相同的超参数，由于高度工程化的模型在6个广泛应用的文本分类任务上。在IMDb上，100个带有标记的样本，ULMFiT的性能和从头开始训练10倍的数据量。</li>
+<li>贡献：<ul>
+<li>1.提出ULMFiT，该方法可用于为NLP的任何任务实现类似CV的迁移学习。</li>
+<li>2.提出了区分式的微调方法，<strong>discriminative fine-tuning,slanted  triangular  learning  rates,  and gradual unfreezing</strong>，为了保留先前的知识并避免在微调过程中造成灾难性的遗忘。</li>
+<li>3.在6个代表性文本分类数据集上，性能明显优于最新技术，大多数数据集上的错误减少了18%~24%。</li>
+<li>4.证明了文章的方法可以实现及其高效的样本迁移学习，并进行了广泛的消融分析。</li>
+<li>5.文章提供了代码。</li>
+</ul>
+</li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>暂时不看了。</li>
+</ul>
+<h4 id="通用语言模型微调"><a href="#通用语言模型微调" class="headerlink" title="通用语言模型微调"></a>通用语言模型微调</h4><ul>
+<li>我们感兴趣于大多数通用的归纳迁移学习在NLP：给定一个静态的任务$\tau_S$,和任何一个任务$\tau_T$,并且$\tau_S \neq \tau_T$，我们想要改善$\tau_T$的性能。语言模型能够被看做是一个理想的源任务，它能够捕获与下游任务相关的很多语言方面。它能够为大多数领域任务提供接近无限的数据。此外，一个预训练的LM能够很简单地适应目标任务的性质，文章证明它可以显著提高性能。此外，语言模型已经是现有任务的关键组成部分。形式上，语言模型产生了一个假设的空间H，空间对许多其他NLP任务都有用。</li>
+<li>我们提出了通用语言模型微调（ULMFiT），预训练了一个语言模型LM在大量的领域通用的语料，微调在特定的任务。这个方法是通用的，<strong>1）适用于文档大小、数量和标签类型不同的任务；2）它使用单一架构和培训过程；3）不需要自定义特征工程或预处理；4）不需要其他域内文档或标签。</strong></li>
+<li>文章的实验中，使用先进的语言模型AWD-LSTM，一个常规的带有dropout的LSTM（没有attention，short-cut connections，或者其他）。与CV类似，我们希望将来能够使用性能更高的语言模型来提高下游任务。</li>
+<li>ULMFiT有下面几个步骤组成，如下图，a)通用的语言模型预训练；b)目标任务语言模型微调；c)目标任务分类器微调。下面具体说这几个步骤。</li>
+<li><img src="/assets/blogImg/ULMFiT-fig1.png" alt="image-20200509152328725"></li>
+<li>3.1 领域通用的语言模型预训练<ul>
+<li>类似于ImageNet一样的语言语料库应该很大，并能够捕获语言的一般属性。我们在Wikitext-103上对语言模型进行预训练，由28595篇预处理过的Wikipedia文章和1.03亿个单词组成。预训练对于具有少量数据集的任务最有利，并且即使只有100个带标签的实例也可以泛化。虽然这个阶段非常昂贵，但是只需执行一次即可，并提高了下游模型的性能和收敛性。</li>
+</ul>
+</li>
+<li>3.2 目标任务语言模型微调<ul>
+<li>无论通用的数据多么多样性，特定任务的数据都有可能来自于不同的分布。因此我们微调语言模型在目标任务的数据上。给定一个预训练的通用领域的语言模型，这一阶段会收敛地非常快因为只需要适应目标数据的特质，并且它允许我们训练一个更健壮的语言模型。文章提出了<strong>区分式微调</strong>和<strong>倾斜三角形学习率</strong>来微调语言模型。下面介绍。</li>
+<li><strong>区分式微调。</strong>因为不同的层能够捕获不同类型的信息，他们应该被微调在不同的程度。为此，文章提出了区分式微调方法。</li>
+<li>代替使用相同的学习率在模型的所有层，区分式微调<strong>允许我们调整每一层使用不同的学习率</strong>。原来的SGD更新参数的方法是$\theta_t = \theta_{t-1}-\eta·\triangledown_\theta J(\theta) $，现在对于分割参数为$\{\theta^1,…,\theta^L \}$，每一层对应的学习率为$\{\eta^1,…,\eta^L \}$，新的更新方法变为$\theta_t^l = \theta_{t-1}^l-\eta·\triangledown_{\theta^l} J(\theta) $,我们经验性地发现它是非常有效果的当我们设置学习率为$\eta^{l-1}=\frac{\eta^l}{2.6}$。</li>
+<li><strong>倾斜三角形学习率。</strong>为了使用参数适应特定任务的特征，我们希望模型在训练开始时迅速收敛到参数空间的合适区域，然后完善参数。训练期间使用相同的学习率或者退火的学习率不是最佳的方法。相反，文章提出了倾斜的三角形学习率（STLR），首先线性增加学习率，然后根据更新时间表线性衰减学习率，如图2所示。公式如下：</li>
+<li><img src="/assets/blogImg/ULMFiT-equ1.png" alt="image-20200509194328160"></li>
+<li>其中T是训练的迭代次数，cut_frac是增长的迭代次数的比例，ratio确定最小的学习率值，t代表迭代次数。文章设置参数cut_frac=0.1,ratio=32,$\eta_{max}=0.01$。</li>
+<li><img src="/assets/blogImg/ULMFiT-fig2.png" alt="image-20200509193812010"></li>
+<li>STLR修改了三角学习率带有一个短的增长和一个长的延迟。实验和一个cosine 退火方法做了对比。</li>
+</ul>
+</li>
+<li>3.3 目标任务分类器微调。<ul>
+<li>最后，微调分类器，我们增强了预训练语言模型用两个线性块。每一个块都使用batch normalization和dropout，ReLU激活对于中间层，一个softmax激活输出一个概率分布在目标类别层。注意，这个特定于任务的分类器层中的参数是从头学习的。第一个线性层将使用最后一个隐藏状态作为输入。</li>
+<li><strong>Concat pooling.</strong>文本分类任务中的信号通常包含在几个单词中，可能出现在文档中的任何位置。由于输入文档可能包含数百个单词，因此如果仅考虑模型的最后一个隐藏状态，则信息可能丢失。因此我们将最后时间步$h_T$和对$H=\{h_1,…,h_T\}$的max-pooled和mean-pooled表示。最后的表示为$h_c=[h_T,maxpool(H),meanpool(H)]$。</li>
+<li>微调目标分类器是最重要的部分在迁移学习中。对于过激的微调将导致灾难性的遗忘，从而消除了通过语言建模捕获的信息的好处；过于谨慎的微调将导致收敛速度缓慢（并导致过度拟合）。除了有区别性微调和三角学习率，文章还建议<strong>逐步取消冻结</strong>以对分类器进行微调。</li>
+<li><strong>Gradual unfreezing。</strong>不是微调所有的层立刻，防止灾难性的遗忘，文章提出了逐步解冻模型从最后一层开始，因为这一层包含最少的通用知识。首先解冻最后一层并且微调所有的未冻结的层进行一个epoch。然后我们解冻下一个低的冻结层并重复步骤，直到微调了所有层，直到最后一次迭代收敛为止（<em>怎么保证最后一次迭代是收敛的？</em>）。</li>
+<li><strong>BPTT for Text Classification（BPT3C）</strong>。语言模型被训练使用backpropagation through time（BPTT）来开始梯度传播对于大的输入句子。 为了微调一个分类器在大文档上可行，文章提出了用于文本分类的BPTT（BPT3C）：将文档划分为固定长度的大小为b的batches。<ul>
+<li>主要是应对长文本的，将长文本分成batch个短句子，然后每次训练的时候，都是用前面一个batch的隐层状态进行初始化（这个好像也是LM训练的一个小trick），但是梯度不会传递到前面去。</li>
+</ul>
+</li>
+<li><strong>Bidirectional language model。</strong>微调使用双向语言模型，微调分类器在每一个LM独立地微调，使用BPT3C，并取分类器预测的平均。</li>
+</ul>
+</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>尽管任务也可以用于序列标注任务，但是由于现实世界中更重要的任务文本分类。</li>
+<li>实验设置<ul>
+<li>数据集和任务。在六个广泛研究的数据集，文档数量和文档长度都不同，使用SOTA文本分类方法和迁移学习方法作为三个通用文本分类的实例：情感分析，问题分类和主题分类。下表展示了每个数据集和任务的统计信息。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab1.png" alt="image-20200509211509550"></li>
+<li>情感分析。二分类的IMDb电影评论数据集和二值分类和五分类的Yelp评论数据集。</li>
+<li>问题分类。使用六分类的小的TREC数据集，类别为语义类别。</li>
+<li>主题分类。对于主题分类，文章评估大规模AG新闻和DB本体数据集。</li>
+<li>预处理。使用相同的预处理和早期的工作。此外，为了允许语言模型捕获特定分类任务方面，文章添加了特定的tokens在大写单词、elongation和重复单词上。</li>
+<li>超参数。我们希望在各种任务中表现出强大的性能。为此，如果没有另外说明，我们将不同的任务使用相同的超参数集，并根据IMDb验证集进行调整。文章使用AWD-LSTM语言模型，embedding size为400，3层，1150个隐藏单元每层，BPTT batch size为70，We  apply  dropout  of 0.4 to layers, 0.3 to  RNN  layers, 0.4 to  input  embedding layers, 0.05 to embedding layers, and weight dropout of 0.5 to the RNN hidden-to-hidden matrix.  <em>这里什么意思？</em>分类器微调阶段，隐藏层维度为50，使用Adam，batch size 64，学习率0.004在语言模型，0.01在分类器微调。其他的和Merity 2017论文设置相同。</li>
+<li>在TREC-6之类的小型数据集上，仅将LM微调15个epochs，而不会过度拟合，而在大型数据集上，可以微调更长的时间。 发现50个epochs是微调分类器的理想默认值。</li>
+<li>Baselines and comparison models. 对于每一个任务，我们比较SOTA。对于IMDb和TREC-6，我们将其与CoVe进行了比较，这是NLP的最新的迁移学习方法。对于AG、Yelp和DBpedia数据集，和Johnson and Zhang (2017)进行比较。</li>
+</ul>
+</li>
+<li>实验结果。<ul>
+<li>报道错误率。下表展示了IMDb和TREC-6数据集的结果。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab2.png" alt="image-20200509221849980"></li>
+<li>下表展示了在更大的AG，DBpedia，Yelp-bi，Yelp-full数据集结果。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab3.png" alt="image-20200509222600356"></li>
+</ul>
+</li>
+</ul>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><ul>
+<li>做了一系列消融实验。在三个数据集上做对比分析，IMDb、TREC-6和AG。</li>
+<li><strong>Low-shot learning。小样本学习。</strong>只有少量的带标签的数据的情况下，监督方法是只使用带标签的数据做LM的微调，半监督的方法是使用所有的数据进行LM的微调，以及从头开始的方法。对比结果如下图。</li>
+<li><img src="/assets/blogImg/ULMFiT-fig3.png" alt="image-20200510112442535"></li>
+<li>在IMDb和AG任务上，监督的ULMFiT带有100个标签的数据和从头开始的带有1000到2000个（10倍到20倍）标签数据性能相当，明显地说明了通用LM预训练的优势。如果是半监督的ULMFiT，能够和从头开始的50倍到100倍相当。</li>
+<li><strong>预训练的影响。</strong>文章比较了不使用预训练在WikiText-103。下表是对比结果，TREC-6是数据量很小，IMDB其次，AG最大。所以说明预训练对中小型最有用，而中小型在商业应用中也很常见。但是即使在大数据集上预训练也是能够起作用的。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab4.png" alt="image-20200510113237566"></li>
+<li><strong>语言模型质量的影响。</strong>为了测量选择合适的LM，文章比较了vanilla LM和AWD-LSTM LM。结果如下。使用微调技术，尽管一个常规的LM仍然能够达到好的性能，但是在小数据集TREC-6上，vanilla LM存在过拟合的风险。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab5.png" alt="image-20200510113652253"></li>
+<li><strong>语言模型微调的影响。</strong>文章比较了使用语言模型微调和不使用的情况。如下表所示。Full代表使用语言模型微调，discr代表使用区分式微调，stlr表示使用倾斜三角形学习率。实验说明在更大的数据集上做语言模型微调是最有用的。discr和stlr在三个数据集上都有作用，但是在更小的数据集上更有效。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab6.png" alt="image-20200510114537352"></li>
+<li><strong>分类器微调的影响。</strong>文章比较训练从头开始，微调全部模型（Full）和只微调最后一层（Last），记逐步解冻为Freez，chain-thaw为逐步解冻的对比（每次只训练一层），区分式微调Discr，倾斜三角形学习率Stlr，Stlr的对比为Cos（余弦退火）。结果如下表。</li>
+<li><img src="/assets/blogImg/ULMFiT-tab7.png" alt="image-20200510120221115"></li>
+<li>微调分类器极大地改善了性能，特别在小的TREC-6上。Last，CV领域最常用的，在这里没有起作用。Chain-thaw在这里起了很大作用，尤其在小数据集，在大数据集上被Full超过。Freez提供了一个和full相当的性能，加入Discr促进了Full和Freez，除了在大数据集AG上。余弦退火学习率和stlr在大数据集上是相当的，但是在小数据集上还是stlr更好。最后，文章使用的方法Freez+disct+stlr实现了最好的性能在IMDb和TREC6上，和相当的性能在AG上。重要的是，ULMFiT（最后一行）是唯一一个全面性能优异的方法，因此也是唯一通用的方法。</li>
+<li><strong>分类器微调行为。</strong>文章比较了分类器微调阶段的ULMFiT和Full两种实现方式的训练曲线，如下图。在所有的数据集上，微调full都会在早期达到最低，后面会过拟合，并且预训练捕获的知识会失去。相比，ULMFiT是更稳定，并且能够预防灾难性的遗忘。</li>
+<li><img src="/assets/blogImg/ULMFiT-fig4.png" alt="image-20200510131602131"></li>
+<li>双向的影响。双向也提供了促进的作用，在IMDb上，错误率从5.3降低到4.58。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>受到CV中ImageNet的启发，文章提出了ULMFiT，这是一种可以应用与任何NLP任务的有效且极其高效的样本<strong>迁移学习方法</strong>。还提出了几种新颖的微调技术，预防灾难性的遗忘。文章的方法在6个具有代表性的文本分类任务上明显优于现有的迁移学习技术和最新技术。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>inductive transfer和transductive transfer是什么意思？</li>
+<li>迁移学习和微调是什么关系？</li>
+<li>hypercolumn-based approaches？</li>
+<li>BPT3C有什么作用？</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/61590026" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/61590026</a></li>
+<li><a href="https://www.jianshu.com/p/7b597742c39c" target="_blank" rel="noopener">https://www.jianshu.com/p/7b597742c39c</a></li>
+<li><a href="https://blog.csdn.net/Magical_Bubble/article/details/89493430" target="_blank" rel="noopener">https://blog.csdn.net/Magical_Bubble/article/details/89493430</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ULMFiT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">fine-tune</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/12/acl03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-naacl02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1731,11 +1928,11 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NMT</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NMT</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -2077,11 +2274,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">emnlp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">emnlp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -2096,164 +2293,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/08/emnlp03/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nips04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/08/nips04/">论文阅读：Distributed Representations of Words and Phrasesand their Compositionality</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/08/nips04/" class="archive-article-date">
-  	<time datetime="2020-04-08T02:46:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>单词和短语的分布式表示及其组合性</li>
-<li>该论文是Mikolov引入词向量表示的模型介绍，和上面读的另一篇《单词在向量空间表示的评估》相对应，是对其的补充。</li>
-<li>论文发表在NIPS2013</li>
-<li>论文下载：<a href="http://papers.nips.cc/paper/5021-distributed-representations-of-wordsand-phrases-and-their-compositionality" target="_blank" rel="noopener">http://papers.nips.cc/paper/5021-distributed-representations-of-wordsand-phrases-and-their-compositionality</a></li>
-</ul>
-<h4 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h4><ul>
-<li>参考上一篇《Efficient Estimation of Word Representations in Vector Space》博客的介绍。</li>
-</ul>
-<h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><ul>
-<li>这篇文章是对Skip-gram的一些扩展，改善向量质量和训练速度。通过频繁单词的负采样我们得到significant 加速和学习更regular单词表示。还描述了一个简单的hierarchical softmax的替换方法叫做负采样。</li>
-<li>单词表示的固有的局限性是对单词顺序的indifference和inability对于惯用语。为了解决这个问题，文章提出了一个简单的对于在文本中找到短语的方法。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（背景）向量空间上的分布式单词表示能够帮助实现更好的性能在许多NLP任务上借助于分组相似的单词。最早的单词表示可以追溯到1986年。这个想法已经被应用到统计语言模型中并取得了重大的成功。follow up工作中包括自动语音识别，机器翻译等NLP任务。</li>
-<li>（背景文章）Mikolov等人介绍了一种Skip-gram模型，一个有效的从大量无结构的文本数据学习高质量单词表示的方法。不像大多数之前的工作，Skip-gram模型不包括dense矩阵乘法。这使得训练及其有效：一个优化的single-machine实现可能训练在超过100B单词在一天的时间。</li>
-<li>（通用技术，使用原因）使用基于神经网络的单词表示形式非常有趣，因为学习到的向量显式地编码了许多语言regularities和patterns。Somewhat surprisingly，许多这些patterns能够表示成线性translations。比如语义和语法的相似性任务。</li>
-<li>（创新1）在这篇文章中我们提出了几个扩展在原始的skip-gram的基础上，我们展示出频繁单词的子采样可以显著提高速度和不频繁单词的表示准确率。此外提出了噪声对比评估的简化变体，能够比hierarchical softmax的Skip-gram更快。</li>
-<li>（挑战1，动机）单词表示被限制在表示短语的inability。比如说，Boston Globe是一个新闻报纸，但是它不是由Boston和Globe组成的，因此，使用向量表示短语可以使Skip-gram更expressive。</li>
-<li>（解决方法1）从单词到短语的扩展是相对简单的。首先我们identity a large number of短语接注意一个数据驱动的方法，然后我们对待这些短语作为独立的tokens在训练时。为了评估短语向量的质量，我们开发了一个test set of analogical reasoning tasks，包含单词和短语。一个例子就是“Montreal”:“Montreal Canadiens”::“Toronto”:“Toronto Maple Leafs”.</li>
-<li>（现象）最后，我们描述了另一个Skip-gram的有趣的property。我们发现简单的向量加法能产生有意义的结果，比如c(“Russia”) + vec(“river”) is close to vec(“Volga River”), and  vec(“Germany”) + vec(“capital”) is close to vec(“Berlin”).这个组合型suggest  不明显的语言理解在单词向量表示上的基本数学运算。</li>
-</ul>
-<h4 id="Skip-gram模型结构"><a href="#Skip-gram模型结构" class="headerlink" title="Skip-gram模型结构"></a>Skip-gram模型结构</h4><ul>
-<li>Skip-gram训练目标是为了找到单词表示对于预测周围词在一个句子或者文档中。更formally，给一系列句子$w_1,w_2,…,w_T$，目标是最大化平均log概率$\frac{1}{T}\sum_{t=1}^T\sum_{-c\le j \le c,j\ne0} logp(w_{t+j}|w_t)$。c是训练上下文的大小。更大的c导致更多的训练例子，因此能够导致更高的准确率，at the expense of训练时间，基本的Skip-gram公式定义$p(w_{t+j}|w_t)$使用softmax函数为：$p(w_O|w_I)=\frac{exp({v_{wo}’}^\top v_{wI})}{\sum_{w=1}^Wexp({v_w’}^\top v_{wI})}$。W是词典大小，$v_w,v_w’$分别表示输入和输出向量表示。但是这个公式是impractical的，因为计算cost太高了，正比于W，一般去$10^5-10^7$。</li>
-<li><strong>Hierarchical softmax</strong>，full softmax的有效近似。它能够将softmax的W降为$log_2(W)$。使用一个二叉树表示W个单词的输出层作为叶子。$n(w,j)$表示节点w的路径上第j个节点，$L(w)$表示路径长度，$ch(n)$表示n的孩子节点，$[x]$表示true为1，false为-1。softmax公式为$p(w|w_I)= \prod_{j=1}^{L(w)-1}\sigma\left ( [n(w,j+1)=ch(n(w,j))] \cdot {v_{n(w,j)}’}^\top v_{wI} \right )$。而且，这里只需要一个单词w的表示$v_w$，原始的需要两个，但是需要树的内部节点n的表示$v_n’$。这里的树取哈夫曼树。</li>
-<li><strong>Negative Sampling</strong>，负采样，NEG。首先需要知道NCE（Noise Contrastive Estimation）是分层softmax的一个替代方法，而NEG又是NCE的一个简化版本，NEG对原来的目标函数做了修改。目标函数见论文公式4，需要按照目标单词$w$的z噪声分布$P_n(w)$采样k个和原来不同的单词。k一般取5-20在小数据集上，2-5在大数据集上。作者试出了一个好的分布是$U(w)^{3/4}/Z$。<ul>
-<li>_NCE是怎么做的？_</li>
-<li><em>unigram分布是什么分布？</em></li>
-</ul>
-</li>
-<li>频繁词的二次采样。为了解决单词频率的不平衡问题，比如单词France和Paris，相比于France和the的共现频率要低很多，对于频繁单词我们使用一个公式进行二次采样，文章多次试验试出了$p(w_i)=1-\sqrt{\frac{t}{f(w_i)}}$，<strong>我的理解是对于训练数据的中间词的选择要进行一下二次采样。</strong>t一般取$10^{-5}$。<ul>
-<li>_$10^{-5}$是什么意思？_</li>
-</ul>
-</li>
-</ul>
-<h4 id="试验结果"><a href="#试验结果" class="headerlink" title="试验结果"></a>试验结果</h4><ul>
-<li>在Google的新闻数据集上，10亿单词，单词表中丢弃少于5次的单词，词典大小692K，试验结果如下。负采样的实验优于分层Softmax，二次采样也可以加速并且使性能更好。</li>
-</ul>
-<p><img src="/assets/blogImg/distributed_representations_of_words_table1.png" alt="image-20200321190258315"></p>
-<ul>
-<li>_线性和非线性？_为什么RNN是非线性的？<h4 id="学习短语"><a href="#学习短语" class="headerlink" title="学习短语"></a>学习短语</h4></li>
-<li>为了学习短语的向量表示，找到频繁组合出现的单词，这样的词组在几个文档经常出现，但是文档频率很低。比如New York Times是词组，但是this is不是一个词组。</li>
-<li>之前有很多发现短语的研究，但是本文使用数据驱动的方法，对于任意两个单词使用基于unigram和bigram的公式$score(w_i,w_j)=\frac{count(w_iw_j)-\delta}{count(w_i) \times count(w_j)}$。对于超过阈值的得分的词组作为短语，运行2~4个轮回可以得到更长的短语。同类型的analogical任务得到的实验examples如下：<br><img src="/assets/blogImg/distributed_representations_of_words_table2.png" alt="image-20200321191935261"></li>
-<li>实验结果，如下表。</li>
-</ul>
-<p><img src="/assets/blogImg/distributed_representations_of_words_table3.png" alt="image-20200321192407789"></p>
-<h4 id="加性组合"><a href="#加性组合" class="headerlink" title="加性组合"></a>加性组合</h4><ul>
-<li>除了类比任务上的线性结构，文章还发现了其他有趣的加法组合，比如</li>
-</ul>
-<p><img src="/assets/blogImg/distributed_representations_of_words_table5.png" alt="image-20200321214234192"></p>
-<ul>
-<li>解释：These values are related logarithmically to the probabilities computed by the output layer, so the sum of two word vectors is related to the product of the two context distributions.  The product works here as the AND function: words that are assigned high probabilities by both word vectors will have high probability, and the other words will have low probability.  </li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>分层softmax目标函数里面中括号是什么意思？</li>
-<li>二次采样是怎么做的？</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">word embeddings</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">NIPS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Skip-gram</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">负采样</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NEG</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二次采样</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分层softmax</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/08/nips04/">展开全文 >></a>
         </p>
       
 
@@ -2421,14 +2460,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2533,10 +2564,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -2549,19 +2576,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2574,6 +2597,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2629,15 +2660,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2657,7 +2684,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2686,6 +2725,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
               </li>
              
               <li class="article-tag-list-item">

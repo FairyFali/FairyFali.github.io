@@ -154,6 +154,164 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nips04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/08/nips04/">论文阅读：Distributed Representations of Words and Phrasesand their Compositionality</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/08/nips04/" class="archive-article-date">
+  	<time datetime="2020-04-08T02:46:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>单词和短语的分布式表示及其组合性</li>
+<li>该论文是Mikolov引入词向量表示的模型介绍，和上面读的另一篇《单词在向量空间表示的评估》相对应，是对其的补充。</li>
+<li>论文发表在NIPS2013</li>
+<li>论文下载：<a href="http://papers.nips.cc/paper/5021-distributed-representations-of-wordsand-phrases-and-their-compositionality" target="_blank" rel="noopener">http://papers.nips.cc/paper/5021-distributed-representations-of-wordsand-phrases-and-their-compositionality</a></li>
+</ul>
+<h4 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h4><ul>
+<li>参考上一篇《Efficient Estimation of Word Representations in Vector Space》博客的介绍。</li>
+</ul>
+<h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><ul>
+<li>这篇文章是对Skip-gram的一些扩展，改善向量质量和训练速度。通过频繁单词的负采样我们得到significant 加速和学习更regular单词表示。还描述了一个简单的hierarchical softmax的替换方法叫做负采样。</li>
+<li>单词表示的固有的局限性是对单词顺序的indifference和inability对于惯用语。为了解决这个问题，文章提出了一个简单的对于在文本中找到短语的方法。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（背景）向量空间上的分布式单词表示能够帮助实现更好的性能在许多NLP任务上借助于分组相似的单词。最早的单词表示可以追溯到1986年。这个想法已经被应用到统计语言模型中并取得了重大的成功。follow up工作中包括自动语音识别，机器翻译等NLP任务。</li>
+<li>（背景文章）Mikolov等人介绍了一种Skip-gram模型，一个有效的从大量无结构的文本数据学习高质量单词表示的方法。不像大多数之前的工作，Skip-gram模型不包括dense矩阵乘法。这使得训练及其有效：一个优化的single-machine实现可能训练在超过100B单词在一天的时间。</li>
+<li>（通用技术，使用原因）使用基于神经网络的单词表示形式非常有趣，因为学习到的向量显式地编码了许多语言regularities和patterns。Somewhat surprisingly，许多这些patterns能够表示成线性translations。比如语义和语法的相似性任务。</li>
+<li>（创新1）在这篇文章中我们提出了几个扩展在原始的skip-gram的基础上，我们展示出频繁单词的子采样可以显著提高速度和不频繁单词的表示准确率。此外提出了噪声对比评估的简化变体，能够比hierarchical softmax的Skip-gram更快。</li>
+<li>（挑战1，动机）单词表示被限制在表示短语的inability。比如说，Boston Globe是一个新闻报纸，但是它不是由Boston和Globe组成的，因此，使用向量表示短语可以使Skip-gram更expressive。</li>
+<li>（解决方法1）从单词到短语的扩展是相对简单的。首先我们identity a large number of短语接注意一个数据驱动的方法，然后我们对待这些短语作为独立的tokens在训练时。为了评估短语向量的质量，我们开发了一个test set of analogical reasoning tasks，包含单词和短语。一个例子就是“Montreal”:“Montreal Canadiens”::“Toronto”:“Toronto Maple Leafs”.</li>
+<li>（现象）最后，我们描述了另一个Skip-gram的有趣的property。我们发现简单的向量加法能产生有意义的结果，比如c(“Russia”) + vec(“river”) is close to vec(“Volga River”), and  vec(“Germany”) + vec(“capital”) is close to vec(“Berlin”).这个组合型suggest  不明显的语言理解在单词向量表示上的基本数学运算。</li>
+</ul>
+<h4 id="Skip-gram模型结构"><a href="#Skip-gram模型结构" class="headerlink" title="Skip-gram模型结构"></a>Skip-gram模型结构</h4><ul>
+<li>Skip-gram训练目标是为了找到单词表示对于预测周围词在一个句子或者文档中。更formally，给一系列句子$w_1,w_2,…,w_T$，目标是最大化平均log概率$\frac{1}{T}\sum_{t=1}^T\sum_{-c\le j \le c,j\ne0} logp(w_{t+j}|w_t)$。c是训练上下文的大小。更大的c导致更多的训练例子，因此能够导致更高的准确率，at the expense of训练时间，基本的Skip-gram公式定义$p(w_{t+j}|w_t)$使用softmax函数为：$p(w_O|w_I)=\frac{exp({v_{wo}’}^\top v_{wI})}{\sum_{w=1}^Wexp({v_w’}^\top v_{wI})}$。W是词典大小，$v_w,v_w’$分别表示输入和输出向量表示。但是这个公式是impractical的，因为计算cost太高了，正比于W，一般去$10^5-10^7$。</li>
+<li><strong>Hierarchical softmax</strong>，full softmax的有效近似。它能够将softmax的W降为$log_2(W)$。使用一个二叉树表示W个单词的输出层作为叶子。$n(w,j)$表示节点w的路径上第j个节点，$L(w)$表示路径长度，$ch(n)$表示n的孩子节点，$[x]$表示true为1，false为-1。softmax公式为$p(w|w_I)= \prod_{j=1}^{L(w)-1}\sigma\left ( [n(w,j+1)=ch(n(w,j))] \cdot {v_{n(w,j)}’}^\top v_{wI} \right )$。而且，这里只需要一个单词w的表示$v_w$，原始的需要两个，但是需要树的内部节点n的表示$v_n’$。这里的树取哈夫曼树。</li>
+<li><strong>Negative Sampling</strong>，负采样，NEG。首先需要知道NCE（Noise Contrastive Estimation）是分层softmax的一个替代方法，而NEG又是NCE的一个简化版本，NEG对原来的目标函数做了修改。目标函数见论文公式4，需要按照目标单词$w$的z噪声分布$P_n(w)$采样k个和原来不同的单词。k一般取5-20在小数据集上，2-5在大数据集上。作者试出了一个好的分布是$U(w)^{3/4}/Z$。<ul>
+<li>_NCE是怎么做的？_</li>
+<li><em>unigram分布是什么分布？</em></li>
+</ul>
+</li>
+<li>频繁词的二次采样。为了解决单词频率的不平衡问题，比如单词France和Paris，相比于France和the的共现频率要低很多，对于频繁单词我们使用一个公式进行二次采样，文章多次试验试出了$p(w_i)=1-\sqrt{\frac{t}{f(w_i)}}$，<strong>我的理解是对于训练数据的中间词的选择要进行一下二次采样。</strong>t一般取$10^{-5}$。<ul>
+<li>_$10^{-5}$是什么意思？_</li>
+</ul>
+</li>
+</ul>
+<h4 id="试验结果"><a href="#试验结果" class="headerlink" title="试验结果"></a>试验结果</h4><ul>
+<li>在Google的新闻数据集上，10亿单词，单词表中丢弃少于5次的单词，词典大小692K，试验结果如下。负采样的实验优于分层Softmax，二次采样也可以加速并且使性能更好。</li>
+</ul>
+<p><img src="/assets/blogImg/distributed_representations_of_words_table1.png" alt="image-20200321190258315"></p>
+<ul>
+<li>_线性和非线性？_为什么RNN是非线性的？<h4 id="学习短语"><a href="#学习短语" class="headerlink" title="学习短语"></a>学习短语</h4></li>
+<li>为了学习短语的向量表示，找到频繁组合出现的单词，这样的词组在几个文档经常出现，但是文档频率很低。比如New York Times是词组，但是this is不是一个词组。</li>
+<li>之前有很多发现短语的研究，但是本文使用数据驱动的方法，对于任意两个单词使用基于unigram和bigram的公式$score(w_i,w_j)=\frac{count(w_iw_j)-\delta}{count(w_i) \times count(w_j)}$。对于超过阈值的得分的词组作为短语，运行2~4个轮回可以得到更长的短语。同类型的analogical任务得到的实验examples如下：<br><img src="/assets/blogImg/distributed_representations_of_words_table2.png" alt="image-20200321191935261"></li>
+<li>实验结果，如下表。</li>
+</ul>
+<p><img src="/assets/blogImg/distributed_representations_of_words_table3.png" alt="image-20200321192407789"></p>
+<h4 id="加性组合"><a href="#加性组合" class="headerlink" title="加性组合"></a>加性组合</h4><ul>
+<li>除了类比任务上的线性结构，文章还发现了其他有趣的加法组合，比如</li>
+</ul>
+<p><img src="/assets/blogImg/distributed_representations_of_words_table5.png" alt="image-20200321214234192"></p>
+<ul>
+<li>解释：These values are related logarithmically to the probabilities computed by the output layer, so the sum of two word vectors is related to the product of the two context distributions.  The product works here as the AND function: words that are assigned high probabilities by both word vectors will have high probability, and the other words will have low probability.  </li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>分层softmax目标函数里面中括号是什么意思？</li>
+<li>二次采样是怎么做的？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">word embeddings</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">NIPS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Skip-gram</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">负采样</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NEG</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二次采样</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分层softmax</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/08/nips04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-session01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1194,142 +1352,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-vae" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/16/vae/">VAE的原理、数学推导以及在NLP上的应用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/16/vae/" class="archive-article-date">
-  	<time datetime="2019-10-16T12:35:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="学习之前的问题"><a href="#学习之前的问题" class="headerlink" title="学习之前的问题"></a>学习之前的问题</h4><ul>
-<li>什么是AE（自编码器）？</li>
-<li>什么是变分推断？</li>
-<li>什么是VAE（变分自编码器）？</li>
-</ul>
-<h4 id="什么是AutoEncoder"><a href="#什么是AutoEncoder" class="headerlink" title="什么是AutoEncoder"></a>什么是AutoEncoder</h4><ul>
-<li><p>AutoEncoder（自编码器）是一个深度学习领域的<strong>生成模型</strong>，<strong>无监督</strong>的学习算法，主要用于<strong>特征的提取</strong>，将输入的数据进行特征转换，在此基础上将特征用于特定的任务。Encoder编码希望编码后的数据能够尽可能的保留原始数据的特征，即编码后的数据更容易解码为原始数据，编码和解码的参数可以使用同一套参数，相当于对参数的一种约束。</p>
-<p><img src="/assets/blogImg/autoencoder.png" alt="image-20191016184437077"></p>
-</li>
-<li><p>其中<strong>前馈神经网络</strong>用于将输入重构为输出。损失函数可以为<script type="math/tex">l(f(x))=-\sum_k(x_klog(\hat{x}_k)+(1-x_k)log(1-\hat{x}_k))</script>，即交叉熵损失函数。</p>
-<h4 id="什么是变分推断"><a href="#什么是变分推断" class="headerlink" title="什么是变分推断"></a>什么是变分推断</h4></li>
-<li>变分推断简单来说是需要根据已有数据推断需要的分布$P$；当$P$不容易表达，不能直接求解时，可以尝试用变分推断的方法。即，**寻找容易表达和求解的分布$Q$，当$Q$和$P$的差距很小的时候，$Q$就可以作为$P$的近似分布代替$P$。</li>
-<li>在推导VAE的损失函数的时候用到的就是变分推断。</li>
-</ul>
-<h4 id="什么是Variational-AutoEncoder"><a href="#什么是Variational-AutoEncoder" class="headerlink" title="什么是Variational AutoEncoder"></a>什么是Variational AutoEncoder</h4><ul>
-<li><p>VAE是深度学习与统计推断相结合，将高维数据X低维表示为Z，与AE相比，X和Z都是<strong>随机变量</strong>。</p>
-</li>
-<li><p>已知输入集合$\{ x_1, x_2,…,x_N \}$，模型参数$\theta$，隐空间$z$</p>
-<ul>
-<li>$z\sim p(z)$</li>
-<li>$x|z \sim p_\theta(x|z)$</li>
-<li>解码器如下：</li>
-</ul>
-<p><img src="/assets/blogImg/decoder.png" alt="image-20191016191947590" style="zoom:50%;"></p>
-<ul>
-<li>为了举例说明，z设置为1维，x设置为2维。</li>
-<li>思路：NN+高斯分布，如下图：</li>
-</ul>
-<p><img src="/assets/blogImg/decoder2.png" alt="image-20191016192226597"></p>
-<ul>
-<li>编码器，如下：</li>
-</ul>
-<p><img src="/assets/blogImg/encoder.png" alt="image-20191016192535334"></p>
-<ul>
-<li><p>完整的auto-encoder如下：</p>
-<p><img src="/assets/blogImg/autoencoder2.png" alt="image-20191016192715439"></p>
-</li>
-<li><p>损失函数的设计：</p>
-<ul>
-<li><p>损失函数是VAE最核心的思想，使用最大似然估计$\varphi,\theta$，以下是损失函数的推导：</p>
-<p><img src="/assets/blogImg/vae.png" alt="image-20191016201302138"></p>
-</li>
-</ul>
-</li>
-<li><p>一些代码例子：</p>
-</li>
-</ul>
-<p><strong>Simple example 2-D distribution</strong> </p>
-<p><strong><a href="https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo-2D.ipynb" target="_blank" rel="noopener">https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo-2D.ipynb</a></strong> </p>
-<p><strong>Simple MNIST Example</strong> </p>
-<p><strong><a href="https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo.ipynb" target="_blank" rel="noopener">https://github.com/oduerr/dl_tutorial/blob/master/tensorflow/vae/vae_demo.ipynb</a></strong> </p>
-</li>
-</ul>
-<h4 id="在NLP上的应用"><a href="#在NLP上的应用" class="headerlink" title="在NLP上的应用"></a>在NLP上的应用</h4><ul>
-<li>[<strong>Language as a Latent Variable: Discrete Generative Models for Sentence Compression</strong>]：句子压缩：将原有的隐变量z设置为离散变量，这样z也可以写成一个句子。</li>
-<li>[<strong>Variational neural machine translation</strong>]：机器翻译</li>
-<li>[<strong>A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues</strong>]：对话系统</li>
-</ul>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li>中国科学院大学，王威老师的深度学习课程生成模型I、vae介绍课件</li>
-<li><a href="https://www.bilibili.com/video/av47765788?from=search&amp;seid=5529315817887042875" target="_blank" rel="noopener">VAE损失函数推导</a></li>
-<li><a href="http://rsarxiv.github.io/2017/03/02/PaperWeekly第二十七期/" target="_blank" rel="noopener">PaperWeekly第二十七期：VAE在NLP上的应用</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vae</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/16/vae/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1468,14 +1490,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -1580,10 +1594,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -1596,19 +1606,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1621,6 +1627,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1676,15 +1690,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1704,7 +1714,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1733,6 +1755,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
               </li>
              
               <li class="article-tag-list-item">
