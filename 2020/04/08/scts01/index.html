@@ -23,7 +23,7 @@
 <meta property="og:image" content="/assets/blogImg/PTMs-fig4.png">
 <meta property="og:image" content="/assets/blogImg/PTMs-tab4.png">
 <meta property="og:image" content="/assets/blogImg/PTMs-tab5.png">
-<meta property="og:updated_time" content="2020-04-08T05:02:57.280Z">
+<meta property="og:updated_time" content="2020-05-12T12:49:40.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Pre-trained Models for Natural Language Processing: A Survey">
 <meta name="twitter:description" content="论文题目 自然语言处理中的预训练模型综述 发表在 Science China Technological Sciences，《中国科学: 技术科学》(英文版)，2020.3.18 是一篇invited review 论文下载：https://arxiv.org/abs/2003.08271  论文作者 一作邱锡鹏，复旦大学博士生导师、教授，目前主要从事自然语言处理、深度学习等方向的研究，开源自然语">
@@ -362,24 +362,29 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="PTMs应用到下游任务"><a href="#PTMs应用到下游任务" class="headerlink" title="PTMs应用到下游任务"></a>PTMs应用到下游任务</h4><ul>
-<li><p><strong>Transfer Learning 迁移学习</strong>。2009年提出的为了使知识从源任务适应目标领域。下图给出了迁移学习的示意图。</p>
+<li><p><strong>Transfer Learning 迁移学习</strong>。2009年【A survey on transfer learning】提出的为了使知识从源任务适应目标领域。下图给出了迁移学习的示意图。</p>
 <ul>
 <li><img src="/assets/blogImg/PTMs-fig4.png" alt="image-20200406144639571"></li>
 <li>有许多类型的迁移类型在NLP中，比如domain adaptation, cross-lingual learning, multi-task learning。使PTM适应下游任务。</li>
 <li><strong>如何迁移？</strong>需要考虑以下问题：<ul>
-<li><strong>选择合适的预训练任务、模型结构和语料。</strong>（1）当前，语言模型是最受欢迎的预训练任务，并且能够更有效地解决NLP问题。但是不同的任务有不同的偏见，比如NSP任务使PTMs更能够了解两个句子之间的关系，因此，PTMs可以满足诸如QA和自然语言推断（NLI）之类的任务。（2）PTMs的体系结构对于下游任务也很重要。例如，尽管BERT可以帮助大多数NLP任务，但是很难做到生成语言。（3）下游任务的数据分布应该近似于PTM。</li>
+<li><strong>选择合适的预训练任务、模型结构和语料。</strong>（1）当前，语言模型是最受欢迎的预训练任务，并且能够更有效地解决NLP问题。但是不同的任务有不同的偏见，比如NSP任务使PTMs更能够了解两个句子之间的关系，因此，PTMs可以满足诸如QA和自然语言推断（NLI）之类的任务。（2）PTMs的体系结构对于下游任务也很重要。例如，尽管BERT可以帮助大多数NLP任务，<strong>但是很难做到生成语言</strong>。（3）下游任务的数据分布应该近似于PTM。</li>
 <li>当前有大量现成的PTM，他们可以方便地用于各种特定任务的下游任务，因此对于目标任务，找到一个适当的训练任务、结构和语料是一个好的解决方案。</li>
 <li><strong>选择合适的layers。</strong>给定一个预训练模型，不同的layers能够capture不同类型的信息。Tenney et al.  2019发现BERT能够按照传统NLP pipline表示：基本的语法信息出现在earlier layers，高级的语义信息出现在higher layers。有3种方式进行选择：a)Embeddings Only. b)Top Layer。c)All Layers，更灵活的方式，像ELMo就是这样处理的。</li>
 <li><strong>微调与否？</strong>当前，有两种通用的模型迁移方式：feature extraction（固定预训练模型参数）和fine-tuning（预训练模型参数不固定并且微调）。尽管这两种方式都可以极大地使大多数NLP任务受益，但是特征提取方式却需要更复杂的任务特定体系结构。 因此，对于许多不同的下游任务而言，微调方法通常比特征提取方法更为通用和方便。</li>
 <li>下表给出了一些常见的适应PTMs的组合：</li>
+</ul>
+</li>
 <li><img src="/assets/blogImg/PTMs-tab4.png" alt="image-20200406153011035"></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <ul>
-<li>微调策略。</li>
+<li><strong>微调策略。</strong>随着PTMs的深度不断增加，使下游任务变得更简单。因为ULMFiT和BERT，微调已经成为主要的PTMs使用方法。但是微调的过程是非常脆弱的，即使使用相同的超参，不同的随机种子也可能导致结果大不相同。除了标准的微调方法，还有一些其他的微调策略。<ul>
+<li>两阶段微调。第一阶段使用目标语料或者中间任务微调，第二阶段在目标任务上微调。</li>
+<li>多任务微调。BERT在所任务学习框架下微调，说明了多任务学习和预训练是互补的技术。</li>
+<li>微调带有额外的适应模块。微调的主要缺点是参数效率低，每个下游任务都有自己微调的过程，因此，更好的解决方案是在固定原始参数的同事向PTM中注入一些可微调的自适应模块。适配器模块产生了紧凑且可扩展的模型； 它们为每个任务仅添加了一些可训练的参数，并且可以在不重新访问先前任务的情况下添加新任务。 原始网络的参数保持固定，从而实现高度的参数共享。</li>
+</ul>
+</li>
 <li>其他。</li>
 </ul>
 <h4 id="PTMs资源"><a href="#PTMs资源" class="headerlink" title="PTMs资源"></a>PTMs资源</h4><ul>
@@ -430,7 +435,7 @@ var _hmt = _hmt || [];
 </li>
 <li>使用PTM作为外部知识，从PTM中挖掘知识更加灵活，例如特征提取，知识蒸馏，数据增强等等。</li>
 <li><strong>（5）PTMs的可解释性和可靠性。</strong>尽管PTM能够达到令人深刻的性能，但是其深层的非线性结构使决策过程变得高度透明。最近，<strong>可解释的人工智能（XAI）2020</strong>成为AI界的热点。和CNNs for images不同，可解释的PTMs是更难的因为类似Transformer结构和语言的复杂性。关于模型分析的许多工作都取决于注意力机制，并且注意力对于可解释的有效性还存在争议。</li>
-<li>此外，PTMs也是容易受到对抗攻击。对PTM的对抗攻击的研究科通过充分暴露其漏洞来帮助我们了解其功能。PTM的对抗性防御也是非常有希望的，它可以提高PTM的健壮性并免受对抗性攻击。</li>
+<li>此外，PTMs也是容易受到对抗攻击。对PTM的对抗攻击的研究可通过充分暴露其漏洞来帮助我们了解其功能。PTM的对抗性防御也是非常有希望的，它可以提高PTM的健壮性并免受对抗性攻击。</li>
 <li>总体来说，作为许多NLP应用程序的关键组件，PTM的可解释性和可靠性在许多方面仍需进一步研究，这有助于我们了解PTM的工作原理，并为了更好地使用和改进提供指导。</li>
 </ul>
 <h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
@@ -444,7 +449,7 @@ var _hmt = _hmt || [];
 <li>facutal knowledge是什么意思？</li>
 <li>不使用微调的知识迁移，为特定任务添加一个小型的微调模块是怎么做的？</li>
 <li>还有一部分没有读，以及很多思想没有理解，后面阅读论文的过程会回顾这些内容。</li>
-<li>文本对抗，文本生成，概率图模型（图神经网络）</li>
+<li>文本对抗，文本生成，概率图模型（图神经网络），信息检索</li>
 </ul>
 <h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
 <li><a href="https://www.cnblogs.com/shona/p/12546820.html" target="_blank" rel="noopener">https://www.cnblogs.com/shona/p/12546820.html</a></li>
@@ -702,6 +707,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -846,6 +859,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">VAE</a>
               </li>
              
@@ -855,14 +876,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -918,11 +931,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -935,26 +960,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
