@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="fairyfali.github.io">
   <title>论文阅读：Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sc">
+  <meta name="description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sci">
 <meta name="keywords" content="Batch Normalization,正则化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文阅读：Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift">
 <meta property="og:url" content="fairyfali.github.io/2020/05/12/icml02/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sc">
+<meta property="og:description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sci">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta property="og:image" content="/assets/blogImg/BN-fig5.png">
 <meta property="og:image" content="/assets/blogImg/BN-alg1.png">
@@ -23,10 +23,10 @@
 <meta property="og:image" content="/assets/blogImg/BN-fig2.png">
 <meta property="og:image" content="/assets/blogImg/BN-fig3.png">
 <meta property="og:image" content="/assets/blogImg/BN-fig4.png">
-<meta property="og:updated_time" content="2020-05-12T12:24:42.145Z">
+<meta property="og:updated_time" content="2020-05-12T12:31:24.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift">
-<meta name="twitter:description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sc">
+<meta name="twitter:description" content="论文题目 批量标准化：通过减少内部协变量偏移来加速深度网络训练 发表在ICML2015 引用量17242（来自谷歌学术，截止到2020.4.15） 论文下载：https://arxiv.org/abs/1502.03167  论文作者 Sergey Ioffe（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Sci">
 <meta name="twitter:image" content="/assets/blogImg/BN-fig5.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
@@ -181,7 +181,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id><a href="#" class="headerlink" title=" "></a> </h3><h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
 <li>批量标准化：通过减少内部协变量偏移来加速深度网络训练</li>
 <li>发表在ICML2015</li>
 <li>引用量17242（来自谷歌学术，截止到2020.4.15）</li>
@@ -348,6 +348,15 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2020/05/12/preprint01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          论文阅读：Layer Normalization
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/04/08/scts01/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">论文阅读：Pre-trained Models for Natural Language Processing: A Survey</div>
@@ -501,6 +510,34 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">卷积神经网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
@@ -581,6 +618,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
               </li>
              
@@ -593,22 +638,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -618,6 +647,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,11 +710,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,39 +722,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vae</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">卷积神经网络</a>
+                <a href="javascript:void(0)" class="js-tag color4">vae</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -766,6 +775,22 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">attention</a>
               </li>
              
               <li class="article-tag-list-item">
