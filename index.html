@@ -154,6 +154,68 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-naacl01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/naacl01/">naacl01</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/12/naacl01/" class="archive-article-date">
+  	<time datetime="2020-05-12T12:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/12/naacl01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nips06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1878,117 +1940,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-acl02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/13/acl02/">论文阅读：Unsupervised Learning of Narrative Event Chains</a>
-    </h1>
-  
-
-        
-        <a href="/2020/01/13/acl02/" class="archive-article-date">
-  	<time datetime="2020-01-13T03:26:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>叙事时间链的无监督学习</li>
-<li>论文发表于ACL2008</li>
-<li>论文下载：<a href="https://www.aclweb.org/anthology/P08-1090/" target="_blank" rel="noopener">https://www.aclweb.org/anthology/P08-1090/</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>一作Nathanael Chambers（钱伯斯）目前是USNA（美国海军学院）的副教授，研究自然语言处理（NLP）和学习世界从文本在最小的监督。个人主页：<a href="https://www.usna.edu/Users/cs/nchamber/index.html" target="_blank" rel="noopener">https://www.usna.edu/Users/cs/nchamber/index.html</a></li>
-<li>二作Dan Jurafsky（丹·尤拉夫斯基）是一作的导师，斯坦福大学计算机学院教授、麦克阿瑟天才奖得主。带出了非常多优秀的学生。个人主页：<a href="http://web.stanford.edu/~jurafsky/" target="_blank" rel="noopener">http://web.stanford.edu/~jurafsky/</a></li>
-</ul>
-<p><img src="/assets/blogImg/Dan Jurafsky.jpg" alt="Dan Jurafsky" style="zoom:50%;"></p>
-<h4 id="论文解决的主要问题"><a href="#论文解决的主要问题" class="headerlink" title="论文解决的主要问题"></a>论文解决的主要问题</h4><ul>
-<li>论文主要针对叙事型的文本进行处理，使用无监督的方式从中提取固定格式的事件，同时提出了两个评价指标（这个指标的意思是两个评测任务来评价提取事件的有效性），包括叙事脚本事件预测和Ordering Narrative Events。</li>
-</ul>
-<h4 id="提出的主要概念和方法"><a href="#提出的主要概念和方法" class="headerlink" title="提出的主要概念和方法"></a>提出的主要概念和方法</h4><ul>
-<li><p>概念</p>
-<ul>
-<li>主演/主角（Protagonist）：一个事件链的主演。</li>
-<li>叙事性事件（Event）：一个二元组e=(verb, particicpants)</li>
-<li>叙事性事件链（Event Chain）：一组<strong>部分有序</strong>的事件$\{ e_i, e_2, …, e_n \}$，顺序信息为$B(e_i, e_j）$。</li>
-</ul>
-</li>
-<li><p>模型一：学习叙事性事件链信息</p>
-<ul>
-<li>提出<strong>叙事型完形填空</strong>任务作为提取事件关系任务的指标。使用PMI方法作为下一事件预测的依据。</li>
-</ul>
-</li>
-</ul>
-<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><ul>
-<li>该文章比较难读懂，还有很多地方没有理解，论文只看了自己关注的叙事性完形填空部分，之后会把没理解和没看到的地方再多读几遍。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">叙事性事件链</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">脚本事件预测</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">自然语言处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/01/13/acl02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2127,6 +2078,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2136,14 +2095,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2323,11 +2274,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2379,10 +2330,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -2392,6 +2339,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
