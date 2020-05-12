@@ -6,20 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>naacl01 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Deep contextualized word representations | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
+  <meta name="description" content="论文题目 深度上下文化的单词表示 发表在NAACL2018，outstanding paper award，CCF C类会议 论文下载：https://arxiv.org/abs/1802.05365  论文作者 一作Matthew E. Peters（马修·彼得斯），2016~至今，在Allen Institute for Artificial Intelligence (AI2， 艾伦人工智能">
+<meta name="keywords" content="ELMo,representation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="naacl01">
+<meta property="og:title" content="论文阅读：Deep contextualized word representations">
 <meta property="og:url" content="fairyfali.github.io/2020/05/12/naacl01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 深度上下文化的单词表示 发表在NAACL2018，outstanding paper award，CCF C类会议 论文下载：https://arxiv.org/abs/1802.05365  论文作者 一作Matthew E. Peters（马修·彼得斯），2016~至今，在Allen Institute for Artificial Intelligence (AI2， 艾伦人工智能">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2020-05-12T12:35:05.822Z">
+<meta property="og:image" content="/assets/blogImg/ELMo-equ1.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-pic3.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-pic1.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab1.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab2.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab3.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab4.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab5.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-tab6.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-fig1.png">
+<meta property="og:image" content="/assets/blogImg/ELMo-fig2.png">
+<meta property="og:updated_time" content="2020-05-12T12:39:34.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="naacl01">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Deep contextualized word representations">
+<meta name="twitter:description" content="论文题目 深度上下文化的单词表示 发表在NAACL2018，outstanding paper award，CCF C类会议 论文下载：https://arxiv.org/abs/1802.05365  论文作者 一作Matthew E. Peters（马修·彼得斯），2016~至今，在Allen Institute for Artificial Intelligence (AI2， 艾伦人工智能">
+<meta name="twitter:image" content="/assets/blogImg/ELMo-equ1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -160,7 +172,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      naacl01
+      论文阅读：Deep contextualized word representations
     </h1>
   
 
@@ -173,7 +185,156 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>深度上下文化的单词表示</li>
+<li>发表在<strong>NAACL</strong>2018，outstanding paper award，CCF C类会议</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1802.05365" target="_blank" rel="noopener">https://arxiv.org/abs/1802.05365</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Matthew E. Peters（马修·彼得斯），2016~至今，在<strong>Allen</strong> Institute for Artificial Intelligence (AI2， 艾伦人工智能研究所)担任Research Scientist。研究方向是NLP（包括问答系统，分类，信息抽取），开源allennlp框架（基于pytorch）的核心贡献者。美国华盛顿大学博士毕业。领英主页：<a href="https://www.linkedin.com/in/petersmatthew/" target="_blank" rel="noopener">https://www.linkedin.com/in/petersmatthew/</a></li>
+<li>三作Mohit Iyyer（莫希特·艾耶），美国马萨诸塞大学阿默斯特分校的计算机科学助理教授，研究方向有文本生成、QA、文本理解，博士毕业于 University of Maryland, College Park，导师为 Jordan Boyd-Graber and Hal Daumé III，个人主页：<a href="https://people.cs.umass.edu/~miyyer/" target="_blank" rel="noopener">https://people.cs.umass.edu/~miyyer/</a><ul>
+<li>[资讯]AI能看懂漫画吗？它的脑补能力比人类差远了：<a href="https://smart.huanqiu.com/article/9CaKrnJYPBg" target="_blank" rel="noopener">https://smart.huanqiu.com/article/9CaKrnJYPBg</a></li>
+</ul>
+</li>
+<li>四作Matt Gardner（马特·加德纳），和一作同是AI2的<a href="https://allennlp.org/" target="_blank" rel="noopener">AllenNLP团队</a>的研究科学家，研究主要集中在使计算机阅读和回答问题，以某种形式的基础（语义分析）来处理开放域阅读理解和理解问题的语义，是<a href="https://github.com/allenai/allennlp" target="_blank" rel="noopener">AllenNLP工具包</a>的原始作者，并且与Waleed Ammar 共同主持了 <a href="https://soundcloud.com/nlp-highlights" target="_blank" rel="noopener">NLP Highlights播客</a>。CMU博士毕业。个人主页：<a href="https://allenai.org/team/mattg/，领英主页：https://www.linkedin.com/in/matt-gardner-34292bbb/" target="_blank" rel="noopener">https://allenai.org/team/mattg/，领英主页：https://www.linkedin.com/in/matt-gardner-34292bbb/</a></li>
+<li>七作Luke Zettlemoyer（卢克·泽特莫耶），是华盛顿大学艾伦计算机科学与工程学院的副教授。我也是PECASE获奖者和Allen杰出研究员。在此之前，在爱丁堡大学做过博士后研究，并获得博士学位。麻省理工学院的学生。个人主页：<a href="https://www.cs.washington.edu/people/faculty/lsz" target="_blank" rel="noopener">https://www.cs.washington.edu/people/faculty/lsz</a><ul>
+<li>第十三届中国中文信息学会暑期学校暨《前沿技术讲习班》邀请嘉宾：<a href="https://www.sohu.com/a/238975302_312708" target="_blank" rel="noopener">https://www.sohu.com/a/238975302_312708</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>文章介绍了一种新类型的深度上下文单词表示模型能够建模单词的复杂特征和基于上下文的变化方法。单词向量通过深度双向语言模型内部状态的学习功能得到，双向语言模型在大型文本语料库上进行预训练。文章展示这些表示能够简单地添加到已存在的模型中，并且能够大大改善模型性能，文章在6个NLP任务上进行实验，包括QA、文本蕴涵、情感分析。文章提出了一项分析，表明暴露预训练模型的网络结构很重要，允许下游模型混合不同类型的半监督信息。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li><p>（说明背景和挑战）预训练词表示是一个关键的组件在许多NLU模型中。可以学习高质量的表示是很有挑战性的。理想中我们应该建模一个能够表达单词复杂特征（语法和语义）和基于上下文变化的单词表示（例如单词多义性）。在这篇文章中，提出了解决这两个挑战的模型，能够简单地整合到现有的模型中，并且极大改善技术水平在各种具有挑战性的语言理解问题中和各种考虑到的情况。</p>
+</li>
+<li><p>（介绍提出的方法）文章的表示和传统的单词embeddings不同，文章的方法中每个token都被赋予一个表示，这个表示是一个句子的函数。我们使用从双向LSTM派生的单词向量，该双向LSTM在大型文本语料库上以coupled LM为目标进行训练。因此，文章称这个模型为ELMo(Embeddings from Language Model)。和之前的基于上下文的方法不同，ELMo表示形式是deep的，某种意义上说它们是biLM所有内部层的function。更具体地说，文章学习了针对每个任务在每个输入词的向量的线性组合，这比仅使用顶层LSTM层显著提高了性能。</p>
+</li>
+<li><p>（模型的优势）以<strong>这种方式</strong>组合<strong>内部状态</strong>允许非常丰富的单词表示。使用内在评估，我们展示出更高level的LSTM状态能够capture词义的上下文相关方面（例如，可以直接用在词义消歧任务上），而较低的level的LSTM状态则可以对语法进行建模（比如，词性标记）。同时暴露所有的这些信息是非常有益的，允许学习的模型选择对每个最终任务选择最有用的半监督模型。</p>
+</li>
+<li><p>（结论）扩展的实验说明了ELMo表示非常有效。文章在6个已存在的NLU任务上进行实验。在每种情况下，添加ELMo表示都会显著提高现有技术，最多能够减少20%的相对误差。对于一个可以直接比较的任务，ELMo优于CoVe（McCannet，2017），后者使用神经机器翻译编码器来计算上下文表示。最后对ELMo和CoVe的分析表示，<strong>深层表示由于仅来自LSTM顶层的深层表示。</strong></p>
+</li>
+<li>公开代码：<a href="http://allennlp.org/elmo" target="_blank" rel="noopener">http://allennlp.org/elmo</a></li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>由于预训练模型能能够学习到单词的语义和语法信息从大规模无监督文本中，所以预训练模型已经成为大多数先进的NLP结构的一部分，包括QA，文本推理和角色标注。可是，这些方法使用的单词向量都是上下文无关的表示。</li>
+<li>之前提出的一些方法克服了一些传统单词向量的缺点，通过用子词信息丰富向量或者分开学习不同单词语义。</li>
+<li>其他相关的工作也关于与学习上下文相关的表示。context2vec使用双向LSTM编码context向量在核心词附近。其他的方法包括使用核心词本身以及编码器（机器翻译中的或者无监督语言模型中的）计算表示。</li>
+<li>之前的工作展示了深度BiRNN不同层之间编码了不同类型的信息。LSTM的顶层可以编码单词的上下文信息。文章使用相似的操作也能够使用修改的LM目标在ELMo表示中达到相同的效果。</li>
+<li>预训练Encoder-Decoder使用LM和Sequence autoencoders，然后在特定任务上进行微调。文章的方法使用biLM在无标签数据上，然后固定参数并添加额外的特定于任务的模型，允许我们使用大量的，丰富的和通用的biLM表示指示更小的监督模型的学习在下游任务中。</li>
+</ul>
+<h4 id="ELMo：Embeddings-from-Language-Models"><a href="#ELMo：Embeddings-from-Language-Models" class="headerlink" title="ELMo：Embeddings from Language Models"></a>ELMo：Embeddings from Language Models</h4><ul>
+<li>和大多数广泛使用的词嵌入不同，ELMo词表示是基于整个输入句子的function。在两层biLMs<strong>带有字符卷积</strong>中进行计算，作为一个内部网络状态的线性function。这个设置允许我们做半监督学习，biLM被预训练在大规模并且可以轻松融入到各种现有的神经NLP体系结构中。</li>
+<li><strong>Bidirectional language models</strong>。<ul>
+<li>给定一个序列包括N个tokens，$(t_1,t_2,\dots,t_N)$，一个前向语言模型计算序列概率通过建模$t_k$的概率分布给定$(t_1,t_2,\dots,t_{k-1})$的条件。</li>
+<li>即$p(t_1,t_2,\dots,t_N)=\Pi_{k=1}^{N}p(t_k|t_1,t_2,\dots,t_{k-1})$。</li>
+<li>最近的先进的神经语言模型计算上下文无关的token表示$x_k^{LM}$，然后通过一个L层的前向LSTMs，第k个未知的输入为$\overrightarrow{h}_{k,j}^{LM}$,j是层数，使用最后一层$\overrightarrow{h}_{k,L}^{LM}$用来预测第k+1个词$t_{k+1}$使用softmax。</li>
+<li>后向的LM和前向LM类似，不同之处在于后向LM反向操作序列，根据将来的词预测前面的词：</li>
+<li>即$p(t_1,t_2,\dots,t_N)=\Pi_{k=1}^{N}p(t_k|t_{k+1},t_{k+2},\dots,t_{N})$。</li>
+<li>双向语言模型biLM组合两个LM。文章的公式联合最大化log likelihood：</li>
+<li><img src="/assets/blogImg/ELMo-equ1.png" alt="image-20200501172952425"></li>
+<li>$\Theta_x$表示token表示参数，$\Theta_s$表示softmax参数。</li>
+<li>网络上的一个模型结构。<a href="https://www.cnblogs.com/huangyc/p/9860430.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangyc/p/9860430.html</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/ELMo-pic3.png" alt="ELMo原理解析及简单上手使用"></p>
+<ul>
+<li>ELMo<ul>
+<li>ELMo是biLM中间层表示的特定于任务的组合。</li>
+<li>每个token $t_k$，一个L层的biLM计算一个$2L+1$个表示的集合：$R_k=\{x_K^{LM},\overrightarrow{h}_{k,j}^{LM},\overleftarrow{h}_{k,j}^{LM} | j=1,\dots,L\}$,为了将ELMo嵌入到下游模型中，ELMo将R中的所有层折叠为一个向量，$ELMo_k=E(R_k,\Theta_e)$。最简单的情况就是E只选择顶层。更通用的方法是计算一个特定于任务的所有的biLM层的权重：</li>
+<li>$E(R_k;\Theta^{task})=\gamma^{task} \sum_{j=0}^Ls_j^{task}h_{k,j}^{LM}$。</li>
+<li>s是softmax向量，标量$\gamma$允许模型对ELMo向量进行缩放，在实际过程中有非常重要的作用，附录中有说明。因为有的时候每个biLM层的分布可能不同，所有有些情况需要做一个Layer Normalization。<ul>
+<li><em>s是怎么学习的？</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用biLMs进行监督NLP任务<ul>
+<li>给定一个预训练的biLM和一个监督NLP任务，使用biLM改善任务模型是很简单的过程。我们简单地运行biLM并且记录所有层的表示。然后我们让特定任务模型学习一个线性组合在这些表示，描述如下。</li>
+<li>为了添加ELMo到监督模型中，我们首先冻结biLM的weights，然后拼接ELMo向量和$x_k$。</li>
+<li>网络上的示意图，如下。<a href="https://www.jianshu.com/p/d93912d5280e" target="_blank" rel="noopener">https://www.jianshu.com/p/d93912d5280e</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/ELMo-pic1.png" alt="img"></p>
+<ul>
+<li>预训练双向语言模型结构<ul>
+<li>使用L=2层BiLSTM（前向和后向都使用双层的），4096个隐藏单元($2<em>L</em>512<em>2$，所以每个单元维度还是512)和512维度投影层，第一层到第二层使用<em>*残差连接</em></em>。biLM提供了三层表示。</li>
+<li>在1B单词Benchmark (Chelba et al., 2014)上训练10个epochs，前后向的平均的困惑度是39.7，和之前的前向CNN-BIG-LSTM的30.0相比。通常来说，前向和后向困惑度是近似相等的，后向的值更低一点。（<strong>这里是什么意思，为什么比CNN-BIG-LSTM还差？</strong>）</li>
+<li>biLM预训练完成后，对于特定任务就可以进行计算了，在一些情况下微调biLM在特定的任务数据上能够降低困惑度并且增长特定任务模型的性能。这可以看做biLM的一种领域迁移，因此在大多数情况下我们都使用微调的biLM。附录中有补充资料。</li>
+<li>这里的微调是指，先在指定任务的语料上改进biLM，再应用到监督任务中。</li>
+</ul>
+</li>
+</ul>
+<h4 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h4><ul>
+<li>表1显示了ELMo在6组基准NLP任务中的性能。 在考虑的每个任务中，只需添加ELMo即可建立新的先进的性能结果，相对于基础模型而言，相对误差减少了6-20％。</li>
+<li><p><img src="/assets/blogImg/ELMo-tab1.png" alt="image-20200502210131412"></p>
+</li>
+<li><p><strong>QA</strong>。斯坦福QA数据集SQuAD包括了100K+ crowd sourced众包问答对，答案是给定维基百科段落中的span跨度。baseline模型是一个<strong>双向attention流模型的改善版本，添加了一个self-attention层在双向attention组件后面</strong>，简化了一些pooling操作，替换LSTM为GRU，添加ELMo后，F1值改善了4.7%。</p>
+</li>
+<li><strong>文本蕴涵</strong>。给定一个前提，判断假设是否正确。斯坦福语言推理语料SNLI提供了大约550K前提/假设对。baseline是ESIM序列模型，使用BiLSTM编码假设和前提，然后是一个attention层，一个局部推理层，另一个BiLSTM推理层，最后是一个poolingpooling操作在输出层之前。添加ELMo到ESIM模型中改善了0.7%的准确率。</li>
+<li><strong>语义角色标注</strong>。SRL是模拟句子的谓词-论元结构，经常被表示为“谁对谁做了什么”。模型通过建模SRL为一个BIO标注问题并且使用一个8层深度BiLSTM带有前向和后向。添加了ELMo之后改善了3.2%。</li>
+<li><strong>共指消解Coreference resolution</strong>。是一个将文本中提及的内容归类到相同的潜在实体的任务。baseline是一个端到端的span-based模型。使用BiLSTM和attention机制计算题span表示并且应用softmax mention ranking模型来查找共指链。文章使用CoNLL2012共指任务，添加ELMo改善了F1值3.2%。</li>
+<li><strong>命名实体抽取</strong>。CoNLL2003NER任务由来自路透社RCV1语料的newswire组成，带有4中不同的实体类型。baseline模型使用预训练的word embeddings，基于字符的CNN表示，两个BiLSTM层和一个CRF损失。加入ELMo后，和之前的不同在于我们允许任务模型学习biLM层之前的权重值，之前的仅仅使用biLM的顶层。</li>
+<li><strong>语义分析</strong>。斯坦福语义树库中的细粒度语义分类任务（SST-5）对电影的评论进行分类。句子中的多种语法现象（如否定词）是模型学习很困难的。Baseline是McCann的bi-attention分类网络BCN，使用了CoVe embeddings。用ELMo替换CoVe使准确率提高了1.0%。</li>
+</ul>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><ul>
+<li>本节提供一个ablation消融分析（<strong>哪里用了消融实验？</strong>）来验证我们的观点，并且说明一些有趣的方面在ELMo的表示上。第1节展示了下游任务中使用深层上下文表示比之前仅使用顶层的工作提高了性能。第3节探索了不同类型的上下文信息在biLM中，使用两个评估任务表明语法信息在较低的层中更好地表示，语义信息在较高的层中更好地表示，这与编码器是一致的。第2节分析了任务模型中对ELMo位置的敏感性。第4节表明了对训练集大小的敏感性。第5节可视化了ELMo学习的权重。</li>
+<li><p>1.替换为加权表示。先说了正则化参数$\lambda$的作用。比较了在SQuAD，SNLI和SRL任务中，替换为加权表示之后的结果。（<strong>这里和上面的结果怎么不一致，开发集的结果，和文章中的数值也对不上</strong>）。下表展示了对比。</p>
+<ul>
+<li><img src="/assets/blogImg/ELMo-tab2.png" alt="image-20200503144322112"></li>
+</ul>
+</li>
+<li><p>2.哪里需要用ELMo？不仅仅在输入过程加入ELMo能够改善结果，在输出层加入ELMo也能改善结果（<strong>怎么在输出层加？</strong>），如下表所示。</p>
+<ul>
+<li><img src="/assets/blogImg/ELMo-tab3.png" alt="image-20200503145242693"></li>
+</ul>
+</li>
+<li>3.biLM表示capture到了什么信息？直觉上，biLM一定能够消除单词语义的歧义根据上下文。比如play是一个多义的词，如下表说明了word vector和上下文表示中最相近的邻居。这个例子说明了biLM消歧的作用。<ul>
+<li><img src="/assets/blogImg/ELMo-tab4.png" alt="image-20200503150409554"></li>
+<li><strong>词义消歧</strong>。具体的说明。在biLM中，训练期间取每个单词每个语义表示的平均值，测试期间取最近的一个语义，baseline是CoVe、WordNet和两个现有方法。实验结果如下。总之第二层表示语义的结果比第一层要好，</li>
+<li><img src="/assets/blogImg/ELMo-tab5.png" alt="image-20200503151618242"></li>
+<li><strong>POS标注</strong>。词性标注。为了检查是否biLM capture语法信息，文章使用上下文表示作为一个线性分类器的输入，用于分类POS标注信息在Penn Treebank（PTB） 的华尔街日报部分。实验结果说明底层更能铺货到语法信息。</li>
+<li><img src="/assets/blogImg/ELMo-tab6.png" alt="image-20200503152448078"></li>
+<li><strong>对监督任务的影响</strong>。综合来说，这些实验都证实了biLM中的不同层代表了不同类型的信息，并解释了为什么使用所有的biLM层对于下游任务能够获得更好的性能（<strong>没有解释啊?</strong>）。并且说明了相比于CoVe的优越性。</li>
+</ul>
+</li>
+<li>4.样本效率。添加ELMo后可以提高样本的效率。比如在SRL中，没有ELMo需要486个epochs，但是加上ELMo只需要10个epochs就可以超过之前的性能。</li>
+<li>此外，使用ELMo可以更有效地利用小训练集。下图比较了使用ELMo和不使用ELMo的模型性能对比，横坐标是训练集的大小。<ul>
+<li><img src="/assets/blogImg/ELMo-fig1.png" alt="image-20200503154745069"></li>
+</ul>
+</li>
+<li>5.<strong>可视化学习权重</strong>。图2展示了softmax-normalized的学习权重。在输入层，任务模型倾向于第一个BiLSTM层，对于共指消解和SQuAD来说，是更支持的。输出层的权重相对平均，略微偏爱底层。如下图所示。<ul>
+<li><img src="/assets/blogImg/ELMo-fig2.png" alt="image-20200503155340609"></li>
+</ul>
+</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>文章介绍了一种从biLM中学习高质量的深层上下文相关表示的通用方法，并且将ELMo应用到这种NLP任务中表现出很大的改善。通过消融实验说明了biLM层有效地编码了单词的语法和语义信息。</li>
+</ul>
+<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
+<li>为什么叫做半监督模型？</li>
+<li>基于编码器的预训练模型是怎么做的？LSTM编码是如何应用到词性标注中的？</li>
+<li>如何微调？</li>
+<li>character-convolution怎么使用的？</li>
+<li>内部状态就是双向语言模型的内部隐向量。</li>
+<li>双向语言模型的softmax是如何预测下一个词的？只使用最后一个隐藏单元吗？</li>
+<li>$\gamma$为什么会起到作用？为什么使用顶层的情况都很重要？</li>
+<li>如何在输出层加入ELMo？</li>
+<li>最开始的表示$x_k$是其他的word vector还是随机初始化的？是CNN-BIG-LSTM</li>
+<li>文章使用的ELMo是在什么语料上训练的？ 1B  Word Benchmark (Chelba et al., 2014)。</li>
+<li>$s$权重和$\gamma$是在语言模型阶段学习的吗？不是。</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://allennlp.org/elmo" target="_blank" rel="noopener">https://allennlp.org/elmo</a></li>
+<li><a href="https://blog.csdn.net/qq_41664845/article/details/84787969" target="_blank" rel="noopener">https://blog.csdn.net/qq_41664845/article/details/84787969</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/51679783（公式很乱）" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/51679783（公式很乱）</a></li>
+<li><a href="https://blog.csdn.net/triplemeng/article/details/82380202" target="_blank" rel="noopener">https://blog.csdn.net/triplemeng/article/details/82380202</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/37915351" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37915351</a></li>
+<li><a href="https://yuanxiaosc.github.io/2018/10/29/ELMo_Deep_contextualized_word_representations/" target="_blank" rel="noopener">https://yuanxiaosc.github.io/2018/10/29/ELMo_Deep_contextualized_word_representations/</a></li>
+</ul>
+
       
 
       
@@ -181,6 +342,21 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ELMo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">representation</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -244,6 +420,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/05/12/naacl02/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          论文阅读：BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding
+        
+      </div>
+    </a>
   
   
     <a href="/2020/05/12/nips06/" id="article-nav-older" class="article-nav-link-wrap">
@@ -526,6 +711,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -535,10 +724,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,6 +864,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ELMo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">representation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">BERT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">pre-train</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">transformer</a>
               </li>
              
               <li class="article-tag-list-item">
