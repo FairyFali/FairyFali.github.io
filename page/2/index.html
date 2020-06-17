@@ -154,6 +154,360 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-scts01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/08/scts01/">论文阅读：Pre-trained Models for Natural Language Processing: A Survey</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/08/scts01/" class="archive-article-date">
+  	<time datetime="2020-04-08T05:01:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>自然语言处理中的预训练模型综述</li>
+<li>发表在 Science China Technological Sciences，《中国科学: 技术科学》(英文版)，2020.3.18</li>
+<li>是一篇invited review</li>
+<li>论文下载：<a href="https://arxiv.org/abs/2003.08271" target="_blank" rel="noopener">https://arxiv.org/abs/2003.08271</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作邱锡鹏，复旦大学博士生导师、教授，目前主要从事自然语言处理、深度学习等方向的研究，开源自然语言处理工具<strong>FudanNLP</strong>项目开发者，<strong>FastNLP</strong>项目负责人。 2015年入选首届中国科协青年人才托举工程。个人主页：<a href="https://xpqiu.github.io/、http://www.cs.fudan.edu.cn/?page_id=1908" target="_blank" rel="noopener">https://xpqiu.github.io/、http://www.cs.fudan.edu.cn/?page_id=1908</a></li>
+</ul>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>PTMs（pre-trained models）的出现为NLP带入了一个新的era时代。这篇调查中，文章提供了NLP中PTM的全面的回顾。我们首先介绍语言表示学习和研究进展。然后从四个角度对现有的PTM进行系统地分类。接下来，描述如何使PTM的知识适应下游任务。最后，我们概述了PTM的未来研究的潜在方向。本次调查旨在作为实践guide，帮助理解、使用和开发各种适用于PTMs的NLP任务。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>各式各样的神经网络都应用到了NLP任务中，比如CNNs，RNNs，GNNs和attention机制。</li>
+<li>这些模型的共同的优势就是他们能够alleviate减轻feature engineering问题。</li>
+<li>神经网络通常使用low-dimensional and dense的向量（又叫做<strong>distributed representation分布式表示</strong>）来implicitly隐式地表示语言的syntactic语法和semantic语义特征。这些表示能够在特定的NLP任务中学习到。</li>
+<li>所以说，神经网络方法让人们开发各式各样的NLP系统变得简单。</li>
+<li>尽管神经网络在NLP任务上很成功，但是他的performance改善仍然不及CV领域。主要原因是当前的数据集对于大多数有监督NLP任务是很小的（除了机器翻译）。</li>
+<li>神经网络通常有大量的参数，使得他们在这些小数据集上会overfit过拟合 and 在实际应用中不能够泛化得很好。因此早期的神将网络模型对于NLP任务都是相对shallow and 通常由1~3个神经层组成。</li>
+<li>最近，大量的工作展示了PTMs在大的语料上能够学习到universal通用的表示，which 能够有益于下游NLP任务 and 避免训练一个新的模型 from scratch从头开始。</li>
+<li>随着计算能力的发展，出现了许多深度模型（比如Transformer），以及随着大训练skills的不断提高，PTMs的结构已经由浅入深。</li>
+<li>first-generation PTMs旨在学习良好的word embeddings。因为这些模型本身不需要下游任务，所以他们的模型结构通常非常shallow，计算效率很高，比如<strong>Skip-gram 2013和GloVe 2014</strong>。</li>
+<li>尽管这些embeddings能够capture语义信息，但是他们是context-free并且不能capture higher-level概念，比如<strong>词义消歧、语法结构、语义角色、回指</strong>等等。</li>
+<li>second-generation PTMs关于学习上下文word embeddings，比如CoVe 2017，ELMo 2018，OpenAI GPT 2018 and BERT 2019。这些模型通常需要表示单词根据上下文在具体的下游任务中。而且不同的PTMs学习目的都不相同。</li>
+<li>这篇调查总结如下：<ul>
+<li>全面的回顾。提供NLP的PTM全面的回顾，包括背景知识、模型架构、预训练模型、不同的扩展形式、适合的方法和应用。</li>
+<li>新的taxonomy分类。文章提出PTMs的分类方法，从4个角度，1）表示类型，2）模型结构，3）预训练任务类型；4）特殊类型场景的扩展。</li>
+<li>丰富的资源。文章收集了大量的PTMs的资源，包括开源的实现、可视化工具、语料和论文列表。</li>
+<li>将来的方向。讨论和分了了已经存在的PTMs的限制。而且，我们suggest可能的将来的研究方向。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><ul>
+<li>语言表示学习<ul>
+<li>Bengio 2017建议，一个好的表示应该能够表达通用目的，而不是特定任务。一个好的表示应该capture implicit 隐藏在文本数据中的语言规则和common sense knowledge，比如说<strong>词义、语法结构、语义角色和语用</strong>。</li>
+<li>分布式表示的核心思想是表达使用低维向量表达一段文本。向量的每一个维度有相应的含义，整体表达一个具体概念。下图说明了通用的神经网络结构 for NLP。有两种word embedding：非上下文和上下文embedding。它们之间的区别在于词的表示是否根据context而改变。</li>
+<li><img src="/assets/blogImg/PTMs-fig1.png" alt="image-20200405133910762"></li>
+<li>Non-contextual Embedding。映射离散的语言符号到一个分布式的embedding空间，每一个词$x$映射为一个向量$e_x \in \R^{D_e}$，使用一个lookup table $E \in \R^{D_e \times |V|}$，$D_e$是一个超参数表示token embeddings的维度。这些embeddings和模型中的其他参数一起被训练。</li>
+<li>这种embeddings有两个主要的限制。第一个是embeddings是静态的无论上下文是什么。因此non-contextual embeddings不能解决多义词问题。第二个是OOV问题。为了解决这个问题，character-level词表示或者子词表示被广泛应用到许多NLP任务中，比如CharCNN 2016，FastText 2017，以及Byte-Pair Encoding 2016。</li>
+<li>Contextual Embeddings。为了解决多义词和上下文相关的性质，需要区别不同contexts中的词义。给定一个文本$x_1,…,x_T$，$x_t \in V$是一个词或者子词，上下文表示取决于整个文本。$[h_1,h_2,…,h_t]=f_{enc}(x_1,x_2,…,x_t)$，$f_{enc}$是一个<strong>神经网络编码器</strong>，$h_t$被称为contextual embedding。</li>
+</ul>
+</li>
+<li><p>神经网络上下文编码器</p>
+<ul>
+<li>大概分为3种类型，Convolutional模型，sequential模型，和graph-based模型。下图说明了这些模型的结构。</li>
+<li><img src="/assets/blogImg/PTMs-fig2.png" alt="image-20200405135428230"></li>
+<li><strong>convolutional卷积模型。</strong>卷积模型聚集local信息来自于他的邻居通过卷积操作，卷机模型通常是比较简单的，并且能够capture local 上下文信息。</li>
+<li><strong>sequectial序列模型。</strong>通常capture上下文表示按照词序，比如LSTM、GRU，实际上多用双向的LSTM或者GRU来收集信息，但是性能通常被长时依赖问题所影响。</li>
+<li><strong>Graph-based图模型。</strong>和上面的不同，<em>图模型把word当做节点并且使用单词之间的预定义语言结构（例如语法结构或者语义关系）来学习上下文表示。</em></li>
+<li>尽管linguistic-aware的图结构可以提供有用的归纳偏差，但是如何构造良好的图结构也是一个有挑战性的问题。此外，这个结构很依赖外部知识或者工具，如dependency parser。</li>
+<li>实际上，更直观的方式是使用全连接的图对每两个单词的关系进行建模，然后让模型自己学习结构。通常连接的权重是通过self-attention计算的，它自动隐含了单词之间的连接关系。</li>
+<li>使用这个idea一个成功的实现是<strong>Transformer 2017</strong>，能够自适应全连接的self-attention结构和其他一些有用的设计，比如position embeddings、layer normalization 和residual connections。</li>
+<li><strong>分析。</strong>Convolutional and sequential 模型学习单词的上下文表示with locality bias，很难capture 单词之间的long-range 交互。相反，Transformer能够直接建模依赖关系在每对单词之间，是更强大和更适合对语言建模。</li>
+<li>可是由于沉重的结构和less model bias，Transformer通常需要大的训练语料。</li>
+</ul>
+</li>
+<li><p>为什么要Pre-training?</p>
+<ul>
+<li>在很多NLP任务上，建立大规模的有标签的数据集是很大的挑战，特别是语法和语义相关的任务上。</li>
+<li>相反，大规模无标签的语料是相对容易得到的。为了leverage大量的无标签的文本数据，我们首先学习一个好的表示from them 并且使用这些表示 for other 任务。最近的研究已经表明了通过这个在大量无标注语料上训练PTM的表示能够得到significant performance gains在许多NLP任务上。</li>
+<li>预训练模型的优势总结如下：<ul>
+<li>在大文本语料上能够学习通用的语言表示，帮助下游任务。</li>
+<li>预训练模型提供一个更好的模型初始化，能够带来一个更好更泛化的性能，并且加速收敛。</li>
+<li>预训练能够被当做一种正则化，避免overfitting在小数据集上。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NLP的PTMs简史<ul>
+<li>第一代预训练模型：Pre-trained Word Embeddings<ul>
+<li>开拓性的<strong>NNLM 2003</strong>第一次引入了“现代”词嵌入。</li>
+<li><strong>Collobertet et al. 2011</strong>说明了在大量无标注语料上预训练的word embedding能够改善许多下游NLP任务。为了解决计算复杂性，他们通过成对排序任务学习词嵌入，而不是语言模型。他们的工作是获取通用词嵌入的首次尝试。</li>
+<li><strong>Mikolov等人 2013</strong> 说明了没有必要使用深度神经网络来建立好的词向量。他们提出了两种浅层次结构：CBOW和Skip-Gram模型。尽管他们很简单，但是他们仍然可以学习高质量的单词嵌入，capture单词之间的语法和语义相似性。最流行的实现WordVec就是使用这两个模型。</li>
+<li>此外，<strong>GloVe 2014</strong>也是被广泛使用的一个模型。</li>
+<li>尽管pre-trained word embeddings已经展示出了效果在许多NLP任务中，但是他们与上下文无关，并且多数是由shallow models训练得到。在下游任务中学习时，浅层部分学习不到的其余部分还需要从头开始学习。</li>
+<li>同时许多学者开始研究段落，句子或文档的嵌入，例如<strong>paragraph  vector 2014，skip-thought vectors 2015，context2Vec 2016</strong>。和modern successors不同，这些句子向量尝试编码句子到一个fixed-dimensional的向量表示，而不是每个token的上下文表示。</li>
+</ul>
+</li>
+<li>第二代预训练模型：Pre-trained Contextual Encoders<ul>
+<li>因为很多NLP任务都不是word-level，因此sentence-level or higher应运而生。这样的神经网络编码器得到的输出向量被叫做contextual word embeddings 因为他们表示单词依赖于context。</li>
+<li><strong>McCann et al. 2017</strong>预训练了一个深度LSTM encoder从一个带有注意力的seq2seq模型在机器翻译上。上下文向量CoVe从Pre-trained编码器能够广泛地改善不同类型的common NLP任务。</li>
+<li><strong>Peters et al. 2018</strong> 预训练了一个2-layer LSTM编码器 with a bidirectional language model（BiLM），有一个前向的LM和一个后向的LM组成，上下文表示通过BiLM输出得到，<strong>ELMo（Embeddings from Language Models）</strong>展示了很大的改善在广泛的NLP任务上。</li>
+<li><strong>Akbik et al. 2018</strong> <em>使用预先经过character-level LM训练的上下文字符串嵌入来捕获单词含义。</em></li>
+<li>但是，这些PTMs只能被用作特征提取来生成上下文word embeddings，然后fed into 下游任务的主模型中。主模型的其他参数仍然需要从头训练。</li>
+<li><strong>Ramachandran et al. 2017</strong>发现了Seq2Seq模型能够极大地改善无监督Pre-trained模型，编码器和解码器都使用两个语言模型初始化，然后在有标注数据上微调。</li>
+<li><strong>ULMFiT(Universal Language Model Fine-tuning) 2018</strong>尝试 fine-tune Pre-trained LM在text classification，并且实现了先进的结果在6个广泛使用的数据集上。UNMFiT由3个步骤组成：1）预训练LM在通用的数据上；2）fine-tuning LM在target 数据上；3）fine-tuning on target 任务上。自从ULMFiT之后，fine-tuning就变成了使用PTMs应用到下游任务上的主流方法。</li>
+<li>最近，deep PTMs展示出了强大的能力在学习通用语言表示上，比如<strong>OpenAI GPT （Generative Pre-training）2018，and BERT（Bidirectional Encoder Representation from Transformer） 2019</strong>。除了语言模型，越来越多的自监督任务被提出使PTMs captures 更多的知识从大规模语料中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="PTMs-概述"><a href="#PTMs-概述" class="headerlink" title="PTMs 概述"></a>PTMs 概述</h4><ul>
+<li><p>PTMs之间的主要的区别是contextual encoders的用法、预训练任务和目的。</p>
+</li>
+<li><p>本节重点介绍预训练任务和PTM的分类。</p>
+</li>
+<li><p>预训练任务</p>
+<ul>
+<li>预训练任务对于学习一个通用的语言表示是非常重要的。通常，这些任务应该是具有挑战性的和需要大量训练数据的。文章总结预训练任务为三类：有监督学习，无监督学习和self-superivsed学习。<ul>
+<li>有监督学习（SL）：学习一个function映射一个输入到一个输出。训练数据由input-output对组成。</li>
+<li>无监督学习（UL）：找到一些固有的知识来自于无标注的数据，比如clusters、densities、latent representations。</li>
+<li>半监督学习（SSL）：是一个有监督和无监督学习的混合。学习过程和有监督学习相同，但是训练数据的标签需要自动生成。SSL的关键思想是根据输入的一部分以某种形式预测来自输入的其他部分。例如MLM（masked language model）会尝试给定其余单词的情况下自动预测被masked的单词。</li>
+</ul>
+</li>
+<li><strong>语言模型LM</strong>。最常见的无监督任务就是概率语言模型，是一个经典的概率密度估计问题。尽管LM是一个笼统的概念，实践过程上，LM经常是指自回归LM或者单向LM。<ul>
+<li>给定一个句子$x_{1:T}=[x_1,x_2,…,x_T]$，它的联合概率$p(x_{1:T})$可以被分解为$p(x_{1:T})=\Pi_{t=1}^Tp(x_t|x_{0:t-1})$，条件概率可以被建模通过一个概率分布在词表上给定context $x_{0:t-1}$，使用神经网络编码器$f_{enc}(·)$，条件概率是$p(x_t|x_{0:t-1})=g_{LM}(f_{enc}(x_{0:t-1}))$,$g_{LM}$是一个预测层。</li>
+<li>给定一个大的语料库，可以训练网络使用MLE最大似然估计。</li>
+<li>单向LM的一个缺点是每个token编码仅仅通过左侧的上下文和本身。一个改善的方法是bidirectional LM（BiLM），由两个单向LM组成。对于BiLM，<strong>Baevski et al. 2019</strong>提出一个双塔模型，前塔是左向右的LM，右塔是右向左的LM。</li>
+</ul>
+</li>
+<li><strong>Masked Language Model（MLM）</strong>。第一次被<strong>Taylor</strong>提出，把这个叫做一个Cloze完形填空任务。<strong>Devlin et al. 2019</strong>使用这个任务作为新颖的预训练模型任务中，为了克服标准单向LM的不足。MLM首先将输入语句中masked掉一些token，然后训练模型以预测masked tokens根据其余的tokens。可是这个预训练方法会产生一些不匹配在预训练阶段和fine-tune阶段之间，因为mask token 不会出现在fine-tune阶段。<em>为了解决这个问题，Devline et al.使用特殊的[MASK] token 在80%的时间里，在10%的时间中使用随机token，在10%的时间内使用原始的token。</em><ul>
+<li>什么意思？</li>
+<li><strong>Sequence-to-Sequence MLM</strong>。MLM通常用来解决分类问题。我们把masked序列输入到neural encoder，其输出向量经过一个softmax分类器预测masked token。或者，我们可以使用MLM的Encoder-Decoder（又名seq2seq）体系结构，在该体系结构里，masked序列输入到编码器中，解码器以自回归的方式顺序生成masked tokens。这种方式的MLM叫做seq2seq MLM。<strong>MASS 2019 and T5 2019</strong>都使用这个任务来做预训练。Seq2Seq MLM训练出来的预训练模型对于使用Seq2Seq的下游任务来说是更有优势的，比如<strong>QA、摘要和机器翻译</strong>。<ul>
+<li><em>自回归的方式？</em></li>
+</ul>
+</li>
+<li><strong>Enhanced Masked Language Modeling（E-MLM）</strong>。代替静态的masking，<strong>RoBERTa 2019</strong>使用动态的masking改善了BERT。<strong>UniLM</strong> 扩展了mask预测在3种语言模型任务上：单向，双向和seq2seq 预测。<em>XLM per-forms MLM on a concatenation of parallel bilingual sentence pairs, called Translation Language Modeling(TLM). Span-BERT replaces MLM with Random Contiguous Words Masking and Span Boundary Objective(SBO) to integrate structure information into pre-training,  which requires the system to predict masked spans based on span boundaries. Besides, StructBERT introduces the Span Order Recovery task to further incorporate language structures.</em><ul>
+<li>这段没看懂</li>
+</ul>
+</li>
+<li>其余的方法扩展MLM是使用外部知识。</li>
+</ul>
+</li>
+<li><strong>Permuted Language Modeling（PLM）</strong>。</li>
+<li><strong>Denoising Autoencoder(DAE)</strong>。</li>
+<li><strong>Contrastive Learning（CTL）</strong>。</li>
+</ul>
+</li>
+<li><p>PTMs的分类</p>
+<ul>
+<li>为了阐明已存在PTMs for NLP之间的联系，文章建立了一个分类体系，把已存在的PTMs从4个角度进行分类：<ul>
+<li>表示类型：根据用到下游任务的表示类型，把PTMs分为non-contextual和contextual models。</li>
+<li>结构：PTMs使用的骨干网络，包括LSTM、Transformer encoder，Transformer decoder、full Transformer。其中，Transformer意思是标准的encoder-decoder结构，<em>decoder和encoder的区别在于decoder使用masked self-attention with 对角矩阵防止tokens干预将来的位置信息。</em></li>
+<li>预训练任务类型。</li>
+<li>扩展性：被设计用到各种各样的场景中，包括knowledge-enriched PTMs、多语言和特定语言的PTMs、多模型PTMs、特定领域PTMs和压缩的PTMs。分类如下图和下表所示。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/PTMs-fig3.png" alt="image-20200406090920527"></p>
+<p><img src="/assets/blogImg/PTMs-tab2.png" alt="image-20200406091105193"></p>
+</li>
+</ul>
+<ul>
+<li><p>模型分析：由于PTMs的巨大成功，所以知道什么类型的知识被captured以及如何引入这些知识是非常重要的。</p>
+<ul>
+<li><strong>Non-Contextual Embeddings</strong>。<strong>Mikolov 2013</strong> 发现了通过NNLM学习的词表示可以capture语言规律，并且单词之间的关系可以被向量offset来表示（就是两个向量的差）。后来的<strong>analogy</strong>实验说明了skip-gram模型产生的词向量能够capture 语法和语义信息，比如vec(“China”)−vec(“Beijing”)≈vec(“Japan”)−vec(“Tokyo”)。此外，他们发现单词的组合性质，例如，vec(“Germany”)+vec(“capital”)is close to vec(“Berlin”)。受到这个工作的鼓舞，<strong>Rubinstein et al. 2015</strong>发现分布式单词表示擅长于预测分类问题（狗是一个动物）但是不擅长学习属性问题（天鹅是白色的）。相似地，<strong>Gupta et al. 2015</strong>展示了 word2vec embeddings隐式地编码实体的引用属性，<em>分布式单向向量和一个有监督模型可以学习一个预测数值和二进制实体。</em></li>
+<li><strong>Contextual Embeddings</strong>。许多研究探查和引入不同类型的知识在contextual embeddings。通常包含两种知识：linguistic knowledge and world knowledge。<ul>
+<li>Linguistic Knowledge. 许多任务被设计用来探索PTMs中的语言知识。 <strong>Tenney et al. 2019, Liu et al. 2019</strong>发现BERT在许多语法任务上表现得很好，比如词性标记和成分标记，但是BERT不擅长处理语义和细粒度的语法任务方面。此外，<strong>Tenney et al. 2019</strong>分析了BERT layers的角色在不同的任务中，<em>发现BERT解决问题的顺序和NLP pipelines相似</em>。<em>而且主语-动词一致性和语义角色也被证实存在于BERT中</em>。此外，<strong>Hewitt and Manning 2019，Jawahar et al. 2019, Kim et al. 2020</strong>提出了几种方法使用BERT来提取依赖树和constituency trees证实了BERT能够编码语法结构的能力。Reif et al.2019探索了BERT内部表示的几何结构及其证据：1）语言特征似乎在单独的语义和语法子空间中表示；2）attention矩阵包含语法表示；3）BERT很好地区分了词义。</li>
+<li>World Knowledge。一个直观的方法获取world knowledge是使用cloze 完形填空语句查询BERT。比如：“Dante was born in [MASK]”。Petroni et al. 2019构造了LAMA(Language Model Analysis)任务，手动建立了单tokencloze statements从几个知识源，实验展示了BERT包含了world knowledge 并且拥有和传统的information extraction方法相当的能力。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="PTMs的扩展"><a href="#PTMs的扩展" class="headerlink" title="PTMs的扩展"></a>PTMs的扩展</h4><ul>
+<li>Knowledge-Enriched PTMs<ul>
+<li>PTMs通常从通用目的的大规模的语料中学习通用的语言表示，但是这样就缺少了domain-specfic知识。将外部知识库中的领域知识整合到PTMs已经被证明非常有效的，外部知识包括语言学，语义学，事实到特定领域的知识。</li>
+<li>一方面，预训练期间可以注入外部知识。早期的研究关注于联合学习knowledge graph embeddings and word embeddings。自BERT出现，一些辅助的预训练任务设计为了整合外部知识到deep PTMs。<strong>LIBERT（Linguistically-informed BERT） 2019</strong> 结合了语言知识通过一个额外的约束任务。<strong>Ke et al. 2019</strong>整合每个单词的情感性质，将MLM扩展到Label-Aware MLM（LA-MLM），提出的模型SentiLR实现了最先进的性能在几个句子级别和aspect-level的情感分类任务上。 <strong>Levine et al. 2019</strong>提出了SenseBERT，能够预测不仅仅masked tokens而且supersenses in WordNet。<em>后面有一系列方法的引用。</em></li>
+<li>另一方面，可以将外部知识整合到预训练模型中无需从头训练。例如，<strong>K-BERT 2019</strong>允许注入事实知识在下游任务中。<strong>Guan et al. 2020</strong>使用常识知识库ConceptNet和ATOMIC来增强GPT-2的故事生成的能力。<strong>Yang et al. 2019</strong>提出一个知识-文本融合的模型来获取相关的语言和事实知识，以进行机器阅读理解。</li>
+<li>此外，<strong>Logan IV et al. 2019 and Hayashi et al. 2019</strong>分别将语言模型扩展到knowledge graph language model(KGLM) and latent relation language model(LRLM) ，允许基于知识图的预测。这些新颖的KG-conditioned语言模型展示出了预训练模型的潜力。</li>
+</ul>
+</li>
+<li>Multilingual and Language-Specific PTMs。<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Multi-Modal PTMs<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Domain-Specific and Task-Specific PTMs<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Model Compression<ul>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h4 id="PTMs应用到下游任务"><a href="#PTMs应用到下游任务" class="headerlink" title="PTMs应用到下游任务"></a>PTMs应用到下游任务</h4><ul>
+<li><p><strong>Transfer Learning 迁移学习</strong>。2009年【A survey on transfer learning】提出的为了使知识从源任务适应目标领域。下图给出了迁移学习的示意图。</p>
+<ul>
+<li><img src="/assets/blogImg/PTMs-fig4.png" alt="image-20200406144639571"></li>
+<li>有许多类型的迁移类型在NLP中，比如domain adaptation, cross-lingual learning, multi-task learning。使PTM适应下游任务。</li>
+<li><strong>如何迁移？</strong>需要考虑以下问题：<ul>
+<li><strong>选择合适的预训练任务、模型结构和语料。</strong>（1）当前，语言模型是最受欢迎的预训练任务，并且能够更有效地解决NLP问题。但是不同的任务有不同的偏见，比如NSP任务使PTMs更能够了解两个句子之间的关系，因此，PTMs可以满足诸如QA和自然语言推断（NLI）之类的任务。（2）PTMs的体系结构对于下游任务也很重要。例如，尽管BERT可以帮助大多数NLP任务，<strong>但是很难做到生成语言</strong>。（3）下游任务的数据分布应该近似于PTM。</li>
+<li>当前有大量现成的PTM，他们可以方便地用于各种特定任务的下游任务，因此对于目标任务，找到一个适当的训练任务、结构和语料是一个好的解决方案。</li>
+<li><strong>选择合适的layers。</strong>给定一个预训练模型，不同的layers能够capture不同类型的信息。Tenney et al.  2019发现BERT能够按照传统NLP pipline表示：基本的语法信息出现在earlier layers，高级的语义信息出现在higher layers。有3种方式进行选择：a)Embeddings Only. b)Top Layer。c)All Layers，更灵活的方式，像ELMo就是这样处理的。</li>
+<li><strong>微调与否？</strong>当前，有两种通用的模型迁移方式：feature extraction（固定预训练模型参数）和fine-tuning（预训练模型参数不固定并且微调）。尽管这两种方式都可以极大地使大多数NLP任务受益，但是特征提取方式却需要更复杂的任务特定体系结构。 因此，对于许多不同的下游任务而言，微调方法通常比特征提取方法更为通用和方便。</li>
+<li>下表给出了一些常见的适应PTMs的组合：</li>
+</ul>
+</li>
+<li><img src="/assets/blogImg/PTMs-tab4.png" alt="image-20200406153011035"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>微调策略。</strong>随着PTMs的深度不断增加，使下游任务变得更简单。因为ULMFiT和BERT，微调已经成为主要的PTMs使用方法。但是微调的过程是非常脆弱的，即使使用相同的超参，不同的随机种子也可能导致结果大不相同。除了标准的微调方法，还有一些其他的微调策略。<ul>
+<li>两阶段微调。第一阶段使用目标语料或者中间任务微调，第二阶段在目标任务上微调。</li>
+<li>多任务微调。BERT在所任务学习框架下微调，说明了多任务学习和预训练是互补的技术。</li>
+<li>微调带有额外的适应模块。微调的主要缺点是参数效率低，每个下游任务都有自己微调的过程，因此，更好的解决方案是在固定原始参数的同事向PTM中注入一些可微调的自适应模块。适配器模块产生了紧凑且可扩展的模型； 它们为每个任务仅添加了一些可训练的参数，并且可以在不重新访问先前任务的情况下添加新任务。 原始网络的参数保持固定，从而实现高度的参数共享。</li>
+</ul>
+</li>
+<li>其他。</li>
+</ul>
+<h4 id="PTMs资源"><a href="#PTMs资源" class="headerlink" title="PTMs资源"></a>PTMs资源</h4><ul>
+<li>下表提供一些流行的仓库，包括三方实现，论文列表，可视化工具和其他相关资源。</li>
+</ul>
+<p><img src="/assets/blogImg/PTMs-tab5.png" alt="image-20200406153306043"></p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
+<li>General Evaluation Benchmark 综合评估基准。NLP community中，存在一个基本问题，就是如何比较PTM，因此需要有大规模的基准测试。General Language Understanding Evaluation (GLUE)benchmark 2019是一个由9个自然语言理解任务组成的集合，包括单句分类任务（CoLA和SST-2），文本对分类(MNLI,RTE, WNLI, QQP, and MRPC)，文本相似性任务（STS-B），和相关排名任务（QNLI）。这个基准很好地设计用来评估模型泛化的robustness。GLUE没有提供标签，而是建立了一个评估服务器。但是近年来的进展削弱了GLUE，因此一个新的基准叫做SuperGLUE 2019。相比GLUE，SuperGLUE有更具有挑战性的任务和更多样化的任务格式。先进的PTMs被列在相应的排行榜中。链接如下：<ul>
+<li><a href="https://gluebenchmark.com/" target="_blank" rel="noopener">https://gluebenchmark.com/</a></li>
+<li><a href="https://super.gluebenchmark.com/" target="_blank" rel="noopener">https://super.gluebenchmark.com/</a></li>
+</ul>
+</li>
+<li>Question Answering。<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Sentiment Analysis<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Named Entity Recgonition<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Machine Translation<ul>
+<li>…</li>
+</ul>
+</li>
+<li>Summarization<ul>
+<li>摘要目的产生一个短文本，其中包含长文本的最大含义。自从PTM的广泛使用，这项任务就得到了显著地改善。Zhong et al. 2019引入了可转移的知识（例如BERT）进行概述，并超越了以前的模型。Zhang et al. 2019尝试训练一个文档级别的模型，该模型可以预测句子而不是单词，然后将其应用到下游任务，比如摘要。Zhang et al. 2019 设计了一个用于预训练的任务Gap Sentence Generation（GSG）任务，其目标从输入中生成类似摘要的文本。Liu and Lapata[110] 提出了一个BERTSUM，包括一个新颖的文档级编码器，以及用于抽取式摘要和生成式摘要的通用框架。在编码器框架中，BERTSUM通过插入多个[CLS]令牌来学习句子表示形式来扩展BERT。 为了进行提取摘要，BERTSUM会堆叠几个句子间的Transformer层。 为了进行抽象总结，BERTSUM提出了使用新的微调时间表的两阶段微调方法。</li>
+</ul>
+</li>
+<li>Adversarial Attacks and Defenses<ul>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h4 id="未来的发展方向"><a href="#未来的发展方向" class="headerlink" title="未来的发展方向"></a>未来的发展方向</h4><ul>
+<li>尽管PTMs证明了其在不同NLP任务上的强大，但是依然存在一些挑战由于语言的复杂性。下面介绍PTMs的5个未来的发展方向。</li>
+<li><strong>（1）Upper Bound of PTMs。</strong>当前PTMs还没有到达上限，大多数当前的PTMs将来都可以在更大的语料和更大的训练steps得到改善。通用PTM一直是我们追求学习语言固有的普遍知识（甚至世界知识）的追求。 但是，这样的PTM通常需要更深的体系结构，更大的语料库和挑战性的预训练任务，这进一步导致更高的训练成本。 但是，训练庞大的模型也是一个挑战性的问题，需要更复杂，更有效的训练技术，例如分布式训练，混合精度，梯度累积等。 因此，一个更实际的方向是使用现有的硬件和软件设计出更有效的模型架构，自我监督的预训练任务，优化器和训练技能。 <strong>ELECTRA 2020</strong>是朝着这个方向的一个很好的解决方案。</li>
+<li><strong>（2）PTMs的架构。</strong>transformer已经被证明是一个有效的预训练架构。可是Transformer的主要限制是它的计算复杂性，是输入长度的平方。受GPUs内存的限制，大多数当前的PTMs不能够解决序列长度超过512tokens。打破这个限制需要改善transformer的模型结构，比如<strong>Transformer-XL 2019</strong>。因此，更有效的PTMs模型结构对于capture长时上下文信息非常重要。</li>
+<li><strong>（3）Task-oriented  Pre-training  and  Model  Compression.</strong>实际上，不同的下游任务需要不同能力的PTMs。PTMs之间的差异和下游任务通常有两个方面：模型结构和数据分布。大的差异可能会导致PTMs的贡献微不足道。例如文本生成任务通常需要特定的任务来预训练编码器和解码器，而文本匹配任务则需要提供为句子对设计的预训练任务。</li>
+<li>此外，尽管大量的PTMs能够导致更好的性能，一个实际的问题是如何利用这些大的PTMs在特定的场景中，比如低容量的硬件设备和low-latency applications。因此，我们需要精心地设计模型结构和预训练任务对于这样的下游任务，或者说提取出一部分任务特定的知识从存在的PTMs。</li>
+<li>与其从头训练task-oriented PTMs，不如通过模型压缩技术，将他们与现有的通用PTM一起使用。尽管在CV中对CNN的模型压缩有很多研究，但是PTM的压缩却刚刚开始，NLP中也是刚刚开始。Transformer的全连接结构使得模型压缩更有挑战性。</li>
+<li><strong>（4）微调之外的知识迁移。</strong>当前，微调是将PTM的知识转移到下游任务的主要方法，但是缺点是参数效率低，每一个下游任务都有自己的微调参数。一种改进的解决方案是调整PTMs参数，为特定任务添加一个小型的微调模块。因此我们可以使用一个共享的PTM应用到多个下游任务中。<ul>
+<li><em>没有理解这个方法？</em></li>
+</ul>
+</li>
+<li>使用PTM作为外部知识，从PTM中挖掘知识更加灵活，例如特征提取，知识蒸馏，数据增强等等。</li>
+<li><strong>（5）PTMs的可解释性和可靠性。</strong>尽管PTM能够达到令人深刻的性能，但是其深层的非线性结构使决策过程变得高度透明。最近，<strong>可解释的人工智能（XAI）2020</strong>成为AI界的热点。和CNNs for images不同，可解释的PTMs是更难的因为类似Transformer结构和语言的复杂性。关于模型分析的许多工作都取决于注意力机制，并且注意力对于可解释的有效性还存在争议。</li>
+<li>此外，PTMs也是容易受到对抗攻击。对PTM的对抗攻击的研究可通过充分暴露其漏洞来帮助我们了解其功能。PTM的对抗性防御也是非常有希望的，它可以提高PTM的健壮性并免受对抗性攻击。</li>
+<li>总体来说，作为许多NLP应用程序的关键组件，PTM的可解释性和可靠性在许多方面仍需进一步研究，这有助于我们了解PTM的工作原理，并为了更好地使用和改进提供指导。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>Graph-based图模型。什么叫做预定义的语言结构？</li>
+<li>第2章的bias应该是表达单词和相关联单词之间的距离偏差。</li>
+<li>word2vec是指Mikolov在谷歌提出的CBOW和Skip-gram的工具包的名称。</li>
+<li>什么叫做BiLM，双向语言模型。</li>
+<li>character-level LM是怎么做的？</li>
+<li>masked language model？</li>
+<li>MLM预训练节点和微调阶段不匹配的解决方案？</li>
+<li>facutal knowledge是什么意思？</li>
+<li>不使用微调的知识迁移，为特定任务添加一个小型的微调模块是怎么做的？</li>
+<li>还有一部分没有读，以及很多思想没有理解，后面阅读论文的过程会回顾这些内容。</li>
+<li>文本对抗，文本生成，概率图模型（图神经网络），信息检索</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://www.cnblogs.com/shona/p/12546820.html" target="_blank" rel="noopener">https://www.cnblogs.com/shona/p/12546820.html</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">survey</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PTM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/08/scts01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-iclr02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1421,169 +1775,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-emnlp02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/03/emnlp02/">论文阅读：Zero-shot User Intent Detection via Capsule Neural Networks</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/03/emnlp02/" class="archive-article-date">
-  	<time datetime="2019-12-03T00:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>基于胶囊网络的未知意图检测</li>
-<li>发表在EMNLP 2018</li>
-<li>论文链接：<a href="https://arxiv.org/abs/1809.00385" target="_blank" rel="noopener">https://arxiv.org/abs/1809.00385</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Congying Xia，PHD student at UIC，个人主页：<a href="https://congyingxia.github.io/" target="_blank" rel="noopener">https://congyingxia.github.io/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>根据已知意图的自然语言数据进行训练，在未知意图的自然语言数据上进行意图检测任务。</li>
-</ul>
-<h4 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h4><ul>
-<li>扩展胶囊网络到文本数据建模，提取层次化语义特征</li>
-<li>提出新颖、有效的未知意图检测方法</li>
-<li>进行实验验证</li>
-</ul>
-<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
-<li><p>IntentCapsNet和IntentCapsNet-ZSL模型结构</p>
-<p><img src="/assets/blogImg/zero-shot_intent_detection.png" alt="image-20191202110910192"></p>
-</li>
-<li><p>语义胶囊</p>
-<ul>
-<li>基于双向lstm和多头attention，每一个attention头对应一个语义特征，输入utterance，输出语义矩阵M，维度是$R×2D_H$，每一个$m_r$表示一个语义特征的向量。</li>
-</ul>
-</li>
-<li><p>检测胶囊</p>
-<ul>
-<li>设计了一个<strong>动态路由协议</strong>，为了得到对于每一个意图的向量表示。</li>
-<li>通过$p_{k|r}=m_rW_{k,r}$获得第k个意图在第r个语义特征上的向量表示，维度为$D_p$。</li>
-</ul>
-<p><img src="/assets/blogImg/dynamic_routing_algorithm.png" alt="image-20191202103836916"></p>
-<ul>
-<li>获得每一个意图k的向量表示$v_k$，（意图检测阶段就可以选择$\left | v_k \right |$最大的意图输出）损失函数包括<strong>max-margin loss</strong>和正则化损失两个部分：</li>
-</ul>
-<p><img src="/assets/blogImg/zero_shot_loss_function.png" alt="image-20191202104131383"></p>
-</li>
-</ul>
-<ul>
-<li><p>未知意图检测胶囊</p>
-<ul>
-<li><p>知识转化策略：已知意图和位置意图的相似性可以根据字词表示得到，比如”AddtoPlaylist”和”PlayMusic”的相似性大于与”GetWeather”的相似性，因为“Playlist”和”Play”,”Music”更相似。</p>
-</li>
-<li><p>建立投票向量：$g_{k,r}=c_{kr}p_{k|r}$表示投票向量。</p>
-</li>
-<li><p>未知动态路由协议：计算得到已知意图k和位未知意图l的相似度矩阵$Q \in R^{L\times K}$，相似度计算方式为：</p>
-<p><img src="/assets/blogImg/formula_similiarity_existing_emerging.png" alt="image-20191202105848232" style="zoom: 67%;"></p>
-<ul>
-<li>计算未知意图和语义特征的关系$u_{l|r}=\sum_{k=1}^K q_{lk}g_{k,r}$，表示未知意图$l$和语义特征$r$之间的特征向量。</li>
-<li>将$u_{l|r}$输入到动态路由协议中，计算得到未知预测向量$n_l$，进行未知意图检测$\hat{z}=\underset{z_l \in Z}{argmax}||n_l||$。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li><p>两个真实的数据集，SNIPS-NLU和CVA数据集。数据集统计：</p>
-<p><img src="/assets/blogImg/zero-shot_dataset.png" alt="image-20191202111207627"></p>
-</li>
-<li><p>意图检测Baselines</p>
-<ul>
-<li>TFIDF-LR/TFIDF-SVM</li>
-<li>CNN</li>
-<li>RNN/LSTM/GRU</li>
-<li>Self-attention Bi-LSTM</li>
-</ul>
-</li>
-</ul>
-<p><img src="/assets/blogImg/zero-shot_experiment1.png" alt="image-20191202111548625"></p>
-<ul>
-<li>未知意图检测Baselines<ul>
-<li>DeviSE</li>
-<li>CMT</li>
-<li>CDSSM</li>
-</ul>
-</li>
-</ul>
-<p><img src="/assets/blogImg/zero-shot_experiment2.png" alt="image-20191202111624714"></p>
-<h4 id="我对IntentCapsNet和IntentCapsNet-ZSL模型的理解"><a href="#我对IntentCapsNet和IntentCapsNet-ZSL模型的理解" class="headerlink" title="我对IntentCapsNet和IntentCapsNet-ZSL模型的理解"></a>我对IntentCapsNet和IntentCapsNet-ZSL模型的理解</h4><ul>
-<li>意图检测部分主要使用了胶囊网络对语义特征进行提取，扩展到未知意图检测就是利用已知意图和未知意图在字词上的相关度应用到未知的分类任务，不能够达到已知和未知意图检测混合的情况。</li>
-</ul>
-<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
-<li><p>多头attention模型</p>
-</li>
-<li><p>Result、Interpretability、Conclusions部分还没看</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">意图检测</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">胶囊网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/03/emnlp02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1722,6 +1913,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -1731,14 +1930,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
