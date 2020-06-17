@@ -6,20 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>acm01 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Adversarial Attacks on Deep-learning Models in Natural Language Processing: A Survey | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
+  <meta name="description" content="论文题目 自然语言处理中深度学习模型的对抗性攻击：一项调查 发表在ACM Trans. Intell. Syst. Technol. 2020 论文下载：https://dl.acm.org/doi/10.1145/3374217  论文作者 一作WEI EMMA ZHANG，张薇，武大学士，北航硕士，阿德莱德大学博士，目前是计算机科学学院，阿德莱德大学的讲师，关注三个方向，i）对文本的深层神经模">
+<meta name="keywords" content="文本对抗,综述">
 <meta property="og:type" content="article">
-<meta property="og:title" content="acm01">
+<meta property="og:title" content="论文阅读：Adversarial Attacks on Deep-learning Models in Natural Language Processing: A Survey">
 <meta property="og:url" content="fairyfali.github.io/2020/06/17/acm01/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 自然语言处理中深度学习模型的对抗性攻击：一项调查 发表在ACM Trans. Intell. Syst. Technol. 2020 论文下载：https://dl.acm.org/doi/10.1145/3374217  论文作者 一作WEI EMMA ZHANG，张薇，武大学士，北航硕士，阿德莱德大学博士，目前是计算机科学学院，阿德莱德大学的讲师，关注三个方向，i）对文本的深层神经模">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2020-06-17T03:01:47.947Z">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-equ1.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-fig1.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-tab1.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-fig2.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-fig3.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-fig4.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-fig5.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-tab2.png">
+<meta property="og:image" content="/assets/blogImg/AdversarialSurvey-tab4.png">
+<meta property="og:updated_time" content="2020-06-17T03:09:11.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="acm01">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Adversarial Attacks on Deep-learning Models in Natural Language Processing: A Survey">
+<meta name="twitter:description" content="论文题目 自然语言处理中深度学习模型的对抗性攻击：一项调查 发表在ACM Trans. Intell. Syst. Technol. 2020 论文下载：https://dl.acm.org/doi/10.1145/3374217  论文作者 一作WEI EMMA ZHANG，张薇，武大学士，北航硕士，阿德莱德大学博士，目前是计算机科学学院，阿德莱德大学的讲师，关注三个方向，i）对文本的深层神经模">
+<meta name="twitter:image" content="/assets/blogImg/AdversarialSurvey-equ1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -160,7 +170,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      acm01
+      论文阅读：Adversarial Attacks on Deep-learning Models in Natural Language Processing: A Survey
     </h1>
   
 
@@ -173,7 +183,223 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>自然语言处理中深度学习模型的对抗性攻击：一项调查</li>
+<li>发表在<strong>ACM Trans. Intell. Syst. Technol.</strong> 2020</li>
+<li>论文下载：<a href="https://dl.acm.org/doi/10.1145/3374217" target="_blank" rel="noopener">https://dl.acm.org/doi/10.1145/3374217</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作WEI EMMA ZHANG，张薇，武大学士，北航硕士，阿德莱德大学博士，目前是计算机科学学院，阿德莱德大学的讲师，关注三个方向，i）对文本的深层神经模型的对抗性攻击；ii）智能空间中的神经对话系统；iii）文本摘要。个人主页：<a href="http://weiemmazhang.me/" target="_blank" rel="noopener">http://weiemmazhang.me/</a></li>
+<li>QUAN Z. SHENG，盛权政，Michael Sheng博士是麦格理大学的正式教授兼计算机系主任。个人主页：<a href="http://web.science.mq.edu.au/~qsheng/" target="_blank" rel="noopener">http://web.science.mq.edu.au/~qsheng/</a></li>
+<li>李晨亮，武汉大学网络安全学院副教授，个人主页：<a href="http://lichenliang.net/zh.html" target="_blank" rel="noopener">http://lichenliang.net/zh.html</a></li>
+</ul>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>随着高性能计算设备的发展，深度神经网络（DNNs）最近几年已经得到了很大的关注度在许多AI应用上。可是之前的努力展示了DNNs容易受到经过战略性修改的样本（成为对抗样本，adversarial examples）的攻击。这些样本被生成通过许多imperceptible perturbations不易察觉的扰动，但是能够使DNNs错误地预测。受到生成对抗样本在CV领域的流行的鼓舞，研究在攻击NLP应用上的DNNs已经在最近几年开始研究了。可是，因为CV和NLP固有的区别直接使CV的攻击方法到NLP遭到了挑战。不同的方法已经被提出解决这个差异。这篇文章中，我们介绍了一个系统的调查在这些工作中。我们收集了所有相关的学术工作从第一次出现在2017年。然后我们选择、总结、讨论和分析了40个representative代表性作品。为了使本文自成一体，我们涵盖了NLP的初步知识并讨论相关开创性工作在CV领域。我们总结我们的综述带有一些未解决问题的讨论，以弥补现有进展与NLP DNNs进行更强大的对抗攻击之间的差距。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>深度神经网络的结构是一系列神经单元层，每一个单元都充当一个独立的计算单元。神经元被不同的权重和偏置连接，发送激活后的结果到下一个神经单元层。深度神经网络尝试模仿人脑的生物神经网络，从示例中学习和积累经验。因此，它们展示了处理复杂任务的优势，这些复杂任务不容易建模为线性或非线性问题。此外，通过连续的实值向量表示下，它们善于处理具有各种模态的数据，比如图像，文本，视频和音频。</li>
+<li>虽然神经网络发展很快，但是可解释性仍然是不满意的，因为他们工作作为一个黑盒，这意味着很难从每一个神经元确切学习到的东西中获得直觉。可解释差的问题之一是评估深度神经网络的健壮性robustness。最近几年，研究者使用小的不可察觉的扰动去评估深度神经网络的健壮性，发现他们对于这些扰动是不健壮的。【<strong>Intriguing properties of neural networks  2014</strong>】第一次评估先进的深度神经网络在图片分类，使用小的生成的扰动在输入图片上。他们发现图片分类很大概率被fooled了，但是人类判断是不受影响的。扰动的图片像素被称为对抗样本，此表示法后来被用于通用的表示各种扰动后的样本。因为对抗样本的生成是costly并且不切实际的在这篇文章中，所以Goodfellow 【<strong>Explaining and harnessing adversarial examples 2015</strong>】提出了一个快速的生成方法（3.1节更详细讨论这个工作）。这些工作之后，之后的许多研究工作可以概括为：(i)通过无法察觉的扰动欺骗深层神经网络来评估深度神经网络；(ii)故意更改深度神经网络的输出；(iii)检测深度神经网络的过度敏感性和过度稳定性，并找到防御攻击的解决方案。</li>
+<li>【<strong>Adversarial examples for evaluating reading comprehension systems 2017</strong>】第一次考虑使用对抗样本生成（就是对抗攻击，这两个词可互换）在深度神经网络for 基于文本的任务（即，文本深度神经网络）。他们的工作快速地获得了研究关注在NLP方向。可是，由于固有的区别在图片数据和文本数据，对抗攻击方法在图像不能直接应用到文本。首先，图像数据（比如像素值）是连续的，但是文本数据是离散的。通常，我们向量化文本在输入到神经网络之前，传统的向量方法包括利用词频和逆文档频率，和one-hot编码。【<strong>Generating natural adversarial examples 2018</strong>】当应用基于梯度的对抗攻击时，生成的对抗示例为无效字符或单词序列。一个解决方案是使用word embeddings作为深度神经网络的输入。可是，这也会生成不能匹配到任何单词的表示。第二，图像的扰动是小的变化在像素上，很难被人眼捕捉到，因此人能够正确地分类图像。但是文本对抗攻击，小的扰动是很容易察觉的。例如替换字符或者单词会生成无效的单词或者语法上错误的句子。此外，它将大大改变句子的语义。因此，这种扰动很容易被察觉，在这种情况下，即使人类也无法提供正确的预测。</li>
+<li>为了解决以上的差异和挑战，许多攻击方法已经被提出从先锋工作【<strong>Adversarial examples for evaluating reading comprehension systems 2017</strong>】提出。尽管这个话题非常流行在NLP中，但是没有全面的review 文章收集和汇总这个方面的工作。所以有必要进行这个工作来帮助研究者和从业者对这个方向有一个总体认识。</li>
+<li><strong>相关的调查和这次调查的区别</strong>。我们与之前的调查不同，因为我们专门针对文本深度学习模型的攻击和防御。此外，我们提供了全面的综述，包括了来自各个方面的信息，使该调查成为了独立的调查。</li>
+<li><p><strong>论文选择</strong>。文章从NLP和AI顶会选择，包括ACL，COLING，NAACL，EMNLP，ICLR，AAAI，IJCAI。除了接收的文章之外，还考虑了优秀文章发表在e-Print archive。</p>
+</li>
+<li><p>这篇调查的贡献。这次调查的目标是为了提供一个全面的review在文本深度神经网络的生成对抗样本研究工作。这项调查将为有兴趣攻击文本深层神经模型的研究人员和从业人员提供服务。 我们希望读者具有有关深度神经网络体系结构的一些基础知识，而本文并不是重点。 总而言之，该调查的主要贡献是：</p>
+<ul>
+<li>对文本深层神经模型的对抗性攻击进行了全面的审查，并提出了不同的分类方案来组织所审查的文献；</li>
+<li>我们提供了所有相关信息使调查独立，从而使那些对NLP知识了解有限的读者更容易理解；</li>
+<li>我们讨论了一些未解决的问题，并在此基础上确定了一些可能的研究方向，研究领域旨在借助对抗性样本构建更强大的文本深度学习模型。</li>
+</ul>
+</li>
+<li>第2节中介绍了针对深度学习模型的对抗性攻击的预备知识，包括对抗性攻击的分类法和NLP中使用的深度学习模型。在第3节中，我们说明了攻击图像数据和文本数据之间的区别，并简要回顾了攻击图像DNN的示例性工作，这些工作启发了NLP的后续行动。在第4节首先介绍了对文献的分类，然后介绍了现有技术。第5节讨论防御策略。并在第6节中指出未解决的问题。最后第7节总结。</li>
+</ul>
+<h4 id="2-自然语言处理中的攻击性和深度学习技术概述"><a href="#2-自然语言处理中的攻击性和深度学习技术概述" class="headerlink" title="2.自然语言处理中的攻击性和深度学习技术概述"></a>2.自然语言处理中的攻击性和深度学习技术概述</h4><ul>
+<li>2.1 对抗攻击在深度学习模型：通用分类。<ul>
+<li>2.1.1 定义。<ul>
+<li><strong>DNN的定义。</strong></li>
+<li><strong>Perturbations</strong>. 扰动是故意产生的小噪声，这些噪声会在测试阶段添加到原始输入数据样本中，旨在fool深度学习模型。</li>
+<li><strong>Adversarial Examples</strong>. 对抗样本$x’$是一个样本通过最坏的扰动而创建的样本，一个理想的DNN会将$x’$仍然分类为正确的y，然而一个受害DNN会有高的置信度对$x’$有错误的预测。$x’$能够形式化为</li>
+<li>$x’=x+\eta,f(x)=y,x \in X,$</li>
+<li>$f(x’) \ne y’$, or</li>
+<li>$f(x’)=y’,y’ \ne y$</li>
+<li>其中$\eta$是最坏的扰动。目标是对抗攻击能够偏离正确的标签$f(x’)\ne y$ 或者特定一个标签$f(x’)=y’$。</li>
+</ul>
+</li>
+<li>2.1.2 Threat Model. 威胁模型。<ul>
+<li>模型知识。对抗样本能够被生成使用黑盒或者白盒策略根据被攻击DNN的知识。黑盒攻击使用当架构，参数，loss，激活函数和训练数据是不可访问的。对抗样本生成直接访问测试集，或者查询DNN并且检查输出的改变。相反，白盒攻击基于DNN技术细节知识。</li>
+<li>目标。生成对抗样本能变化输出预测到错误的结果或者特定的结果。无目标攻击是$f(x’) \ne y$，有目标攻击是$f(x’)=y’$是更严格的，对于二值任务，无目标攻击和有目标攻击是等价的。</li>
+<li>Granularity. 粒度。攻击粒度是对抗样本生成的数据级别，例如，通常是图像数据的图像像素。关于文本数据，它可以是字符，单词和句子级别的嵌入。3.3节会更深度的探讨。</li>
+<li>动机。生成对抗样本有两个目标：攻击和防御，攻击目的是检查目标DNN的健壮性，而防御则是进一步利用生成的对抗样本来增强目标DNN的健壮性。第5节将给出更多细节。</li>
+</ul>
+</li>
+<li>2.1.3 评估。对抗攻击需要两组测量值，分别用于(i)控制干扰， (ii)评估攻击的有效性。<ul>
+<li>扰动限制。理想情况下，扰动$\eta$应该不会改变输入的类别标签，有效的扰动应该是最有作用的噪声在一个有限的范围。【<strong>Intriguing properties of neural networks.</strong>】第一次提出了限制$(x+\eta) \in [0,1]^n$对于图像对抗样本，确保对抗样本有相同的范围和原始数据。【<strong>Explaining and harnessing adversarial examples 2015</strong>】简化了方案，并且使用最大的范数限制扰动：$||\eta|| \le \epsilon$。这被鼓舞通过，直觉上，不会将任何特定像素的变化幅度超过某个量$\epsilon$，不会更改输出类别。使用最大范数是是足够对于分类或者物品识别任务。但是对于文本对抗攻击是稍微不同的，3.3节会给出更多的细节。</li>
+<li>攻击评估。对抗攻击被设计来降低DNN性能，因此，评估攻击的有效性是基于不同任务的性能指标。比如分类任务使用准确率、F1分数和AUC分数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.2 NLP中的深度学习<ul>
+<li><strong>Recurrent/Recursive Neural Networks</strong>. Recursive neural networks extends recurrent neural networks from sequences to tree, which respects the hierarchical dependency of the language.</li>
+<li>强化学习。In NLP, a reinforcement learning framework usually consists of an agent (a DNN), a policy (guiding action) and a reward.</li>
+<li>深度生成模型。GANs和VAEs， Although they have been adopted in generatingtexts, so far no work examines their robustness using adversarial examples.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-从图像到文本"><a href="#3-从图像到文本" class="headerlink" title="3.从图像到文本"></a>3.从图像到文本</h4><ul>
+<li>3.1 制作对抗样本：计算机视觉中的启发性作品<ul>
+<li>对抗样本第一次提出在物体识别任务，【<strong>Threat of adversarial attacks on deep learning in computer vision: A survey.</strong>】全面的调查了计算机视觉方面的工作。</li>
+<li>Szegedy et al.提出了对抗样本的概念，提出了设计方法，解决一个优化问题：</li>
+<li>$\eta = argmin \lambda||\eta||_2^2+J(x+\eta, y’) st.(x+\eta \in [0,1]^n)$</li>
+<li>$y’$是目标输出。这个最小化问题被使用一个箱约束Limited memory Broyden-Fletcher-Goldfarb-Shanno (<strong>L-BFGS</strong>) algorithm。</li>
+<li><strong>Fast Gradient Sign Method (FGSM)</strong>. 是对L-BFGS的一个简化版本，并且考虑不固定$y’$，这个方法在NLP攻击中也最常使用。</li>
+<li><strong>Jacobian Saliency Map Adversary (JSMA)</strong>. 这个方法不基于梯度，而是使用前向的导数，例如Jacobian。这个方法将每个输入成分对目标攻击的贡献进行排名。</li>
+<li><strong>C&amp;W攻击</strong>。目的是评估防御型蒸馏策略，为了缓解对抗性攻击。</li>
+<li>DeepFool。</li>
+<li><strong>Substitute Attack</strong>. 替代攻击。以上提及的表示工作都是白盒方法，需要所有模型知识。但是白盒攻击限制很大，【<strong>Practical black-box attacks against machine learning. 2017</strong>】提出了黑盒方法，通过训练一个替代模型，然后对替代品进行白盒攻击，并据此生成对抗性样本。具体来说，对替代的模型采用FSGM和JSMA生成对抗性样本。</li>
+<li><strong>GAN-like Attack</strong>. 类似GAN的攻击。黑盒攻击，【<strong>Generating natural adversarial examples. 2018</strong>】第一次训练了一个生成模型，WGAN，生成隐变量z，重构x，搜索一个对抗的z*生成对抗样本x*。</li>
+</ul>
+</li>
+<li>3.2 攻击图片DNNs versus 攻击文本DNNs，主要区别有3个：<ul>
+<li>离散输入 vs. 连续输入。图片的输入是连续的，通常的方法使用$L_p$-norm测量原始数据和扰动数据的距离。可是，文本数据是符号化的，因此是离散的。很难定义文本上的扰动。谨慎的设计度量方法对于文本扰动是必需的。另一个选择是映射文本数据到连续的数据上，然后采用CV的攻击方法。</li>
+<li>感知的 vs. 不可感知的。图片上的小的扰动通常不会容易被人类察觉，因此对抗样本不会改变人类的判断，但是能够欺骗DNN模型。可是文本上小的变化很容易被人类察觉，使得攻击失败。比如这些改变都可以通过拼写检查和语法校正器发现，因此很难找到不易察觉的文本对抗样本。</li>
+<li>语义的 vs. 语义少的。图像通常小的改变不会改变语义，可是文本的扰动容易改变句子意思。比如一个否定词会改变句子的意思。改变了文本的语义和攻击的目标是不相符的。</li>
+</ul>
+</li>
+<li>3.3 扰动测试<ul>
+<li>扰动度量。图像的扰动测试和文本是非常不同的。一般扰动测试就是比较对抗样本和原来的距离，但是文本的距离测试还应该考虑语法正确性和语义保留。测试方法如下：<ul>
+<li>基于范数的度量。使用embeddings表示，使用$L_p$-norm度量，但这通常会导致无效和难以理解的文本，进而需要涉及其他约束。</li>
+<li>语法相关的度量。<ul>
+<li>语法检查器保证生成的文本对抗样本是有效的。</li>
+<li>困惑度通常用来度量语言模型的质量，有人用来做对抗样本的有效性。</li>
+<li>Paraphrase 受控，能被当做对抗样本的一种类型。</li>
+</ul>
+</li>
+<li>语义保持度量。比较两个词向量的欧式距离或者余弦相似度。</li>
+<li>编辑距离度量。编辑距离是一个定量最小变化从一个字符串到另一个。<ul>
+<li>Levenshtein Distance。使用插入，删除和替换操作。</li>
+<li>Word Mover’s Distance. WMD方法。在word embeddings上进行计算的，计算一个文档移动到另一个文档的最小距离。形式化如下：</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-equ1.png" alt="image-20200516220540347"></li>
+<li>T是什么意思？d是什么意思？</li>
+</ul>
+</li>
+<li>杰卡德相似度系数，使用交集和并集的大小计算。</li>
+<li>$J(A,B)=\frac{|A \cap B|}{|A\cup B|}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-NLP的攻击神经模型：SOTA"><a href="#4-NLP的攻击神经模型：SOTA" class="headerlink" title="4.NLP的攻击神经模型：SOTA"></a>4.NLP的攻击神经模型：SOTA</h4><ul>
+<li>分类攻击方法在文本深度学习模型，然后突出SOTA调查。</li>
+<li>4.1 文本深度学习模型的攻击方法分类<ul>
+<li>下图说明了分类视角。</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-fig1.png" alt="image-20200517093436883"></li>
+<li>主要分类为5个角度：模型访问性、语义应用、目标类型、语义粒度和攻击DNNs。</li>
+</ul>
+</li>
+<li><p>4.2 白盒攻击</p>
+<ul>
+<li>白盒攻击需要访问模型全部的信息，，包括结构、参数、损失函数、激活函数、输入和输出数据。白盒方法分为7种。</li>
+<li><strong>FGSM-based.</strong> FGSM是第一个攻击方法在图像。它吸引了许多以后的工作在文本DNNs。【<strong>Deep text classification can be fooled.</strong>】采用了FGSM的概念。提出了三种类型攻击，插入、修改和删除。【<strong>Generating adversarial text samples.</strong>】采用同样的方法，但是效率更高。</li>
+<li>恶意软件检测，攻击文本DNNs的方法也可以用来攻击恶意软件检测DNNs。</li>
+<li>神经机器翻译攻击。AdvGen[23] is a gradient-based method for attacking neural machine translation (NMT) models. </li>
+<li><strong>JSMA-based.</strong> JSMA是另一个先驱性工作在攻击神经模型对于图片应用，【<strong>Crafting adversarial input sequences for recurrent neural networks. 2016</strong>】使用前向导数找到最多贡献的序列。</li>
+<li>In addition, the authors provided three methods to defense against the attacks, namely,feature reduction,distillation,and adversarial training. They found adversarial training is the most effective defense method.</li>
+<li><strong>C&amp;W-based.</strong> 【<strong>Identify susceptible locations in medical records via adversarial attacks on deep predictive models.</strong>】采用C&amp;W方法攻击预测模型在病例上。目标是检测易感事件和测量结果，为临床使用提供指导。</li>
+<li>【<strong>Seq2Sick: Evaluating the robustness of sequence-to-sequence models with adversarial examples.</strong>】攻击了seq2seq模型使用两种目标攻击：non-overlapping attack and keywords attack。非重叠攻击将文本全部修改。关键词攻击希望输出logits在目标关键词最大化在所有的词输出。</li>
+<li><strong>Direction-based.</strong> HotFlip 【<strong>White-box adversarial examples for text classification.</strong>】执行原子翻转操作为了生成对抗样本。【<strong>On adversarial examples for character-level neural machine translation.</strong>】是对HotFlip的一个扩展，进行了有目标攻击。</li>
+<li><strong>Attention-based</strong>。【<strong>Comparing attention-based convolutional and recurrent neural networks: Success and limitations in machine reading comprehension.</strong>】利用注意力来找到对抗样本，并没有对注意力本身进行攻击。</li>
+<li><strong>Reprogramming.</strong> 重新编程。【<strong>Adversarial reprogramming of sequence classification neural networks. 2018</strong>】采用对抗重编程（AP）来攻击序列神经分类器。AP的思想来自迁移学习。</li>
+<li>混合方法。【<strong>Adversarial texts with gradient methods. 2018</strong>】为了解决无意义文本的生成，使用WMD距离，将对抗文本找到最近的有意义的单词向量。</li>
+<li>总结如下：</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-tab1.png" alt="image-20200517143347448"></li>
+</ul>
+</li>
+<li><p>4.3 黑盒攻击</p>
+<ul>
+<li>黑盒攻击不需要神经网络的细节，但是能够访问输入和输出，这种类型的攻击京城依赖启发式生成对抗样本，并且是更实用因为在许多真实应用中，DNN细节都是一个黑盒。我们分类为5个类别。</li>
+<li><strong>第一种方法，Concatenation Adversaries.</strong>【<strong>Adversarial examples for evaluating reading comprehension systems. 2017</strong>】是第一个攻击阅读理解系统的，作者提出了拼接攻击，在段落末尾添加无意义的句子。这些分散注意力的句子不会改变段落的语义和问题的答案，但是会fool 神经模型，分散注意力的句子要么精心生成有信息的句子，要么使用20个随机的普通单词组成的句子。下图说明了一个例子，添加了一个分散注意力的句子，预测的答案就改变了。</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-fig2.png" alt="image-20200517151549860"></li>
+<li>【<strong>Robust machine comprehension models via adversarial training.</strong>】的作者改善了这个工作通过变化分散注意力句子的位置生成对抗样本。</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-fig3.png" alt="image-20200517152302472"></li>
+<li><strong>第二种方法，Edit Adversaries.</strong> 【<strong>Synthetic and natural noise both break neural machine translation. 2018</strong>】扰动神经机器翻译的输入数据通过两种方式：语法，字符顺序的变化。DeepWordBug【<strong>Black-box generation of adversarial text sequences to evade deep-learning classifiers.</strong>】是一个简单的方法使用字符转换来生成对抗样本，作者第一次确定了重要的tokens，例如单词或者字符能够影响模型预测最多地，通过打分函数评测分类器的输出。使用四种策略修改确定的tokens：replace，delete，add和swap。作者评价他们的方法在一个变化的NLP任务上。比如文本分类，语义分析和垃圾检测。</li>
+<li>下面是一个例子：</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-fig4.png" alt="image-20200517154133436"></li>
+<li>当攻击文本分类任务时，【<strong>Generating natural language adversarial examples through probability weighted word saliency.</strong>】提出了一个概率方法来荀泽单词替换，首先收集同义词，然后选择一个替代单词从同义词中，通过测量影响程度。还结合了单词显著性来确定替换顺序，单词显著性是指当单词未知时输出的变化。</li>
+<li>参考文献【<strong>Generating natural language adversarial examples.</strong>】中的工作使用遗传算法（GA）来最大程度地减少原始文本中的单词替换次数，但同时可以更改被攻击模型的结果。 作者在GA中采用交叉和变异运算来产生扰动，并根据对受攻击DNN的影响来衡量单词替换的有效性。 他们的攻击重点是情感分析和文本蕴含的DNN。</li>
+<li>【<strong>Generating fluent adversarial examples for natural languages.</strong>】MHA(Metropolis-Hastings Attack)也是一个基于编辑的方法，目的是提供有效流畅的有效的对抗攻击。基于语言模型和M-H采样，进行替换和插入操作，提出了黑盒和白盒两个版本。</li>
+<li>下图说明了一个生成流对于编辑对抗。扰动被执行在句子、单词或者字符通过编辑策略，比如替换、删除、插入和交换。</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-fig5.png" alt="image-20200517160017792"></li>
+<li><strong>第三种方法，Paraphrase-based Adversaries.</strong> SCPNs【<strong>Adversarial example generation with syntactically controlled paraphrase networks.</strong>】产生句子释义。通过一个Encoder-Decoder结构将句子映射为一个目标语法结构的解释句子，这个方法第一次编码原始句子，然后输入释义和语法树结构到解码器，解码出目标释义句子，主要贡献是解析模板的使用，选择20个最常用的训练得到的模板，使用选择的模板生成释义句子，分类器能够正确的分类原始句子但是在释义句子上分类错误，这个释义句子被当做对抗样本。</li>
+<li><strong>第四种方法，GAN-based</strong>。【Generating natural adversarial examples.】目的是使对抗样本的生成更加自然。提出的模型生成对抗样本的过程包括两个关键的组件：一个是GAN，生成虚假的数据样本，和一个转换器，映射输入x到隐藏表示z’，两个组件训练原始输入最小化重构损失在原始输入和对抗样本之间。扰动被执行在隐藏空间，确定扰动样本的$\hat{z}$在$z’$附近。提出了两种搜索方法确定$\hat{z}$。</li>
+<li><strong>第五种方法，Substitution</strong>。训练一个替代品。【52】提出了一个黑盒框架攻击RNN模型对于恶意软件检测。有两个模型组成，一个生成式RNN和一个替代的RNN。替代RNN模仿原始的RNN。因此生成对抗样本通过替代品。</li>
+<li><strong>第六种方法，重编程</strong>。【<strong>Adversarial reprogramming of sequence classification neural networks.</strong>】使用基于强化学习的方法。通过一个强化学习问题形式化序列生成，对抗性重编程函数$g_\theta$作为策略网络，应用强化学习的方法学历$g_\theta$。</li>
+<li>总结如下：</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-tab2.png" alt="image-20200517171420925"></li>
+</ul>
+</li>
+<li>4.4 跨模态攻击<ul>
+<li>略</li>
+</ul>
+</li>
+<li>4.5 Benchmark 数据集 by 应用<ul>
+<li>文本分类</li>
+<li>机器翻译</li>
+<li>机器阅读</li>
+<li>文本摘要</li>
+<li>文本蕴涵</li>
+<li>POS</li>
+<li>对话生成</li>
+<li>跨模态应用</li>
+<li><img src="/assets/blogImg/AdversarialSurvey-tab4.png" alt="image-20200517175315240"></li>
+</ul>
+</li>
+</ul>
+<h4 id="5-防御"><a href="#5-防御" class="headerlink" title="5.防御"></a>5.防御</h4><ul>
+<li><p>对抗样本的目的是增强模型健壮性。有两个通用的方式在文本DNN来实现这个目标：对抗性训练和知识蒸馏。对抗训练在训练过程中结合了对抗样本。知识蒸馏操作神经网络模型并训练新模型。</p>
+</li>
+<li><p>1.对抗性训练</p>
+<ul>
+<li>Szegedy【<strong>Intriguing properties of neural networks.</strong>】发明了对抗训练，使用正常的数据和对抗样本训练网络。Goodfellow et al. [40]employed explicit training with adversarial examples. 这一节具体说明数据增强、模型正则化和健壮性优化对于防御目的。</li>
+<li><strong>数据增强</strong>。数据增强扩展原来的数据集为加入生成的对抗样本以及尝试让模型看到更多的数据在训练过程。数据增强通常用于抵抗黑盒攻击。</li>
+<li><strong>模型正则化</strong>。【Adversarial training methods for semi-supervised text<br>classification.】模型正则化强制对抗样本作为一种正则化项，如下</li>
+<li>$min(J(f(x),y)+\lambda J(F(x’),y))$</li>
+<li><strong>鲁棒性优化</strong>。【<strong>Towards deeplearning models resistant to adversarial attacks.</strong>】训练一个健壮性优化问题 with min-max公式。值得注意的是，所提出的鲁棒优化方法是一个通用框架，在该框架下其他对抗训练策略也具有自然的解释能力。 Madry等人 [84]将DNN模型学习转换为具有min-max（鞍点）公式的鲁棒优化，这是内部非凹最大化问题（攻击）和外部非凸最小化问题（防御）的组合。 根据Danskin定理，内部最大化器处的梯度对应于最小-最大问题的下降方向，因此优化仍然可以应用反向传播进行。 该方法通过普遍的训练和学习，成功展示了DNN对抗对手图像的鲁棒性。</li>
+</ul>
+</li>
+<li>2.Distillation. Papernot 【<strong>Distillation as a defense to adversarial perturbations against deep neural networks.</strong>】提出了蒸馏作为另一个可能的防御抵抗对抗样本。原则是使用softmax 输入来训练第二个DNN，有相同的结构和原始的。增加温度参数T：</li>
+<li>$q_i=\frac{exp(z_i/T)}{\sum_kexp(z_k/T)}$</li>
+</ul>
+<h4 id="开放问题和讨论"><a href="#开放问题和讨论" class="headerlink" title="开放问题和讨论"></a>开放问题和讨论</h4><ul>
+<li>1.感知能力<ul>
+<li>图片像素的扰动通常很难被察觉，因此不会影响人类的判断，会欺骗深度神经网络，但是对文本的扰动是显而易见的，无效的单词和句法错误很容易被人识别并有语法检查软件检测到，因此这种干扰很难攻击真正的NLP系统。但是许多研究工作都产生了这类对抗性样本。只有在做对抗性训练时可以接受。从保留语义的角度来看，以一个句子的形式更改单词有时会极大地改变语义，并且容易被人发现。对于像阅读理解和情感分析之类的NLP应用程序，需要仔细设计对抗性样本。因此，对于实际攻击，我们需要提出一些方法，这些方法不仅使扰动不被察觉，而且保持正确的语法和语义。</li>
+</ul>
+</li>
+<li>2.迁移能力<ul>
+<li>迁移能力是一个通用的属性对于对抗样本。它反映了攻击方法的泛化能力。迁移性意味着一个深度神经网络生成的对抗样本也可以有效地攻击另一个深度神经网络或者另一个数据集。目前这个属性通常用到黑盒方法中，因为他们对模型结构不敏感。目前的工作泛化能力都很差。期望更多的努力可以提供更好的泛化能力。</li>
+</ul>
+</li>
+<li>3.自动化<ul>
+<li>一些工作能够自动化生成对抗样本，但是还有一些不能。在白盒攻击中，利用DNN的损失函数能够确定文本中最有效的位置自动地。在黑盒攻击中，一些攻击，比如替代品攻击，使用白盒攻击的方法生成对抗样本，也可以实现自动化攻击。但是，大多数其他工作手动生成对抗样本。比如[54]手动拼接一些无意义的段落欺骗阅读理解系统。许多研究工作都遵循参考文献[54]，而不是针对实际攻击，而是针对目标网络的健壮性。 这些手工工作既费时又不切实际。 我们认为，今后在这方面的更多努力可能会克服这一障碍。</li>
+</ul>
+</li>
+<li>4.新的结构<ul>
+<li>尽管大多数常用的文本DNNs已经得到了关注在对抗攻击方面，但是许多DNNs还没有被攻击，比如生成神经模型：GANs和VAEs。生成模型需要更复杂的技术对于模型训练，所以目前的对抗攻击对于这些模型是空白的。此外，注意力机制也是一个非常常用的组件，但是没有工作来检查这个机制，目前只是利用注意力来确定扰动的单词。</li>
+</ul>
+</li>
+<li>5.Iterative versus One-off 可迭代的 vs. 一次性<ul>
+<li>FGSM [40] is one example of one-off attack.  可迭代的攻击往往是根据DNN进行迭代的，效果往往很好，但是费时，所以在实时攻击中不能接受。因此一次性攻击用来解决实时问题，一次性攻击更快但是效果差，容易被防御，当在实际攻击中，需要考虑实时性和有效性的平衡。</li>
+</ul>
+</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>一般的模型都有对于特定数据集过拟合的性质，修改为意思相同但是模型检测不出的对抗样本。</li>
+<li>可解释性差是提出对抗的一个启发和解决的问题。</li>
+<li>生成模型被文本对抗攻击也可以考虑。</li>
+<li>什么样的攻击叫一次性攻击。</li>
+</ul>
+
       
 
       
@@ -181,6 +407,21 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">综述</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -244,6 +485,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/06/17/security02/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          论文阅读：Black-box Generation of Adversarial Text Sequences to Evade Deep Learning Classifiers
+        
+      </div>
+    </a>
   
   
     <a href="/2020/05/12/acl03/" id="article-nav-older" class="article-nav-link-wrap">
@@ -398,26 +648,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -431,6 +661,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,14 +740,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICML</a>
               </li>
              
@@ -514,15 +756,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,6 +785,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,18 +872,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -650,19 +888,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">alignment</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">attention</a>
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -675,6 +913,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">attention</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,6 +965,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PTM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">综述</a>
               </li>
             
             <div class="clearfix"></div>
