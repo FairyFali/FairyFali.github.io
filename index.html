@@ -189,11 +189,11 @@ var _hmt = _hmt || [];
 <li>Cho-Jui Hsieh，UCLA计算科学的助理教授，个人主页：<a href="http://web.cs.ucla.edu/~chohsieh/" target="_blank" rel="noopener">http://web.cs.ucla.edu/~chohsieh/</a></li>
 <li>王立威，北京大学教授，<a href="http://www.liweiwang-pku.com/index-cn.html" target="_blank" rel="noopener">http://www.liweiwang-pku.com/index-cn.html</a></li>
 </ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><p>文章摘要：对抗训练是最流行的学习鲁棒模型的方法，但是耗时和依赖攻击方法（难点挑战，和动机）。我们提出了MACER算法，不使用对抗性训练，但是比所有已存在的可证明的l2防御效果好（提出模型）。最近的工作，Cohen展示了随机平滑能够提供一个认证l2半径来学习平滑分类器（最近的工作）。我们的算法训练可证明的鲁棒平滑分类器通过MAximizing the CErtified Radius (MACER)（模型思想）。攻击无关的特点使MACER训练更快和优化更容易（模型优点）。在Cifar-10，ImageNet，MNIST和SVHN进行实验，MACER占用更少地训练时间比SOTA对抗训练算法，以及模型达到更大的平均认证半径（实验）。</p>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><p>文章摘要：对抗训练是最流行的学习鲁棒模型的方法，但是耗时和依赖攻击方法（难点挑战，和动机）。我们提出了MACER算法，不使用对抗性训练，但是比所有已存在的可证明的l2防御效果好（提出模型）。最近的工作，Cohen展示了随机平滑能够提供一个认证l2半径来学习平滑分类器（最近的工作，主要的参考工作）。我们的算法训练可证明的鲁棒平滑分类器通过MAximizing the CErtified Radius (MACER)（模型思想）。攻击无关的特点使MACER训练更快和优化更容易（模型优点）。在Cifar-10，ImageNet，MNIST和SVHN进行实验，MACER占用更少地训练时间比SOTA对抗训练算法，以及模型达到更大的平均认证半径（实验）。</p>
 <p>具体解决的问题如下：</p>
 <ol>
 <li>最大化鲁棒认证方法提供的认证半径是一类训练鲁棒模型的方法，鲁棒认证方法计算一个输入的安全半径r，在任何半径r的球内的输入，模型都有不变的预测。但是这种方法是计算量昂贵且仅仅能够解决浅层次的神经网络。因此本文提出了使用最近提出的<strong>随机平滑技术</strong>（Cohen等人，2019）来解决这个问题，因为这个技术和模型无关，所以认为是可扩展的。</li>
-<li>（Salman等人，2019）提出SmoothAdv改善平滑模型的鲁棒性，但是它仍然依赖对抗样本，进而依赖具体的攻击方法，是一个对抗性训练方法。本文提出不适用对抗性训练，直接以最大化认证半径为目标，因为提出的方法和具体的攻击无关，所以是attack-free的。提出的方法是 <strong>MAximizing the CErti-fied Radius (MACER)</strong>. </li>
+<li>（Salman等人，2019）提出SmoothAdv改善平滑模型的鲁棒性，但是它仍然依赖对抗样本，进而依赖具体的攻击方法，是一个对抗性训练方法。本文提出不使用对抗性训练，直接以最大化认证半径为目标，因为提出的方法和具体的攻击无关，所以是attack-free的。提出的方法是 <strong>MAximizing the CErti-fied Radius (MACER)</strong>. </li>
 </ol>
 <h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><p><strong>问题定义</strong>。$x’=x+\delta$记为对抗样本，$||\delta||_2 \le \epsilon$，使用$l_2$范数度量，我们认为模型$f_\theta$是$l_2^\epsilon$- robust在$(x,y)$如果所有的$||\delta||_2 \le \epsilon$都能正确分类$x’$到ground truth $y$，最终的目标是找到一个模型在所有$(x,y) \sim p_{data}$有高概率是$l_2^\epsilon$- robust对于给定的$\epsilon&gt;0$。</p>
 <p><strong>神经网络</strong>。模型的输出层为$u_\theta(x) = \{ u_\theta^1(x),…,u_\theta^K(x) \}$。模型预测为$f_\theta(x)=argmax_{c\in Y} u_\theta^c(x)$。为了最小化损失函数，我们通常经$u_\theta$转换为概率分布$z_\theta$，$z_\theta(·;\beta):X\rightarrow P(K),z_\theta^c(x;\beta)=e^{\beta u_\theta^c(x)}/\sum_{c’ \in Y} e^{\beta u_\theta^{c’} (x)}$，$\beta$是温度。</p>
@@ -2568,6 +2568,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -2596,27 +2604,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2636,11 +2628,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2649,6 +2641,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2696,6 +2696,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -2708,7 +2712,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2740,22 +2756,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">VAE</a>
               </li>
              
@@ -2772,10 +2772,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
@@ -2784,11 +2780,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vae</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vae</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2836,10 +2836,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
               </li>
              
@@ -2849,6 +2845,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
