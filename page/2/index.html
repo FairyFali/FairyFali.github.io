@@ -154,6 +154,163 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-icml02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/icml02/">论文阅读：Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/12/icml02/" class="archive-article-date">
+  	<time datetime="2020-05-12T12:22:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>批量标准化：通过减少内部协变量偏移来加速深度网络训练</li>
+<li>发表在ICML2015</li>
+<li>引用量17242（来自谷歌学术，截止到2020.4.15）</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1502.03167" target="_blank" rel="noopener">https://arxiv.org/abs/1502.03167</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Sergey <strong>Ioffe</strong>（谢尔盖·伊夫），博士 加州大学伯克利分校2001，导师：David A. Forsyth，2006年至今都在谷歌做Research Scientist，研究方向是CV。谷歌学术：<a href="https://scholar.google.com/citations?user=S5zOyIkAAAAJ&amp;hl=en，领英主页：https://www.linkedin.com/in/sergey-ioffe-1758821/?trk=public_profile_publications_contributor_image，主页：https://www.aminer.cn/profile/53f44865dabfaee0d9bbb61f" target="_blank" rel="noopener">https://scholar.google.com/citations?user=S5zOyIkAAAAJ&amp;hl=en，领英主页：https://www.linkedin.com/in/sergey-ioffe-1758821/?trk=public_profile_publications_contributor_image，主页：https://www.aminer.cn/profile/53f44865dabfaee0d9bbb61f</a></li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>分布不一致导致训练速度慢，每一层的分布会受到前层的影响，当前面一层的分布发生变化时，后面层的参数需要适应这个变化，训练参数的变化会导致各层分布的不断变化，这个问题被定义为”Internal covariate shift”（ICS）,由于每一层的分布不同，导致训练速度慢。</li>
+<li>梯度消失和梯度爆炸：深度网络中参数微小的变化可能导致陷入sigmoid激活函数的饱和区域。</li>
+<li>需要使用较小的学习率。</li>
+<li>权重初始化非常重要。</li>
+<li>需要正则化，防止过拟合。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li>Batch Normalization。IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。</li>
+<li>卷积网络中的BN，BN除了可以应用在MLP上，其在CNN网络中的表现也非常好，但是在RNN上的表现并不好，这里详细介绍BN在卷积网络中的使用方法。卷积网络和MLP的不同点是卷积网络中每个样本的隐层节点的输出是三维（宽度，高度，维度）的，而MLP是一维的，如图所示。</li>
+</ul>
+<p><img src="/assets/blogImg/BN-fig5.png" alt="img"></p>
+<ul>
+<li>在图中，假设一个批量有$m$个样本，Feature Map的尺寸是 $p\times q $，通道数是$d$。在卷积网络的中，BN的操作是以Feature Map为单位的，因此一个BN要统计的数据个数为$m\times p\times q$ ，每个Feature Map使用一组$\gamma$ 和$\beta$。</li>
+</ul>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>训练深度神经网络非常复杂，因为在训练过程中随着先前各层的参数变化，各层输入的分布也会发生变化。较低的学习率和严格的参数初始化降低了训练速度，并且训练具有saturating饱和的非线性模型非常困难。我们把这种现象叫做<strong>internal covariate shift内部协变量偏移</strong>，通过归一化layers输入来解决这个问题。我们的方法通过将归一化作为模型结构的一部分，为每个训练mini-batch执行归一化来汲取其优势。Batch Normalization允许我们设置更高的学习率和更少地关注初始化。应用到图片分类模型上，batch normalization可以节省14倍的时间达到同样的accuracy。在ImageNet分类上得到了改进，测试集上的错误率为4.8%，超过了人类评分者的accuracy。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>SGD被证明是一个有效的训练深度神经网络的方式，SGD变体包括momentum和Adagrad。SGD优化参数$\theta$通过最小化$\theta = \underset{\theta}{argmin} \frac{1}{N}\sum_{i=1}^N l(x_i, \theta)$,每一个时间步我们考虑一个mini-batch $x_{1\dots m}$ of size $m$。</li>
+<li>但是SGD特别需要仔细调整模型的超参数，特别是学习率和模型参数的初始值。随着网络变得更深，网络参数的微小更改也会amplify放大。</li>
+<li>当输入分布发生改变时，会导致一个<strong>covariate shift</strong> (Shimodaira, 2000)。</li>
+<li>固定的输入分布对于sub-network也有积极地影响。</li>
+<li>对于sigmoid，随着$|x|$的增长，梯度也会趋于0。</li>
+<li>因为$x=Wu+b$受到W,b和后面所有层的参数影响，改变这些参数可能会使x的许多维度进入非线性饱和状态，降低收敛速度。这个影响随着网络深度的增加会被放大。</li>
+<li>实际上，饱和问题和消失梯度问题都可以使用ReLU解决（Nair&amp;Hinton，2010），$ReLU(x)=max(x,0)$。</li>
+<li>但是，如果我们可以确保在网络训练时非线性输入的分布保持更稳定，则优化器更少地可能陷入饱和状态，训练速度会加速。</li>
+<li>我们将深度网络内部节点的分布变化叫做<strong>内部协变量偏移</strong>。消除它就可以加快训练速度。我们提出了一个Batch Normalizatioin的方法，朝着减少内部协变量偏移迈出了一步，从而加速训练。</li>
+<li>它通过固定层输入的均值和方差的归一化步骤来完成此操作。batch normalization还可以减少梯度对参数或其初始值的大小的依赖性，这使得我们可以使用更高的学习率并且不会出现divergence发散的风险。</li>
+<li>总之，Batch Normalization可以使用饱和的非线性防止网络陷入饱和模式。</li>
+</ul>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p><img src="/assets/blogImg/BN-alg1.png" alt="image-20200417144808386"></p>
+<p><img src="/assets/blogImg/BN-alg2.png" alt="image-20200417144907508"></p>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>minist：数字分类任务。</li>
+</ul>
+<p><img src="/assets/blogImg/BN-fig1.png" alt="img"></p>
+<ul>
+<li>ImageNet图片分类：<ul>
+<li>Inception：学习率为0.0015，对Inceptionv1做了一些结构修改（比如2个3x3卷积替代5x5卷积）。I</li>
+<li>BN：在上面的基础上加入了BN，提升了Inception的收敛速度和准确率</li>
+<li>BNx5：做了一些加速BN的策略变动，其中学习率扩大为原BN的5倍，即0.0075，相比于BN，收敛更快，准确率更高</li>
+<li>BNx30：在BNx5的基础上，学习率扩大为原BN的30倍，即0.045，相比于BNX5，准确率更高</li>
+<li>BNx5-sigmoid：虽然不如以上结果好，但是相比于不用BN，准确率更高</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/BN-fig2.png" alt="image-20200417113539000"></p>
+<p><img src="/assets/blogImg/BN-fig3.png" alt="image-20200417113554993"></p>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>饱和的非线性模型是什么意思？</li>
+<li>为什么叫内部协变量偏移internal covariate shift？</li>
+<li>输入x到底指的是什么？是Wu+b，也可以是u</li>
+<li>BN规范化后，对于较大的权重会有较小的梯度，对于较小的权重会有较大的梯度，为什么？因为<ul>
+<li><img src="/assets/blogImg/BN-fig4.png" alt="image"></li>
+<li>当a变大时，W的梯度变小了，a变小时W的梯度变大了</li>
+</ul>
+</li>
+<li>论文内容有很多地方没有看懂，大多数是看的博客</li>
+<li>Whiten是什么意思？所谓<strong>白化</strong>，<strong>就是对输入数据分布变换到0均值，单位方差的正态分布</strong>——那么神经网络会较快收敛。</li>
+<li>使用了ReLU还有必要使用BN吗？</li>
+<li>$\gamma,\beta$是针对每一个神经元的，不是每一层的，也是一个向量。</li>
+<li>MNIST图的b和c的横坐标纵坐标代表什么？</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li>论文笔记：<a href="https://www.cnblogs.com/liaohuiqiang/p/9250469.html" target="_blank" rel="noopener">https://www.cnblogs.com/liaohuiqiang/p/9250469.html</a></li>
+<li><a href="https://blog.csdn.net/happynear/article/details/44238541" target="_blank" rel="noopener">https://blog.csdn.net/happynear/article/details/44238541</a></li>
+<li><a href="https://www.cnblogs.com/yinheyi/p/7016487.html" target="_blank" rel="noopener">https://www.cnblogs.com/yinheyi/p/7016487.html</a></li>
+<li><a href="https://www.cnblogs.com/guoyaohua/p/8724433.html（讲的很好）" target="_blank" rel="noopener">https://www.cnblogs.com/guoyaohua/p/8724433.html（讲的很好）</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/54171297" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54171297</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Batch Normalization</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">正则化</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/12/icml02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-scts01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1656,125 +1813,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-security01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/security01/">论文阅读：PUBCRAWL: Protecting Users and Businesses from CRAWLers</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/08/security01/" class="archive-article-date">
-  	<time datetime="2019-12-08T11:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>PUBCRAWL：保护用户和企业免受爬虫伤害</li>
-<li>论文发表于21st Usenix Security Symposium 2012</li>
-<li>论文下载地址：<a href="https://sites.cs.ucsb.edu/~chris/research/doc/usenix12_pubcrawl.pdf" target="_blank" rel="noopener">https://sites.cs.ucsb.edu/~chris/research/doc/usenix12_pubcrawl.pdf</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>一作Gregoire Jacob，没有找到更多资料；</li>
-<li>二作Christopher Kruegel，加利福尼亚大学圣塔芭芭拉分校计算机科学系的教授，参与了国际安全系统实验室，Lastline，Inc.的联合创始人之一，担任首席科学家。研究兴趣包括计算机安全的大多数方面，重点是恶意软件分析，Web安全，网络安全和漏洞分析。个人主页：<a href="https://sites.cs.ucsb.edu/~chris/" target="_blank" rel="noopener">https://sites.cs.ucsb.edu/~chris/</a></li>
-</ul>
-<h4 id="论文解决的主要问题"><a href="#论文解决的主要问题" class="headerlink" title="论文解决的主要问题"></a>论文解决的主要问题</h4><ul>
-<li>web crawlers是浏览网络以检索和分许信息的自动化工具，也叫做机器人，抓取器，蜘蛛，后文统称为爬虫或者爬取器，他们又可能是恶意的(malicous)，社交网络经常作为受害者，<strong>文章提出的PUBCRAWL用于检测和限制爬虫，基于爬虫访问模式和用户访问模式的不同</strong>，该方法已经上线运行使用。</li>
-</ul>
-<h4 id="相关知识和方法"><a href="#相关知识和方法" class="headerlink" title="相关知识和方法"></a>相关知识和方法</h4><ul>
-<li>许多网站都在服务条款中明确禁止未经授权的爬取，但是爬虫工具可以轻松的忽略。</li>
-<li>当前的检测技术<ul>
-<li>主要使用一些爬虫的设置，例如，虚假的user-agent，可疑的来源网址和简单的访问模式，例如访问间隔和访问量。但是，高明的爬虫都可以消除这些暴露的设置。在代理的存在下，访问模式这种方法会失效，代理通过一个IP为上百合法用户提供服务，针对这些问题一些商业的防爬服务涌现，例如Distil.lt、SiteBlackBox、SentorAssassin。</li>
-<li>许多网站使用<strong>CAPTCHAs</strong>方法来反爬(anti-scraping)，对于计算机来说很难而对于人来说很简单，但是也会受到一些自动化技术的攻击的，精心设计的验证码可以抵制自动化工具，但是也会降低用户的使用满意度。</li>
-<li><strong>爬虫陷阱。</strong>是一个陷阱URL，引诱爬虫进入无限循环，但正常用户也可能会被误导。</li>
-</ul>
-</li>
-</ul>
-<h4 id="PUBCRAWL方法"><a href="#PUBCRAWL方法" class="headerlink" title="PUBCRAWL方法"></a>PUBCRAWL方法</h4><ul>
-<li>PUBCRAWL利用爬虫工具的自动化过程进行观察，以爬虫会有不同程度的规律性和变化为基础。基于内容和基于时间两种方式。基于内容的方式通过HTTP Headers和URLs提取特征，启发式利用这些特征确定爬虫的值；基于时间的方式分析请求产生的时间序列，使用机器学习方法训练爬虫和用户的分类器。系统还可以根据访问模式的同步性识别分布式爬虫。方法的主要过程如下图所示：</li>
-</ul>
-<p><img src="/assets/blogImg/pubcrawl_architecture.png" alt="image-20191207154307568"></p>
-<ul>
-<li><p>只有访问量到达一定程度，上述方法才会有效，但是有些敌手可能有大型僵尸网络，每个机器只需要访问一点点就可以进行爬取，因此需要设置触发机制，比如验证码、陷阱、以及当单个用户超过访问阈值就开始检测，为了减少合法用户的影响，对检测结果良性源的IP加入白名单。</p>
-</li>
-<li><p>PUBCRWAL架构包括四个模块</p>
-<ul>
-<li>启发式检测。使用HTTP Headers Fields &amp; Urls区分一些简单的爬虫。</li>
-<li>访问模式检测。为了将慢爬虫和忙代理区分开，使用<strong>自相关分析技术</strong>，训练分类器。下图是爬虫和正常用户的访问频次图示。</li>
-</ul>
-<p><img src="/assets/blogImg/pubcrawl_time_series.png" alt="image-20191207155027501"></p>
-<ul>
-<li>Campaign attribution。确定两个子网访问模式分布的相似性。如下图就是两个相似子网。</li>
-</ul>
-<p><img src="/assets/blogImg/pubcrawl_distribution_subnet.png" alt="image-20191207155442295"></p>
-<ul>
-<li>主动抵制模块。不在黑白名单的访问源，按照上述的少量访问允许，超过阈值则进行验证码和爬虫陷阱的验证。</li>
-</ul>
-</li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>只看到了第2章结束。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">反爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/security01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1910,14 +1948,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2121,6 +2151,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
@@ -2189,14 +2227,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ELMo</a>
               </li>
              
@@ -2217,7 +2247,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">

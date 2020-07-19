@@ -154,6 +154,125 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-security01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/08/security01/">论文阅读：PUBCRAWL: Protecting Users and Businesses from CRAWLers</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/08/security01/" class="archive-article-date">
+  	<time datetime="2019-12-08T11:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>PUBCRAWL：保护用户和企业免受爬虫伤害</li>
+<li>论文发表于21st Usenix Security Symposium 2012</li>
+<li>论文下载地址：<a href="https://sites.cs.ucsb.edu/~chris/research/doc/usenix12_pubcrawl.pdf" target="_blank" rel="noopener">https://sites.cs.ucsb.edu/~chris/research/doc/usenix12_pubcrawl.pdf</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Gregoire Jacob，没有找到更多资料；</li>
+<li>二作Christopher Kruegel，加利福尼亚大学圣塔芭芭拉分校计算机科学系的教授，参与了国际安全系统实验室，Lastline，Inc.的联合创始人之一，担任首席科学家。研究兴趣包括计算机安全的大多数方面，重点是恶意软件分析，Web安全，网络安全和漏洞分析。个人主页：<a href="https://sites.cs.ucsb.edu/~chris/" target="_blank" rel="noopener">https://sites.cs.ucsb.edu/~chris/</a></li>
+</ul>
+<h4 id="论文解决的主要问题"><a href="#论文解决的主要问题" class="headerlink" title="论文解决的主要问题"></a>论文解决的主要问题</h4><ul>
+<li>web crawlers是浏览网络以检索和分许信息的自动化工具，也叫做机器人，抓取器，蜘蛛，后文统称为爬虫或者爬取器，他们又可能是恶意的(malicous)，社交网络经常作为受害者，<strong>文章提出的PUBCRAWL用于检测和限制爬虫，基于爬虫访问模式和用户访问模式的不同</strong>，该方法已经上线运行使用。</li>
+</ul>
+<h4 id="相关知识和方法"><a href="#相关知识和方法" class="headerlink" title="相关知识和方法"></a>相关知识和方法</h4><ul>
+<li>许多网站都在服务条款中明确禁止未经授权的爬取，但是爬虫工具可以轻松的忽略。</li>
+<li>当前的检测技术<ul>
+<li>主要使用一些爬虫的设置，例如，虚假的user-agent，可疑的来源网址和简单的访问模式，例如访问间隔和访问量。但是，高明的爬虫都可以消除这些暴露的设置。在代理的存在下，访问模式这种方法会失效，代理通过一个IP为上百合法用户提供服务，针对这些问题一些商业的防爬服务涌现，例如Distil.lt、SiteBlackBox、SentorAssassin。</li>
+<li>许多网站使用<strong>CAPTCHAs</strong>方法来反爬(anti-scraping)，对于计算机来说很难而对于人来说很简单，但是也会受到一些自动化技术的攻击的，精心设计的验证码可以抵制自动化工具，但是也会降低用户的使用满意度。</li>
+<li><strong>爬虫陷阱。</strong>是一个陷阱URL，引诱爬虫进入无限循环，但正常用户也可能会被误导。</li>
+</ul>
+</li>
+</ul>
+<h4 id="PUBCRAWL方法"><a href="#PUBCRAWL方法" class="headerlink" title="PUBCRAWL方法"></a>PUBCRAWL方法</h4><ul>
+<li>PUBCRAWL利用爬虫工具的自动化过程进行观察，以爬虫会有不同程度的规律性和变化为基础。基于内容和基于时间两种方式。基于内容的方式通过HTTP Headers和URLs提取特征，启发式利用这些特征确定爬虫的值；基于时间的方式分析请求产生的时间序列，使用机器学习方法训练爬虫和用户的分类器。系统还可以根据访问模式的同步性识别分布式爬虫。方法的主要过程如下图所示：</li>
+</ul>
+<p><img src="/assets/blogImg/pubcrawl_architecture.png" alt="image-20191207154307568"></p>
+<ul>
+<li><p>只有访问量到达一定程度，上述方法才会有效，但是有些敌手可能有大型僵尸网络，每个机器只需要访问一点点就可以进行爬取，因此需要设置触发机制，比如验证码、陷阱、以及当单个用户超过访问阈值就开始检测，为了减少合法用户的影响，对检测结果良性源的IP加入白名单。</p>
+</li>
+<li><p>PUBCRWAL架构包括四个模块</p>
+<ul>
+<li>启发式检测。使用HTTP Headers Fields &amp; Urls区分一些简单的爬虫。</li>
+<li>访问模式检测。为了将慢爬虫和忙代理区分开，使用<strong>自相关分析技术</strong>，训练分类器。下图是爬虫和正常用户的访问频次图示。</li>
+</ul>
+<p><img src="/assets/blogImg/pubcrawl_time_series.png" alt="image-20191207155027501"></p>
+<ul>
+<li>Campaign attribution。确定两个子网访问模式分布的相似性。如下图就是两个相似子网。</li>
+</ul>
+<p><img src="/assets/blogImg/pubcrawl_distribution_subnet.png" alt="image-20191207155442295"></p>
+<ul>
+<li>主动抵制模块。不在黑白名单的访问源，按照上述的少量访问允许，超过阈值则进行验证码和爬虫陷阱的验证。</li>
+</ul>
+</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>只看到了第2章结束。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">反爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/08/security01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-emnlp02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1233,93 +1352,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-group01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/16/group01/">2019年9月10日论文创作经验分享会</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/16/group01/" class="archive-article-date">
-  	<time datetime="2019-09-16T12:38:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="经验分享会记录"><a href="#经验分享会记录" class="headerlink" title="经验分享会记录"></a>经验分享会记录</h2><ul>
-<li>高能：深度学习逐渐分为许多分支，<strong>表示学习</strong>是其中比较热门的一个分支，现在主要是和知识图谱和推荐系统相结合，<strong>异常检测</strong>有一个没来的老师在做项目需求，将来可能会发展这个方向，目前组里没有人在做，<strong>李祥所做的身份关联</strong>是一个老话题，偏向于数学功底，发论文比较吃亏，属于安全领域，<strong>王子涵和王鑫老师都在做GAN</strong>，非常热，可以借鉴很多院士发表的文章，恶意代码分析，我们主要做在图像方面，图像隐藏、图像和文字结合等等，这个方向一直不会放弃，<strong>陈钧莎博士做的事件分析</strong>很早发了一篇B，idea比较好，<strong>如何发表一个文章</strong>领域、Motivation、方法（straightforward、combine是不行的）、实验（C论文的实验比较简单，体现问题在图上的，方法和实验呼应），<strong>江伊雯社会属性推断</strong>根据社会属性推断人口属性，<strong>王炯发表了一篇C</strong>，C一般是复现别人的实验，高于别人的实验，C相当于一个代步工具，B是一个轿车，A是一个需要挣大钱的工具，写论文多了读论文就会很快，会写就会读，将stopword都圈出来，确定哪一段话是什么意思。改造数据集。Case Study的重要性。</li>
-<li>莫靖杰：attributed network embedding，属性隐藏网络是为了1、自动特征工程，2、同时提取结构信息和属性信息，和3、找到网络结构的和属性的内部关系。Motivation都是灵光乍现。</li>
-<li>李祥：身份关联。多社交平台多网络，发现不同社交平台同一个人的账号，数据比较麻烦，清华大学的一篇论文提供了一些数据。</li>
-<li>唐伟：中文字符骨骼特征识别。缺少数据集的情况下使用无监督或者半监督方法。2019年自然场景识别文字提出了公开数据集。</li>
-<li>王子涵：生成对抗网络。2014年提出，2016年流行。</li>
-<li>陈钧莎：事件分析。局部话题检测（有一些信息检索的意思、有参考LDA方法），在社交媒体中找到热点事件，空间性、时间性、语义相关性3个特性，表示学习和话题模型进行结合。</li>
-<li>江伊雯：根据计步器进行人的属性判定。</li>
-<li>王炯：属性网络和推荐系统。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">论文创作</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分享会</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/16/group01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1455,14 +1487,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1666,6 +1690,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
@@ -1734,14 +1766,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ELMo</a>
               </li>
              
@@ -1762,7 +1786,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
