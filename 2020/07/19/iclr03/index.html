@@ -35,7 +35,7 @@
 <meta property="og:image" content="/assets/blogImg/MaCeR-tab1.png">
 <meta property="og:image" content="/assets/blogImg/MaCeR-tab2.png">
 <meta property="og:image" content="/assets/blogImg/MaCeR-tab3.png">
-<meta property="og:updated_time" content="2020-07-19T10:56:05.990Z">
+<meta property="og:updated_time" content="2020-07-19T11:10:29.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：MACER: ATTACK-FREE AND SCALABLE ROBUST TRAINING VIA MAXIMIZING CERTIFIED RADIUS">
 <meta name="twitter:description" content="论文题目 MACER：通过最大化可证明半径进行攻击无关和可扩展的鲁棒训练 发表在ICLR2020 论文下载：https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf 论文代码：https://github.com/RuntianZ/macer Slides：http://www.runtianzhai">
@@ -215,8 +215,8 @@ var _hmt = _hmt || [];
 <li>（Salman等人，2019）提出SmoothAdv改善平滑模型的鲁棒性，但是它仍然依赖对抗样本，进而依赖具体的攻击方法，是一个对抗性训练方法。本文提出不使用对抗性训练，直接以最大化认证半径为目标，因为提出的方法和具体的攻击无关，所以是attack-free的。提出的方法是 <strong>MAximizing the CErti-fied Radius (MACER)</strong>. </li>
 </ol>
 <h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><p><strong>问题定义</strong>。$x’=x+\delta$记为对抗样本，$||\delta||_2 \le \epsilon$，使用$l_2$范数度量，我们认为模型$f_\theta$是$l_2^\epsilon$- robust在$(x,y)$如果所有的$||\delta||_2 \le \epsilon$都能正确分类$x’$到ground truth $y$，最终的目标是找到一个模型在所有$(x,y) \sim p_{data}$有高概率是$l_2^\epsilon$- robust对于给定的$\epsilon&gt;0$。</p>
-<p><strong>神经网络</strong>。模型的输出层为$u_\theta(x) = \{ u_\theta^1(x),…,u_\theta^K(x) \}$。模型预测为$f_\theta(x)=argmax_{c\in Y} u_\theta^c(x)$。为了最小化损失函数，我们通常经$u_\theta$转换为概率分布$z_\theta$，$z_\theta(·;\beta):X\rightarrow P(K),z_\theta^c(x;\beta)=e^{\beta u_\theta^c(x)}/\sum_{c’ \in Y} e^{\beta u_\theta^{c’} (x)}$，$\beta$是温度。</p>
-<p><strong>鲁棒半径</strong>。鲁棒性依赖于最大$f_\theta$不会发生预测变化的l2球。这个半径叫做鲁棒半径，形式化如下：</p>
+<p><strong>神经网络</strong>。模型的输出层为$u_\theta(x) = \{ u_\theta^1(x),…,u_\theta^K(x) \}$。模型预测为$f_\theta(x)=argmax_{c\in Y} u_\theta^c(x)$。为了最小化损失函数，我们通常将$u_\theta$转换为概率分布$z_\theta$，$z_\theta(·;\beta):X\rightarrow P(K),z_\theta^c(x;\beta)=e^{\beta u_\theta^c(x)}/\sum_{c’ \in Y} e^{\beta u_\theta^{c’} (x)}$，$\beta$是温度。</p>
+<p><strong>鲁棒半径</strong>。鲁棒性依赖于最大的$f_\theta$不会发生预测变化的l2球。这个半径叫做鲁棒半径，形式化如下：</p>
 <p><img src="/assets/blogImg/MaCeR-equ1.png" alt="image-20200716164757972"></p>
 <p>inf表示下确界。0/1鲁棒分类器错误定义为$l_{\epsilon-robust}^{0/1}(f_\theta,x,y):=1-\mathbf{1}_{R(f_\theta;x,y)\ge\epsilon}$,即鲁棒半径大于扰动限制即为0，否则为1。目标是最小化数据分布上的期望$L_{\epsilon}^{0/1}(f_\theta):=\mathbb{E}_{(x,y) \sim p_{data}}l_{\epsilon-robust}^{0/1}(f_\theta,x,y)$。计算公式1很可能是NP-hard问题。</p>
 <p><strong>认证半径</strong>。许多之前的工作提出了认证方法来寻找$R(f_\theta;x,y)$的下界，我们记为认证半径$CR(f_\theta;x,y)$，$0 \le CR \le R$。因此，<strong>0/1认证鲁棒错误率</strong>定义为$l_{\epsilon-certified}^{0/1}(f_\theta;x,y):=1-\mathbf{1}_{R(f_\theta;x,y)\ge\epsilon}$.</p>
@@ -225,7 +225,7 @@ var _hmt = _hmt || [];
 <p>简单说，$g_\theta$就是返回输入x被采样自$N(x,\sigma^2I)$最可能的标签。Cohen证明了认证半径的形式：</p>
 <p><img src="/assets/blogImg/MaCeR-equ2.png" alt="image-20200716220422084"></p>
 <p>$\Phi$是标准高斯分布的CDF累计分布函数，$\Phi^{-1}$即CDF的反函数。</p>
-<p><strong>损失函数</strong>。文章将0/1认证鲁棒性错误分解成两部分$l_{\epsilon-certified}^{0/1}(f_\theta,x,y):=1-1_{CR(f_\theta;x,y)\ge\epsilon}=I_{g_\theta(x) \ne y} + I_{g_\theta(x)=y,CR(g_\theta;x,y)&lt;\epsilon}$。第一部分是分类错误，第二部分是鲁棒错误。对应两部分错误，设计对应的损失函数。分类错误使用交叉熵损失，鲁棒错误使用hinge loss</p>
+<p><strong>损失函数</strong>。文章将0/1认证鲁棒性错误分解成两部分$l_{\epsilon-certified}^{0/1}(f_\theta,x,y):=1-1_{CR(f_\theta;x,y)\ge\epsilon}=I_{g_\theta(x) \ne y} + I_{g_\theta(x)=y,CR(g_\theta;x,y)&lt;\epsilon}$。第一部分是分类错误，第二部分是鲁棒错误。两部分错误，设计对应的损失函数。分类错误使用交叉熵损失，鲁棒错误使用hinge loss</p>
 <p><img src="/assets/blogImg/MaCeR-equ3.png" alt="image-20200717111941426"></p>
 <p>损失的选择符合文中提出了三个条件C1：替代损失应该是原始错误函数的上界；C2：损失可微；C3：数值上稳定。</p>
 <p><strong>软随机平滑Soft-RS</strong>。因为CR是不可微的，所以使用软随机平滑Soft-RS解决，和原始的版本相比，Soft-RS使用神经网络$z_\theta(x)$替代，soft版本记为$\widetilde{g}_\theta$:<br>$\widetilde{g}_\theta(x)=\underset{c \in Y}{argmax} \mathbb{E}_{\eta \sim N(0,\sigma^2I)}[z_\theta^c(x+\eta)]$</p>
@@ -256,9 +256,9 @@ var _hmt = _hmt || [];
 <p><img src="/assets/blogImg/MaCeR-tab1.png" alt="image-20200717211258280"></p>
 <p>图1展示了了半径和准确率的曲线，曲线和x轴之间的面积和ACR等价。首先，展示出了我们提出的方法实现了更好地认证测试集准确率和Cohen相比，第二，和Salman相比在不同的r表现不同，在ACR这个指标上，我们的模型比Salman的效果好。</p>
 <p><strong>训练速度</strong>。因为MACER不需要对抗性攻击在训练期间，所以它可以训练的更快。在文中表3列出了统计数据。</p>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>我们有力的实证结果表明，对抗性训练不是强大训练的必要条件，基于认证的防御是未来研究的有希望的方向。 此外，最近的几篇论文（Carmon等人，2019; Zhai等人，2019; Stanforth等人，2019）建议使用未标记的数据有助于改善对抗性鲁棒泛化性。 我们将来会将MACER扩展到半监督设置。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>我们有力的实证结果表明，对抗性训练不是鲁棒训练的必要条件，基于认证的防御是未来研究的有希望的方向。 此外，最近的几篇论文（Carmon等人，2019; Zhai等人，2019; Stanforth等人，2019）建议使用未标记的数据有助于改善对抗性鲁棒泛化性。 我们将来会将MACER扩展到半监督设置。</p>
 <h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>simplex是什么意思？</li>
+<li>simplex是什么意思？单纯形，一种线性规划求解的经典算法。</li>
 </ul>
 <h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
 <li>对抗训练是学习鲁棒性模型最流行的方式，但是通常是依赖攻击的和耗时的。本文，我们提出了MACER算法，学习鲁棒模型在<strong>不使用对抗训练</strong>情况下，但是比所有已存在的l2-防御执行效果更好。之前的工作（Jeremy Cohen, Elan Rosenfeld, and Zico Kolter.  <strong>Certified adversarial robustness via randomized smoothing</strong>.）展示了随机平滑为平滑的分类器提供可证明的l2半径，我们的算法通过最大化可证明半径（MACER）训练鲁棒性平滑分类器。攻击无关的特征使MACER更快训练和更容易优化。在我们的实验中，我们证明了我们的方法能够被应用到现代深度神经网络在广泛的数据集，包括Cifar-10，ImageNet，MNIST，和SVHN。对于所有的任务，MACER占用了更少的训练时间比SOTA对抗训练算法，学习的模型实现了更大的平均可证明半径。我们的代码可用：<a href="https://github.com/RuntianZ/macer。" target="_blank" rel="noopener">https://github.com/RuntianZ/macer。</a></li>
@@ -618,14 +618,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -639,6 +631,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,26 +710,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICML</a>
               </li>
              
@@ -746,7 +726,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -762,11 +758,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -775,6 +767,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -806,27 +818,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -842,18 +842,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
@@ -863,6 +851,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -902,19 +902,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">防御</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
               </li>
              
               <li class="article-tag-list-item">
