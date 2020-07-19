@@ -6,20 +6,40 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>iclr03 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：MACER: ATTACK-FREE AND SCALABLE ROBUST TRAINING VIA MAXIMIZING CERTIFIED RADIUS | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
+  <meta name="description" content="论文题目 MACER：通过最大化可证明半径进行攻击无关和可扩展的鲁棒训练 发表在ICLR2020 论文下载：https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf 论文代码：https://github.com/RuntianZ/macer Slides：http://www.runtianzhai">
+<meta name="keywords" content="iclr,对抗性训练,鲁棒训练,可信半径">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iclr03">
+<meta property="og:title" content="论文阅读：MACER: ATTACK-FREE AND SCALABLE ROBUST TRAINING VIA MAXIMIZING CERTIFIED RADIUS">
 <meta property="og:url" content="fairyfali.github.io/2020/07/19/iclr03/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 MACER：通过最大化可证明半径进行攻击无关和可扩展的鲁棒训练 发表在ICLR2020 论文下载：https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf 论文代码：https://github.com/RuntianZ/macer Slides：http://www.runtianzhai">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:updated_time" content="2020-07-19T07:16:28.829Z">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ2.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ3.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ6.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-proposition1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ5.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-alg1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-tab1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ2.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ3.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-theo1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ4.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-proposition1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-equ5.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-alg1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-tab1.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-tab2.png">
+<meta property="og:image" content="/assets/blogImg/MaCeR-tab3.png">
+<meta property="og:updated_time" content="2020-07-19T07:21:31.297Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iclr03">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：MACER: ATTACK-FREE AND SCALABLE ROBUST TRAINING VIA MAXIMIZING CERTIFIED RADIUS">
+<meta name="twitter:description" content="论文题目 MACER：通过最大化可证明半径进行攻击无关和可扩展的鲁棒训练 发表在ICLR2020 论文下载：https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf 论文代码：https://github.com/RuntianZ/macer Slides：http://www.runtianzhai">
+<meta name="twitter:image" content="/assets/blogImg/MaCeR-equ1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -160,7 +180,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      iclr03
+      论文阅读：MACER: ATTACK-FREE AND SCALABLE ROBUST TRAINING VIA MAXIMIZING CERTIFIED RADIUS
     </h1>
   
 
@@ -173,7 +193,184 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>MACER：通过最大化可证明半径进行攻击无关和可扩展的鲁棒训练</li>
+<li>发表在ICLR2020</li>
+<li>论文下载：<a href="https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf" target="_blank" rel="noopener">https://openreview.net/pdf?id=rJx1Na4Fwr，https://arxiv.org/pdf/2001.02378.pdf</a></li>
+<li>论文代码：<a href="https://github.com/RuntianZ/macer" target="_blank" rel="noopener">https://github.com/RuntianZ/macer</a></li>
+<li>Slides：<a href="http://www.runtianzhai.com/slides/iclr_macer.pdf" target="_blank" rel="noopener">http://www.runtianzhai.com/slides/iclr_macer.pdf</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作翟润天，北京大学学士，即将攻读CMU博士，个人主页：<a href="http://www.runtianzhai.com/" target="_blank" rel="noopener">http://www.runtianzhai.com/</a></li>
+<li>二作丹晨，CMU在读博士，个人主页：<a href="https://chendancmu.github.io/" target="_blank" rel="noopener">https://chendancmu.github.io/</a></li>
+<li>三作Di He，个人主页：<a href="https://www.microsoft.com/en-us/research/people/dihe/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/people/dihe/</a></li>
+<li>四作Huan Zhang，UCLA博士，个人主页：<a href="https://www.huan-zhang.com/" target="_blank" rel="noopener">https://www.huan-zhang.com/</a></li>
+<li>Cho-Jui Hsieh，UCLA计算科学的助理教授，个人主页：<a href="http://web.cs.ucla.edu/~chohsieh/" target="_blank" rel="noopener">http://web.cs.ucla.edu/~chohsieh/</a></li>
+<li>王立威，北京大学教授，<a href="http://www.liweiwang-pku.com/index-cn.html" target="_blank" rel="noopener">http://www.liweiwang-pku.com/index-cn.html</a></li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><p>文章摘要：对抗训练是最流行的学习鲁棒模型的方法，但是耗时和依赖攻击方法（难点挑战，和动机）。我们提出了MACER算法，不使用对抗性训练，但是比所有已存在的可证明的l2防御效果好（提出模型）。最近的工作，Cohen展示了随机平滑能够提供一个认证l2半径来学习平滑分类器（最近的工作）。我们的算法训练可证明的鲁棒平滑分类器通过MAximizing the CErtified Radius (MACER)（模型思想）。攻击无关的特点使MACER训练更快和优化更容易（模型优点）。在Cifar-10，ImageNet，MNIST和SVHN进行实验，MACER占用更少地训练时间比SOTA对抗训练算法，以及模型达到更大的平均认证半径（实验）。</p>
+<p>具体解决的问题如下：</p>
+<ol>
+<li>最大化鲁棒认证方法提供的认证半径是一类训练鲁棒模型的方法，鲁棒认证方法计算一个输入的安全半径r，在任何半径r的球内的输入，模型都有不变的预测。但是这种方法是计算量昂贵且仅仅能够解决浅层次的神经网络。因此本文提出了使用最近提出的<strong>随机平滑技术</strong>（Cohen等人，2019）来解决这个问题，因为这个技术和模型无关，所以认为是可扩展的。</li>
+<li>（Salman等人，2019）提出SmoothAdv改善平滑模型的鲁棒性，但是它仍然依赖对抗样本，进而依赖具体的攻击方法，是一个对抗性训练方法。本文提出不适用对抗性训练，直接以最大化认证半径为目标，因为提出的方法和具体的攻击无关，所以是attack-free的。提出的方法是 <strong>MAximizing the CErti-fied Radius (MACER)</strong>. </li>
+</ol>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><p><strong>问题定义</strong>。$x’=x+\delta$记为对抗样本，$||\delta||_2 \le \epsilon$，使用$l_2$范数度量，我们认为模型$f_\theta$是$l_2^\epsilon$- robust在$(x,y)$如果所有的$||\delta||_2 \le \epsilon$都能正确分类$x’$到ground truth $y$，最终的目标是找到一个模型在所有$(x,y) \sim p_{data}$有高概率是$l_2^\epsilon$- robust对于给定的$\epsilon&gt;0$。</p>
+<p><strong>神经网络</strong>。模型的输出层为$u_\theta(x) = \{ u_\theta^1(x),…,u_\theta^K(x) \}$。模型预测为$f_\theta(x)=argmax_{c\in Y} u_\theta^c(x)$。为了最小化损失函数，我们通常经$u_\theta$转换为概率分布$z_\theta$，$z_\theta(·;\beta):X\rightarrow P(K),z_\theta^c(x;\beta)=e^{\beta u_\theta^c(x)}/\sum_{c’ \in Y} e^{\beta u_\theta^{c’} (x)}$，$\beta$是温度。</p>
+<p><strong>鲁棒半径</strong>。鲁棒性依赖于最大$f_\theta$不会发生预测变化的l2球。这个半径叫做鲁棒半径，形式化如下：</p>
+<p><img src="/assets/blogImg/MaCeR-equ1.png" alt="image-20200716164757972"></p>
+<p>inf表示下确界。0/1鲁棒分类器错误定义为$l_{\epsilon-robust}^{0/1}(f_\theta,x,y):=1-\mathbf{1}_{R(f_\theta;x,y)\ge\epsilon}$,即鲁棒半径大于扰动限制即为0，否则为1。目标是最小化数据分布上的期望$L_{\epsilon}^{0/1}(f_\theta):=\mathbb{E}_{(x,y) \sim p_{data}}l_{\epsilon-robust}^{0/1}(f_\theta,x,y)$。计算公式1很可能是NP-hard问题。</p>
+<p><strong>认证半径</strong>。许多之前的工作提出了认证方法来寻找$R(f_\theta;x,y)$的下界，我们记为认证半径$CR(f_\theta;x,y)$，$0 \le CR \le R$。因此，<strong>0/1认证鲁棒错误率</strong>定义为$l_{\epsilon-certified}^{0/1}(f_\theta;x,y):=1-\mathbf{1}_{R(f_\theta;x,y)\ge\epsilon}$.</p>
+<p><strong>随机平滑</strong>。Cohen等人，2019提出了随机平滑技术，可以扩展到任何架构，能够计算平滑深度神经网络的认证半径。原始模型为$f_\theta$，光滑模型为$g_\theta$，定义为</p>
+<p>$g_\theta(x)=\underset{c \in Y}{argmax}P_{\eta \sim N(0,\sigma^2I)}(f_\theta(x+\eta)=c)$</p>
+<p>简单说，$g_\theta$就是返回输入x被采样自$N(x,\sigma^2I)$最可能的标签。Cohen证明了认证半径的形式：</p>
+<p><img src="/assets/blogImg/MaCeR-equ2.png" alt="image-20200716220422084"></p>
+<p>$\Phi$是标准高斯分布的CDF累计分布函数，$\Phi^{-1}$即CDF的反函数。</p>
+<p><strong>损失函数</strong>。文章将0/1认证鲁棒性错误分解成两部分$l_{\epsilon-certified}^{0/1}(f_\theta,x,y):=1-1_{CR(f_\theta;x,y)\ge\epsilon}=I_{g_\theta(x) \ne y} + I_{g_\theta(x)=y,CR(g_\theta;x,y)&lt;\epsilon}$。第一部分是分类错误，第二部分是鲁棒错误。对应两部分错误，设计对应的损失函数。分类错误使用交叉熵损失，鲁棒错误使用hinge loss</p>
+<p><img src="/assets/blogImg/MaCeR-equ3.png" alt="image-20200717111941426"></p>
+<p>损失的选择符合文中提出了三个条件C1：替代损失应该是原始错误函数的上界；C2：损失可微；C3：数值上稳定。</p>
+<p><strong>软随机平滑Soft-RS</strong>。因为CR是不可微的，所以使用软随机平滑Soft-RS解决，和原始的版本相比，Soft-RS使用神经网络$z_\theta(x)$替代，soft版本记为$\widetilde{g}_\theta$:<br>$\widetilde{g}_\theta(x)=\underset{c \in Y}{argmax} \mathbb{E}_{\eta \sim N(0,\sigma^2I)}[z_\theta^c(x+\eta)]$</p>
+<p>新的可证明半径是</p>
+<p><img src="/assets/blogImg/MaCeR-equ6.png" alt="image-20200719143714719"></p>
+<p><strong>数值稳定性</strong>。因为$\Phi^{-1}$在接近0和1时导数是很大的，会导致梯度爆炸，幸运的是，hinge loss能解决这个问题。根据文中page 6提出的Proposition 1。（<em>这里我也没有看懂</em>）。这里引入了新的符号$\gamma=\frac{2(\epsilon+\widetilde{\epsilon})}{\sigma}$</p>
+<p><img src="/assets/blogImg/MaCeR-proposition1.png" alt="image-20200717122711692"></p>
+<p><strong>完整实现</strong>。高斯分布上的采样使用蒙特卡洛采样计算。令$\eta_1,…,\eta_k$是iid的采样自$N(0,\sigma^2I)$。最终的目标为</p>
+<p><img src="/assets/blogImg/MaCeR-equ5.png" alt="image-20200717155324471"></p>
+<p>其中，$\hat{z}_\theta(x)=\frac{1}{k} \sum_{j=1}^k z_\theta(x+\eta_j)$是$z_\theta(x+\eta)$的经验性期望，$\hat{\xi}_\theta(x,y)=\Phi^{-1}(\hat{z}_\theta^{y}(x)) - \Phi^{-1} (max_{y’ \ne y} \hat{z}_\theta^{y’}(x))$，使用$\gamma$替代参数$\epsilon$。<br>算法如下：<br><img src="/assets/blogImg/MaCeR-alg1.png" alt="image-20200717160213423"></p>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><h5 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h5><ul>
+<li>LeNet for MNIST</li>
+<li>ResNet-110 for Cifar-10 and SVHN</li>
+<li>ResNet-50 for ImageNet</li>
+</ul>
+<h5 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h5><ul>
+<li>Cifar-10,MNIST，SVHN。 440epoches，学习率0.01，decay 0.1 at 200th/400th epoch, k=16, $\gamma$=8.0,$\beta$=16.0。$\lambda=12.0,\sigma=0.25$ or $\lambda=4.0,\sigma=0.5$效果最好。</li>
+<li>另外还有ImageNet的设置，省略。</li>
+</ul>
+<h5 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h5><ul>
+<li><p>Cohen提出的简单的最小化交叉熵损失。等价于本文提出的方法取特殊的参数$k=1,\lambda=0$。</p>
+</li>
+<li><p>Salman使用对抗性训练在光滑的神经网络。</p>
+</li>
+</ul>
+<h5 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h5><p>Follow之前的工作，使用approximated certified test set accuracy，是指测试集中在半径r是鲁棒的概率。但是这是和r相关的，很难比较两个模型除非一个模型在所有的r都强于另一个模型，所以我们使用average certified radius（ACR）平均认证半径作为另一个指标，$ACR=\frac{1}{|S_{test}|}\sum_{(x,y) \in S_{test}} CR(g;x,y)$。</p>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p><strong>性能</strong>。拿Cifar-10举例：</p>
+<p><img src="/assets/blogImg/MaCeR-tab1.png" alt="image-20200717211258280"></p>
+<p>图1展示了了半径和准确率的曲线，曲线和x轴之间的面积和ACR等价。首先，展示出了我们提出的方法实现了更好地认证测试集准确率和Cohen相比，第二，和Salman相比在不同的r表现不同，在ACR这个指标上，我们的模型比Salman的效果好。</p>
+<p><strong>训练速度</strong>。因为MACER不需要对抗性攻击在训练期间，所以它可以训练的更快。在文中表3列出了统计数据。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>我们有力的实证结果表明，对抗性训练不是强大训练的必要条件，基于认证的防御是未来研究的有希望的方向。 此外，最近的几篇论文（Carmon等人，2019; Zhai等人，2019; Stanforth等人，2019）建议使用未标记的数据有助于改善对抗性鲁棒泛化性。 我们将来会将MACER扩展到半监督设置。</p>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>simplex是什么意思？</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>对抗训练是学习鲁棒性模型最流行的方式，但是通常是依赖攻击的和耗时的。本文，我们提出了MACER算法，学习鲁棒模型在<strong>不使用对抗训练</strong>情况下，但是比所有已存在的l2-防御执行效果更好。之前的工作（Jeremy Cohen, Elan Rosenfeld, and Zico Kolter.  <strong>Certified adversarial robustness via randomized smoothing</strong>.）展示了随机平滑为平滑的分类器提供可证明的l2半径，我们的算法通过最大化可证明半径（MACER）训练鲁棒性平滑分类器。攻击无关的特征使MACER更快训练和更容易优化。在我们的实验中，我们证明了我们的方法能够被应用到现代深度神经网络在广泛的数据集，包括Cifar-10，ImageNet，MNIST，和SVHN。对于所有的任务，MACER占用了更少的训练时间比SOTA对抗训练算法，学习的模型实现了更大的平均可证明半径。我们的代码可用：<a href="https://github.com/RuntianZ/macer。" target="_blank" rel="noopener">https://github.com/RuntianZ/macer。</a></li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（对抗的背景）现代神经网络分类器能够实现非常高的准确率在图片分类任务，但是对于输入上小的、对抗性选择的扰动是敏感的。给定一个图片x能够正确被神经网络分类正确，一个恶意攻击者可以找到一个小的对抗性扰动$\delta$就是扰动的图片$x+\delta$，尽管在视觉上无法与原始图像区分开，但是网络是高可信度将其分配给一个错误的类别。这种脆弱性在许多实际应用中引起了安全隐患。</li>
+<li>（对抗性训练的背景和缺点，提出Baseline）研究者已经提出了许多防御方法为了改善神经网络的鲁棒性。多数已存在的防御方法是基于对抗性训练。训练期间，这些方法首先学习具有多次攻击迭代的即时的输入对抗样本，然后使用这些扰动的样本以及原始标签来更新模型参数。<strong>可是，这些方法依赖特定攻击方法</strong>。它不能被形式化保证是否结果模型也是鲁棒的对于其他攻击。此外，攻击迭代通常是非常昂贵的。因此对抗性训练运行非常慢。</li>
+<li>（最大化可证明半径的方法背景）另一类算法通过最大化由鲁棒认证方法提供的认证半径来训练鲁棒模型。使用全连接ReLU网络的线性或者凸松弛，鲁棒可证明方法计算一个安全半径r，以便在输入的相邻半径r-ball内的任何点上，保证分类器具有不变的预测。可是，可证明方法通常计算昂贵并且仅仅能够解决带有ReLU的浅层神经网络，因此这些训练算法在扩展到现代神经网络有很大的困难。</li>
+<li>（随机光滑技术背景和挑战）在这个工作中，我们提出了一个<strong>攻击无关的</strong>和<strong>可扩展的</strong>方法为了训练鲁棒深度神经网络。我们主要利用了最近的随机平滑技术。一个随机平滑分类器g对于一个任意分类器f被定义为$g(x)=E_\eta f(x+\eta)$，这里$\eta \sim N(0,\sigma^2I)$。Cohen派生了如何计算随机光滑分类器的g可证明半径，<strong>但是他们没有说明如何最大化半径使分类器g鲁棒</strong>。Salman提出了SmoothAdv改善g的鲁棒性，但是它仍然依赖昂贵的攻击迭代。代替对抗性训练，我们提出通过直接将可证明半径作为目标来学习鲁棒模型。我们概述了一些具有挑战性的需求，并依次解决这些问题。在第4节中将讨论这些需求以及我们的详细实现。正如我们在理论和经验上所显示的那样，我们的方法在数值上是稳定的，并考虑了分类准确率和鲁棒性。</li>
+<li>贡献如下：<ul>
+<li>提出了攻击无关的和可扩展的鲁棒性训练算法通过最大化可证明半径（MaCeR）。MACER有以下优点：<ul>
+<li>不同于对抗性训练。攻击无关且运行更快。</li>
+<li>不同于其他方法。Wong最大化可证明半径但是不是可扩展的。</li>
+</ul>
+</li>
+<li>我们经验性评估了我们提出的方法通过广泛实验在Cifar-10，ImageNet，MNIST和SVHN。在所有的任务上，MaCeR实现了更好的性能比SOTA，也显著地快。比如，在ImageNet上，MaCeR使用了少于对抗性训练39%的时间，但是性能更好。</li>
+</ul>
+</li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><p>…</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ul>
+<li><strong>问题设置</strong>。考虑一个标准的分类任务，$x\in X, y \in Y=\{ 1,2,…,K \}$。通常分布是未知的并且我们仅仅能够访问训练集S，$(x_i,y_i)$是iid独立同分布的。经验性的数据分布（S上的均匀分布）表示为$\hat{p}_{data}$。令$f$是分类器，参数即为$f_\theta$。</li>
+<li>我们将$x’=x+\delta$，得到不同的标签，叫做对抗样本。我们关注$\delta$满足l2范数约束$||\delta||_2 \le \epsilon$。我们说模型$f_\theta$是$l_2^\epsilon$-robust在(x,y)如果能够正确分类x对于任意的$||\delta||_2 \le \epsilon$。在这个鲁棒分类问题，我们最终的目标是找到一个模型是$l_2^\epsilon$-robust在(x,y)有高概率在$(x,y) \sim p_{data}$，给定$\epsilon&gt;0$。</li>
+<li><strong>神经网络</strong>。在图片分类，我们经常使用深度神经网络。令$u_\theta : X \rightarrow \mathbb{R}^K$是一个神经网络，输出是一个向量$(u_\theta^1(x),…,u_\theta^K(x))$.分类器通过$u_\theta$诱导是$f_\theta(x)=argmax_{c \in Y} u_\theta^c(x)$。</li>
+<li>为了训练$\theta$通过最小化损失函数比如交叉熵，我们总是使用softmax层。网络结果是$z_\theta(·;\beta):X\rightarrow P(K),z_\theta^c(x;\beta)=e^{\beta u_\theta^c(x)}/\sum_{c’ \in Y} e^{\beta u_\theta^{c’} (x)}$,$\beta$是温度。为了简化，我们会使用$z_\theta(x)$表示$z_\theta(x;\beta)$，被当做似然向量。</li>
+<li><strong>鲁棒半径</strong>。根据$l_2^\epsilon$-robust的定义，(x,y)的预测在最大的l2球内不会变化预测情况。这个半径被叫做<strong>鲁棒性半径</strong>，形式化定义为：</li>
+<li><img src="/assets/blogImg/MaCeR-equ1.png" alt="image-20200716164757972"></li>
+<li>数学上目标能够被表达为最小化<strong>0/1鲁棒分类错误率</strong>。错误率被定义为：</li>
+<li>$l_{\epsilon-robust}^{0/1}(f_\theta,x,y):=1-1_{R(f_\theta;x,y)\ge\epsilon}$，I指是否符合条件，返回0或1，意思就是鲁棒半径大于$\epsilon$即错误率为0。</li>
+<li><p>目标为最小化：</p>
+<ul>
+<li>$L_{\epsilon}^{0/1}(f_\theta):=\mathbb{E}_{(x,y) \sim p_{data}}l_{\epsilon-robust}^{0/1}(f_\theta,x,y)$</li>
+</ul>
+</li>
+<li><p>最大化鲁棒性半径能够改善鲁棒性。不幸的是，计算鲁棒半径是非常困难的。Weng说明了计算l1鲁棒半径是NP-hard的。</p>
+</li>
+<li><strong>可证明半径</strong>。许多之前的工作提出了可证明方法，寻找派生一个半径下界。我们称这个下界为可证明半径$CR(f_\theta;x,y)$。</li>
+<li>可证明半径导致一个鲁棒分类错误率的上界，称为<strong>0/1可证明鲁棒损失</strong>。定义为：</li>
+<li>$l_{\epsilon-certified}^{0/1}(f_\theta,x,y):=1-1_{CR(f_\theta;x,y)\ge\epsilon}$</li>
+<li><strong>随机平滑</strong>。在这个工作中，我们使用最近提出的随机平滑技术（Cohen等人，2019），可扩展到任意框架，得到光滑深度神经网络的可证明半径。随机平滑的关键部分是使用$f_\theta$的光滑版本，即$g_\theta$，定义如下。</li>
+<li>定义1.对于一个任意的分类器$f_\theta \in F$ and $\sigma &gt; 0$，对应的光滑分类器$g_\theta$被定义为</li>
+<li>$g_\theta(x)=\underset{c \in Y}{argmax}P_{\eta \sim N(0,\sigma^2I)}(f_\theta(x+\eta)=c)$</li>
+<li>总结来说，光滑分类器$g_\theta$返回$f_\theta$最可能的标签当它的输入从以输入x为中心的一个高斯分布$N(x,\sigma^2I)$。Cohen证明了一下定理，提供了一个可证明半径的可分析形式。</li>
+<li>定理1.Cohen 令$f_\theta \in F$, and $\eta \sim N(0,\sigma^2I)$，$g_\theta$定义如上，令输入x的真实标签是y，如果$g_\theta$分类x正确，即</li>
+<li>$P_\eta(f_\theta(x+\eta)=y)\ge \underset{y’\ne y}{max}P_\eta(f_\theta(x+\eta)=y’)$</li>
+<li>然后$g_\theta$是可证明地鲁棒在x，可证明半径被给定通过</li>
+<li><img src="/assets/blogImg/MaCeR-equ2.png" alt="image-20200716220422084"></li>
+<li>其中，$\Phi$是标准高斯分布的cdf，即累计分布函数，$\Phi^{-1}$是累计分布函数的反函数，即根据概率找分位点。</li>
+</ul>
+<h4 id="通过最大化可证明半径进行鲁棒训练"><a href="#通过最大化可证明半径进行鲁棒训练" class="headerlink" title="通过最大化可证明半径进行鲁棒训练"></a>通过最大化可证明半径进行鲁棒训练</h4><ul>
+<li>正如定理1所说，可证明半径的值能够被评估通过高斯噪声。更重要的是，它能够被计算对于任何深度神经网络。这启发我们设计一个训练方法为了最大化可证明半径。</li>
+<li>为了最小化0/1鲁棒分类器错误率或者0/1可证明鲁棒错误率，许多之前的工作提出分解错误率。注意分类器$g_\theta$有一个positive 0/1可证明鲁棒错误率当且仅当以下两个条件发生：<ul>
+<li>$g_\theta(x) \ne y$，即分类器误分类x；</li>
+<li>$g_\theta(x)=y$，但是$CR(g_\theta;x,y)&lt;\epsilon$，即，分类器时正确的但是不足够鲁棒。</li>
+</ul>
+</li>
+<li>因此，0/1可证明鲁棒错误率能够被分解为两个错误项的和：</li>
+<li>$l_{\epsilon-certified}^{0/1}(f_\theta,x,y):=1-1_{CR(f_\theta;x,y)\ge\epsilon}=I_{g_\theta(x) \ne y} + I_{g_\theta(x)=y,CR(g_\theta;x,y)&lt;\epsilon}$</li>
+<li><strong>4.1 目标功能</strong></li>
+<li>直接最小化0-1错误是棘手的。一个经典的方法是最小化一个替代损失。0/1分类器错误率的替代损失叫做<strong>分类器损失</strong>，记为$l_C(g_\theta;x,y)$。0/1鲁棒性错误率的替代损失叫做<strong>鲁棒损失</strong>，记为$l_R(g_\theta;x,y)$。最终目标是</li>
+<li>$l(g_\theta;x,y)=l_C(g_\theta;x,y)+l_R(g_\theta;x,y)$</li>
+<li>我们想要我们的损失函数满足一些条件。这些条件总结为以下：<ul>
+<li>C1，替代条件：替代损失应该是一个上界，即$l_C,l_R$应该分别是对应错误项的上界。</li>
+<li>C2，可微性：$l_C,l_R$应该是可微的关于$\theta$。</li>
+<li>C3，数值稳定性：$l_C,l_R$关于$\theta$应该是数值上稳定的。</li>
+</ul>
+</li>
+<li>替代条件C1保证了$l$本身满足替代条件，C2和C3保证使用可以用一阶方法稳定地最小化。</li>
+<li><strong>4.2 替代损失（For C1）</strong></li>
+<li>我们接下来讨论替代损失的选项，为了保证我们满足条件C1，分类器替代损失是相对容易设计。有许多广泛使用的损失，我们选择交叉熵损失作为分类损失。<ul>
+<li>$I_{g_\theta(x) \ne y} \le l_C(g_\theta;x,y):=l_{CE}(g_\theta(x),y)$        (12)</li>
+</ul>
+</li>
+<li>鲁棒性替代损失使用hinge loss：<ul>
+<li><img src="/assets/blogImg/MaCeR-equ3.png" alt="image-20200717111941426"></li>
+<li>其中$\widetilde{\epsilon} &gt; 0$ and $\lambda \ge \frac{1}{\widetilde{\epsilon}}$。使用hinge loss因为它不仅满足替代条件，而且它在数值上稳定。</li>
+</ul>
+</li>
+<li><strong>4.3 可微的可证明半径通过软随机平滑（For C2）</strong></li>
+<li>鲁棒替代损失需要CR的可微性，但是随机平滑中的可证明半径CR不满足条件C2，我们引入了软随机平滑Soft-RS来解决这个问题。</li>
+<li><img src="/assets/blogImg/MaCeR-theo1.png" alt="image-20200717122815369"></li>
+<li>…省略了一些内容</li>
+<li><img src="/assets/blogImg/MaCeR-equ4.png" alt="image-20200717120516439"></li>
+<li><strong>4.4 数值稳定性（For C3）</strong></li>
+<li>直接优化公式16会带来梯度爆炸，问题来自于cdf的反函数$\Phi^{-1}(x)$,导数是很大的当x接近0或者1。</li>
+<li>幸运的是，通过最小化公式13的鲁棒损失，我们能够在没有梯度爆炸的情况下最大化鲁棒半径。</li>
+<li>…省略了一些内容</li>
+<li><img src="/assets/blogImg/MaCeR-proposition1.png" alt="image-20200717122711692"></li>
+<li><strong>4.5 完整实现</strong></li>
+<li>我们现在准备提出完整的MACER算法，高斯分布的期望使用蒙特卡洛采样近似。令$\eta_1,…,\eta_k$是iid采样，从$N(0,\sigma^2I)$，最终目标函数是</li>
+<li><img src="/assets/blogImg/MaCeR-equ5.png" alt="image-20200717155324471"></li>
+<li>其中，$\hat{z}_\theta(x)=\frac{1}{k} \sum_{j=1}^k z_\theta(x+\eta_j)$是$z_\theta(x+\eta)$的经验性期望，$\hat{\xi}_\theta(x,y)=\Phi^{-1}(\hat{z}_\theta^{y}(x)) - \Phi^{-1} (max_{y’ \ne y} \hat{z}_\theta^{y’}(x))$</li>
+<li>具体算法如下：</li>
+<li><img src="/assets/blogImg/MaCeR-alg1.png" alt="image-20200717160213423"></li>
+</ul>
+<h4 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><strong>设置</strong>。为了公平比较之前的工作，我们follow Cohen，使用LeNet对于MNIST，ResNet-110对于Cifar-10和SVHN，ResNet对于ImageNet。</li>
+<li><strong>MACER 训练</strong>。对于Cifar-10，MNIST和SVHN，我们训练模型440epochs，使用我们提出的算法。学习率初始化为0.01，decay为0.1在200th/400th epoch。对于所有的模型，使用k=15,$\gamma=8.0$ 以及$\beta=16.0$。设置$\lambda=12.0,\sigma=0.25$和$\lambda=4.0,\sigma=0.5$最有效。对于ImageNet，我们训练了120epoches，初始学习率0.1，decay是0.1在30th/60th/90th epoch了，使用k=2,$\gamma$=8.0,$\beta$=16.0。更多细节见附录C。</li>
+<li><strong>Baselines</strong>。我们比较MACER和之前的两个工作。第一个工作是Cohen训练的光滑网络通过最小化交叉熵损失。第二个是Salman使用对抗性训练在光滑网络改善鲁棒性。对于两个baselines，我们使用作者提供的checkpoints。</li>
+<li>证明。遵循之前的工作，report the approximated certified test set accuracy。使用平均可证明半径ACR作为指标。</li>
+<li><strong>结果</strong>。我们报告Cifar-10和ImageNet的结果。</li>
+<li><img src="/assets/blogImg/MaCeR-tab1.png" alt="image-20200717211258280"></li>
+<li><img src="/assets/blogImg/MaCeR-tab2.png" alt="image-20200717211327773"></li>
+<li>训练速度。因为MACER不需要对抗性攻击样本，学习一个鲁棒模型运行更快。</li>
+<li><img src="/assets/blogImg/MaCeR-tab3.png" alt="image-20200717212532772"></li>
+<li><strong>超参数的影响</strong>。</li>
+<li>…</li>
+</ul>
+<h4 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>在这项工作中，我们提出了MACER，这是一种攻击无关且可扩展的鲁棒训练方法，可以直接最大化平滑分类器的认证半径。 我们讨论了一种算法必须满足的需求，并为它们提供了一种方法。 根据我们广泛的实验，MACER的性能优于以前的证明的l2防御，而且训练速度更快。 我们有力的实证结果表明，对抗性训练不是强大训练的必要条件，基于认证的防御是未来研究的有希望的方向。 此外，最近的几篇论文（Carmon等人，2019; Zhai等人，2019; Stanforth等人，2019）建议使用未标记的数据有助于改善对抗性鲁棒泛化性。 我们将来会将MACER扩展到半监督设置。</li>
+</ul>
+
       
 
       
@@ -181,6 +378,29 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">iclr</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">对抗性训练</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">鲁棒训练</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">可信半径</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -426,11 +646,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,11 +686,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,19 +702,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分享会</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,26 +746,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -531,34 +759,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,15 +790,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,7 +826,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,23 +838,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,23 +854,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NMT</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">alignment</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,11 +890,47 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">iclr</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">对抗性训练</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">可信半径</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,15 +954,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
