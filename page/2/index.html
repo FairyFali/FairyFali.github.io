@@ -154,6 +154,232 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-preprint01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/preprint01/">论文阅读：Layer Normalization</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/12/preprint01/" class="archive-article-date">
+  	<time datetime="2020-05-12T12:27:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>层归一化</li>
+<li>2016年</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1607.06450" target="_blank" rel="noopener">https://arxiv.org/abs/1607.06450</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Jimmy Ba（吉米·巴），多伦多大学副教授，师从Hinton，个人主页：<a href="https://jimmylba.github.io/" target="_blank" rel="noopener">https://jimmylba.github.io/</a></li>
+</ul>
+<p><img src="/assets/blogImg/LN-auth.png" alt="img" style="zoom:25%;"></p>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>layer normalization和batch normalization类似，缓解Internal Covariate Shift问题。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>batch normalization对一个神经元的batch所有样本进行标准化，layer normalization对一个样本同一层所有神经元进行标准化，前者纵向 normalization，后者横向 normalization。</p>
+</li>
+<li><p>与其他几种方法的区别，如下图：</p>
+<ul>
+<li><blockquote>
+<p><a href="https://blog.csdn.net/liuxiao214/article/details/81037416" target="_blank" rel="noopener">https://blog.csdn.net/liuxiao214/article/details/81037416</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-pic2.png" alt="这里写图片描述"></p>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>训练深度神经网络在计算方面是很昂贵的，一个降低训练时间的方法就是normalize神经元的活动。最近的一个技术叫做batch normalization（BN），使用一个mini-batch的神经元的均值和方差normalize 输入神经元。这个工作极大地改善了前馈神经网络feedforward neural networks。可是BN是依赖mini-batch的大小并且在循环神经网络上效果是模糊的。在这篇文章中，我们将batch normalization转换为layer normalization（LN）通过计算所有输入的均值和方差在一个single训练case中。和BN类似的是，我们给每个神经元一个自适应的bias和gain在归一化之后非线性之前。和BN不同的是，LN在训练和测试阶段的执行时间完全相同。将其应用到RNN非常简单，LN对于稳定RNN的隐藏单元很有效率。经验上，我们证明了layer归一化能够降低训练时间和之前的技术相比。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（背景，和目前存在的方法）深度神经网络使用SGD训练的方法，已经展示出优于之前的方法在不同的监督任务上在CV领域和语音识别领域。但是先进的方法经常需要训练许多天。通过在不同机器计算不同训练自己可以加快网络的学习速度，但是这可能需要大量的通信和复杂的软件。随着并行度的增加，训练还倾向于收益迅速减少。一个正交的方法是修改神经网络的前向传递中的计算，使学习更加容易。最近，BN被提出降低训练时间。除了改善训练时间外，batch 统计中的随机性还可以作为训练期间的regularizer正则化器。</li>
+<li>（挑战）尽管很简单，但是BN需要汇总输入统计的平均值，在固定深度的feed-forward网络中，每一个隐藏层单独地存储统计信息是很简单的，但是再RNN中输入序列的长度经常变化，因此应用BN到RNN需要不同的统计对于不同的时间步，而且，BN不能应用于在线学习任务或mini-batch必须很小的超大型分布式模型。</li>
+</ul>
+<blockquote>
+<p>在一个batch中，通常各个样本的长度都是不同的，当统计到比较靠后的时间片时，例如下图中 $t&gt;4$时，这时只有一个样本还有数据，基于这个样本的统计信息不能反映全局分布，所以这时BN的效果并不好。</p>
+<p>——<a href="https://zhuanlan.zhihu.com/p/54530247" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54530247</a></p>
+</blockquote>
+<p><img src="/assets/blogImg/LN-pic1.png" alt="img"></p>
+<ul>
+<li>（介绍新的方法）这篇文章介绍了layer normalization，一个简单的方法用来改善训练速度对于不同类型的神经网络模型。与BN不同，LN不会在样本之间引入任何依赖关系。实验表明，LN对RNN效果很好。</li>
+</ul>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><ul>
+<li>（又把BN的方法介绍了一遍）前馈神经网络是一个非线性映射，输入$x$，输出$y$，考虑第$l$层，$a^l$表示这一层的向量表示，输入表示为$h^l$，也就是上一层的输出，权重矩阵表示为$W^l$，$w_i^l$表示权重矩阵的第$i$列，也就是到$l$层第$i$个隐藏神经元的权重向量，$a_i^l={w_i^l}^\top h^l$，就是求解第$i$个神经元的计算公式，也是文中说的summed inputs，$h_i^{l+1}=f(a_i^l+b_i^l)$，求解输出。</li>
+<li>一个挑战在深度神经网络中就是关于权重的梯度和上一层的输出高度相关，尤其是这些输出以高度相关的方式变化。所以BN的提出就是解决这个“covariate shift”。</li>
+<li>$\overline{a}_i^l=\frac{g_i^l}{\sigma_i^l}(a_i^l-\mu_i^l)$,$\mu_i^l=\underset{x\sim P(x)}{E}[a_i^l]$,$\sigma_i^l=\sqrt{\underset{x\sim P(x)}{E}[(a_i^l-\mu_i^l)^2]}$.</li>
+<li>上面的公式就是BN的过程，这篇文章说$g_i^l$是gain，也就相当于BN论文中的$\gamma$，计算期望理论上是需要在整个训练集上的，但是这样是不现实的，因此使用mini-batch的平均值和方差来代替。这样就对mini-batch的大小有了要求，并且不适用与RNN网络。</li>
+</ul>
+<h4 id="Layer-Normalization"><a href="#Layer-Normalization" class="headerlink" title="Layer Normalization"></a>Layer Normalization</h4><ul>
+<li>LN被设计用来解决BN的缺陷。</li>
+<li>我们计算LN统计信息在所有的相同层的隐藏单元通过以下公式：<ul>
+<li>$\mu^l=\frac{1}{H}\sum_{i=1}^{H}a_i^l$,H为当前层的隐藏单元的数量</li>
+<li>$\sigma^l=\sqrt{\frac{1}{H}\sum_{i=1}^{H}(a_i^l-\mu^l)^2}$</li>
+</ul>
+</li>
+<li>和BN不同的是，LN的均值和方差由层内的单元来计算，层内单元共享均值和方差，因此LN不会引入mini-batch大小的问题，可以被使用在batch大小为1的<strong>online regime</strong>任务上。</li>
+<li>Seq2Seq（ilya）模型被提出来利用RNN来解决序列预测问题。这个方法很容易解决RNN因为每一个时间步都使用相同的权重。</li>
+<li>对于BN，如果测试集的句子长度超过了所有训练集的句子，是有问题的。LN可以解决这个问题。</li>
+<li>LN同样共享一组gain和bais参数共享在所有的时间步，并且和隐藏单元的维度相同。</li>
+<li>具体地，在一个标准RNN中，summed inputs $a^t$计算取决于当前输入$x^t$和之前的隐藏状态向量$h^{t-1}$,计算公式为$a^t=W_{hh}h^{t-1}+W_{xh}x^t$。layer normalization通过re-centers和re-scales（和BN的方法相同） 它的激活(这里为什么是激活？)，通过公式<ul>
+<li>$h^t=f[\frac{g}{\sigma^t}\odot(a^t-\mu^t)+b]$，g是gain，b是bias，维度和$a^t$相同</li>
+<li>$\mu^t=\frac{1}{H}\sum_{i=1}^{H}a_i^t$,H为当前层的隐藏单元的数量</li>
+<li>$\sigma^t=\sqrt{\frac{1}{H}\sum_{i=1}^{H}(a_i^t-\mu^t)^2}$</li>
+</ul>
+</li>
+<li>$\odot$是元素对乘积，也叫作Hadamard 乘积。</li>
+<li>summed inputs在每个时间步的平均变化幅度有增长（或者下降）趋势，从而导致了梯度爆炸（或消失）问题。在LN的RNN中，归一化项是所有summed inputs都重新缩放为不变的趋势，这将导致更稳定的学习。</li>
+</ul>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><ul>
+<li>我们investigate探究不同归一化方案的不变形。</li>
+<li><strong>权重和数据转换的不变性</strong><ul>
+<li><strong>权重re-scale和re-center</strong>：LN对于权重W矩阵进行缩放和偏移，不会影响归一化的计算。</li>
+<li><strong>数据re-scale和re-center：</strong>可以验证所有的normalization对数据集进行整体的re-scale不会变化summed inputs。此外，LN对于单个case的re-scale也是保持不变的。对于dataset进行re-center，LN会变化的，BN是不会变化的。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-tab1.png" alt="image-20200420173223303"></p>
+<ul>
+<li>参数空间的几何特征在学习过程中<ul>
+<li>这一节，我们通过参数空间的集合形状和<strong>manifold流形</strong>来分析学习行为。</li>
+<li>黎曼指标<ul>
+<li>统计模型中的可学习参数形成一个平滑的流形，该流形由模型的所有可能的输入-输出关系组成。对于输出为概率分布的模型，测量流形的两点之间的距离方法是模型输出分布之间的KL散度。在KL散度指标下，参数空间是一个黎曼流形。</li>
+<li>看不懂</li>
+</ul>
+</li>
+<li>归一化线性模型的几何特征</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>执行实验在6个任务上，有image-sentence ranking、QA、上下文语言模型，生成模型、手写序列识别和MNIST分类。</li>
+<li>1、图像和语言的<strong>order embeddings</strong>，2016提出的一个模型，为了学习一个联合embedding空间在image和sentence，能够将images和sentences表示一个2-level 的局部排序。使用GRU。数据集 <strong>Microsoft COCO dataset</strong>。使用Theano实现。<ul>
+<li>使用Recall@K（R@K）作为评价指标，使用Adam，文章附录中说明了LN如何应用到GRU，下图说明了试验结果，在收敛速度上所有的指标都有提升。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-fig1.png" alt="image-20200421091017725"></p>
+<ul>
+<li>2、机器阅读理解模型。这是一个QA任务，通过填补空白来完成对段落描述的查询。也是使用Theano实现的。使用CNN语料库。为了和最近提出的recurrent batch normalization做比较，文章在一个单向注意力阅读模型做对比。实验结果如下。我们发现LN不仅仅能够训练快，还能收敛到一个更好的验证集结果。</li>
+</ul>
+<p><img src="/assets/blogImg/LN-fig2.png" alt="image-20200421092644474"></p>
+<ul>
+<li>3、skip-thougnt 向量。skip-thougnts是一个skip-gram的泛化模型，2015年提出的为了学习无监督句子向量分布。给定连续的文本，一个句子使用一个encoder RNN和一个解码RNNs预测周围的句子。模型能够生产出通用的句子表示，并且在几个任务上表现地很好。训练这个模型需要几天的时间。<ul>
+<li>BookCorpus数据集</li>
+<li>使用Theano</li>
+<li>在五类任务上进行对比：semantic-relatedness (SICK) [Marelli et al., 2014],  movie review sentiment (MR)[Pang and Lee, 2005], customer product reviews (CR) [Hu and Liu, 2004], subjectivity/objectivityclassification (SUBJ) [Pang and Lee, 2004] and opinion polarity (MPQA) [Wiebe et al., 2005]. </li>
+<li>下图展示了试验结果。使用了LN的模型收敛速度和结果都有了改善。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-fig3.png" alt="image-20200421104036918"></p>
+<ul>
+<li>4、建模二进制MNIST使用DRAW模型<ul>
+<li><strong>Deep Recurrent Attention Writer（DRAW）</strong>建模MNIST的分布，是一个无监督模型。使用差分注意力机制和RNN依次生成图片片段。</li>
+<li>这个没看懂，觉得图也有问题。</li>
+</ul>
+</li>
+<li>5、手写序列生成<ul>
+<li>为了验证LN能够在更长的序列上的效果，选择了手写生成任务，序列更长。</li>
+<li>使用IAM Online 手写数据集。由221位作家收集的手写lines组成。</li>
+<li>目标是给定字符串，预测白板上相应手写 line 的坐标的序列。</li>
+<li>文章中给定了一些参数设置，看不懂，对比图如下：</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-fig5.png" alt="image-20200421110438506"></p>
+<ul>
+<li>6、Permutation invariant MNIST<ul>
+<li>为了研究前馈神经网络中的LN。</li>
+<li>和BN比较。</li>
+<li>下图展示实验结果，上面是训练过程，下面是测试过程，左边是batch size取128，右边是batch size取4。发现batch size很小时，BN效果很差，batch size足够大时，LN更稳定。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/LN-fig6.png" alt="image-20200421110956178"></p>
+<ul>
+<li>最后作者提了一点，在卷积神经网络效果不好的解释，因为对于全连接层，LN假设每个隐藏单元的贡献类似，但是再CNN中，这个假设不再成立，因此效果不好。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>在本文中，我们引入了层归一化来加速神经网络的训练。 我们提供了理论分析，将层归一化与批处理归一化和权重归一化的不变性进行了比较。 我们证明了层归一化对于训练情况下的特征移位和缩放是不变的。经验表明，RNN受益于所提出的方法，特别是对于长序列和小的小批处理。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>归一化层，目前主要有这几个方法，Batch Normalization（2015年）、Layer Normalization（2016年）、Instance Normalization（2017年）、Group Normalization（2018年）、Switchable Normalization（2018年）</li>
+<li>很喜欢这篇论文的结构</li>
+<li>专业词汇：order-embedding、layer normalization、manifold、MSCOCO</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://blog.csdn.net/zhangjunhit/article/details/53169308" target="_blank" rel="noopener">https://blog.csdn.net/zhangjunhit/article/details/53169308</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/54530247" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54530247</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">正则化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Layer Normalization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/12/preprint01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-icml02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1703,119 +1929,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-nsid01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/08/nsid01/">论文阅读：The Architecture and Implementation of an Extensible Web Crawler</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/08/nsid01/" class="archive-article-date">
-  	<time datetime="2019-12-08T11:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>可扩展web爬虫的结构和实现</li>
-<li>发表在nsdi2010</li>
-<li>论文下载：<a href="https://www.usenix.org/legacy/event/nsdi10/tech/" target="_blank" rel="noopener">https://www.usenix.org/legacy/event/nsdi10/tech/</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Jonathan M. Hsieh，美国华盛顿大学硕士毕业，目前就职于Cloudrea，领英主页：<a href="https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/" target="_blank" rel="noopener">https://www.linkedin.com/in/jonathan-m-hsieh-96904a2/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>本文描述了一种原生可扩展爬虫的架构、实现和评估。关注于低延迟、高选择性、和可扩展性。</li>
-<li>在客户端指定<strong>过滤器</strong>，实现高选择性，使用<strong>索引技术</strong>降低过滤器的计算成本；使用<strong>集群技术</strong>实现可扩展性；采取一定<strong>机制</strong>频繁地更新过滤器集，实现低延迟。</li>
-<li>应用：关键词通知、web恶意软件检测、版权侵犯检测、网络度量研究。</li>
-</ul>
-<h4 id="爬虫架构"><a href="#爬虫架构" class="headerlink" title="爬虫架构"></a>爬虫架构</h4><ul>
-<li>目标：高选择性、可索引、效率大于精度、低延迟、可扩展性。</li>
-<li>架构如下：</li>
-</ul>
-<p><img src="/assets/blogImg/xcrawler_architecture.png" alt="image-20191208171929458"></p>
-<ul>
-<li>提出的架构，首先将网络的相关文档通过检索的方式获取到，第二，将大量的documents文档分区给多个pods，每个文档对应一个pod，在每个pod中包含所有过滤器。将过滤器进行过滤器分片，第三，将匹配到的文档和过滤器发送给collecter，收集后发送给所有的订阅客户端。过滤器的上传，删除通过一个客户端的管理api进行，扩展性体现在pod的增加和过滤器的动态增加。</li>
-</ul>
-<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
-<li>文章的related work部分介绍了作者提出的爬虫架构的思路来源<ul>
-<li>web crawlers和搜索引擎系统：解决了高吞吐量问题，本文的爬虫的检索模块使用现有的web crawlers，利用了他们的高吞吐量特征。把他们当做一个黑盒。Mercator提出了一个可扩展的crawler(<strong>A. Heydon and M. Najork. Mercator: A scalable, exten- sible web crawler. World Wide Web, 2(4):219–229, 1999.</strong>)。</li>
-<li>发布订阅系统(Publish-subscribe systems)：本文提出的爬虫相当于一个基于内容的发布订阅系统。Le Subscribe(<strong>F.Fabret,A.Jacobsen,F.Llirbat,J.Pereira,K.Ross,and D. Shasha. Filtering algorithms and implementation for very fast publish/subscribe systems. In Proceedings of the 2001 ACM SIGMOD International Conference on Man- agement of Data, Santa Barbara, CA, May 2001.</strong> and <strong>J. Pereira, F. Fabret, F. Llirbat, and D. Shasha. Efficient matching for web-based publish/subscribe systems. In Proceedings of the 7th International Conference on Co- operative Information Systems (CoopIS 2000), Eilat, Is- rael, September 2000.</strong>)和本文的系统最为相近，在设计索引的时候借鉴了pub-sub系统。Google alert系统允许用户订阅关键词，定期地查询搜索引擎，对返回的结果进行过滤，返回最新的结果以邮件的方式返回给用户。Cobra（<strong>I. Rose, R. Murty, P. Pietzuch, J. Ledlie, M. Roussopou- los, and M. Welsh. Cobra: Content-based filtering and aggregation of blogs and RSS feeds. In Proceedings of the 4th USENIX/ACM Symposium on Networked Systems De- sign and Implementation (NSDI 2007), Cambridge, MA, April 2007.</strong>）和本文的方法最相似。</li>
-<li>包过滤和网络入侵检测系统（Packet filters and NIDs）：在处理大量filters和低延迟处理无结构化的数据方面有相同的挑战。NFAs和DFAs关注于防止状态空间爆炸。（<strong>S.Rubin,S.Jha,andB.P.Miller.Protomatchingnetwork traffic for high throughput network intrusion detection. In Proceedings of the 13th ACM conference on Computer and Communications Security (CCS ’06), October 2006.</strong>）关注于内容规范化。</li>
-<li>数据库和信息选择性传播系统(Databases and SDIs)：并行化分布式方面借鉴了数据库的设计，比如Bubba和Gamma。SDIs有相同的目标在对查询进行索引，执行大量filters与单个文档匹配。</li>
-</ul>
-</li>
-</ul>
-<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
-<li>阅读到第2节结束。</li>
-<li>过滤器如何进行在没有进行爬取的情况下进行过滤？<ul>
-<li>我认为，在过滤器阶段进行文档的爬取，通过过滤器的索引进行匹配；和信息检索不同的是，信息检索的索引建立在文档上，而本文的索引建立在query上。</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/08/nsid01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1995,19 +2111,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLG</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2087,14 +2203,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">VAE</a>
               </li>
              
@@ -2104,6 +2212,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2143,11 +2259,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2191,15 +2307,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+                <a href="javascript:void(0)" class="js-tag color5">可信防御</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+                <a href="javascript:void(0)" class="js-tag color5">随机平滑</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">attention</a>
+                <a href="javascript:void(0)" class="js-tag color5">可信鲁棒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">鲁棒性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2215,15 +2335,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2232,6 +2356,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
