@@ -154,6 +154,133 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-colab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/17/colab/">Google Colab使用教程</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/17/colab/" class="archive-article-date">
+  	<time datetime="2020-08-17T08:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Colab学习"><a href="#Colab学习" class="headerlink" title="Colab学习"></a>Colab学习</h3><h4 id="MetaData"><a href="#MetaData" class="headerlink" title="MetaData"></a>MetaData</h4><ul>
+<li>Google Colab：Google的云计算代码平台，可以在Google的云计算加速资源上运行自己的程序；jupyter的一种改装，既可以运行jupyter，又可以运行bash命令（使用!）</li>
+<li>外连接：1.Seed bank，深度学习模型库，存在很多样例；2.Github；3.GoogleDrive</li>
+<li>硬件资源：GPU特斯拉16G显存，40G硬盘，20G内存</li>
+<li>登录：科学上网，谷歌账号，<a href="https://colab.research.google.com/notebooks/" target="_blank" rel="noopener">https://colab.research.google.com/notebooks/</a></li>
+<li>学习参考：<a href="https://blog.csdn.net/qq_41375318/article/details/106744540" target="_blank" rel="noopener">https://blog.csdn.net/qq_41375318/article/details/106744540</a></li>
+<li>参考视频：<a href="https://www.bilibili.com/video/BV1PV411k7nH" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1PV411k7nH</a></li>
+</ul>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ul>
+<li>通过!运行bash命令<ul>
+<li>运行可以通过<code>shift + enter</code>或者点击单元格左侧的小三角按钮</li>
+<li>!ls 表示显示当前目录</li>
+<li>!pip install opcv-python 表示安装库</li>
+<li>!pip list 查看已安装库</li>
+<li>!pip show tensorflow 查看某库的版本</li>
+<li>!pip install —upgrade torch 更新库</li>
+</ul>
+</li>
+<li>目录结构<ul>
+<li>左侧会展示代码的markdown的目录结构</li>
+</ul>
+</li>
+<li>代码段<ul>
+<li>左侧的代码段，可以插入常用操作的代码</li>
+</ul>
+</li>
+<li>文件目录<ul>
+<li>显示当前文件目录，虚拟主机的文件目录结构</li>
+<li>当前路径是/content</li>
+</ul>
+</li>
+<li><p>数据的上传和下载</p>
+<ul>
+<li>通过Google Driver 谷歌网盘，可以实现文件的下载和上传</li>
+<li><p>※Colab挂载网盘</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from google.colab import drive</span><br><span class="line">drive.mount(&apos;/content/drive&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>左侧的文件目录会在/content下加入一个drive的目录</p>
+</li>
+<li>通过文件-下载.py/.ipynb 可以下载当前代码</li>
+</ul>
+</li>
+<li>GPU加速<ul>
+<li>修改-笔记本设置-硬件加速器-GPU-保存</li>
+<li>查看GPU<code>!nvidia-smi</code></li>
+<li><img src="leanote://file/getImage?fileId=5f3a2eb3b528d456e0000000" alt="GPU"></li>
+<li>可以看到GPU使用的是特斯拉P100</li>
+</ul>
+</li>
+<li>补充<ul>
+<li>※虽然GPU没有使用时长限制，但是有连续使用时间限制，为12h，所以注意模型保存</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Colab</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/17/colab/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-icml03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2221,188 +2348,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-nips06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/nips06/">论文阅读：Attention Is All You Need</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/12/nips06/" class="archive-article-date">
-  	<time datetime="2020-05-12T12:30:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>注意力就是你所需要的</li>
-<li>发表在NIPS 2017</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1706.03762，http://papers.nips.cc/paper/7181-attention-is-all-you-need" target="_blank" rel="noopener">https://arxiv.org/abs/1706.03762，http://papers.nips.cc/paper/7181-attention-is-all-you-need</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>一作Ashish Vaswani（阿什什·瓦斯瓦尼），2016年至今工作在Google Brain，领英主页：<a href="https://www.linkedin.com/in/ashish-vaswani-99892181/" target="_blank" rel="noopener">https://www.linkedin.com/in/ashish-vaswani-99892181/</a></li>
-<li>三作Niki Parmar，领英主页：<a href="https://www.linkedin.com/in/nikiparmar/" target="_blank" rel="noopener">https://www.linkedin.com/in/nikiparmar/</a></li>
-<li>四作Jakob Uszkoreit，谷歌学者，个人网站：<a href="http://jakob.uszkoreit.net/，领英主页：https://www.linkedin.com/in/jakob-uszkoreit-b238b51/" target="_blank" rel="noopener">http://jakob.uszkoreit.net/，领英主页：https://www.linkedin.com/in/jakob-uszkoreit-b238b51/</a><ul>
-<li>（资讯）谷歌大脑Jakob Uszkoreit访问自动化所并作学术报告：<a href="http://www.ia.cas.cn/xwzx/xshd/201802/t20180212_4951567.html" target="_blank" rel="noopener">http://www.ia.cas.cn/xwzx/xshd/201802/t20180212_4951567.html</a></li>
-</ul>
-</li>
-<li>五作Llion Jones，谷歌学者，领英主页：<a href="https://www.linkedin.com/in/llion-jones-9ab3064b/" target="_blank" rel="noopener">https://www.linkedin.com/in/llion-jones-9ab3064b/</a></li>
-<li>六作Aidan N. Gomez，2013年~2018年多伦多大学学士毕业，2018年牛津大学博士，论文发表时还在读博，导师是Yarin Gal，2018年和Geoffrey Hinton合作 on distillation，2019年和Jakob Uszkoreit合作，在多伦多大学期间经常参与谷歌的项目，个人主页：<a href="https://aidangomez.ca/，领英主页：https://www.linkedin.com/in/aidangomez/" target="_blank" rel="noopener">https://aidangomez.ca/，领英主页：https://www.linkedin.com/in/aidangomez/</a></li>
-<li>七作Łukasz Kaiser，谷歌学者，参与构建了TensorFlow机器学习系统，领英主页：<a href="https://www.linkedin.com/in/lukaszkaiser/" target="_blank" rel="noopener">https://www.linkedin.com/in/lukaszkaiser/</a></li>
-<li>八作Illia Polosukhin，2014年1月到2017年2月在谷歌工作，2017年6月至今在NEAR Protocol工作，领英主页：<a href="https://www.linkedin.com/in/illia-polosukhin-77b6538/" target="_blank" rel="noopener">https://www.linkedin.com/in/illia-polosukhin-77b6538/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>序列转换模型是基于复杂的带有encoder和decoder的RNN或者CNN的。达到最好性能的模型连接encoder和decoder通过一个attention机制。我们提出一个简单的网络结构，Transformer，仅仅基于attention机制，舍弃RNN和CNN。实验在两个机器翻译任务上展示出了这个模型需要更少的训练时间。我们的模型达到28,4BLEU在WMT2014英德翻译任务上。改善了已存在的最好的结果，包括集成方法，提高了2 BLEU。在WMT2014英法翻译任务上，我们的模型在8个GPU上进行了3.5天的训练后，建立了新的单模型，BLEU得分为41.8，这是文章中最佳训练模型的训练成本的一小部分。我们展示了Transformer通过将其成功用于具有大量训练数据和优先数据的英语 constituency parsing，将其很好的概括了其他任务。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（背景）RNN等网络在序列模型中建立了许多先进的方法，比如语言模型、机器翻译。</li>
-<li>（挑战）<strong>RNN需要的序列性质阻止了训练示例的并行化。</strong><ul>
-<li>因为RNN不知道有多少层，所以没有办法做到模型并行。（如果所有的句子长度都是相等的，比如舍弃和补全，那可不可以模型并行？）</li>
-<li>数据并行还是可以做的？</li>
-</ul>
-</li>
-<li>（提出方法的背景）注意力机制已经成为各种任务中引人注目的序列模型和transduction转导模型不可或缺的一部分，允许模型不考虑输入序列或输出序列的距离。但是，在少数情况下，注意力机制和RNN结合使用。</li>
-<li>（提出的方法）本文提出了一种Transformer，一种避免重复发生的模型架构，而是完全依赖于注意力机制来绘制输入和输出之间的全局依存关系。Transformer可以实现更多的并行化，在8个P100GPU上进行了12个小时的训练，在翻译任务上达到了先进水平。</li>
-</ul>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><ul>
-<li>在Transformer中，尽管由于平均注意力加权位置而导致有效分辨率降低的代价，但操作次数却减少了，这与第3.2节所述的“多头注意力”相抵消。<ul>
-<li>不理解</li>
-</ul>
-</li>
-</ul>
-<h4 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h4><ul>
-<li>这里的编码器将输入序列符号表示$(x_1,\dots,x_n)$映射到一个连续表示$z=(z_1,\dots,z_n)$，给定z，解码器生成一个输出符号序列$(y_1,\dots,y_m)$，模型的每一步都是<strong>自回归</strong>的。</li>
-<li>模型对编码器和解码器使用stacked 自注意力和point-wise 全连接层。如下图所示。</li>
-</ul>
-<p><img src="/assets/blogImg/Transformer-fig1.png" alt="image-20200426144633478"></p>
-<ul>
-<li>编码器和解码器栈。<ul>
-<li>编码器：编码器由N=6个相同的层组成。每一层有两个子层，第一个是multi-head self-attention机制，第二个是一个简单的、位置相关的全连接前馈网络。文章应用一个残差连接在两个子网络中，然后做一个layer normalization。每一个子层的输出是$LayerNorm(x+Sublayer(x))$，为了促进残差连接，模型中的所有子层以及embedding层都产生$d_{model}=512$维度的输出。</li>
-<li>解码器：解码器也由N=6个相同的层组成。除了两个子层之外，插入了第三个子层，它对编码器堆栈的输出执行multi-head attention。和编码器相同，这里也是用残差连接在每一个子层里，再接一个layer normalization。此外，修改了解码器堆栈中的自我注意力子层，<strong>防止位置关注后续位置</strong>。这个masking，加上输出嵌入被偏移一个位置，确保了对未知$i$的预测只能依赖于小于位置$i$的已知输出。</li>
-</ul>
-</li>
-<li>Attention<ul>
-<li>注意力方法可以描述为将查询和一个k-v对映射到一个输出，查询，key，values和输出都是向量。输出为values的加权总和，其中分配给每个值的权重是通过查询和key计算。</li>
-<li><strong>缩放的点积Attention。</strong>如下图。文章将自己的attention叫做scaled dot-product attention。输入由queries、keys，维度为$d_k$，values的维度为$d_v$。我们计算query和所有keys的点积，除以$\sqrt{d_k}$，应用一个softmax函数得到values的权重值。矩阵的形式计算就是$Attention(Q,K,V)=softmax(\frac{AK^T}{\sqrt{d_k}})V$。<ul>
-<li><img src="/assets/blogImg/Transformer-fig2-a.png" alt="image-20200426154819643"></li>
-</ul>
-</li>
-<li><strong>Multi-Head Attention。</strong>代替执行一个单attention函数，文章发现将queries，keys和values线性投影h次使用不同的线性投影到$d_k,d_k,d_v$维度。在每一次投影版本中我们然后并行执行attention方法，生成$d_v$维的输出值，这些被拼接起来再次投影到最终值，如下图。多头attention允许模型共同关注来自不同位置的不同表示空间的信息。对于一个单注意力头，<strong>平均抑制了这一点。</strong><ul>
-<li>这篇文章中，设置h=8，$d_k=d_b=d_{model}/h=64$，由于每个头的维度较低，因此总计算成本类似于具有全维度的单头注意力的计算成本。</li>
-<li><img src="/assets/blogImg/Transformer-fig2-b.png" alt="image-20200426160102184"></li>
-</ul>
-</li>
-<li>Applications of Attention in our Model。</li>
-</ul>
-</li>
-<li>位置前馈网络。</li>
-<li>embedding和softmax</li>
-<li>Positional Encoding。</li>
-</ul>
-<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><ul>
-<li>训练在WMT2014英德翻译数据集，4.5M句子对。句子使用byte-pair编码，词表37000 tokens。还有WMT2014英法翻译任务。</li>
-<li>序列模型在8 NVIDIA p100 GPUs。基础模型训练12小时，大模型训练3.5天。</li>
-<li>优化器，Adam。</li>
-<li>正则化。Dropout、LN、Label Smoothing。</li>
-</ul>
-<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p><img src="/assets/blogImg/Transformer-tab2.png" alt="image-20200426184341071"></p>
-<h4 id="疑问和备注"><a href="#疑问和备注" class="headerlink" title="疑问和备注"></a>疑问和备注</h4><ul>
-<li>为什么RNN不能实现并行化？<ul>
-<li><a href="https://www.cnblogs.com/yihaha/p/7265280.html" target="_blank" rel="noopener">https://www.cnblogs.com/yihaha/p/7265280.html</a></li>
-<li>深度学习中的模型并行：<a href="https://www.zhihu.com/question/55480951" target="_blank" rel="noopener">https://www.zhihu.com/question/55480951</a></li>
-<li>TCN</li>
-</ul>
-</li>
-<li>在并行方面，多头attention和CNN一样不依赖于前一时刻的计算，可以很好的并行，优于RNN。</li>
-<li>自回归</li>
-<li>解码器第一个子层直接Add？</li>
-<li>We implement this inside of scaled dot-product attention by masking out (setting to−∞) all values in the inputof the softmax which correspond to illegal connections. 为什么加一个softmax？</li>
-<li>Decoder的softmax之前的Linear使用了embeddings矩阵？</li>
-<li>embeddings乘以$\sqrt{d_{model}}$是什么意思？</li>
-<li>位置向量的选择原因没有看懂。</li>
-<li>第4章，序列操作数量是什么意思？</li>
-<li>如何保证每个头学到的不同？</li>
-</ul>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://spaces.ac.cn/archives/4765/comment-page-1" target="_blank" rel="noopener">https://spaces.ac.cn/archives/4765/comment-page-1</a></li>
-<li><a href="https://www.cnblogs.com/robert-dlut/p/8638283.html" target="_blank" rel="noopener">https://www.cnblogs.com/robert-dlut/p/8638283.html</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/47282410" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/47282410</a></li>
-<li><a href="https://www.jianshu.com/p/d7f50cc5560e" target="_blank" rel="noopener">https://www.jianshu.com/p/d7f50cc5560e</a></li>
-<li><a href="https://blog.csdn.net/malefactor/article/details/78767781" target="_blank" rel="noopener">https://blog.csdn.net/malefactor/article/details/78767781</a></li>
-<li><a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">https://jalammar.github.io/illustrated-transformer/</a></li>
-<li>上个链接的中文翻译：<a href="https://blog.csdn.net/yujianmin1990/article/details/85221271" target="_blank" rel="noopener">https://blog.csdn.net/yujianmin1990/article/details/85221271</a></li>
-<li><a href="https://www.bilibili.com/video/BV1RE411H7wA?p=7" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1RE411H7wA?p=7</a></li>
-<li><a href="https://github.com/tensorflow/tensor2tensor" target="_blank" rel="noopener">https://github.com/tensorflow/tensor2tensor</a></li>
-<li><a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">http://nlp.seas.harvard.edu/2018/04/03/attention.html</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Transformer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">self-attention</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">attention</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/12/nips06/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2541,14 +2486,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2561,11 +2498,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2585,19 +2522,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2633,6 +2566,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
               </li>
              
@@ -2653,6 +2594,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -2665,23 +2610,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2694,6 +2627,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SLU</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2729,7 +2670,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2737,7 +2682,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2745,19 +2690,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2774,6 +2711,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2821,11 +2762,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2837,7 +2778,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
+                <a href="javascript:void(0)" class="js-tag color2">ULMFiT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2846,6 +2791,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">representation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">综述</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2858,14 +2815,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">transformer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">综述</a>
               </li>
              
               <li class="article-tag-list-item">
