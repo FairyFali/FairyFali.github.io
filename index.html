@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
 </li>
 <li><p>2.2字符量化。</p>
 </li>
-<li>我们的模型接受一个编码字符序列作为输入。编码被完成通过规定输入语言的一个字母表，大小为m，然后量化每一个字符使用1-of-m编码（或者独热编码）。然后字符序列被转化为一个m个固定长度$l_0$的向量。任何字符超过长度$l_0$是忽略的，任何字符不在字母表中被量化为全0向量，包括空格。字符量化顺序是向后的，因此最新读取的字符始终位于输出的开头附近，这使得全连接层可以轻松地将权重与最新读取相关联。</li>
+<li>我们的模型接受一个编码字符序列作为输入。编码被完成通过规定输入语言的一个字母表，大小为m，然后量化每一个字符使用1-of-m编码（或者独热编码）。然后字符序列被转化为一个固定长度$l_0$的m维向量序列。任何字符超过长度$l_0$是忽略的，任何字符不在字母表中被量化为全0向量，包括空格。字符量化顺序是向后的，因此最新读取的字符始终位于输出的开头附近，这使得全连接层可以轻松地将权重与最新读取相关联。</li>
 <li>在我们所有的模型中使用的字母表总共70个字符，包含26个英文字母，10个数字，33个其他的字符和换行符号，如下所示：</li>
 <li>abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/|_@#$%ˆ&amp;* ̃‘+-=&lt;&gt;()[]{}</li>
 <li>后来，我们还与使用不同字母的模型进行了比较，在该模型中我们区分了大写字母和小写字母。</li>
@@ -233,8 +233,9 @@ var _hmt = _hmt || [];
 </li>
 <li><p>2.4使用同义词库进行数据增强</p>
 </li>
-<li>许多学者已经发现了合适的数据增强技术能够有效的控制泛化错位。当我们可以找到模型应具有的适当不变性时，这些技术通常效果很好。就文本而言，使用像在图像或语音识别中那样的信号转换来扩充数据是不合理的，因为字符的确切顺序可能会形成严格的句法和语义含义。因此，最好的方式是使用人类转述的方式，但是这是不现实的和昂贵的由于大量样本。因此最自然的选择是代替单词或者短语为他们的同义词。</li>
-<li>我们实验数据增强通过使用英语同义词库，从LibreOffice项目（<a href="http://www.libreoffice.org/）中使用的组件中获得的mytheas。这个同义词库从WordNet中得到，每一个单词或者短语的同义词都根据语义相似性进行排序。为了决定多少单词被替换，我们提取了所有可替换的单词来自于给定的文本和随机选择r个要替换的单词。r的概率通过集合分布得到$P[r" target="_blank" rel="noopener">http://www.libreoffice.org/）中使用的组件中获得的mytheas。这个同义词库从WordNet中得到，每一个单词或者短语的同义词都根据语义相似性进行排序。为了决定多少单词被替换，我们提取了所有可替换的单词来自于给定的文本和随机选择r个要替换的单词。r的概率通过集合分布得到$P[r</a>] \sim p^r$.选择同义词单词的索引也是通过另一种集合分布确定的$P[s] \sim q^s$。这样，当同义词远离最常见的含义时，被选中的可能性就会变小。 我们将使用这种新的数据增强技术报告结果，p=0.5,q=0.5.</li>
+<li>许多学者已经发现了合适的数据增强技术能够有效的控制泛化错误。当我们可以找到模型应具有的适当不变性时，这些技术通常效果很好。就文本而言，使用像在图像或语音识别中那样的信号转换来扩充数据是不合理的，因为字符的确切顺序可能会形成严格的句法和语义含义。因此，最好的方式是使用人类转述的方式，但是这是不现实的和昂贵的由于大量样本。因此最自然的选择是代替单词或者短语为他们的同义词。</li>
+<li>我们实验数据增强通过使用英语同义词库，从LibreOffice项目<br>（<a href="http://www.libreoffice.org/）" target="_blank" rel="noopener">http://www.libreoffice.org/）</a></li>
+<li>中使用的组件中获得的mytheas。这个同义词库从WordNet中得到，每一个单词或者短语的同义词都根据语义相似性进行排序。为了决定多少单词被替换，我们提取了所有可替换的单词来自于给定的文本和随机选择r个要替换的单词。r的概率通过集合分布得到$P[r] \sim p^r$.选择同义词单词的索引也是通过另一种集合分布确定的$P[s] \sim q^s$。这样，当同义词远离最常见的含义时，被选中的可能性就会变小。 我们将使用这种新的数据增强技术报告结果，p=0.5,q=0.5.</li>
 </ul>
 <h4 id="3-比较的模型"><a href="#3-比较的模型" class="headerlink" title="3.比较的模型"></a>3.比较的模型</h4><ul>
 <li>为了提供公平的比较和竞争模型，我们指导了一系列实验，包括传统的和深度学习的方法。我们尽力选择模型，能够提供可比较的和竞争性的结果，结果被真实地报告没有任何模型选择。</li>
@@ -2347,6 +2348,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2359,14 +2368,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -2376,14 +2377,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Colab</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2403,11 +2396,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
+                <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2419,19 +2412,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">论文创作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分享会</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2451,19 +2444,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2495,6 +2488,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">word embeddings</a>
               </li>
              
@@ -2523,15 +2528,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2539,15 +2544,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2607,6 +2604,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -2623,15 +2632,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2643,15 +2652,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+                <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2675,15 +2680,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
               </li>
              
               <li class="article-tag-list-item">
