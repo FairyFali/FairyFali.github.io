@@ -154,6 +154,196 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nips07" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/10/nips07/">论文阅读：Character-level Convolutional Networks for Text Classification</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/10/nips07/" class="archive-article-date">
+  	<time datetime="2020-09-10T06:38:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于字符级别的卷积网络的文本分类方法</li>
+<li>发表在NIPS 2015</li>
+<li>论文下载：<a href="http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf" target="_blank" rel="noopener">http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf</a></li>
+<li>Code：<a href="https://github.com/zhangxiangxiao/Crepe" target="_blank" rel="noopener">https://github.com/zhangxiangxiao/Crepe</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Xiang Zhang,张翔博士 纽约大学数学科学学院学生，在Yann LeCun教授的指导下，对将深度学习应用于自然语言表示，推理和生成感兴趣。个人主页：<a href="http://xzh.me/，Github:https://github.com/zhangxiangxiao" target="_blank" rel="noopener">http://xzh.me/，Github:https://github.com/zhangxiangxiao</a></li>
+<li>Junbo Zhao，同在Yann LeCun的指导下完成博士学位。个人主页：<a href="http://jakezhao.net/，Github：https://github.com/jakezhaojb" target="_blank" rel="noopener">http://jakezhao.net/，Github：https://github.com/jakezhaojb</a></li>
+<li>Yann LeCun，2018 图灵奖获得者，不用多介绍了。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>对于文本分类任务，之前的方法大多数都是基于单词的方法，本文希望提出一种基于字符的方法。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li>使用卷积网络进行实证，卷积过程如图1，其中几个trick是倒序截断字符，同义词库增强。还比较了多种传统文本分类方法和深度学习方法，在多种数据集上进行实证，结论是不存在一个机器学习模型在所有任务上都最优，在不同的场景下有不同的最优模型。</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>这个文章提供了一个在字符级别卷积神经网络（ConvNets）上对于文本分类的经验性的探索。我们构建了几个大型数据集来展示字符级别卷积网络能够实现SOTA或者可竞争的结果。和传统的模型比较，比如BOW，N-gram和它们的TFIDF变体，和深度神经网络，比如单词级别的ConvNets和循环神经网络。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（文本分类背景）文本分类是自然语言处理的经典主题，其中需要为自由文本文档分配预定义的类别。文本分类研究的范围从设计最好的特征到选择最好的机器学习分类器。迄今为止，几乎所有的文本分类技术都是基于单词的，其中某些有序单词组合（比如n-gram）的简单统计通常表现最佳。</li>
+<li>（模型的优势）另一方面，许多调查已经发现卷积网络从原生数据中提取信息方面是有用的，涵盖了计算机视觉应用到语音识别，以及其他的。特别地，深度学习早期使用的时延网络的研究是对顺序数据进行建模的卷积网络。</li>
+<li>（本文的方法）在这个文章中，我们探索了将文本视为一种字符级别的原始信号，并将其应用于时序（1维）ConvNet。在本文中，我们仅使用分类任务来举例说明ConvNets理解文本的能力。历史上我们知道ConnNets通常需要大规模数据集才能有效，因此我们也建立了其中的几个。传统模型和其他深度学习模型提供了广发的比较。</li>
+<li>（卷积模型可以直接使用分布式词嵌入）在文献中探索了将卷积网络应用于文本分类或整个自然语言处理。它已经展示了ConvNets能够被直接应用到分布式的或者离散的词嵌入，无需任何语言的语法和语义结构的知识。这些方法已经被证明是和传统模型可竞争的。</li>
+<li>（相关的工作）有相关的工作，使用字符级别的特征进行语言处理。这些包括使用带有线性分类器的字符级别的n-grams，和将字符级别的特征合并到ConvNets。特别的，这些ConvNet方法使用单词作为基础，其中在单词或单词n-gram级别提取的字符特征形成了分布式表示。在词性标记和信息检索得到了改进。</li>
+<li>（优点）这个文章是第一个应用ConvNets在字符上的。我们展示了当训练在大规模数据集，深度ConvNets不需要单词知识，此外来自于之前研究的结论，ConvNets不需要语法和语义的知识。工程的简化对于可以适用于不同语言的单个系统而言至关重要，因为字符始终构成必要的部分，而不管是否可以分割单词。仅处理字符还有以下优点：可以自然地学习诸如拼写错误和表情符号之类的异常字符组合。</li>
+</ul>
+<h4 id="字符级别卷积网络"><a href="#字符级别卷积网络" class="headerlink" title="字符级别卷积网络"></a>字符级别卷积网络</h4><ul>
+<li>在这节，我们介绍对于文本分类的字符级别的ConvNets的设计，设计是模块化的，通过后向传播得到梯度来实现优化。</li>
+<li>2.1 关键模块</li>
+<li>这个主要的组件是时序卷积模块，简单地计算了1-D卷积。假设我们有一个离散的输入函数$g(x) \in [1,l] \rightarrow R$和一个离散的核函数$f(x) \in [1, k] \rightarrow R$。这个卷积$h(y) \in [1,\left \lfloor (l-k+1)/d \right \rfloor] \rightarrow R$在$f(x)$和$g(x)$带有stride d被定义为</li>
+<li>$h(y) = \sum_{x=1}^{k} f(x)·g(y·d-x+c)$</li>
+<li>其中$c=k-d+1$是一个偏移常量。就像传统的视觉上的卷积网络，模块被一系列核函数$f_{ij}(x) i=1,…,n,j=1,…,m$参数化，我们称之为权重，在一系列输入$g_i(x)$和输出$h_j(y)$。我们称每一个$g_i$(或者$h_j$)输入（或者输出）特征，和m（或者n）输入（或者输出）特征尺寸。输出$h_j(y)$被得到通过求和在$i$在$g_i(x)$和$f_{ij}(x)$。</li>
+<li>一个关键的模块，帮助我们训练较深模型的一个关键模块是有时做的最大池化操作。若有一个离散的输入函数g(x)，它的取值范围是[1, l]（小写L）中的实数。则它的最大池化操作函数$h(y) \in [1,\left \lfloor (l-k+1)/d \right \rfloor] \rightarrow R$，定义为</li>
+<li>$h(y) = max_{x=1}^{k} g(y·d-x+c)$</li>
+<li>同样，c = k - d + 1 是一个偏移常数。这个特有的池化模型能够使我们训练深度超过6层的ConNets，其他的都失败了。这个分析也许可以从[3]中获得启发。</li>
+<li><p>我们的非线性处理使用的是h(x) = max{0, x}，这就比较像ReLUs了。算法使用的是随机梯度下降法，最小批量大小是128，使用0.9的动量以及0.01的初始步长，步长每3个epoches减半，持续10次。每个epoch都采用固定数量的随机训练样本，这些样本在各个类别之间均匀采样。 稍后将为每个数据集讨论该数字。 该实现是使用Torch 7 [4]完成的。</p>
+</li>
+<li><p>2.2字符量化。</p>
+</li>
+<li>我们的模型接受一个编码字符序列作为输入。编码被完成通过规定输入语言的一个字母表，大小为m，然后量化每一个字符使用1-of-m编码（或者独热编码）。然后字符序列被转化为一个m个固定长度$l_0$的向量。任何字符超过长度$l_0$是忽略的，任何字符不在字母表中被量化为全0向量，包括空格。字符量化顺序是向后的，因此最新读取的字符始终位于输出的开头附近，这使得全连接层可以轻松地将权重与最新读取相关联。</li>
+<li>在我们所有的模型中使用的字母表总共70个字符，包含26个英文字母，10个数字，33个其他的字符和换行符号，如下所示：</li>
+<li>abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/|_@#$%ˆ&amp;* ̃‘+-=&lt;&gt;()[]{}</li>
+<li>后来，我们还与使用不同字母的模型进行了比较，在该模型中我们区分了大写字母和小写字母。</li>
+<li>2.3模型设计。</li>
+<li>我们设计了2个ConvNets，一个大型的和一个小型的。它们是9层，其中6层卷积层和3层全连接层。图1给出了一个说明。</li>
+<li><p><img src="/assets/blogImg/Char-CNN_fig1.png" alt="image-20200909154109046"></p>
+</li>
+<li><p>由于我们的量化方式，输入特征是70维的，即有70个特征，并且每个特征的长度是1014（对于不同的问题可能不一样，字符embedding长度）。看来，似乎1014个字符已经能够捕获大部分我们感兴趣的文本了。另外，我们在3个全连接层之间插入两个dropout模块以实现正则化（regularize）。（dropout一般是用来防止过拟合的）他们dropout的概率是0.5。</p>
+</li>
+<li>下表1列出了卷积层的所有配置，表2列出了全连接层的配置。</li>
+<li><img src="/assets/blogImg/Char-CNN_tab1.png" alt="image-20200909160913473"></li>
+<li>我们使用高斯分布初始化权重，初始化大模型和小模型的平均值和标准差分别是（0,0.02）和（0,0.05）。</li>
+<li><img src="/assets/blogImg/Char-CNN_tab2.png" alt="image-20200909160952284"></li>
+<li><p>对于不同的问题，输入长度也许是不同的，因此是frame长度，来自于我们的模型设计，很容易指导给定的输入长度$l_0$，输出框架长度在最后一个卷积层（但是在任何全连接层之前）是$l_6=(l_0-96)/27$。该数字乘以第6层的frame大小将得出第一个完全连接的层接受的输入尺寸。</p>
+</li>
+<li><p>2.4使用同义词库进行数据增强</p>
+</li>
+<li>许多学者已经发现了合适的数据增强技术能够有效的控制泛化错位。当我们可以找到模型应具有的适当不变性时，这些技术通常效果很好。就文本而言，使用像在图像或语音识别中那样的信号转换来扩充数据是不合理的，因为字符的确切顺序可能会形成严格的句法和语义含义。因此，最好的方式是使用人类转述的方式，但是这是不现实的和昂贵的由于大量样本。因此最自然的选择是代替单词或者短语为他们的同义词。</li>
+<li>我们实验数据增强通过使用英语同义词库，从LibreOffice项目（<a href="http://www.libreoffice.org/）中使用的组件中获得的mytheas。这个同义词库从WordNet中得到，每一个单词或者短语的同义词都根据语义相似性进行排序。为了决定多少单词被替换，我们提取了所有可替换的单词来自于给定的文本和随机选择r个要替换的单词。r的概率通过集合分布得到$P[r" target="_blank" rel="noopener">http://www.libreoffice.org/）中使用的组件中获得的mytheas。这个同义词库从WordNet中得到，每一个单词或者短语的同义词都根据语义相似性进行排序。为了决定多少单词被替换，我们提取了所有可替换的单词来自于给定的文本和随机选择r个要替换的单词。r的概率通过集合分布得到$P[r</a>] \sim p^r$.选择同义词单词的索引也是通过另一种集合分布确定的$P[s] \sim q^s$。这样，当同义词远离最常见的含义时，被选中的可能性就会变小。 我们将使用这种新的数据增强技术报告结果，p=0.5,q=0.5.</li>
+</ul>
+<h4 id="3-比较的模型"><a href="#3-比较的模型" class="headerlink" title="3.比较的模型"></a>3.比较的模型</h4><ul>
+<li>为了提供公平的比较和竞争模型，我们指导了一系列实验，包括传统的和深度学习的方法。我们尽力选择模型，能够提供可比较的和竞争性的结果，结果被真实地报告没有任何模型选择。</li>
+<li>3.1传统的方法</li>
+<li>我们将传统方法称为那些使用手工特征提取器和线性分类器的方法。 在所有这些模型中，使用的分类器都是多项逻辑回归。</li>
+<li>1.词袋和它的TFIDF。对于每个数据集词袋模型被构建通过选择训练子集中50,000最频繁的单词。对于正常的词袋，我们使用每个单词的计数作为特征。对于TFIDF版本，我们使用技术作为词频，逆文档频率是样本总数与训练子集中带有单词的样本数之间的对数。 通过除以最大特征值来对特征进行归一化。</li>
+<li>2.bag-of-ngram和它的TFIDF。bag-of-ngram被构造通过选择500,000最频繁的n-grams(最多5-grams)从训练子集对于每个数据集。特征值被计算和词袋模型相同。</li>
+<li>3.bag-of-means在词嵌入。我们也实验模型使用k-means在word2vec，从每个数据集的训练子集学习，然后使用这些学到的方法作为聚类词的代表。 我们考虑了在训练子集中出现超过5次的所有单词。 嵌入的维数为300。bag-of-means特征的计算方法与词袋模型相同。 means 数量是5000。(我理解的，根据学习到的Word2vec，做k-means，一共k个特征，每个文本在每个特征上进行计数，tfidf同理)</li>
+<li>3.2深度学习方法</li>
+<li>最近深度学习方法已经应用到文本分类，我们考虑两个简单的和代表性的模型作为对比，一个是单词级别的ConvNet和另一个简单的LSTM循环神经网络。</li>
+<li>1.基于单词的ConvNet。在大量最近的对于文本分类的基于单词的ConvNets，其中的一个区别是使用预训练的词向量，我们提供了比较在使用预训练Word2vec和使用lookup tables方式。embedding size 是300，和bag-of-means相同。为了确保公平地进行比较，每种情况下的模型在图层数和每层的输出大小方面都与字符级ConvNets大小相同。还进行了使用词库进行数据增强的实验。</li>
+<li>2.LSTM。我们提供了一个比较和循环神经网络模型，即LSTM。LSTM模型使用在基于单词的情况，使用预训练word2vec embedding size 300作为之前的模型。该模型是通过取所有LSTM单元的输出平均值形成一个特征向量，然后对该特征向量使用多项对数回归而形成的。 输出维度是512。我们使用LSTM的变体，是常见的“vanilla” 结构。我们也使用梯度clipping将梯度范数现在在5。图2给出了一个说明。</li>
+<li><img src="/assets/blogImg/Char-CNN_fig2.png" alt="image-20200910114442423"></li>
+<li>3.3词表的选择。</li>
+<li>对于英语词表，一个明显的选择是是否区分大小写字母。我们报道了实验在这个选择上，发现通常是更坏的结果当区分大小写时。一种可能的解释可能是语义不会随字母大小写而改变，因此存在正则化的好处。</li>
+</ul>
+<h4 id="大规模数据集和结果"><a href="#大规模数据集和结果" class="headerlink" title="大规模数据集和结果"></a>大规模数据集和结果</h4><ul>
+<li>之前的研究在ConvNets在不同的领域已经展示了它们通常有效包括大规模数据集，特别是当模型使用低级别的原生特征像字符。可是，大多数开源文本分类数据集是十分小的，大规模数据集被分割为十分小的训练集相比于测试集。因此，我们没有使用它们来混淆我们的社区，而是为我们的实验构建了几个大规模的数据集，范围从数十万到数百万个样本。 表3是总结。</li>
+<li><p><img src="/assets/blogImg/Char-CNN_tab3.png" alt="image-20200910115638998"></p>
+</li>
+<li><p>1.AG‘s news语料。我们得到了AG’s 新闻语料在web（<a href="http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），它包含来自2000多个新闻来源的496,835个分类新闻文章。" target="_blank" rel="noopener">http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），它包含来自2000多个新闻来源的496,835个分类新闻文章。</a> 我们仅从标题和描述字段中选择该语料库中最大的4个类来构建数据集。 每个类别的train样本数量为30,000，测试数量为1900。</p>
+</li>
+<li>2.Sougou 新闻语料。该数据集是SogouCA和SogouCS新闻语料库的组合，总共包含各种主题频道中的2,909,551条新闻文章。 然后，通过手动分类新闻的域名，我们使用其URL标记新闻。 这使我们获得了大量带有其类别标签的新闻文章。 类别很多，但大多数只包含很少的文章。 我们选择5个类别-“体育”，“金融”，“娱乐”，“汽车”和“技术”。 每个类别选择的训练样本数量为90,000，测试次数为12,000。 尽管这是中文数据集，但我们还是使用了pypinyin拼音软件包与jieba中文分词系统相结合来产生拼音-汉语的语音罗马化。然后，英语模型可以直接应用于该数据集。 使用的字段是标题和内容。</li>
+<li>3.DBPedia本体数据集。DBpedia是从Wikipedia 中提取结构化信息的人群资源。 通过从DBpedia 2014中选择14个不重叠的类来构建DBpedia本体数据集。从这14个本体类中的每一个中，我们随机选择40,000个训练样本和5,000个测试样本。 我们用于此数据集的字段包含每个Wikipedia文章的标题和摘要。</li>
+<li>4.Yelp 评论。Yelp评论数据集来自2015年的Yelp数据集挑战赛。该数据集包含1,569,264个包含评论文本的样本。 从该数据集构建了两个分类任务–一个预测用户给定的stars总数，另一个通过考虑stars 1和2为负，stars 3和4为正，来预测极性标签。 完整的数据集在每颗star中具有130,000个训练样本和10,000个测试样本，而极性数据集在每个极性中具有280,000个训练样本和19,000个测试样本。</li>
+<li>5.Yahoo！Answers数据集。我们获得了Yahoo! 通过Yahoo!解答综合问答集1.0版数据集通过Webscope程序。 语料库包含4,483,032个问题及其答案。 我们使用10个最大的主要类别从该语料库构建了一个主题分类数据集。 每个类别包含140,000个训练样本和5,000个测试样本。 我们使用的字段包括问题标题，问题内容和最佳答案。</li>
+<li>6.Amazon reviews。我们从Stanford Network AnalysisProject（SNAP）获得了一个Amazon评价数据集，该数据集跨越18年，从6,643,669个用户的2,441,053个产品中获得了34,686,770条评论[22]。 与Yelp评论数据集相似，我们还构建了2个数据集–一个完整的分数预测和另一个极性预测。 完整的数据集包含每个类别中的600,000个训练样本和130,000个测试样本，而极性数据集则包含每个极性情感中的1,800,000个训练样本和200,000个测试样本。 使用的字段是评论标题和评论内容。</li>
+<li>表4列出了所有的测试错误率，来自于这些数据集和应用的模型。注意因为我们没有一个中文同义词，搜狗新闻数据集没有使用同义词增强。我们标记了最好的结果用蓝色和最坏的结果用红色。</li>
+<li><img src="/assets/blogImg/Char-CNN_tab4.png" alt="image-20200910124425758"></li>
+</ul>
+<h4 id="5-讨论"><a href="#5-讨论" class="headerlink" title="5.讨论"></a>5.讨论</h4><ul>
+<li>为了理解表4中的结果，我们提供了一些经验性的分析在这节。为了方便于我们的分析，我们提出了相对错误在图3参考于比较的模型（正为字符级别的模型好）。这些图的每一个都是通过比较模型和字符级ConvNet模型的误差之间的差来计算的，然后除以比较模型错误。 图中的所有ConvNets分别是带有词库增强的大型模型。</li>
+<li><img src="/assets/blogImg/Char-CNN_fig3.png" alt="image-20200910125952181"></li>
+<li>字符级的ConvNet是一种有效的方法。 从我们的实验中得出的最重要的结论是，字符级的ConvNets可以不需要文字就可以用于文本分类。这有力地表明，语言也可以被视为与任何其他类型都没有区别的信号。 图4显示了我们的一个字符级ConvNets for DBPedia数据集学习的12个随机第一层patches。</li>
+<li><img src="/assets/blogImg/Char-CNN_fig4.png" alt="image-20200910130258818"></li>
+<li><strong>数据集大小在传统模型与ConvNets模型之间形成了二分法</strong>。 来自图3中所有图的最明显趋势是较大的数据集往往表现更好。 像n-grams TFIDF这样的传统方法仍然是大小高达数十万的数据集的强大候选者，只有在数据集达到几百万的规模之前，我们才能观察到字符级的ConvNets开始变得更好。</li>
+<li><strong>ConvNets对于用户生成的数据可能效果很好</strong>。 用户生成的数据的文字编排程度不同。 例如，在我们的数百万个数据集中，亚马逊评论倾向于吸引用户输入，而用户在Yahoo!上的写作可能会格外小心。 比较基于单词的深层模型（图3c，3d和3e）的图表明，字符级的ConvNets是更好地管理用户生成的文本的更好的工具。 此属性表明ConvNets可能在现实情况中具有更好的适用性。 但是，需要进一步的分析来验证ConvNets确实擅长识别诸如拼写错误和表情符号之类的外来字符组合的假设，因为仅我们的实验并未显示任何明确的证据。</li>
+<li><strong>选择字母表会有所不同</strong>。 图3f显示，通过区分大写和小写字母来更改字母可能会有所不同。 对于百万规模的数据集，似乎不做这种区分通常会更好。 一种可能的解释是存在正则化效应，但这是有待验证的。</li>
+<li><strong>任务的语义可能并不重要</strong>。 我们的数据集包括两种任务：情感分析（Yelp和Amazon评论）和主题分类（所有其他任务）。 任务语义上的这种二分法似乎在决定哪种方法更好时没有作用。</li>
+<li><strong>Bag-of-means是对word2vec的滥用</strong>。 从表4和图3a可以观察到的最明显的事实之一是，在每种情况下，means词袋模型的表现都较差。 与传统模型相比，这表明分布式单词表示的这种简单使用可能不会给我们带来文本分类的优势。 但是，我们的实验并不代表任何其他语言处理任务或以任何其他方式使用word2vec。</li>
+<li><strong>天下没有免费的午餐</strong>。 我们的实验再次验证了没有一个适用于所有数据集的机器学习模型。 在确定哪种方法最适合某些特定应用的过程中，本节中讨论的因素都可以发挥作用。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>本文提供了针对文本分类的字符级卷积网络的实证研究。 我们将使用几个大型数据集的大量传统和深度学习模型进行了比较。 一方面，分析表明字符级的ConvNet是一种有效的方法，另一方面，我们的模型在比较中的表现如何取决于许多因素，例如数据集大小，文本是否经过整理以及字母表的选择。 我们希望将字符级的ConvNets用于更广泛的语言处理任务，尤其是在需要结构化输出的情况下。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>2.1节的1-D卷积没有看懂。</li>
+<li>multinomial logisticreg ression 是什么意思？</li>
+<li>Thesaurus 同义词库。</li>
+<li>gradient clipping 是在On the difficulty of training recurrent neural networks中提出。</li>
+<li>为什么图4高比宽看起来长？为什么有格子？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Char-CNN</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/10/nips07/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-acl06" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2019,272 +2209,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-naacl02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/naacl02/">论文阅读：BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/12/naacl02/" class="archive-article-date">
-  	<time datetime="2020-05-12T12:39:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>BERT：用于语言理解的深度双向Transformer预训练模型</li>
-<li>第一次发表是在2018.10预印版，最后修改于2019.5，NAACL2019 Best Paper</li>
-<li>Google AI Language发表</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener">https://arxiv.org/abs/1810.04805</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>一作Jacob Devlin（雅各布·德夫林），谷歌高级研究人员科学家，马里兰大学学院公园毕业，领英主页：<a href="https://www.linkedin.com/in/jacob-devlin-135ab048/" target="_blank" rel="noopener">https://www.linkedin.com/in/jacob-devlin-135ab048/</a></li>
-<li>二作Ming-Wei Chang，获得了博士学位在伊利诺伊大学厄本那-香槟分校与丹·罗斯（Dan Roth）合作。在 国立台湾大学期间，与林志仁一起工作。领英主页：<a href="https://www.linkedin.com/in/ming-wei-chang-4962497/，个人主页：https://ming-wei-chang.github.io/" target="_blank" rel="noopener">https://www.linkedin.com/in/ming-wei-chang-4962497/，个人主页：https://ming-wei-chang.github.io/</a></li>
-<li>三作Kenton Lee，在ELMo作者中也有他，谷歌科学家，毕业于华盛顿大学博士学位，导师是Luke Zettlemoyer（ELMo的作者之一），个人主页：<a href="https://kentonl.com/，主页里有Bert论文的发表和代码" target="_blank" rel="noopener">https://kentonl.com/，主页里有Bert论文的发表和代码</a></li>
-<li>四作Kristina Toutanova（克里斯蒂娜·图塔诺娃），谷歌研究科学家，NLU实验室的一员，斯坦福大学博士毕业，个人主页：<a href="http://kristinatoutanova.com/，领英主页：https://www.linkedin.com/in/kristina-toutanova-71a0061/，斯坦福大学主页：https://nlp.stanford.edu/kristina/" target="_blank" rel="noopener">http://kristinatoutanova.com/，领英主页：https://www.linkedin.com/in/kristina-toutanova-71a0061/，斯坦福大学主页：https://nlp.stanford.edu/kristina/</a></li>
-</ul>
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>文章介绍了一个新型语言表示模型叫做BERT，表示Bidirectional Encoder Representations from Transformers。和之前的语言表示模型不同，BERT设计为了预训练深层双向表示从未标记的文本中通过在所有层中联合左侧和右侧的上下文。BERT模型可以被微调仅仅添加一个输出层就可以在很多模型上取得先进的水平，比如QA、语言推理，无需大量特定于任务的结构上的修改。</li>
-<li>BERT在概念上很简单，经验上也很强大。在11种任务上都取得了先进的结果，包括将GLUE提升了7.7%、MultiNLI准确率提高了4.6%，SQuADv1.1提高了1.5，SQuADv2.0提高了5.1。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（背景）<strong>语言模型预训练</strong>已经被展示出了在改善NLP任务上非常有效。句子级别的包括自然语言推断、语言解释，目的是预测句子之间的关系并整体分析，还有token级别的任务比如NER和QA，模型需要得到token级别的细粒度的输出。</li>
-<li>（方法背景）有两种已存在的方式应用预训练模型到下游任务：feature-based和微调。feature-based方法，比如ELMo，将特定于任务的结构中加入预训练表示作为额外的特征。微调的方法，比如OpenAI GPT，引入最小的特定于任务的参数，在下游任务中训练通过简单的微调所有的预训练参数。两种方法在预训练期间具有相同的目标，他们使用<strong>单向语言模型学习</strong>通用的语言表示。（为什么是单向？还是就是一个说明）</li>
-<li>（挑战）我们认为，当前的技术限制了预训练表示的能力，特别是微调方法。主要的限制是标准语言模型是单向的，这限制了在预训练期间使用的体系结构的选择。例如在OpenAI GPT中使用从左到右的结构，每个tokens只能看到前面的tokens在self-attention层。这样的限制对于句子级别的任务不是很理想，并且在将微调应用到token级别的任务中时，可能非常有害，在这种情况下必须从两个方向来合并上下文。</li>
-<li>（解决的方法）在这篇文章中，提出了一个基于微调的方法，通过引入BERT通过使用masked LM（MLM）来训练目标缓和单向的限制。MLM是随机掩盖住一些单词，目标是根据上下文识别这些单词。与从左向右的语言模型不同，MLM的表示能够融合左侧和右侧的context，允许我们预训练一个深层次的双向的Transformer。我们还使用下一个句子预测NSP任务联合预训练文本对表示。贡献如下：<ul>
-<li>说明了双向预训练表示的重要性。使用MLM训练深层的双向表示，和ELMo形成对比，ELMo使用一个浅层次的左到右和右到左的拼接。</li>
-<li>展示了预训练表示降低了许多精心设计的特定于任务的结构的需求。BERT是第一个基于微调的表示模型，实现了先进的性能在一系列句子级别和token级别任务中，性能优于很多特定于任务的体系结构。</li>
-<li>BERT推动了11个NLP任务的发展，代码和可训练的模型开源在：<a href="https://github.com/google-research/bert。" target="_blank" rel="noopener">https://github.com/google-research/bert。</a></li>
-</ul>
-</li>
-</ul>
-<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
-<li>无监督feature-based方法。之前的上下文无关的词向量都属于这种方法。特别说明了ELMo模型是一个feature-based方法，并且是一个不深的双向语言模型。</li>
-<li>无监督微调方法。和feature-based相同，首先都需要根据无标签文本训练word embeddings参数。<strong>这个方法的优势就是几乎不需要从头训练任何参数。</strong>由于这个优势，OpenAI GPT实现了先进的结果在许多句子级别的任务上。</li>
-<li>从监督数据中迁移学习。</li>
-</ul>
-<h4 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h4><ul>
-<li><p>这一节介绍BERT的详细实现。有两个步骤：预训练和微调。预训练阶段，模型使用无标签的数据进行训练根据不同的预训练任务。微调阶段，BERT模型首先初始化使用预训练的参数，并且所有参数被微调使用有标签的数据根据下游任务，每一个下游任务都有独立的微调模型，尽管他们使用相同的初始化参数。图1是QA例子。</p>
-</li>
-<li><p><img src="/assets/blogImg/BERT-fig1.png" alt="image-20200504162535949"></p>
-</li>
-<li><p>BERT的一个独特的特征是它在不同任务的统计结构。有最小的不同在预训练结构和下游结构。</p>
-</li>
-<li><p>模型结构。BERT的模型结构是一个多层双向Transformer编码器，由于Transformer的使用已经非常普遍，并且文章的实现和原始几乎相同，因此文章忽略了相关介绍，但是向读者推荐了一个指导The Annotated Transformer：<a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html。" target="_blank" rel="noopener">http://nlp.seas.harvard.edu/2018/04/03/attention.html。</a></p>
-</li>
-<li><p>在这个工作中，文章设置层数为L，隐藏层维度为H，自注意力头个数为A，前馈神经网络维度为4H（应该是两层中的中间层吧？），文章报道了两套参数，$BERT_{BASE}$是L=12，H=768，A=12，参数量为110M，和$BERT_{LARGE}$是L=24，H=1024，A=16，参数量为340M。</p>
-</li>
-<li><p>base版本和OpenAI GPT有相同的参数量，为了对比。可是，BERT有双向的self-attention，但是GPT使用的Transformer只能获取到左侧的上下文。</p>
-</li>
-<li><p>输入/输出表示。为了使BERT能够处理各种任务，输入表示有能力表示单个句子和一对句子（比如QA）。在整个工作中，“句子”可以是连续文本的任意跨度，而不是实际的语言句子。“序列”是指输入到BERT的token序列，可以是单个句子，也可以是一对句子。</p>
-</li>
-<li><p>我们使用WordPiece embeddings（将一个单词分成几个部分，比如loving分为lov，ing，这样做可以有效地捕捉单词词根的信息，减小词表容量，也可以解决OOV问题，常用的方法有BPE方法），有30000个单词的词典。序列的第一个token总是特殊的token [CLS]，句子对打包成单个序列。我们区分句子通过两种方式。第一种是用一个特殊的token [SEP] 分割。<strong>第二种是我们在每个token上添加一个可学习的嵌入，以指示是否它为句子A或者B。</strong>图1中，我们把输入嵌入作为E，最后的隐层向量作为T，$T_i \in \R^H$，特殊的[CLS]作为C。</p>
-<ul>
-<li>博客对CLS的解释：[CLS]～关于这个标记，我觉得可以简单理解为，该标记经过特征提取层以后的得到的向量，是能够代表整一个句子的（因为后面的每一个词都会有一个自己对应的向量，而很多下游任务都是希望得到句子的向量表达，所以要么采用暴力的方法，把所有的词汇对应的向量做一个pooling，要么就如谷歌实验设计的一样，加入一个新的标记，让模型对于这个标记去学会整个句子的表达，用于下游的一系列文本分类任务等，看下面的图示也应该能很好理解了，图解也是直接用了[CLS]的输出，并不是误画漏画其他的单词）。</li>
-</ul>
-</li>
-<li><p>对于一个token，其输入形式是通过将token，segment，position embeddings求和来构造。如图2所示。对于输入的序列，每一个token的embedding都由三部分求和而成，分别是token的embedding，句子分割的embedding（如果是两个句子前一个句子segment embedding为0，后一个句子为1），以及位置编码的embedding（该embedding通过训练学习）。</p>
-</li>
-<li><p><img src="/assets/blogImg/BERT-fig2.png" alt="image-20200504211905629"></p>
-</li>
-<li><p>1.预训练BERT阶段：预训练BERT使用两个无监督任务，图1中可以看出。最终的loss也是来源于两种训练方法叠加的一个loss。</p>
-<ul>
-<li>任务1：Masked LM。MLM训练图解如下图。直觉上来说，深层双向模型比左到右或者右到左的语言模型更强大。不幸的是，标准条件语言模型只能从左到右或者从右到左训练，<strong>因为双向条件将间接地允许每个单词间接地看到自己</strong>，并且该模型可以在多层结构中轻松地预测目标单词上下文。<ul>
-<li><em>为什么能看到自己？</em></li>
-<li>引用简书的博客内容：“这里我简单聊一下我对这种训练方法的理解。其实本质上来讲，这种训练方法来源于深度学习中很主流的自编码（AutoEncoder）的方法论，该方法论的核心就是给定一个输入，经过若干层的特征提取变化，最后的输出还是输入本身（比如图像领域，输入一张图片，输出仍是这一张图片，其作用就是更好的提取这张图片的特征表达，是一种非监督的学习方法）。当然为了让模型更加robust，有一种升级的自编码器就是加入一定的噪音（denoising-AutoEncoder），模型的训练目标依旧是要复原输入。再回过来看谷歌提出的这一种训练方法，其实就是输入一句话，我们要复原这一句话，而其中的mask就是我们加的随机的噪音～真的是很巧妙的迁移，解决了同时利用上下文信息的痛点～”</li>
-</ul>
-</li>
-<li>为了训练双向表示，文章简单地mask一些比例的输入tokens随机地，然后预测这些masked token。在实际中并不总是替换为[MASK] token，选择15%的单词进行改变，80%使用[MASK]，10%使用其他单词，10%不变，为了缓和预训练和微调不一致的问题。只预测masked的单词。<ul>
-<li><em>这个问题是什么？</em>预训练阶段与微调阶段不一致，因为微调阶段是不会有【MASK】存在的。微调阶段就没有mask的操作了吗？没有了。</li>
-<li>博客解释：为什么要以一定的概率保持不变呢？ 这是因为刚才说了，如果100%的时间都用[MASK]来取代被选中的词，那么在fine tuning的时候模型会有一些没见过的词。那么为啥要以一定的概率使用随机词呢？这是因为Transformer要保持对每个输入token分布式的表征，否则Transformer很可能会记住这个[MASK]就是”hairy”。至于使用随机词带来的负面影响，文章中说了,所有其他的token(即非”hairy”的token)共享15%*10% = 1.5%的概率，其影响是可以忽略不计的。原文链接：<a href="https://blog.csdn.net/triplemeng/article/details/83053419" target="_blank" rel="noopener">https://blog.csdn.net/triplemeng/article/details/83053419</a><br><img src="/assets/blogImg/BERT-pic3.png" alt="img"></li>
-</ul>
-</li>
-<li>任务2：下一句子预测NSP。许多重要的下游任务比如QA和NLI，都是基于理解两个句子之间的关系，不能被语言模型capture。为了训练一个能够理解句子关系的模型，文章预训练了一个二值NLP任务。特殊地，当选择句子A和B作为一个样本，50%的时候B是A的下一句子，标签为IsNext，另外50%是随机的句子，为NotNext。如图1所示，C被用来做NSP，在输入句子时第一个token是[cls] token，其对应的输出的token上会连接一个二分类层，通过损失函数对其进行训练。上述两个任务在预训练中会同时进行。如果不进行微调，向量C并不是有意义的句子表示形式，因为它是使用NSP训练的。最终，模型能达到97%-98%的准确率。NSP图解过程如下图。<ul>
-<li><em>什么意思？C怎么用来做NSP？</em></li>
-</ul>
-</li>
-<li>尽管很简单，文章也说明了这是非常有益的在QA和NLI上。</li>
-<li>预训练数据：  BooksCorpus  (800M  words)  (Zhu  et  al.,2015)  and  English  Wikipedia  (2,500M  words). 并且说明了使用document-level语料比使用sentence-level 语料要好，为了学习长连续序列。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/assets/blogImg/BERT-pic2.png" alt="img"></p>
-<ul>
-<li>2.BERT微调阶段。<ul>
-<li>微调非常简单，因为self-attention机制允许BERT建模许多下游任务。</li>
-<li>对每一个任务，我们只需要将输入输出plug到BERT中，并且微调所有的参数。在输入中，来自于预训练的句子A和句子B类似于（1）释义中的句子对，（2）蕴涵中的假设-前提对，（3）QA中的问题文章对，（4）一个退化的文章-空对在文本分类或者序列标注中。输出中，token表示被送到输出层进行token-level任务，例如序列标记和问答，[CLS]表示被送到输出层用来进行分类，利用蕴涵和情感分析。</li>
-<li>博客中的解释：BERT训练完成后，就可以将BERT应用到下游任务中，BERT可应用的任务主要包括下述四类。对应的架构如下图。<ul>
-<li>（1）句子对分类问题，输入句子对，输出分类标签。对于该任务，只需在cls token对应输出端连接一个全连接层，便可以进行预测，在具体的任务中，需要用有label的数据对该全连接层进行训练，与此同时BERT的参数也会进行微调，这就是fine-tune。训练完成后就可以用BERT完成该分类任务。</li>
-<li>（2）单句子分类问题，输入一个句子，输出句子类别。与双句子分类的结构的方法完全一致。</li>
-<li>（3）SQuAD问题，从一个段落中找出一个问题所对应的几个词。对于该任务，会新建两个可学习的向量$v_s$和$v_e$，对于paragraph输出端的向量，$v_s$会与之每一个相乘，然后计算softmax，最大的值则为预测的答案的起始位置，同理$v_e$为结束的位置。</li>
-<li>（4）序列标注问题，对一个句子中的每一个单词进行标注。对于该任务，每一个句子中的输出单词都会连接一个全连接层，输出维度为标注的标签种类数，然后同样用上述方法进行训练即可。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="/assets/blogImg/BERT-fig4.png" alt="image-20200505153126230"></p>
-<ul>
-<li>与预训练相比，微调相对简单。从完全的预训练模型开始，在单个Cloud TPU上，只需要训练一个小时。文章描述了特定于任务的细节在附录中。</li>
-<li>博客对微调的理解：与传统的LM模型训练过程相似，BERT的训练也遵循基本的套路（大家可参见ULMFiT，我的另一篇<a href="https://www.jianshu.com/p/7b597742c39c" target="_blank" rel="noopener">笔记</a>也有详实的介绍）。</li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li>GLUE：通用语言理解评估任务。是各种自然语言理解任务的集合，数据集的详细说明在附录中。<ul>
-<li>为了对GLUE进行微调，文章按照上一节的描述表示输入序列（针对单个句子或者句子对），并使用第一个输入token [CLS]对应的最终的隐藏向量C作为aggregate表示。在微调期间引入的唯一新参数是分类权重$W \in R^{K\times H}$，其中K是标签数，使用C和W计算标准分类损失，例如$log(softmax(CW^T))$。</li>
-<li>文章使用batch size 为32，微调3个epochs。对于每一个人物，选择学习率为(5e-5, 4e-5,2e-5)其中最好的在开发集。此外，对于LARGE版本，我们发现微调在小数据集上有时是不稳定的，因此我们进行了几次随机重新开始，并在开发集上选择最好的模型。</li>
-<li>实验结果如下表。base和large版本都由于所有的系传统在所有的任务上，得到了4.5%到7%的改善。base版本和GPT的结构几乎相同。</li>
-<li><img src="/assets/blogImg/BERT-tab1.png" alt="image-20200505102419860"></li>
-</ul>
-</li>
-<li>其他任务暂时不看了。</li>
-</ul>
-<h4 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h4><ul>
-<li>附录中有额外的研究。</li>
-<li>预训练任务的效果。使用两个预训练目标。<ul>
-<li>1.No NSP：一个双向模型使用MLM但是没有NSP任务。</li>
-<li>2.LTR&amp;No NSP：一个只有左侧上下文的模型，使用标准的left-to-right（LTR）语言模型，而不是MLM，只有左侧的方法也应用到微调中，此外也没有NSP。</li>
-<li>首先检查NSP任务带来的影响，在下表中，我们展示出移除NSP hurts性能在QNLI，MNLI和SQuAD1.1任务上。然后比较MLM和LTR，发现性能也下降了。</li>
-<li><img src="/assets/blogImg/BERT-tab5.png" alt="image-20200505104120729"></li>
-</ul>
-</li>
-<li>模型大小的影响，先不看。</li>
-<li>基于feature-based方法的BERT<ul>
-<li>BERT的所有方法都使用了微调的方法，一个简单的分类层添加到预训练模型的后面，并且所有的参数都被联合微调在下游任务中。</li>
-<li>可是，feature-based方法，固定从预训练模型中学习到的feature，有明确的优点。第一，不是所有的任务都可以轻松地有Transformer编码器结构表示，因此需要添加特定于任务的模型结构；第二，计算优势。</li>
-<li>这一节，我们比较两种方法在CoNLL 命名实体识别任务上。在BERT的输入上，使用一个保留大小写的WordPiece模型，并包括了数据提供的最大文档上下文。没有使用CRF层，使用第一个sub-token的表示作为NER上分类器的输入。</li>
-<li>使用feature-based方法提取激活值从一层或者多层没有微调。这些上下文embeddings用作BiLSTM的输入在分类层之前。</li>
-<li>结果如下表。large版本表现出有竞争性的先进的水平。最好的拼接的方法只比微调方法低了0.3 F1值，这也说明了BERT在feature-based上的有效性。</li>
-<li><img src="/assets/blogImg/BERT-tab7.png" alt="image-20200505110634877"></li>
-</ul>
-</li>
-</ul>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
-<li>由于使用语言模型进行的迁移学习已经展示出丰富的无监督的预训练是许多语言理解系统的组成部分。特别是，这些结果使小数据集任务能够从深层的单向结构中受益。文章的主要贡献是将这些发现推广到深层双向体系结构中，从而使相同的经过预训练的模型成功地解决了各式各样的NLP任务。</li>
-</ul>
-<h4 id="附录内容"><a href="#附录内容" class="headerlink" title="附录内容"></a>附录内容</h4><ul>
-<li>A. BERT的额外的细节<ul>
-<li><strong>MLM</strong>。保持不变的部分是为了让表示偏向实际的单词。因为Transformer不知道哪一个词会被Masked，所以会强制保持每一个单词的上下文表示的分布。此外，因为随机替换只占有1.5%（15%中的10%），这不会损害模型的语言理解能力，在附录C.2文章说明了这个过程。</li>
-<li>与标准LM相比，MLM仅对batch中的15%的token进行预测，这表明模型可能需要更多的预训练步骤才能收敛，在C.1中说明了模型收敛速度慢一点，但是MLM的效果远远超过了增加的训练成本。</li>
-<li><strong>NSP</strong>。下一个句子预测任务能被说明通过下面这个例子。<ul>
-<li>Input=[CLS] the man went to [MASK] store [SEP] he bought a gallon [MASK] milk [SEP]</li>
-<li>Label=IsNext</li>
-<li>Input=[CLS] the man [MASK] to the store [SEP] penguin [MASK] are flight ##less birds [SEP]</li>
-<li>Label=NotNext</li>
-</ul>
-</li>
-<li><strong>预训练过程</strong>。为了生产输入句子，通过采样两个跨度的方式进行采样，第一个句子接收A embeddings，第二个句子接收B embeddings，B有50%的概率是A的下一个句子。最后的句子再被采样为长度为小于等于512。<ul>
-<li>？？？有两个embeddings？</li>
-</ul>
-</li>
-<li>文章训练了256个序列在1,000,000 steps，将近40 epochs 在3.3 billion单词语料库上。使用gelu激活而不是relu，following OpenAI GPT。 损失是MLM 似然和NSP似然的求和。</li>
-<li>训练base版本使用4个Cloud TPUs（总共16个TPU芯片），large版本在16 Cloud TPUs（总共64个TPU芯片）。每个预训练需要4天完成。</li>
-<li><strong>微调过程</strong>。微调阶段的参数和与预训练阶段的参数大多是相同的，除了batch size，学习率，epochs数量。发现一些范围内的参数是非常好的，包括：<ul>
-<li>batch size：16,32</li>
-<li>学习率（Adam）：5e-5,3e-5,2e-5</li>
-<li>epochs：2，3，4</li>
-</ul>
-</li>
-<li>文章还发现大数据集（100k+被标记的训练样例）是很少对超参数敏感相对于小数据集。微调是非常快的。</li>
-<li><strong>BERT，ELMo，OpenAI GPT的比较</strong>：如下图所示。除了结构上的差别，ELMo是feature-based方法，BERT和OpenAI GPT是微调的方法。<ul>
-<li>OpenAI GPT使用Transformer left-to-right LM在一个大的文本语料库。</li>
-<li>文章的核心在于双向性和两个预训练任务，其他和GPT都很相似。但是文章也发现了一些BERT和GPT上的其他不同：GPT训练在BooksCorpus（800M words），BERT训练在BooksCorpus（800M words）和Wikipedia（2500M words）；GPT仅仅使用[SEP]和[CLS]在微调阶段，BERT在预训练阶段就使用了，此外还有A/B embeddings；GPT预训练1M步，batch size为32000 words，BERT被训练1M 步，batch size为128000 words；GPT使用相同的学习率在微调阶段，BERT根据特定任务的不同，学习率不同。</li>
-</ul>
-</li>
-<li><img src="/assets/blogImg/BERT-fig3.png" alt="image-20200505203055134"></li>
-<li>不同任务上微调的说明。图4说明了不同任务的微调方法的不同。</li>
-</ul>
-</li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>微调和feature-based方法的区别？ELMo不是微调吗？微调到底是怎么做的，能够达到不需要调整任何参数？</li>
-<li>Cloze  task  (Taylor,  1953).</li>
-<li>微调到底是怎么回事，是不是就不需要特定任务的模型结构了？</li>
-<li>C在做分类时候才起到作用，比如NSP中的二值分类。</li>
-<li>这篇文章的作者似乎不同意ELMo的双向和深层。</li>
-<li>BERT的缺点：<ul>
-<li>不是语言模型，不能用来生成文本。</li>
-<li>训练和预测过程是不同的。</li>
-<li>训练效率低。</li>
-</ul>
-</li>
-<li>针对90％的步骤对序列长度为128的模型进行了预训练。 然后，我们训练长度为512的序列中其余10％的步骤，以学习位置嵌入。？？？</li>
-<li>博客观点：BERT绝对是一项里程碑式的工作。我想可能利用语言模型预训练然后在fine-tuning这条路可能已经走到底了。无论是从技术上还是从资源上来讲。技术上来讲，BERT使用了masked lm和下一句预测的联合训练方法，在加上12层($BERT_{BASE}$)的transformer，的确碾压ELMo,ULMFiT,OpenAI GPT; 从资源上讲，开销巨大，个人很难复现其工作。它有可能是CV领域利用image net预训练出的那些著名模型在NLP领域的对等物。这同时也是Transformer的巨大胜利，它的self attention机制和position embedding相信会赢得更大的关注。理论上来讲，还是存在那么多的未知：12层或者24层的架构究竟学到了什么？这不是CV领域，低层学语法特征，高层学语义特征不足以解释其效果; 另外实验中的复杂模型竟然在小数据集上也表现优异，个人觉得这不是经过了充足的预训练就能够解释清楚的。原文链接：<a href="https://blog.csdn.net/triplemeng/article/details/83053419" target="_blank" rel="noopener">https://blog.csdn.net/triplemeng/article/details/83053419</a></li>
-</ul>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/89563245" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/89563245</a></li>
-<li><a href="https://www.jianshu.com/p/4cb1f255cd7c" target="_blank" rel="noopener">https://www.jianshu.com/p/4cb1f255cd7c</a></li>
-<li><a href="https://jalammar.github.io/" target="_blank" rel="noopener">Jay Alammar</a>：<a href="https://blog.csdn.net/qq_41664845/article/details/84787969" target="_blank" rel="noopener">https://blog.csdn.net/qq_41664845/article/details/84787969</a></li>
-<li>翻译：<a href="https://yuanxiaosc.github.io/2018/12/25/Bidirectional_Encoder_Representations_Transformers翻译/" target="_blank" rel="noopener">https://yuanxiaosc.github.io/2018/12/25/Bidirectional_Encoder_Representations_Transformers%E7%BF%BB%E8%AF%91/</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">BERT</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">pre-train</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">transformer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/12/naacl02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2399,6 +2323,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -2415,11 +2347,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2431,15 +2367,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2467,22 +2403,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">意图检测</a>
               </li>
              
@@ -2491,7 +2411,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
+                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2527,15 +2451,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2543,55 +2459,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">可验证鲁棒性</a>
+                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随机平滑</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">可信半径</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">鲁棒性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2604,22 +2476,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">推荐系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2647,6 +2503,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Skip-gram</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">负采样</a>
               </li>
              
@@ -2663,11 +2523,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2680,6 +2556,82 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">可验证鲁棒性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随机平滑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">emnlp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">encoder-decoder</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">可信半径</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">鲁棒性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2703,6 +2655,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ELMo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">representation</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">BERT</a>
               </li>
              
@@ -2715,47 +2675,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ELMo</a>
+                <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">representation</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">综述</a>
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">综述</a>
               </li>
              
               <li class="article-tag-list-item">
