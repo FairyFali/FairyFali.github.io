@@ -24,7 +24,7 @@
 <meta property="og:image" content="/assets/blogImg/Char-CNN_tab4.png">
 <meta property="og:image" content="/assets/blogImg/Char-CNN_fig3.png">
 <meta property="og:image" content="/assets/blogImg/Char-CNN_fig4.png">
-<meta property="og:updated_time" content="2020-09-10T07:25:09.330Z">
+<meta property="og:updated_time" content="2020-09-10T07:31:55.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Character-level Convolutional Networks for Text Classification">
 <meta name="twitter:description" content="论文题目 基于字符级别的卷积网络的文本分类方法 发表在NIPS 2015 论文下载：http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf Code：https://github.com/zhangxiangxiao/Crepe  论文作者 Xiang Z">
@@ -264,8 +264,9 @@ var _hmt = _hmt || [];
 <li>之前的研究在ConvNets在不同的领域已经展示了它们通常有效包括大规模数据集，特别是当模型使用低级别的原生特征像字符。可是，大多数开源文本分类数据集是十分小的，大规模数据集被分割为十分小的训练集相比于测试集。因此，我们没有使用它们来混淆我们的社区，而是为我们的实验构建了几个大规模的数据集，范围从数十万到数百万个样本。 表3是总结。</li>
 <li><p><img src="/assets/blogImg/Char-CNN_tab3.png" alt="image-20200910115638998"></p>
 </li>
-<li><p>1.AG‘s news语料。我们得到了AG’s 新闻语料在web（<a href="http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），它包含来自2000多个新闻来源的496,835个分类新闻文章。" target="_blank" rel="noopener">http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），它包含来自2000多个新闻来源的496,835个分类新闻文章。</a> 我们仅从标题和描述字段中选择该语料库中最大的4个类来构建数据集。 每个类别的train样本数量为30,000，测试数量为1900。</p>
+<li><p>1.AG‘s news语料。我们得到了AG’s 新闻语料在web（<a href="http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），" target="_blank" rel="noopener">http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html），</a></p>
 </li>
+<li>它包含来自2000多个新闻来源的496,835个分类新闻文章。 我们仅从标题和描述字段中选择该语料库中最大的4个主题类别来构建数据集。 每个类别的train样本数量为30,000，测试数量为1900。</li>
 <li>2.Sougou 新闻语料。该数据集是SogouCA和SogouCS新闻语料库的组合，总共包含各种主题频道中的2,909,551条新闻文章。 然后，通过手动分类新闻的域名，我们使用其URL标记新闻。 这使我们获得了大量带有其类别标签的新闻文章。 类别很多，但大多数只包含很少的文章。 我们选择5个类别-“体育”，“金融”，“娱乐”，“汽车”和“技术”。 每个类别选择的训练样本数量为90,000，测试次数为12,000。 尽管这是中文数据集，但我们还是使用了pypinyin拼音软件包与jieba中文分词系统相结合来产生拼音-汉语的语音罗马化。然后，英语模型可以直接应用于该数据集。 使用的字段是标题和内容。</li>
 <li>3.DBPedia本体数据集。DBpedia是从Wikipedia 中提取结构化信息的人群资源。 通过从DBpedia 2014中选择14个不重叠的类来构建DBpedia本体数据集。从这14个本体类中的每一个中，我们随机选择40,000个训练样本和5,000个测试样本。 我们用于此数据集的字段包含每个Wikipedia文章的标题和摘要。</li>
 <li>4.Yelp 评论。Yelp评论数据集来自2015年的Yelp数据集挑战赛。该数据集包含1,569,264个包含评论文本的样本。 从该数据集构建了两个分类任务–一个预测用户给定的stars总数，另一个通过考虑stars 1和2为负，stars 3和4为正，来预测极性标签。 完整的数据集在每颗star中具有130,000个训练样本和10,000个测试样本，而极性数据集在每个极性中具有280,000个训练样本和19,000个测试样本。</li>
@@ -382,6 +383,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/09/15/emnlp04/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          论文阅读：Generating Natural Language Adversarial Examples※
+        
+      </div>
+    </a>
   
   
     <a href="/2020/09/09/acl06/" id="article-nav-older" class="article-nav-link-wrap">
@@ -536,6 +546,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -549,26 +571,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">脚本事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">自然语言处理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,6 +634,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICML</a>
               </li>
              
@@ -657,10 +667,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,19 +742,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Batch Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">正则化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -756,7 +750,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">异构图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -765,6 +779,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">随机平滑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本度踹</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,18 +834,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -832,19 +846,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,11 +870,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+                <a href="javascript:void(0)" class="js-tag color5">鲁棒训练</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -884,11 +894,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">黑盒</a>
+                <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
