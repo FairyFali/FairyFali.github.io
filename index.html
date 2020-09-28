@@ -154,6 +154,334 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-naacl03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/28/naacl03/">论文阅读：Counter-fitting Word Vectors to Linguistic Constraints</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/28/naacl03/" class="archive-article-date">
+  	<time datetime="2020-09-28T01:58:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>Counter-fitting 语言约束的词向量</li>
+<li>发表在NAACL 2016</li>
+<li>短文</li>
+<li>论文下载：<a href="https://www.aclweb.org/anthology/N16-1018/" target="_blank" rel="noopener">https://www.aclweb.org/anthology/N16-1018/</a></li>
+<li>Code：<a href="https://github.com/nmrksic/counter-fitting" target="_blank" rel="noopener">https://github.com/nmrksic/counter-fitting</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Nikola Mrksic，Nikola Mrkšić是PolyAI的首席执行官和联合创始人，该公司是一家位于伦敦的对话式AI公司，为大型企业客户提供服务。在开始PolyAI之前，Nikola曾在剑桥的Apple Siri团队工作，他是VocalIQ（苹果收购的对话系统初创公司）的第一位工程师。他完成了博士学位。在剑桥，与Dialogue Systems Group的Steve Young教授一起工作。GitHub：<a href="https://github.com/nmrksic" target="_blank" rel="noopener">https://github.com/nmrksic</a></li>
+<li>二作Diarmuid O Seaghdha。在Siri团队工作。之前，是剑桥计算机实验室自然语言和信息处理小组的高级研究助理。个人主页:<a href="https://www.cl.cam.ac.uk/~do242/" target="_blank" rel="noopener">https://www.cl.cam.ac.uk/~do242/</a></li>
+<li>三作 Blaise Thomson。</li>
+<li>四作 Milica Gasic。</li>
+<li>五作Lina Rojas-Barahona。</li>
+<li>六作 Pei-Hao Su。</li>
+<li>七作David Vandyke。</li>
+<li>八作Tsung-Hsien Wen。温宗宪 （Shawn）是PolyAI的联合创始人兼首席技术官，该公司是一家总部位于伦敦的初创公司，致力于通过对话式AI技术实现全球客户支持的自动化。剑桥大学博士，导师是Steve Young。</li>
+<li>九作Steve Young。</li>
+</ul>
+<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
+<li>将同义词的词向量靠近，反义词的词向量远离。</li>
+</ul>
+<h4 id="论文提出了什么方法"><a href="#论文提出了什么方法" class="headerlink" title="论文提出了什么方法"></a>论文提出了什么方法</h4><ul>
+<li>增加语言约束的counter-fitting方法。</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>我们提出了一个新颖的counter-fitting方法，注入同义词和反义词约束在向量空间以提高向量判断语义相似性的能力。将该方法应用于公开可用的预训练词向量，将在SimLex-999数据集上产生新的性能水平。 我们还将展示该方法如何用于为对话状态跟踪的下游任务量身定制单词向量空间，从而在不同对话域之间实现鲁棒的改进。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>许多流行的方法引入了单词表示依赖分布式假设，假设是语义相似或相关单词出现在相似上下文中的假设。该假设支持从大型语料库中无监督学习有意义的单词表示形式。单词向量使用这些方法已经证明对许多下游任务包括机器翻译和依赖解析是有效的。</li>
+<li>一个从共现信息中学习词嵌入的缺陷是它倾向于合并语义相似性和概念关联的概念。此外，即使是可以将相似性与关联性区分开的方法（例如，基于语法共现），也通常无法分辨出同义词和反义词。例如，单词east和west或者expensive和inexpensive出现在几乎相同的上下文，意味着分布式模型对这些词产生非常相似的表示。这些同义词的例子在GloVe向量能够在表1中看到，单词比如cheaper和inexpensive是是非相似的和expensive（它们的反义词）。</li>
+<li><img src="E:\博客笔记\counter-fitting_fig1.png" alt="image-20200815221040754"></li>
+<li>第二个缺陷是第二个缺点是相似性和反义词可能是特定于应用程序或领域的。我们感兴趣与探索DST对话状态跟踪任务的分布式知识。对话系统的DST组件负责解释用户的话语并更新系统的信任状态-对话所有可能状态的概率分布。比如，DST在餐馆领域需要检测出是否用户想要一个cheap或者昂贵的餐馆。能够概括使用分布式信息，同时能够区分语义的不同，但是概念上是相关的，比如cheaper和pricey，对于对话系统的性能是非常重要的。尤其是，对话系统可能会因错误的同义词而严重误入歧途。</li>
+<li>我们提出了一个方法，解决这两个缺陷，通过使用从一般词汇资源或特定于应用程序的本体中提取的同义词和反义关系来微调分布词向量。我们的方法，我们称之为counter-fitting，本着改造的精神，这是一种轻量级的后处理程序。表1中的第二行说明了counter-fitting的结果：最近的邻居比原始GloVe向量更直观地捕获了真实相似性。这个过程改善了词向量的质量无论初始的词向量（注意这里的改善不是针对语义相似度，而是改善Mohammad发现的问题，反义词概念是相关的而不是相似的）。通过应用counter-fitting到Paragram-SL999词向量Wieting 2015，我们实现了一个新的先进的性能在SimLex-999，一个数据集设计用来策略不同的模型对于语义相似度的程度。我们还表明，counter-fitting方法可以将对话域本体的知识注入到单词向量空间表示中，以促进语义词典的构建，从而提高跨两个不同对话域的DST性能。</li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><h4 id="语言约束的Counter-fitting-单词向量"><a href="#语言约束的Counter-fitting-单词向量" class="headerlink" title="语言约束的Counter-fitting 单词向量"></a>语言约束的Counter-fitting 单词向量</h4><ul>
+<li>我们的起点是一个带有索引的单词向量集合$V=\{ v_1, v_2, …,v_N \}$，我们会注入语义关系进入此行了产生一个新的单词向量几何$V’=\{ v_1’,v_2’,…,v_N’ \}$。对于反义词和同义词我们对应地有一个约束集合A和S。每一个集合的元素都是一对单词索引；比如S中的(i,j)表示第i个单词和第j个单词是同义词。用于将预训练的单词向量伪造为语言约束A和S的集合的目标函数包含三个不同项：</li>
+<li>1.反义词相斥（AR）：这项用来push反义词向量互相远离：</li>
+<li>$AR(V’)=\underset{(u,w) \in A}{\sum} \tau (\delta-d(v_u’, v_w’))$</li>
+<li>其中d是1-余弦相似度，$\tau (x)$等价于$max(0, x)$给cost增加了一定的maigin。 从直觉上讲，δ是反义词之间的“理想”最小距离； 在我们的实验中，我们将δ= 1.0设置为与向量正交性相对应的值。</li>
+<li>2.同义词相吸（SA）：counter-fitting构成应该设法使已知同义单词对的单词向量更接近在一起：</li>
+<li>$SA(V’)=\underset{(u,w) \in S}{\sum} \tau (d(v_u’, v_w’)-\gamma)$</li>
+<li>其中，γ是理想的最大距离在同义词之间，我们取0.</li>
+<li>3.向量空间保持（VSP）。原始向量空间的拓扑描述了使用非常大的文本语料库中的分布信息捕获的词汇中单词之间的关系。 VSP项将转换后的向量空间尽可能地弯曲到原始向量空间，以保留原始向量中包含的语义信息：</li>
+<li>$VSP(V, V’)=\sum_{i=1}^N\sum_{j \in N(i)} \tau(d(v_i’, v_j’)-d(v_i, v_j))$</li>
+<li>为了计算效率，我们没有计算每一对单词的距离。代替地，我们关注于邻居N(i)，贡献了在原始向量空间V第i个单词周围的一个特定半径ρ内的单词集合。我们的实验表明了counter-fitting是相对不敏感对于ρ，值在0.2到0.4之间，我们使用0.2.</li>
+<li>目标函数是三项的加权求和：</li>
+<li>$C(V,V’)=k_1 AR(V’) + k_2 SA(V’) + k_3 VSP(V, V’)$</li>
+<li>我们的实验设置$k_1=k_2=k_3$,使用SGD优化20epochs。在四CPU的笔记本电脑上运行端到端过程少于2分钟。</li>
+<li>3.1注入对话领域本体进入单词向量表示</li>
+<li>对话状态跟踪（DST）模型捕获了用户话语的目标。目标是由槽位值对表示的约束表达，例如[food: Indian] 或者 [parking: allowed]。slots集合S和values集合$V_S$组成了对话领域的本体。</li>
+<li>在本文中，我们采用了递归神经网络（RNN）框架进行跟踪（Hender-son等，2014d; Henderson等，2014c; Mrkˇsíc等，2015）。 该模型没有使用口语理解（SLU）解码器将用户话语转换为含义表示，而是直接对从自动语音识别（ASR）假设中提取的n元语法特征进行操作。这种方法的缺点是RNN模型只能执行精确的字符串匹配以检测用户提到的插槽名称和值。 它无法识别同义词，例如pricey和expensive，甚至无法识别细微的形态变化，例如moderate和moderately。 解决此问题的一种简单方法是使用语义词典：本体列表中的值的重新表述，手工制造字典需要大量人力。 但是，如果可以自动检测到高质量的措辞，则此功能将不会给系统设计人员带来额外的费用。</li>
+<li>为了得到能够用来创造语义词典的单词向量集合，我们需要注入领域本体进入向量空间。这可以通过在每个slot的所有可能值之间引入反义约束来实现（即Chinese和Indian，expensive和cheap等）。 其余的语言约束可以来自语义词典：注入的同义词和反义词的集合越丰富，所得到的单词表示就越好。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>4.1 单词向量和语义词汇表</li>
+<li><p>两个不同的预训练词向量集合被用来作为输入到counter-fitting过程：</p>
+<ul>
+<li>1.Glove：300-dim 向量 by Pennington 2014</li>
+<li>2.Paragram-SL999：300-dim 向量 by Wieting2015</li>
+</ul>
+</li>
+<li><p>同义词和反义词约束被得到从两个语义词表：</p>
+<ul>
+<li>1.PPDB2.0。Pavlick 2015 释义数据库的最新版本。 此版本的新功能是它将关系类型分配给其单词对。 我们用同义词来识别等价关系，而用反义词来识别排除关系。 我们使用了数据库的最大可用版本（XXXL），并且仅考虑了single-token 项。</li>
+<li>2.WordNet。Miller 1995 一种众所周知的语义词典，其中包含大量高质量的人工注释同义词和反义词对。 我们词汇表中任何两个具有反义词的词都被视为反义词。 没有使用WordNet同义词。</li>
+</ul>
+</li>
+<li>总之，词汇表产生了12802对反义词和31828对同义词，其中包括76,427个Open-Subtitles中最常见的单词，，来自于invokeit.wordpress.com/frequency-word-lists/</li>
+<li>4.2改善词汇相似性预测</li>
+<li>在本节中，我们表明具有语言约束的反拟合预训练单词向量提高了其在判断语义相似性方面的有用性。 我们将Spearman的排名相关系数与SimLex-999数据集结合使用，该数据集包含按大量注释者排列的单词对，指示它们仅考虑语义相似性。</li>
+<li>表2总结了最近报告的SimLex-999竞争得分，包括原始的，翻新的和counter-fitting的GloVe和Paragram-SL999单词向量的性能。<strong>据我们所知，后者的0.685数字代表当前的高分。 该数字高于注释者之间的平均协议一致性0.67，在迄今为止的大多数工作中，该协议被称为最高性能。</strong></li>
+<li><img src="E:\博客笔记\counter-fitting_fig2.png" alt="image-20200816155302915"></li>
+<li><strong>我们认为，注释者之间的平均协议不是衡量最高绩效的唯一有意义的指标。 我们认为将以下内容进行比较也很有意义：a）模型排名与gold标准排名的相关性与：b）人类注释者的排名与gold标准排名所达到的平均排名相关性。 SimLex-999作者告知我们，与黄金标准的平均注释者协议为0.78. 如表2所示，所报告的所有模型和词向量的性能均大大低于此数字。</strong></li>
+<li><strong>Retrofitting预训练词向量改善了GloVe向量，但是不能改善已经语义化的Paragram-SL999向量。</strong>反向拟合实质上改善了这两组向量，这表明注入反义词关系对于改善词向量以达到语义相似性判断的目的大有帮助。</li>
+<li>表3展示了注入不同的语言约束的效果。GloVe向量受益于所有三个约束，Paragram仅仅在WordNet反义词有效。</li>
+<li><img src="E:\博客笔记\counter-fitting_fig3.png" alt="image-20200816201940032"></li>
+<li>表4说明了如何通过反拟合来修复基于原始（Paragram）向量的不正确的相似性预测。 <strong>该表显示了八个错误的同义词和九个错误的反义词：预测对排名最高（底部）的单词对为200个单词对，黄金标准排名500。这些误差中的八个通过反拟合得以解决：预测与黄金标准排名之间的差现在为100或更小</strong>。</li>
+<li><p><img src="E:\博客笔记\counter-fitting_fig4.png" alt="image-20200816202310927"></p>
+</li>
+<li><p>有趣的是，八个纠正的单词对中的五个未出现在语言约束集中； 这些在表中用双勾号表示。 这表明通过代价函数的三个项的辅助（即间接）交互作用确实有助于转换后的向量空间的语义内容。</p>
+</li>
+<li>4.3 改善对话状态跟踪</li>
+<li>表5显示了用于评估的对话状态跟踪数据集。 这些数据集来自“对话状态跟踪挑战2”和“挑战3” (Hender-son et al., 2014a; Henderson et al., 2014b)。</li>
+<li>我们使用了四组不同的单词向量来构建语义词典：原始的GloVe和Paragram-SL999向量，以及与每个领域本体Counter-fitting的版本。 用于Counter-fitting的约束是上一部分中的所有约束，以及每个插槽的值集中的反义约束。 使用网格搜索确定t的最佳值：我们生成了一个字典并为每个潜在的t训练了一个模型，然后在开发集上进行了评估。 表6显示了使用构造的字典的RNN模型的性能。 从预训练向量中导出的字典大大提高了在基线（不使用语义词典）上的跟踪性能。 使用反拟合向量创建的字典甚至进一步提高了性能。 与SimLex-999实验相反，从Paragram矢量开始并没有带来卓越的性能，这表明注入专用本体至少与初始单词矢量的质量同样重要。</li>
+<li><img src="E:\博客笔记\counter-fitting_fig5.png" alt="image-20200816220250411"></li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>我们提出了一种新颖的反拟合方法，用于将语言约束注入词向量空间表示中。 该方法有效地对词向量进行后处理，以提高其对涉及语义相似性判断的任务的有用性。 它着重于分离反义词对的向量表示，从而导致对真实相似度估计任务的实质性改进。 我们还表明，反拟合可以通过使用反向本体将域本体注入用于构造对话系统语义词典的单词向量中，来定制用于下游任务的单词向量。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>ontology 是什么意思？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词向量</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/28/naacl03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-aaai02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/28/aaai02/">论文阅读：Is BERT Really Robust? A Strong Baseline forNatural Language Attack on Text Classification and Entailment</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/28/aaai02/" class="archive-article-date">
+  	<time datetime="2020-09-28T01:55:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准</li>
+<li>发表在AAAI2020</li>
+<li>论文下载：<a href="https://aaai.org/ojs/index.php/AAAI/article/view/6311" target="_blank" rel="noopener">https://aaai.org/ojs/index.php/AAAI/article/view/6311</a></li>
+<li>Code：<a href="https://github.com/jind11/TextFooler" target="_blank" rel="noopener">https://github.com/jind11/TextFooler</a><ul>
+<li>Keras</li>
+</ul>
+</li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Di Jin，毕业<a href="https://www.csail.mit.edu/" target="_blank" rel="noopener">CSAIL</a>在麻省理工学院，监督由教授 <a href="http://groups.csail.mit.edu/medg/people/psz/home/Pete_MEDG_site/Home.html" target="_blank" rel="noopener">Peter Szolovits</a> at the <a href="http://groups.csail.mit.edu/medg/" target="_blank" rel="noopener">Clinical Decision Making Group</a>。很快加入Amazon Alexa AI，和<a href="https://scholar.google.com/citations?user=GMcL_9kAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dilek Hakkani-Tur</a>担任对话系统的研究科学家。个人主页：<a href="https://jind11.github.io/，GitHub：https://github.com/jind11" target="_blank" rel="noopener">https://jind11.github.io/，GitHub：https://github.com/jind11</a></li>
+<li>Zhijing Jin，香港大学本科毕业，我的本科研究论文是由香港大学的高本杰教授指导的。是一名NLP研究员和有效的利他主义者。目前正在与Amazon AI进行研究，很快将在2020年秋季在Max Planck Institute的Bernhard Schoelkopf博士开始。个人主页：<a href="https://zhijing-jin.com/fantasy/" target="_blank" rel="noopener">https://zhijing-jin.com/fantasy/</a></li>
+<li>Joey Tianyi Zhou，周天一。是新加坡A * STAR高性能计算研究所（IHPC）的科学家，PI和组经理。个人主页：<a href="https://joeyzhouty.github.io/" target="_blank" rel="noopener">https://joeyzhouty.github.io/</a></li>
+<li>Peter Szolovits，个人主页：<a href="https://www.csail.mit.edu/person/peter-szolovits" target="_blank" rel="noopener">https://www.csail.mit.edu/person/peter-szolovits</a></li>
+</ul>
+<h4 id="论文解决的问题"><a href="#论文解决的问题" class="headerlink" title="论文解决的问题"></a>论文解决的问题</h4><h4 id="论文提出的方法"><a href="#论文提出的方法" class="headerlink" title="论文提出的方法"></a>论文提出的方法</h4><ul>
+<li>提出了TextFooler黑盒攻击方法，攻击了三个目标模型。远远优于TextBugger和遗传算法。</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>机器学习算法通常容易受到对抗样本的攻击，这些样本与原始样本相比没有明显的变化，但是却欺骗了最先进的模型。通过公开恶意制作的对抗样本，有助于评估甚至提高这些模型的鲁棒性。在本文中，我们介绍了TEXTFOOLER，它是简单而强大的基准来生成对抗性文本。通过将其应用于两个基本自然语言任务（文本分类和文本蕴涵），我们成功地攻击了三个目标模型，包括强大的预训练BERT和广泛使用的卷积神经网络和递归神经网络。我们展示了此框架的三个优点：（1）有效-通过成功率和扰动率优于先前的攻击；（2）效用保留性-它可以保留语义内容，语法和按人类分类的正确类型，以及（3）有效率—生成对抗性文本，其计算复杂度与文本长度成线性关系。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>最近十年，机器学习模型已经展示了十分成功在多种任务上比如分类，回归和决策制定。但是，最近发现它们很容易受到对抗性样本的攻击，这些例子是合法的输入，这些输入被小且通常不易察觉的扰动所改变（Kurakin，Goodfellow和Bengio 2016a; 2016b; Papernot等人2017; Zhao，Dua和Singh 2017）。这些精心策划的样本由人类观察者正确分类，但可能使目标模型蒙蔽，引起对现有ML算法的安全性和完整性的严重关注。另一方面，ML模型的鲁棒性和泛化性能够通过制造高质量的对抗样本和添加它们到训练数据而改善 (Goodfellow, Shlens, and Szegedy 2015)。</li>
+<li>尽管存在工作在对抗性样本已经得到了成功在图像和语音领域（Szegedy etal. 2013; Carlini and Wagner 2018), 解决文本数据仍然是困难的，因为它的离散特性。形式上，除了欺骗目标模型的能力，自然语言攻击系统的输出应该满足三个关键的留存特定：（1）人类预测一致性，（2）语义相似性，（3）语言流畅性。以前的工作几乎不符合这三个要求。例如，单词拼写的方法(Li et al. 2018; Gao et al. 2018), 单个单词去除 (Li, Monroe, and Jurafsky 2016), 和短语插入和移除(Liang  et  al.  2017)  导致了不自然的句子。而且，几乎没有工作可以攻击新兴起的文本分类的BERT模型。</li>
+<li>在这个工作中，我们提出了TextFooler，一个简单但是强壮的基线对于自然语言攻击在黑盒设置下，一个常见的情况是没有模型结构和参数可供访问。我们设计了一个更全面的范例，以创建符合上述三个要求的语义和句法相似的对抗性样本。具体地，我们首先确定重要单词对于目标模型，然后优先替换他们为语义和语法上最相似的正确的单词指导预测被改变。我们成功的应用这个框架攻击了3种先进的模型在5个文本分类任务和两个文本蕴涵任务。在对抗新样本，我们能够降低几乎所有目标模型的准确率到10%以下，仅仅扰动了20%的单词。此外，我们验证生成的样本，（1）人类评估者判断，（2）语义相似性与原始文本，（3）语法上被人类判断接收。</li>
+<li>我们的主要贡献总结如下：</li>
+<li>我们提出了一个简单的但是强壮的baseline，TextFooler，快速地生成高质量的效用保持的对抗样本，使得目标模型只做了错误的预测在黑盒设置下。</li>
+<li>我们评估TextFooler在先进的深度学习模型在5个文本分类任务和2个文本蕴涵任务，它实现了先进的攻击成功率和扰动率。</li>
+<li>我们提议对语言对抗攻击进行全面的<strong>四向自动和三向人工评估</strong>，以评估系统的有效性，效率和实用性。</li>
+<li>我们开源了代码，预训练目标模型和测试数据，以便将来的研究。</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><strong>问题形式化</strong></li>
+<li>给你的能给一个语料，N个句子，$\mathcal{X} = \{ X_1,X_2,..,X_N \}$，和一个相应的N个标签的集合$\mathcal{Y}=\{ Y_1,Y_2,…,Y_N \}$，我们有一个预训练模型$F:\mathcal{X} \rightarrow \mathcal{Y}$，映射输入文本空间$\mathcal{X}$到标签空间$\mathcal{Y}$。</li>
+<li>对于一个句子X，一个可用的对抗样本$X_{adv}$应该满足一下需求：</li>
+<li>$F(X_{adv}) \ne F(X), and  Sim(X_{adv},X)\ge\epsilon$（1）</li>
+<li>其中Sim为$\mathcal{X} \times \mathcal{X} \rightarrow (0,1)$是一个相似度函数，$\epsilon$是最小的相似度。在自然语言领域，Sim经常是一个语义和语法的度量。</li>
+<li><strong>威胁模型</strong></li>
+<li>在黑盒设置下，攻击者不知道模型结构，参数，或者训练数据，它仅仅能够查询目标模型的输入和预测结果以及相应的置信度分数。</li>
+<li>提出的对抗文本生成方法被展示在算法1，由两步组成：</li>
+<li><img src="/assets/blogImg/TextFooler_alg1.png" alt="image-20200916103149138"></li>
+<li><strong>步骤1：单词重要性排序（1~6行）</strong></li>
+<li>给定一个句子，n个单词$X = \{ w_1,w_2,…,w_n \}$，我们观察到只有一些关键词充当了预测模型F的影响信号，这与BERT参与某些词的统计线索的发现（Nivenand Kao 2019）相呼应。因此，我们创建了一个选择机制来选择单词，对最终预测结果最具有影响力的单词。使用这个选择过程我们最小化了替换，并且尽可能地维持了语义相似度。</li>
+<li>注意重要单词的选择是微不足道的在白盒设置下，因为它能容易地通过检查模型F的梯度，然而大多数其他单词是无关紧要的。可是在最常见的黑盒设置下，模型梯度是不可用的。因此我们创建了一个选择机制如下。我们使用分数$I_{w_I}$测量单词$w_i \in X$的影响力。我们贡献分数为删除单词$w_i$，$X_{\setminus  w_i} = X\setminus  \{ w_i \}=\{w_i,w_2,…,w_{i-1}, w_{i+1}, …,w_N \}$ ,使用$F_Y(\cdot)$表示预测为标签Y的分数。</li>
+<li>重要程度$I_{w_i}$因此被计算为改变之前和之后的变化值，形式化如下：</li>
+<li><img src="/assets/blogImg/TextFooler_eq2.png" alt="image-20200916105004627"></li>
+<li>通过重要程度排序单词之后，我们筛选掉停用词从NLTK和spaCy库中派生的，比如the，when，none。这些简单的过滤步骤对于防止语法破坏是很重要的。</li>
+<li><strong>步骤2：单词转换（7到30行）</strong></li>
+<li>对于一个费定的单词$w_i \in X$带有一个高的重要性分数，通过步骤1得到的，我们需要设计一个单词替换机制。一个合适的替换单词需要完成以下准则：它应该（1）有相似的语义含义，（2）适合上下文，（3）是目标模型做出错误的预测。为了选择替换单词，满足这些准则，我们提出了以下工作流。</li>
+<li><strong>同义词提取</strong>：我们收集了一个候选集合Candidates对于所有可能的选择单词$w_i$的替换，Candidates被初始化为N个最近的同义词根据余弦相似度在$w_i$和么一个其他单词之间。为了表示单词，我们使用单词embeddings来自于（Mrksic 2016）。这些词向量专门用于查找同义词，因为它们在SimLex-999上达到了最先进的性能。</li>
+<li>使用这组嵌入向量，我们识别出余弦相似度大于δ的topN同义词。注意，增大N或降低δ都会生成更多不同的同义词候选词； 但是，对抗文本和原始句子之间的语义相似性将会降低。 在我们的实验中，根据经验性地将N设置为50，将δ设置为0.7，可以在多样性和语义相似性控制之间取得平衡。</li>
+<li><strong>POS检查</strong>：在候选集中，我们仅仅保持有相同词性（POS）的的单词（我们使用了现成的spaCy标记器，可从以下<a href="https://spacy.io/api/tagger" target="_blank" rel="noopener">网站</a>获得），此步骤是为了确保大部分文本语法得到保留（算法1中的第10行）。</li>
+<li><strong>语义相似度检查</strong>，对于每一个保留下来的单词$c \in Candidates$，我们使用它替代$w_i$在句子X，得到对抗样本$X_{adv}$。我们使用目标模型F计算相应的预测分数$F(X_{adv})$。我们也计算句子语义相似度在原始的X和对抗样本。具体地，我们使用通用句子编码（USE）(Cer et al 2018)编码两个句子进入一个高维的向量，使用他们的余弦相似度分数作为一个语义相似度的估计。将产生高于预设阈值$\epsilon$的相似性分数的单词放入最终候选池FINCANDIDATES（算法1中的第11-19行）。</li>
+<li><strong>对抗性样本的敲定</strong>：最后的候选池FinCandidates中，如果存在候选，能够改变目标模型的预测标签的，然后我们选择具有最高语义相似度分数的候选单词，但是如果没有，我们选择最小的标签y的置信度分数对应的替换单词，重复步骤2转换下一个单词（算法1中的20到30行）。</li>
+<li>总之，算法首先使用步骤1排序单词重要性，然后重复步骤2找到每一个单词的替换单词指导目标模型的预测发生变化。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>任务</li>
+<li>我们研究我们的攻击方法在两类NLP任务上，文本分类和文本蕴涵。数据集统计和总结在表1.遵从Alzantot 2018的操作，我们评估我们的算法在一个从测试集随机采样的1000样本上。</li>
+<li><img src="/assets/blogImg/TextFooler_tab1.png" alt="image-20200916115725946"></li>
+<li>文本分类。为了研究我们的模型的鲁棒性，我们使用文本分类数据集带有不同属性的，包括新闻主题分类，虚假新闻检测和句子或者文档级别的情感分析。<ul>
+<li>Fake新闻检测：<a href="https://www.kaggle.com/c/fake-news/data" target="_blank" rel="noopener">https://www.kaggle.com/c/fake-news/data</a></li>
+</ul>
+</li>
+<li>文本蕴涵。SNLI和MultiNLI。</li>
+<li>攻击目标模型。对于每个数据集，我们训练了三种先进的模型在训练集上，实现了测试集的准确率分数和原始的实现类似，在表2，我们然后生成了对抗性样本，语义上是相似的，攻击模型产生不同的结果。</li>
+<li><img src="/assets/blogImg/TextFooler_tab2.png" alt="image-20200916163355475"></li>
+<li>在文本分类任务，我们选择了三种模型，单次级别的卷积神经网络（WordCNN）（Kim 2014），单词级别的长短时记忆网络（WordLSTM）（Hochreiter 1997），先进的BERT（Devlin 2018）。</li>
+<li>在文本蕴涵任务同样实现了三种目标模型。Standard InferSent(Conneau et al. 2017),ESIM(Chen et al. 2016), and fine-tuned BERT.<ul>
+<li><a href="https://github.com/facebookresearch/InferSent" target="_blank" rel="noopener">https://github.com/facebookresearch/InferSent</a></li>
+<li><a href="https://github.com/coetaur0/ESIM" target="_blank" rel="noopener">https://github.com/coetaur0/ESIM</a></li>
+</ul>
+</li>
+<li>自动评估的设置</li>
+<li>我们首先将攻击前原始测试样本上目标模型的准确性报告为原始准确性。 然后，我们根据测试样本制作的对抗样本，测量目标模型的准确性，称为攻击后准确性。 通过比较这两个准确性分数，我们可以评估攻击的成功程度，原始和攻击后准确性之间的差距越大，我们的攻击就越成功。 除了这些准确性外，我们还将被干扰词的百分比报告为被干扰词的数量与文本长度的比率。此外，我们使用USE10来度量原始文本和对抗文本之间的语义相似性。 这两个度量标准，即干扰词的百分比和语义相似度得分，共同评估了原始文本和对抗文本在语义上的相似程度。 最后，我们报告攻击系统对目标模型的查询数量，并获取输出概率分数。 该度量可以揭示攻击模型的效率。</li>
+<li>人类评估的设置</li>
+<li>我们根据三个标准进行人工评估：语义相似度，语法和分类准确性。我们会随机选择每个任务的100个测试语句来生成对抗性示例，其中一个针对MRdataset的WordLSTM，另一个针对SNLI的BERT。我们首先将原始文本和对抗文本混合起来，并要求人类判断者以1-5的李克特量表对它们的语法进行评分，类似于（Gagnon-Marchand等人2018）的做法。接下来，我们通过要求人类对原始和对抗性句子的混洗中的每个示例进行分类来评估分类一致性，然后计算两种分类结果的一致性率。最后，通过要求人类判断生成的对抗性句子与源句是否相似，模棱两可或不相似，我们评估了原始句和对抗文本的语义相似性。每项任务均由两名以英语为母语的独立人类法官完成。志愿者具有大学水平的教育背景，并且在开始注释之前通过了一批测试。</li>
+</ul>
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><ul>
+<li>自动化评估。表3和表4.</li>
+<li><img src="/assets/blogImg/TextFooler_tab3.png" alt="image-20200916170413633"></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Bert</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本分类</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">攻击</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/28/aaai02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-emnlp04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -261,11 +589,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">攻击</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">攻击</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -457,11 +785,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Char-CNN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本分类</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本分类</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Char-CNN</a>
         		</li>
       		
 		</ul>
@@ -1675,500 +2003,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-security02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/security02/">论文阅读：Black-box Generation of Adversarial Text Sequences to Evade Deep Learning Classifiers</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/17/security02/" class="archive-article-date">
-  	<time datetime="2020-06-17T03:06:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>黑盒生成的对抗性文本序列可逃避深度学习分类器</li>
-<li>发表在2018 IEEE Symposium on Security and Privacy Workshops</li>
-<li>下载地址：<a href="https://ieeexplore.ieee.org/document/8424632" target="_blank" rel="noopener">https://ieeexplore.ieee.org/document/8424632</a></li>
-<li>论文代码：<a href="https://github.com/QData/deepWordBug" target="_blank" rel="noopener">https://github.com/QData/deepWordBug</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Ji Gao，”I’m a Ph.D. student in the computer science department of the University of Virginia. My research interest is the privacy and security of machine learning. I work under the supervision of Prof. Mohammad Mahmoody”，个人主页：<a href="http://www.cs.virginia.edu/~jg6yd/" target="_blank" rel="noopener">http://www.cs.virginia.edu/~jg6yd/</a></li>
-<li><p><img src="/assets/blogImg/DeepWordBug-auth1.png" alt="1" style="zoom: 18%;" align="left"></p>
-</li>
-<li><p>Jack Lanchantin（杰克·兰尚汀）, 是弗吉尼亚大学（University of Virginia）的计算机科学专业的博士研究生，由Yanjun Qi博士指导。 研究兴趣在于表示学习和可解释的序列和图形结构化数据模型。 特别关注基因组学，蛋白质组学和自然语言的数据。 以前是计算机视觉小组的Microsoft AI and Research的研究实习生。个人主页：<a href="http://www.cs.virginia.edu/~jjl5sw/" target="_blank" rel="noopener">http://www.cs.virginia.edu/~jjl5sw/</a></p>
-</li>
-<li>Mary Lou Soffa（玛丽·卢·索法）, Mary Lou Ehnot Soffa是弗吉尼亚大学计算机科学系的Owen R. Cheatham科学教授。从2004年到2012年，她担任UVA的部门主席。1977年至2004年，她担任匹兹堡大学计算机科学教授，并于1991年至1996年担任艺术与科学学院的研究生院院长。她的研究兴趣包括优化编译器，虚拟执行环境，软件测试，程序分析，软件安全性和用于多核体系结构的软件系统。她发表了175篇文章，并指导32位博士。学生完成学业，其中一半是女性。个人主页：<a href="http://www.cs.virginia.edu/~soffa/" target="_blank" rel="noopener">http://www.cs.virginia.edu/~soffa/</a></li>
-<li>Yanjun Qi（祁妍军），主页：<a href="http://www.cs.virginia.edu/yanjun/bio.htm" target="_blank" rel="noopener">http://www.cs.virginia.edu/yanjun/bio.htm</a></li>
-</ul>
-<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
-<li>为了解决黑盒攻击下的字符级别的对于文本分类的RNN结构的对抗攻击。</li>
-</ul>
-<h4 id="论文提出了什么方法"><a href="#论文提出了什么方法" class="headerlink" title="论文提出了什么方法"></a>论文提出了什么方法</h4><ul>
-<li>提出了一个DeepWordBug算法，字符级别，黑盒攻击，基于文本分类，</li>
-</ul>
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>尽管已经提出了各种技术来生成针对文本的白盒攻击的对抗样本，但是人们很少关注黑盒攻击，这是一种更为现实的情况。在本文中，我们提出了一种新颖的算法DeepWordBug，该算法可在黑盒设置中有效生成小的文本扰动，从而迫使深度学习分类器对文本输入进行错误分类。我们开发了新颖的评分策略，以找到最重要的单词进行修改，从而使深度分类器做出错误的预测。将简单字符级转换应用于排名最高的单词，以最小化扰动的编辑距离。我们在两个真实世界的文本数据集上评估了DeepWordBug：Enron垃圾邮件数据集和IMDB电影评论。我们的实验表明，DeepWordBug可以将Enron的分类准确率从99%降低到40%，将IMDB的分类准确率从87%降低到26%。我们的结果证明，从深度学习模型生成的对抗序列可以类似地规避其他深度模型。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（文本对抗的背景）尽管深度学习已经实现了显著的结果在自然语言处理上，包括语义分析，关系抽取，和机器翻译，最近一些研究指出了增加一些小的扰动在文本输入能够欺骗深度分类器到不正确的分类。自然地，它引起了关于深度学习系统的鲁棒性关注和担忧，考虑到深度学习系统已经成为了许多安全敏感型应用的核心组件，例如及语文本的垃圾邮件检测。</li>
-<li>（文本对抗的定义）形式上，对于一个给定的分类器F和测试样本x，最近的文献定义了扰动为$\Delta x$，扰动结果为$x’$,即对抗样本：</li>
-<li>$x’=x+\Delta x,\left | \Delta x \right |_p  &lt; \epsilon, x’\in \mathbb{X}$</li>
-<li>$F(x) \ne F(x’)$ or $F(x’)=t$</li>
-<li>其中F是一个机器学习分类器$F:\mathbb{X}\rightarrow \mathbb{Y}$，对抗强度$\epsilon$测量合法的转换。目标又可分为无目标和有目标两种。</li>
-<li>扰动距离的选择一般都是$L_p$-norm距离指标。最近的研究都使用三种范数$L_\infty,L_2,L_0$。</li>
-<li>$L_\infty$测量最大的变化在所有维度中，意味着$L_\infty$控制着最大的变化对于每个特征。$L_2$比较欧式距离。这个距离小当所有的距离都很小时。$L_0$限制被改变的数量。</li>
-<li>（黑盒假设的说明）除了有目标/无目标和扰动距离的计算，第三个参数是对抗假设是黑盒或者白盒。对手可能对尝试欺骗的模型由不同程度的了解，范围从无信息到完整信息。在黑盒设置中，一个对手是仅仅允许查询目标分类器，不知道模型的细节或者输入的特征表示。因为对手不知道特征集，它仅仅能够操作输入样本通过测试和观察的输出。在白盒设置中，对手可以访问模型，模型参数，输入的特征集。和黑盒相同，白盒不允许修改模型本身，或者改变训练数据。大多数对抗性样本的研究都是使用白盒假设的。有一个研究展示了成功地创建对抗样本用于降低准确率是可能的不知道模型结构和参数的情况下。</li>
-<li>（对抗攻击的相关工作）最近的研究集中在图片分类上，通常通过优化程序对像素值进行不可察觉的修改。Szegedy第一次发现了DNN模型容易受到对抗性扰动的影响，使用L-BFGS算法找到对抗性样本。他们的研究也发现了对抗性扰动从一个CNN模型能够迫使其他的CNN模型生成不正确的输出。接下来的文章探索了其他的策略来生成对抗操作，包括……。</li>
-<li>（与图片方向的区别）图片能够被自然地表示成连续的$\mathbb{R}^d$空间的点。使用$L_p$-norm距离指标限制图片的修改。可是文本序列的输出是很难找到小的文本修改因为以下原因：<ul>
-<li>文本tokens是类别特征。使用$L_p$-norm在连续空间是有意义的，但是在字母上是不行的，因为它们是离散的。</li>
-<li>每一个文本样本包括一些线性排列的单词序列，序列的长度可变。</li>
-</ul>
-</li>
-<li>由于以上原因，原始的对抗修改$\Delta x$不能直接应用到文本输入上。一个对抗修改可行的定义在文本上是编辑距离。</li>
-<li>（文本对抗的相关工作）……</li>
-<li>（本文提出的方法）我们设计了一个打分函数对于对抗序列通过做小的编辑操作到一个文本序列这样人类会考虑它和原始序列相似。例如，小的变化应该产生对抗单词是不可感知地和原始单词不同。我们做到这点首先针对序列中的重要token，然后对那些token执行修改，从而可以有效的迫使深度分类器做出错误的决定。我们定义的对抗序列的实例如图1所示。深度RNN模型将原始文本输入正确分类为正面情绪。但是通过仅修改几个字符，生成的对抗序列可能会误导深度分类器进行错误的分类。</li>
-<li><img src="/assets/blogImg/DeepWordBug-fig1.png" alt="image-20200614095519849"></li>
-<li>贡献：本文提出了一个有效的算法，DeepWordBug，能够生成对抗序列对于自然语言输入用来逃避evade深度学习分类器，我们的新颖的算法有以下属性：<ul>
-<li>黑盒：之前的方法需要知识，我们的方法可以工作在一个黑盒设置中。</li>
-<li>有效：使用几个新颖的打分函数，带有两个真实世界的文本分类任务，DeepWordBug能够欺骗两种不同的RNN模型比之前的先进的baseline。</li>
-<li>简单：DeepWordBug使用简单的字符级别的转换到对抗序列，对比之前的工作，使用梯度的或者多语言驱动的步骤。</li>
-<li>小的扰动人类难以发现：DeepWordBug能够生成对抗序列看起来和原来的序列更相似。</li>
-</ul>
-</li>
-</ul>
-<h4 id="DeepWordBug"><a href="#DeepWordBug" class="headerlink" title="DeepWordBug"></a>DeepWordBug</h4><ul>
-<li>我们将样本表示为$(x,y)$元素对，其中$x=x_1x_2x_3…x_n$是一个输入文本序列，$y \in \{ 1,…,K \}$，一个机器学习模型被表示为$F:\mathbb{X}\rightarrow\mathbb{Y}$。</li>
-<li><strong>A.循环神经网络</strong>。循环神经网络是一组神经网络，包括一个循环结构来捕获序列依赖在序列之间。RNNs有广泛地使用在NLP任务，已经被证明是有效的在多种NLP任务中，包括情感分析、解析和翻译。由于他们的递归的天性，RNNs能够建模不同长度的输入并且能捕获完整的依赖在所有元素之间，比如所有的空间位置在一个文本样例。为了解决消失的梯度问题，提出了一个RNN变体，LSTM网络实现了更好地性能相比较于朴素的RNNs。</li>
-<li><strong>B.基于单词的修改对于对抗序列</strong>。在典型对抗生成场景中，梯度是被使用指导变化从一个原始的样本到一个对抗样本。可以在黑盒设置中计算梯度是不可用的因为模型参数是不可见的。</li>
-<li>因此我们需要改变输入单词没有梯度的指导。考虑到可能变化的巨大搜索空间，我们首先提出发现重要单词来变化，然后修改它们轻微地通过控制编辑距离和原始样本。更特别的，我们需要一个打分函数评估哪个单词是重要的，和应该改变它来创建一个对抗样本，和一个方法能够被使用来改变单词在一个可控的编辑距离下。</li>
-<li>为了发现关键单词对于模型预测在一个黑盒设置，我们提出了一个时间分数(TS)和一个时间尾分数(TTS)。这两个分数函数被用来解决找到单词重要性对于最终的预测。</li>
-<li>我们假设扰动直接发生在输入单词（即，不是在embeddings，或者语义层）。我们假设扰动近似为最小化编辑距离到原始样本。我们发现了一个有效的策略改变单词并且充分对于常见一个对抗文本序列。</li>
-<li>总之，这个生成基于单词的对抗文本过程在NLP数据上在黑盒设置是一个两步方法:（1）使用打分函数确定每个单词的重要性对于分类结果，并且排序，和（2）使用一个转换算法来改变所选的单词。</li>
-<li><strong>C.步骤1：Token打分函数和排序</strong>。<ul>
-<li>第一，我们知道打分函数确定哪一个单词是重要的对于最终的预测。提出的打分方法有以下属性：<ul>
-<li>1.我们的打分函数有能力反应单词的重要性对于预测。</li>
-<li>2.我们的打分函数计算单词分数不考虑模型参数和结构。</li>
-<li>3.我们的打分函数是有效的。</li>
-</ul>
-</li>
-<li>接下来，我们解释3个打分函数我们提出的：时间分数，时间尾分数和一个两者的组合。</li>
-<li>1）时间分数TS。假设输入序列$x=x_1x_2x_3…x_n$，其中$x_i$表示第i个未知的单词。为了排序单词根据预测重要性，我们需要测量第i个导出在输出分类上。</li>
-<li>在连续的例子中，比如图片，假设一个小的扰动变化$x_i$到$x_i’$。预测输出的结果变化$\Delta_iF(x)$可以被近似使用部分第i个特征的导数：$\Delta_iF(x)=(x_i’-x_i)\triangledown_{x_i}F(x)$</li>
-<li>可是在黑盒设置中，导数是不可用的。在文本的情况下测量$x_i’-x_i$也是很困难的因为单词是离散的。</li>
-<li>因此，我们直接测量$\Delta_iF(x)$通过移除第i个单词。比较预测结果之前和之后反映出单词影响分类结果。RNNs建模单词在一个时序的方式。因此我们定义这个分数为时间分数，第i个单词记为$TS(x_i)=F(x_1,x_2,…,x_{i-1},x_i)-F(x_1,x_2,…,x_{i-1})$</li>
-<li>每个单词的时序分数在输入$x$能被计算通过一个前向过程计算出来，是不昂贵的。</li>
-<li>2）时序尾分数。时序分数的问题是只使用前面的单词。可以单词后面的单词经常是很重要的对于目标。因此我们定义时序尾分数作为时序分数的补充。第i个单词的时序尾分数计算如下：</li>
-<li>$TTS(x_i)=F(x_i,x_{i+1},…,x_n)-F(x_{i+1},…,x_n)$</li>
-<li>3）组合分数。因为时序分数和时序尾分数建模了单词从一句话两个相反的方向，我们能够组合两者。我们计算组合分数如下：</li>
-<li>$Combined Score = TS + \lambda TTS$</li>
-<li>其中$\lambda$是一个超参数。</li>
-<li>一旦我们计算每一个单词重要性分数，我们选择top m个单词进行扰动为了创建一个对抗序列。</li>
-</ul>
-</li>
-<li><strong>D.步骤2：Token Transformer</strong>。之前的方法（总结在表5）改变了单词根据梯度方向，或者根据梯度进行指导。可以在我们的情况有没梯度方向可用。因此我们提出一个有效的方法修改单词，我们故意创建拼写错误的单词。</li>
-<li>关键的发现是单词是符号性的，基于学习的分类程序通过字典来处理NLP单词，以便是可能单词的有限集合。NLP词典的大小通常是更小的比可能的字符组合。这意味着如果我们故意创建拼写错误的单词在重要的单词上，我们能够容易地转换那些重要的单词到“UNK”。位置的单词被映射到UNK embedding 向量在深度学习模型中。我们的结果强烈的暗示了这个简单的侧咯能够有效地迫使RnN模型制造一个错误的分类。</li>
-<li>为了常见这样一个拼写错误，许多策略能够被使用。可是，我们更喜欢小的扰动，因为我们想生成的对抗序列在视觉上和形态学上和人类相同。因此我们更喜欢方法带有一个小的编辑距离，使用Levenshtein距离，是一个指标度量序列之间相似性的指标。我们提出了4中相似性方法：(1)替换，（2）删除，（3）插入，（4）交换。编辑距离对于替换，删除和插入都是1，对于交换操作是2。示例如表1.</li>
-<li><img src="/assets/blogImg/DeepWordBug-tab1.png" alt="image-20200614152051507"></li>
-<li>这些方法不能保证原始单词被改变为一个拼写错误的单词，它是可能的生成一个单词和另一个单词碰撞。可是概率是非常小的。</li>
-<li>对抗性样本的生成总结为算法1，输入为input 序列，RNN分类器F，最大允许的变化m，超参数$\lambda$。</li>
-<li><img src="/assets/blogImg/DeepWordBug-alg1.png" alt="image-20200614135939246"></li>
-<li>生成示例如图2所示。</li>
-<li><img src="/assets/blogImg/DeepWordBug-fig2.png" alt="image-20200614142934371"></li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li>我们评估我们的算法的优先性通过指导实验在不同的RNN模型通过两个真实世界的NLP数据集。特别地，我们想要回答一下研究问题：（1）深度学习模型的准确率降低多少当使用对抗样本时？（2）我们的方法生成的对抗样本是否可以在模型之间迁移？</li>
-<li><strong>A.实验设置</strong>。数据集：使用大的电影评论数据集 IMDB数据集和Enron垃圾邮件数据集。</li>
-<li>IMDB数据集包括50000高极化的电影评论，25000用来训练，25000用来测试，训练一个RNN模型分类电影评论到2类：积极和消极。</li>
-<li>Enron垃圾邮件数据集是一个原始Enron邮件数据集的一个子集。目标是训练一个垃圾邮件过滤器能够确定是否一个信息是垃圾。我们使用一个子集包括3527ham邮件和1500spam邮件。数据集的细节列在表2。</li>
-<li><img src="/assets/blogImg/DeepWordBug-tab2.png" alt="image-20200614152132309"></li>
-<li>目标深度模型：为了展示我们的方式是有效的，我们执行我们的实验在单向和双向LSTMs。第一个模型包括一个随机的embedding层，一个单向LSTM，隐藏层维度100和一个全连接层用于分类，没有对抗样本，这个模型达到了84%准确率在IMDB数据集和99%在垃圾邮件数据集。</li>
-<li>第二个模型是相同的和第一个，除了双向LSTM。没有对抗文本时，达到了86%和98%分别地。</li>
-<li>Baseline：我们实现了一下攻击算法来生成对抗样本：Projected FGSM和Random+DeepWordbug。</li>
-<li>我们的方法：使用打分函数找到更好地突变单词。使用不同的打分函数：replace-1分数，时序分数，时序尾分数和组合分数。使用我们的Transformer改变单词。</li>
-<li>平台：使用Keras with Tensorflow训练。使用英伟达GTX Titan卡。</li>
-<li>性能：攻击方法的性能被评估通过深度模型的对抗文本的准确率。更低的准确率说明更有效的攻击。允许修改的数量是一个超参数。</li>
-<li><strong>B.实验结果</strong>。我们分析攻击的有效性在两个深度模型上，单向LSTM和双向LSTM。模型结果被总结在表3。详细的实验结果在不同的允许的单词修改数量被展示在图3，单向LSTM的结果是在图3a和b，双向是在图3c和d。</li>
-<li><img src="/assets/blogImg/DeepWordBug-tab3.png" alt="image-20200614153706764"></li>
-<li><img src="/assets/blogImg/DeepWordBug-fig3.png" alt="image-20200614153948882"></li>
-<li>从图3中，我们可以看出模型有一个明显的低的准确率当分类对抗样本通过我们的方法生成的在两个数据集，当比较准确率结果从原始的测试样本。在IMDB数据集，改变20个单词每个评论使用WordBug-Combined降低了模型准确率从86%到41%。因为电影评论有一个平均商都215，我们考虑的20个单词。在Enron垃圾邮件数据集，改变20个单词在WordBug-Combined从98%降低到了44%。我们也可以看见随机选择单词只起到了一点点影响。</li>
-<li>惊讶地是，我们的方法实现了更好的结果当比较和projected FGSM。改善是最可能因为单词的选择是更重要的，比如何改变单词。因为projected FGSM选择单词随机地。</li>
-<li>比较不同的分数函数我们提出的也是很有趣的。在两个数据集上。组合分数都只能显著好于时序分数和时序尾分数。它利用了更多的信息和其他的相比。Replace-1分数不会执行地好在这些数据集中，很有可能因为它不考虑时序关系在单词之间。</li>
-<li><strong>C.对抗序列的迁移性</strong>。接下来我们评估对抗序列的迁移性。之前的研究已经发现了迁移性是一个非常重要的属性在对抗图片文本上：对抗图片生成对于一个特定的DNN模型能够成功地欺骗另一个DNN模型对于相同的任务，即，迁移到另一个模型。</li>
-<li>我们使用组合分数和替换转换来生成对抗样本。修改的单词数量为20。结果在表4，是通过一个RNN模型生成，到另一个RNN模型在相同的任务。</li>
-<li><img src="/assets/blogImg/DeepWordBug-tab4.png" alt="image-20200614162922857"></li>
-<li><img src="/assets/blogImg/DeepWordBug-tab5.png" alt="image-20200614162824868"></li>
-<li>从这个表格中，我们看到了最多的对抗样本能够成功的迁移到其他的模型中，甚至到那些模型使用不同的word embeddings。实验说明了我们的方法成功的发现了哪些单词是重要的对于分类，迁移是有效的在多模型中。</li>
-</ul>
-<h4 id="连接之前的研究"><a href="#连接之前的研究" class="headerlink" title="连接之前的研究"></a>连接之前的研究</h4><ul>
-<li>比较对抗样本的生成在图片领域，很少的关注在生成样本序列在文本上。我们比较了最相关的两个方法和我们的方法在表5。（1）papernot 应用基于梯度的对抗修改直接到NLP输入目标是RNN-based分类器。（2）使用embedding 梯度确定重要的单词。即使启发式驱动规则一起带有手工的同义词和拼写错误。不同于我们的，这个研究是一个白盒攻击。</li>
-<li>总之，…</li>
-</ul>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
-<li>本文引入了一个弱点在深度学习模型对于文本分类。我们提出了一个新颖的框架，DeepWordBug，来生成对抗性本文序列，能够误导深度学习模型通过利用它的脆弱性。我们的方法有以下优点：</li>
-<li>（1）黑盒。（2）性能。</li>
-<li>我们的实验结果说明了DeepWordBug结果是大约70%降低了原始分类器的准确率在两个不同的数据集。我们也说明了对抗样本生成在一个模型能够成功的迁移到另一个模型。降低了目标模型准确率从90%到30%~60%。<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4></li>
-<li>Replace-1分数是如何工作的？</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">黑盒</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/17/security02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-acm01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/acm01/">论文阅读：Adversarial Attacks on Deep-learning Models in Natural Language Processing: A Survey</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/17/acm01/" class="archive-article-date">
-  	<time datetime="2020-06-17T03:01:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>自然语言处理中深度学习模型的对抗性攻击：一项调查</li>
-<li>发表在<strong>ACM Trans. Intell. Syst. Technol.</strong> 2020</li>
-<li>论文下载：<a href="https://dl.acm.org/doi/10.1145/3374217" target="_blank" rel="noopener">https://dl.acm.org/doi/10.1145/3374217</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>一作WEI EMMA ZHANG，张薇，武大学士，北航硕士，阿德莱德大学博士，目前是计算机科学学院，阿德莱德大学的讲师，关注三个方向，i）对文本的深层神经模型的对抗性攻击；ii）智能空间中的神经对话系统；iii）文本摘要。个人主页：<a href="http://weiemmazhang.me/" target="_blank" rel="noopener">http://weiemmazhang.me/</a></li>
-<li>QUAN Z. SHENG，盛权政，Michael Sheng博士是麦格理大学的正式教授兼计算机系主任。个人主页：<a href="http://web.science.mq.edu.au/~qsheng/" target="_blank" rel="noopener">http://web.science.mq.edu.au/~qsheng/</a></li>
-<li>李晨亮，武汉大学网络安全学院副教授，个人主页：<a href="http://lichenliang.net/zh.html" target="_blank" rel="noopener">http://lichenliang.net/zh.html</a></li>
-</ul>
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>随着高性能计算设备的发展，深度神经网络（DNNs）最近几年已经得到了很大的关注度在许多AI应用上。可是之前的努力展示了DNNs容易受到经过战略性修改的样本（成为对抗样本，adversarial examples）的攻击。这些样本被生成通过许多imperceptible perturbations不易察觉的扰动，但是能够使DNNs错误地预测。受到生成对抗样本在CV领域的流行的鼓舞，研究在攻击NLP应用上的DNNs已经在最近几年开始研究了。可是，因为CV和NLP固有的区别直接使CV的攻击方法到NLP遭到了挑战。不同的方法已经被提出解决这个差异。这篇文章中，我们介绍了一个系统的调查在这些工作中。我们收集了所有相关的学术工作从第一次出现在2017年。然后我们选择、总结、讨论和分析了40个representative代表性作品。为了使本文自成一体，我们涵盖了NLP的初步知识并讨论相关开创性工作在CV领域。我们总结我们的综述带有一些未解决问题的讨论，以弥补现有进展与NLP DNNs进行更强大的对抗攻击之间的差距。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>深度神经网络的结构是一系列神经单元层，每一个单元都充当一个独立的计算单元。神经元被不同的权重和偏置连接，发送激活后的结果到下一个神经单元层。深度神经网络尝试模仿人脑的生物神经网络，从示例中学习和积累经验。因此，它们展示了处理复杂任务的优势，这些复杂任务不容易建模为线性或非线性问题。此外，通过连续的实值向量表示下，它们善于处理具有各种模态的数据，比如图像，文本，视频和音频。</li>
-<li>虽然神经网络发展很快，但是可解释性仍然是不满意的，因为他们工作作为一个黑盒，这意味着很难从每一个神经元确切学习到的东西中获得直觉。可解释差的问题之一是评估深度神经网络的健壮性robustness。最近几年，研究者使用小的不可察觉的扰动去评估深度神经网络的健壮性，发现他们对于这些扰动是不健壮的。【<strong>Intriguing properties of neural networks  2014</strong>】第一次评估先进的深度神经网络在图片分类，使用小的生成的扰动在输入图片上。他们发现图片分类很大概率被fooled了，但是人类判断是不受影响的。扰动的图片像素被称为对抗样本，此表示法后来被用于通用的表示各种扰动后的样本。因为对抗样本的生成是costly并且不切实际的在这篇文章中，所以Goodfellow 【<strong>Explaining and harnessing adversarial examples 2015</strong>】提出了一个快速的生成方法（3.1节更详细讨论这个工作）。这些工作之后，之后的许多研究工作可以概括为：(i)通过无法察觉的扰动欺骗深层神经网络来评估深度神经网络；(ii)故意更改深度神经网络的输出；(iii)检测深度神经网络的过度敏感性和过度稳定性，并找到防御攻击的解决方案。</li>
-<li>【<strong>Adversarial examples for evaluating reading comprehension systems 2017</strong>】第一次考虑使用对抗样本生成（就是对抗攻击，这两个词可互换）在深度神经网络for 基于文本的任务（即，文本深度神经网络）。他们的工作快速地获得了研究关注在NLP方向。可是，由于固有的区别在图片数据和文本数据，对抗攻击方法在图像不能直接应用到文本。首先，图像数据（比如像素值）是连续的，但是文本数据是离散的。通常，我们向量化文本在输入到神经网络之前，传统的向量方法包括利用词频和逆文档频率，和one-hot编码。【<strong>Generating natural adversarial examples 2018</strong>】当应用基于梯度的对抗攻击时，生成的对抗示例为无效字符或单词序列。一个解决方案是使用word embeddings作为深度神经网络的输入。可是，这也会生成不能匹配到任何单词的表示。第二，图像的扰动是小的变化在像素上，很难被人眼捕捉到，因此人能够正确地分类图像。但是文本对抗攻击，小的扰动是很容易察觉的。例如替换字符或者单词会生成无效的单词或者语法上错误的句子。此外，它将大大改变句子的语义。因此，这种扰动很容易被察觉，在这种情况下，即使人类也无法提供正确的预测。</li>
-<li>为了解决以上的差异和挑战，许多攻击方法已经被提出从先锋工作【<strong>Adversarial examples for evaluating reading comprehension systems 2017</strong>】提出。尽管这个话题非常流行在NLP中，但是没有全面的review 文章收集和汇总这个方面的工作。所以有必要进行这个工作来帮助研究者和从业者对这个方向有一个总体认识。</li>
-<li><strong>相关的调查和这次调查的区别</strong>。我们与之前的调查不同，因为我们专门针对文本深度学习模型的攻击和防御。此外，我们提供了全面的综述，包括了来自各个方面的信息，使该调查成为了独立的调查。</li>
-<li><p><strong>论文选择</strong>。文章从NLP和AI顶会选择，包括ACL，COLING，NAACL，EMNLP，ICLR，AAAI，IJCAI。除了接收的文章之外，还考虑了优秀文章发表在e-Print archive。</p>
-</li>
-<li><p>这篇调查的贡献。这次调查的目标是为了提供一个全面的review在文本深度神经网络的生成对抗样本研究工作。这项调查将为有兴趣攻击文本深层神经模型的研究人员和从业人员提供服务。 我们希望读者具有有关深度神经网络体系结构的一些基础知识，而本文并不是重点。 总而言之，该调查的主要贡献是：</p>
-<ul>
-<li>对文本深层神经模型的对抗性攻击进行了全面的审查，并提出了不同的分类方案来组织所审查的文献；</li>
-<li>我们提供了所有相关信息使调查独立，从而使那些对NLP知识了解有限的读者更容易理解；</li>
-<li>我们讨论了一些未解决的问题，并在此基础上确定了一些可能的研究方向，研究领域旨在借助对抗性样本构建更强大的文本深度学习模型。</li>
-</ul>
-</li>
-<li>第2节中介绍了针对深度学习模型的对抗性攻击的预备知识，包括对抗性攻击的分类法和NLP中使用的深度学习模型。在第3节中，我们说明了攻击图像数据和文本数据之间的区别，并简要回顾了攻击图像DNN的示例性工作，这些工作启发了NLP的后续行动。在第4节首先介绍了对文献的分类，然后介绍了现有技术。第5节讨论防御策略。并在第6节中指出未解决的问题。最后第7节总结。</li>
-</ul>
-<h4 id="2-自然语言处理中的攻击性和深度学习技术概述"><a href="#2-自然语言处理中的攻击性和深度学习技术概述" class="headerlink" title="2.自然语言处理中的攻击性和深度学习技术概述"></a>2.自然语言处理中的攻击性和深度学习技术概述</h4><ul>
-<li>2.1 对抗攻击在深度学习模型：通用分类。<ul>
-<li>2.1.1 定义。<ul>
-<li><strong>DNN的定义。</strong></li>
-<li><strong>Perturbations</strong>. 扰动是故意产生的小噪声，这些噪声会在测试阶段添加到原始输入数据样本中，旨在fool深度学习模型。</li>
-<li><strong>Adversarial Examples</strong>. 对抗样本$x’$是一个样本通过最坏的扰动而创建的样本，一个理想的DNN会将$x’$仍然分类为正确的y，然而一个受害DNN会有高的置信度对$x’$有错误的预测。$x’$能够形式化为</li>
-<li>$x’=x+\eta,f(x)=y,x \in X,$</li>
-<li>$f(x’) \ne y’$, or</li>
-<li>$f(x’)=y’,y’ \ne y$</li>
-<li>其中$\eta$是最坏的扰动。目标是对抗攻击能够偏离正确的标签$f(x’)\ne y$ 或者特定一个标签$f(x’)=y’$。</li>
-</ul>
-</li>
-<li>2.1.2 Threat Model. 威胁模型。<ul>
-<li>模型知识。对抗样本能够被生成使用黑盒或者白盒策略根据被攻击DNN的知识。黑盒攻击使用当架构，参数，loss，激活函数和训练数据是不可访问的。对抗样本生成直接访问测试集，或者查询DNN并且检查输出的改变。相反，白盒攻击基于DNN技术细节知识。</li>
-<li>目标。生成对抗样本能变化输出预测到错误的结果或者特定的结果。无目标攻击是$f(x’) \ne y$，有目标攻击是$f(x’)=y’$是更严格的，对于二值任务，无目标攻击和有目标攻击是等价的。</li>
-<li>Granularity. 粒度。攻击粒度是对抗样本生成的数据级别，例如，通常是图像数据的图像像素。关于文本数据，它可以是字符，单词和句子级别的嵌入。3.3节会更深度的探讨。</li>
-<li>动机。生成对抗样本有两个目标：攻击和防御，攻击目的是检查目标DNN的健壮性，而防御则是进一步利用生成的对抗样本来增强目标DNN的健壮性。第5节将给出更多细节。</li>
-</ul>
-</li>
-<li>2.1.3 评估。对抗攻击需要两组测量值，分别用于(i)控制干扰， (ii)评估攻击的有效性。<ul>
-<li>扰动限制。理想情况下，扰动$\eta$应该不会改变输入的类别标签，有效的扰动应该是最有作用的噪声在一个有限的范围。【<strong>Intriguing properties of neural networks.</strong>】第一次提出了限制$(x+\eta) \in [0,1]^n$对于图像对抗样本，确保对抗样本有相同的范围和原始数据。【<strong>Explaining and harnessing adversarial examples 2015</strong>】简化了方案，并且使用最大的范数限制扰动：$||\eta|| \le \epsilon$。这被鼓舞通过，直觉上，不会将任何特定像素的变化幅度超过某个量$\epsilon$，不会更改输出类别。使用最大范数是是足够对于分类或者物品识别任务。但是对于文本对抗攻击是稍微不同的，3.3节会给出更多的细节。</li>
-<li>攻击评估。对抗攻击被设计来降低DNN性能，因此，评估攻击的有效性是基于不同任务的性能指标。比如分类任务使用准确率、F1分数和AUC分数。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>2.2 NLP中的深度学习<ul>
-<li><strong>Recurrent/Recursive Neural Networks</strong>. Recursive neural networks extends recurrent neural networks from sequences to tree, which respects the hierarchical dependency of the language.</li>
-<li>强化学习。In NLP, a reinforcement learning framework usually consists of an agent (a DNN), a policy (guiding action) and a reward.</li>
-<li>深度生成模型。GANs和VAEs， Although they have been adopted in generatingtexts, so far no work examines their robustness using adversarial examples.</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-从图像到文本"><a href="#3-从图像到文本" class="headerlink" title="3.从图像到文本"></a>3.从图像到文本</h4><ul>
-<li>3.1 制作对抗样本：计算机视觉中的启发性作品<ul>
-<li>对抗样本第一次提出在物体识别任务，【<strong>Threat of adversarial attacks on deep learning in computer vision: A survey.</strong>】全面的调查了计算机视觉方面的工作。</li>
-<li>Szegedy et al.提出了对抗样本的概念，提出了设计方法，解决一个优化问题：</li>
-<li>$\eta = argmin \lambda||\eta||_2^2+J(x+\eta, y’) st.(x+\eta \in [0,1]^n)$</li>
-<li>$y’$是目标输出。这个最小化问题被使用一个箱约束Limited memory Broyden-Fletcher-Goldfarb-Shanno (<strong>L-BFGS</strong>) algorithm。</li>
-<li><strong>Fast Gradient Sign Method (FGSM)</strong>. 是对L-BFGS的一个简化版本，并且考虑不固定$y’$，这个方法在NLP攻击中也最常使用。</li>
-<li><strong>Jacobian Saliency Map Adversary (JSMA)</strong>. 这个方法不基于梯度，而是使用前向的导数，例如Jacobian。这个方法将每个输入成分对目标攻击的贡献进行排名。</li>
-<li><strong>C&amp;W攻击</strong>。目的是评估防御型蒸馏策略，为了缓解对抗性攻击。</li>
-<li>DeepFool。</li>
-<li><strong>Substitute Attack</strong>. 替代攻击。以上提及的表示工作都是白盒方法，需要所有模型知识。但是白盒攻击限制很大，【<strong>Practical black-box attacks against machine learning. 2017</strong>】提出了黑盒方法，通过训练一个替代模型，然后对替代品进行白盒攻击，并据此生成对抗性样本。具体来说，对替代的模型采用FSGM和JSMA生成对抗性样本。</li>
-<li><strong>GAN-like Attack</strong>. 类似GAN的攻击。黑盒攻击，【<strong>Generating natural adversarial examples. 2018</strong>】第一次训练了一个生成模型，WGAN，生成隐变量z，重构x，搜索一个对抗的z*生成对抗样本x*。</li>
-</ul>
-</li>
-<li>3.2 攻击图片DNNs versus 攻击文本DNNs，主要区别有3个：<ul>
-<li>离散输入 vs. 连续输入。图片的输入是连续的，通常的方法使用$L_p$-norm测量原始数据和扰动数据的距离。可是，文本数据是符号化的，因此是离散的。很难定义文本上的扰动。谨慎的设计度量方法对于文本扰动是必需的。另一个选择是映射文本数据到连续的数据上，然后采用CV的攻击方法。</li>
-<li>感知的 vs. 不可感知的。图片上的小的扰动通常不会容易被人类察觉，因此对抗样本不会改变人类的判断，但是能够欺骗DNN模型。可是文本上小的变化很容易被人类察觉，使得攻击失败。比如这些改变都可以通过拼写检查和语法校正器发现，因此很难找到不易察觉的文本对抗样本。</li>
-<li>语义的 vs. 语义少的。图像通常小的改变不会改变语义，可是文本的扰动容易改变句子意思。比如一个否定词会改变句子的意思。改变了文本的语义和攻击的目标是不相符的。</li>
-</ul>
-</li>
-<li>3.3 扰动测试<ul>
-<li>扰动度量。图像的扰动测试和文本是非常不同的。一般扰动测试就是比较对抗样本和原来的距离，但是文本的距离测试还应该考虑语法正确性和语义保留。测试方法如下：<ul>
-<li>基于范数的度量。使用embeddings表示，使用$L_p$-norm度量，但这通常会导致无效和难以理解的文本，进而需要涉及其他约束。</li>
-<li>语法相关的度量。<ul>
-<li>语法检查器保证生成的文本对抗样本是有效的。</li>
-<li>困惑度通常用来度量语言模型的质量，有人用来做对抗样本的有效性。</li>
-<li>Paraphrase 受控，能被当做对抗样本的一种类型。</li>
-</ul>
-</li>
-<li>语义保持度量。比较两个词向量的欧式距离或者余弦相似度。</li>
-<li>编辑距离度量。编辑距离是一个定量最小变化从一个字符串到另一个。<ul>
-<li>Levenshtein Distance。使用插入，删除和替换操作。</li>
-<li>Word Mover’s Distance. WMD方法。在word embeddings上进行计算的，计算一个文档移动到另一个文档的最小距离。形式化如下：</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-equ1.png" alt="image-20200516220540347"></li>
-<li>T是什么意思？d是什么意思？</li>
-</ul>
-</li>
-<li>杰卡德相似度系数，使用交集和并集的大小计算。</li>
-<li>$J(A,B)=\frac{|A \cap B|}{|A\cup B|}$</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-NLP的攻击神经模型：SOTA"><a href="#4-NLP的攻击神经模型：SOTA" class="headerlink" title="4.NLP的攻击神经模型：SOTA"></a>4.NLP的攻击神经模型：SOTA</h4><ul>
-<li>分类攻击方法在文本深度学习模型，然后突出SOTA调查。</li>
-<li>4.1 文本深度学习模型的攻击方法分类<ul>
-<li>下图说明了分类视角。</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-fig1.png" alt="image-20200517093436883"></li>
-<li>主要分类为5个角度：模型访问性、语义应用、目标类型、语义粒度和攻击DNNs。</li>
-</ul>
-</li>
-<li><p>4.2 白盒攻击</p>
-<ul>
-<li>白盒攻击需要访问模型全部的信息，，包括结构、参数、损失函数、激活函数、输入和输出数据。白盒方法分为7种。</li>
-<li><strong>FGSM-based.</strong> FGSM是第一个攻击方法在图像。它吸引了许多以后的工作在文本DNNs。【<strong>Deep text classification can be fooled.</strong>】采用了FGSM的概念。提出了三种类型攻击，插入、修改和删除。【<strong>Generating adversarial text samples.</strong>】采用同样的方法，但是效率更高。</li>
-<li>恶意软件检测，攻击文本DNNs的方法也可以用来攻击恶意软件检测DNNs。</li>
-<li>神经机器翻译攻击。AdvGen[23] is a gradient-based method for attacking neural machine translation (NMT) models. </li>
-<li><strong>JSMA-based.</strong> JSMA是另一个先驱性工作在攻击神经模型对于图片应用，【<strong>Crafting adversarial input sequences for recurrent neural networks. 2016</strong>】使用前向导数找到最多贡献的序列。</li>
-<li>In addition, the authors provided three methods to defense against the attacks, namely,feature reduction,distillation,and adversarial training. They found adversarial training is the most effective defense method.</li>
-<li><strong>C&amp;W-based.</strong> 【<strong>Identify susceptible locations in medical records via adversarial attacks on deep predictive models.</strong>】采用C&amp;W方法攻击预测模型在病例上。目标是检测易感事件和测量结果，为临床使用提供指导。</li>
-<li>【<strong>Seq2Sick: Evaluating the robustness of sequence-to-sequence models with adversarial examples.</strong>】攻击了seq2seq模型使用两种目标攻击：non-overlapping attack and keywords attack。非重叠攻击将文本全部修改。关键词攻击希望输出logits在目标关键词最大化在所有的词输出。</li>
-<li><strong>Direction-based.</strong> HotFlip 【<strong>White-box adversarial examples for text classification.</strong>】执行原子翻转操作为了生成对抗样本。【<strong>On adversarial examples for character-level neural machine translation.</strong>】是对HotFlip的一个扩展，进行了有目标攻击。</li>
-<li><strong>Attention-based</strong>。【<strong>Comparing attention-based convolutional and recurrent neural networks: Success and limitations in machine reading comprehension.</strong>】利用注意力来找到对抗样本，并没有对注意力本身进行攻击。</li>
-<li><strong>Reprogramming.</strong> 重新编程。【<strong>Adversarial reprogramming of sequence classification neural networks. 2018</strong>】采用对抗重编程（AP）来攻击序列神经分类器。AP的思想来自迁移学习。</li>
-<li>混合方法。【<strong>Adversarial texts with gradient methods. 2018</strong>】为了解决无意义文本的生成，使用WMD距离，将对抗文本找到最近的有意义的单词向量。</li>
-<li>总结如下：</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-tab1.png" alt="image-20200517143347448"></li>
-</ul>
-</li>
-<li><p>4.3 黑盒攻击</p>
-<ul>
-<li>黑盒攻击不需要神经网络的细节，但是能够访问输入和输出，这种类型的攻击京城依赖启发式生成对抗样本，并且是更实用因为在许多真实应用中，DNN细节都是一个黑盒。我们分类为5个类别。</li>
-<li><strong>第一种方法，Concatenation Adversaries.</strong>【<strong>Adversarial examples for evaluating reading comprehension systems. 2017</strong>】是第一个攻击阅读理解系统的，作者提出了拼接攻击，在段落末尾添加无意义的句子。这些分散注意力的句子不会改变段落的语义和问题的答案，但是会fool 神经模型，分散注意力的句子要么精心生成有信息的句子，要么使用20个随机的普通单词组成的句子。下图说明了一个例子，添加了一个分散注意力的句子，预测的答案就改变了。</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-fig2.png" alt="image-20200517151549860"></li>
-<li>【<strong>Robust machine comprehension models via adversarial training.</strong>】的作者改善了这个工作通过变化分散注意力句子的位置生成对抗样本。</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-fig3.png" alt="image-20200517152302472"></li>
-<li><strong>第二种方法，Edit Adversaries.</strong> 【<strong>Synthetic and natural noise both break neural machine translation. 2018</strong>】扰动神经机器翻译的输入数据通过两种方式：语法，字符顺序的变化。DeepWordBug【<strong>Black-box generation of adversarial text sequences to evade deep-learning classifiers.</strong>】是一个简单的方法使用字符转换来生成对抗样本，作者第一次确定了重要的tokens，例如单词或者字符能够影响模型预测最多地，通过打分函数评测分类器的输出。使用四种策略修改确定的tokens：replace，delete，add和swap。作者评价他们的方法在一个变化的NLP任务上。比如文本分类，语义分析和垃圾检测。</li>
-<li>下面是一个例子：</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-fig4.png" alt="image-20200517154133436"></li>
-<li>当攻击文本分类任务时，【<strong>Generating natural language adversarial examples through probability weighted word saliency.</strong>】提出了一个概率方法来荀泽单词替换，首先收集同义词，然后选择一个替代单词从同义词中，通过测量影响程度。还结合了单词显著性来确定替换顺序，单词显著性是指当单词未知时输出的变化。</li>
-<li>参考文献【<strong>Generating natural language adversarial examples.</strong>】中的工作使用遗传算法（GA）来最大程度地减少原始文本中的单词替换次数，但同时可以更改被攻击模型的结果。 作者在GA中采用交叉和变异运算来产生扰动，并根据对受攻击DNN的影响来衡量单词替换的有效性。 他们的攻击重点是情感分析和文本蕴含的DNN。</li>
-<li>【<strong>Generating fluent adversarial examples for natural languages.</strong>】MHA(Metropolis-Hastings Attack)也是一个基于编辑的方法，目的是提供有效流畅的有效的对抗攻击。基于语言模型和M-H采样，进行替换和插入操作，提出了黑盒和白盒两个版本。</li>
-<li>下图说明了一个生成流对于编辑对抗。扰动被执行在句子、单词或者字符通过编辑策略，比如替换、删除、插入和交换。</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-fig5.png" alt="image-20200517160017792"></li>
-<li><strong>第三种方法，Paraphrase-based Adversaries.</strong> SCPNs【<strong>Adversarial example generation with syntactically controlled paraphrase networks.</strong>】产生句子释义。通过一个Encoder-Decoder结构将句子映射为一个目标语法结构的解释句子，这个方法第一次编码原始句子，然后输入释义和语法树结构到解码器，解码出目标释义句子，主要贡献是解析模板的使用，选择20个最常用的训练得到的模板，使用选择的模板生成释义句子，分类器能够正确的分类原始句子但是在释义句子上分类错误，这个释义句子被当做对抗样本。</li>
-<li><strong>第四种方法，GAN-based</strong>。【Generating natural adversarial examples.】目的是使对抗样本的生成更加自然。提出的模型生成对抗样本的过程包括两个关键的组件：一个是GAN，生成虚假的数据样本，和一个转换器，映射输入x到隐藏表示z’，两个组件训练原始输入最小化重构损失在原始输入和对抗样本之间。扰动被执行在隐藏空间，确定扰动样本的$\hat{z}$在$z’$附近。提出了两种搜索方法确定$\hat{z}$。</li>
-<li><strong>第五种方法，Substitution</strong>。训练一个替代品。【52】提出了一个黑盒框架攻击RNN模型对于恶意软件检测。有两个模型组成，一个生成式RNN和一个替代的RNN。替代RNN模仿原始的RNN。因此生成对抗样本通过替代品。</li>
-<li><strong>第六种方法，重编程</strong>。【<strong>Adversarial reprogramming of sequence classification neural networks.</strong>】使用基于强化学习的方法。通过一个强化学习问题形式化序列生成，对抗性重编程函数$g_\theta$作为策略网络，应用强化学习的方法学历$g_\theta$。</li>
-<li>总结如下：</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-tab2.png" alt="image-20200517171420925"></li>
-</ul>
-</li>
-<li>4.4 跨模态攻击<ul>
-<li>略</li>
-</ul>
-</li>
-<li>4.5 Benchmark 数据集 by 应用<ul>
-<li>文本分类</li>
-<li>机器翻译</li>
-<li>机器阅读</li>
-<li>文本摘要</li>
-<li>文本蕴涵</li>
-<li>POS</li>
-<li>对话生成</li>
-<li>跨模态应用</li>
-<li><img src="/assets/blogImg/AdversarialSurvey-tab4.png" alt="image-20200517175315240"></li>
-</ul>
-</li>
-</ul>
-<h4 id="5-防御"><a href="#5-防御" class="headerlink" title="5.防御"></a>5.防御</h4><ul>
-<li><p>对抗样本的目的是增强模型健壮性。有两个通用的方式在文本DNN来实现这个目标：对抗性训练和知识蒸馏。对抗训练在训练过程中结合了对抗样本。知识蒸馏操作神经网络模型并训练新模型。</p>
-</li>
-<li><p>1.对抗性训练</p>
-<ul>
-<li>Szegedy【<strong>Intriguing properties of neural networks.</strong>】发明了对抗训练，使用正常的数据和对抗样本训练网络。Goodfellow et al. [40]employed explicit training with adversarial examples. 这一节具体说明数据增强、模型正则化和健壮性优化对于防御目的。</li>
-<li><strong>数据增强</strong>。数据增强扩展原来的数据集为加入生成的对抗样本以及尝试让模型看到更多的数据在训练过程。数据增强通常用于抵抗黑盒攻击。</li>
-<li><strong>模型正则化</strong>。【Adversarial training methods for semi-supervised text<br>classification.】模型正则化强制对抗样本作为一种正则化项，如下</li>
-<li>$min(J(f(x),y)+\lambda J(F(x’),y))$</li>
-<li><strong>鲁棒性优化</strong>。【<strong>Towards deeplearning models resistant to adversarial attacks.</strong>】训练一个健壮性优化问题 with min-max公式。值得注意的是，所提出的鲁棒优化方法是一个通用框架，在该框架下其他对抗训练策略也具有自然的解释能力。 Madry等人 [84]将DNN模型学习转换为具有min-max（鞍点）公式的鲁棒优化，这是内部非凹最大化问题（攻击）和外部非凸最小化问题（防御）的组合。 根据Danskin定理，内部最大化器处的梯度对应于最小-最大问题的下降方向，因此优化仍然可以应用反向传播进行。 该方法通过普遍的训练和学习，成功展示了DNN对抗对手图像的鲁棒性。</li>
-</ul>
-</li>
-<li>2.Distillation. Papernot 【<strong>Distillation as a defense to adversarial perturbations against deep neural networks.</strong>】提出了蒸馏作为另一个可能的防御抵抗对抗样本。原则是使用softmax 输入来训练第二个DNN，有相同的结构和原始的。增加温度参数T：</li>
-<li>$q_i=\frac{exp(z_i/T)}{\sum_kexp(z_k/T)}$</li>
-</ul>
-<h4 id="开放问题和讨论"><a href="#开放问题和讨论" class="headerlink" title="开放问题和讨论"></a>开放问题和讨论</h4><ul>
-<li>1.感知能力<ul>
-<li>图片像素的扰动通常很难被察觉，因此不会影响人类的判断，会欺骗深度神经网络，但是对文本的扰动是显而易见的，无效的单词和句法错误很容易被人识别并有语法检查软件检测到，因此这种干扰很难攻击真正的NLP系统。但是许多研究工作都产生了这类对抗性样本。只有在做对抗性训练时可以接受。从保留语义的角度来看，以一个句子的形式更改单词有时会极大地改变语义，并且容易被人发现。对于像阅读理解和情感分析之类的NLP应用程序，需要仔细设计对抗性样本。因此，对于实际攻击，我们需要提出一些方法，这些方法不仅使扰动不被察觉，而且保持正确的语法和语义。</li>
-</ul>
-</li>
-<li>2.迁移能力<ul>
-<li>迁移能力是一个通用的属性对于对抗样本。它反映了攻击方法的泛化能力。迁移性意味着一个深度神经网络生成的对抗样本也可以有效地攻击另一个深度神经网络或者另一个数据集。目前这个属性通常用到黑盒方法中，因为他们对模型结构不敏感。目前的工作泛化能力都很差。期望更多的努力可以提供更好的泛化能力。</li>
-</ul>
-</li>
-<li>3.自动化<ul>
-<li>一些工作能够自动化生成对抗样本，但是还有一些不能。在白盒攻击中，利用DNN的损失函数能够确定文本中最有效的位置自动地。在黑盒攻击中，一些攻击，比如替代品攻击，使用白盒攻击的方法生成对抗样本，也可以实现自动化攻击。但是，大多数其他工作手动生成对抗样本。比如[54]手动拼接一些无意义的段落欺骗阅读理解系统。许多研究工作都遵循参考文献[54]，而不是针对实际攻击，而是针对目标网络的健壮性。 这些手工工作既费时又不切实际。 我们认为，今后在这方面的更多努力可能会克服这一障碍。</li>
-</ul>
-</li>
-<li>4.新的结构<ul>
-<li>尽管大多数常用的文本DNNs已经得到了关注在对抗攻击方面，但是许多DNNs还没有被攻击，比如生成神经模型：GANs和VAEs。生成模型需要更复杂的技术对于模型训练，所以目前的对抗攻击对于这些模型是空白的。此外，注意力机制也是一个非常常用的组件，但是没有工作来检查这个机制，目前只是利用注意力来确定扰动的单词。</li>
-</ul>
-</li>
-<li>5.Iterative versus One-off 可迭代的 vs. 一次性<ul>
-<li>FGSM [40] is one example of one-off attack.  可迭代的攻击往往是根据DNN进行迭代的，效果往往很好，但是费时，所以在实时攻击中不能接受。因此一次性攻击用来解决实时问题，一次性攻击更快但是效果差，容易被防御，当在实际攻击中，需要考虑实时性和有效性的平衡。</li>
-</ul>
-</li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>一般的模型都有对于特定数据集过拟合的性质，修改为意思相同但是模型检测不出的对抗样本。</li>
-<li>可解释性差是提出对抗的一个启发和解决的问题。</li>
-<li>生成模型被文本对抗攻击也可以考虑。</li>
-<li>什么样的攻击叫一次性攻击。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">综述</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/17/acm01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2291,6 +2125,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -2304,14 +2146,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2339,30 +2173,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">话题检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LDA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">表示学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
@@ -2376,6 +2186,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2439,6 +2257,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">话题检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LDA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">表示学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -2464,6 +2298,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2495,19 +2333,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2516,6 +2342,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Bert</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2540,10 +2386,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2579,6 +2421,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">词向量</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
               </li>
              
@@ -2588,6 +2434,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2603,7 +2453,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2612,10 +2462,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2644,10 +2490,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
               </li>
              
               <li class="article-tag-list-item">

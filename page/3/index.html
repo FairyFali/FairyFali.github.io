@@ -154,6 +154,352 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nips05" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/08/nips05/">论文阅读：Sequence to Sequence Learning with Neural Networks</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/08/nips05/" class="archive-article-date">
+  	<time datetime="2020-04-08T03:02:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于神经网络的序列到序列学习</li>
+<li>本文主要用于记录谷歌发表于2014年的一篇神作（引用量上千），现已被广泛使用的Sequence to Sequence模型论文。</li>
+<li>发表在NIPS2014</li>
+<li>论文下载：<a href="http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks" target="_blank" rel="noopener">http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Ilya Sutskever，2015 年 12 月，创立了OpenAI，本科就读于多伦多大学，是Hinton的学生，攻读了博士学位，加入了Hinton的小组。2012年和同学Alex Krizhevsky开发了AlexNet。2013年被聘请为Google Brain的研究科学家。2014年和谷歌研究员一起提出了Seq2Seq学习，开启了RNN广泛应用于语言任务的时代。2015 年，麻省理工学院技术评论将 Sutskever 评为 Visionaries 类别的「35 岁以下创新者」。在谷歌大脑团队中，参与了Tensorflow的开发。在谷歌大脑，协助了DeepMind的研究人员开发了划时代的人工智能AlphaGo。</li>
+</ul>
+<blockquote>
+<p><a href="https://www.sohu.com/a/258018819_129720" target="_blank" rel="noopener">https://www.sohu.com/a/258018819_129720</a></p>
+</blockquote>
+<p><img src="/assets/blogImg/sutskever.png" alt="img"></p>
+<p>左一是Sutskever。</p>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>end-to-end和seq2seq是一回事。</li>
+<li>使用多层LSTM。</li>
+<li>英语到法语的机器翻译，在WMT‘ 14数据集上。</li>
+<li>最终score of BLEU是34.8。</li>
+<li>baseline是phrase-based SMT系统，score of BLEU是33.3。</li>
+<li>LSTM能够学习到词序和主动被动语态的保持。</li>
+<li>反转source句子能够显著改善LSTM的性能，因为可以学到短期依赖性，从而使优化问题更简单。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（神经网络的可用性）DNNs能解决非常多的intricate的问题。反向传播总能找到参数的值。</li>
+<li>（挑战，神经网络的限制）尽管DNNs很灵活和很有力量，但是DNNs只能解决那些输入和目标是明确带有固定维度编码的问题。比如语音识别和机器翻译，QA也可以抽象为一个seq2seq任务。</li>
+<li>（展示idea）在本文中，我们展示了一个直观的应用of LSTM结构，能够用来解决通用的seq2seq任务，idea是使用LSTM编码input sequence，使用另一个LSTM提取output sequence。如图所示。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig1.png" alt="image-20200331094534460"></p>
+<ul>
+<li>（实验结果）总WMT’14English to French数据集上得到了34.81的BLEU score，使用5 deep LSTMs（384M参数和8000维状态），数据集单词量80k，使用简单的<strong>beam-search</strong>解码。</li>
+<li>（实验扩展）最后，使用LSTM <strong>rescore</strong>公共可用的1000-best 列表 of the SMT baseline，在这个基础上，得到了36.5的分数。</li>
+<li>（深入研究）意想不到的是，LSTM能在长句子上展示好的结果因为本文在训练集和测试集中reverse source 句子的单词顺序，而不是目标句子。通过这个方法，文章引入了短期依赖性，从而使优化问题变得简单，reverse 单词在source 句子是文章的关键技术贡献之一。</li>
+<li>一个有用的性质of the LSTM是映射变长到一个固定长度的向量。定性评估支持了翻译任务的主张，模型知道单词顺序和主动被动语态保持不变。</li>
+</ul>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
+<li>标准的RNN计算一个inputs$(x_1,…,x_T)$，对应的outputs$(y_1,…,y_T)$，迭代公式如下：$h_t=\sigma(W^{hx}x_t+W^{hh}h_{t-1})$，$y_t=W^{yh}h_t$。RNN能够简单的实现对齐的序列到序列。可是，如何应用不同未知长度的inputs和outputs。</li>
+<li>简单的策略是将序列映射到输入句子到固定长度的向量使用RNN，然后映射这个向量到一个目标序列使用另一个RNN。LSTM能够解决长时依赖的问题，因此采用LSTM作为RNN的基本结构。</li>
+<li>LSTM的目标是评估条件概率$p(y_1,…,y_{T’}|x_1,…,x_T)$,fixed-dimmensional representation v是最后一个隐藏状态，使用一个标准的LSTM-LM公式计算输出序列，使得条件概率$p(y_1,…,y_{T’}|x_1,…,x_T)=\Pi_{t=1}^{T’}p(y_t|v,y_1,…y_{t-1})$。</li>
+<li>在这个公式中，每一个$p(y_t|v,y_1,…y_{t-1})$分布被表示为一个softmax在所有的单词上，注意每一个句子结尾都有一个特殊地结束符”<eos>“。</eos></li>
+<li>文章实际的模型不同于上述在3个重要的方面。第一，使用两个不同的LSTMs，能够利用LSTM同时在多种语言之间。第二，文章发现deep LSTMs显著优于shallow LSTMs。第三，文章发现reverse the order of the words在input句子上是极其有价值的，例如代替使用a,b,c映射到α，β，γ，使用c,b,a来进行映射，使用这种方法，a和α更近，能够是SGD更简单的建立输入和输出之间的交流，文章发现这个简单的数据变换能够极大改善LSTM的性能。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><p>WMT’14 English to French MT task 通过两种方式，不使用SMT系统和使用SMT系统。</p>
+</li>
+<li><p>数据集细节。训练模型在12M句子的子集上，348M法语单词，304M英语单词。使用160000最频繁出现的单词作为vocabulary在source语言上，使用80000最频繁出现的单词作为vocabulary在target语言上。每一个OOV单词被替换为”UNK” token。</p>
+</li>
+<li><p>解码和rescoring。目标函数是$1/|S|\sum_{T,S} logp(T|S)$，使用一个简单的left-to-right beam search解码。还是用LSTM去rescore the 1000-best lists被SMT提供的，</p>
+<ul>
+<li><blockquote>
+<p>beam search：<a href="https://www.zhihu.com/question/54356960" target="_blank" rel="noopener">https://www.zhihu.com/question/54356960</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>reversing the source sentences. 通过这个方式，测试困惑度从5.8降低到4.7，BLEU score从25.9上升到30.6。如果不reverse的话，这个任务有一个大的<strong>“minimal time lag”</strong>问题，reverse之后，minimal time lag大大变小了。论文起初认为reverse句子只会在翻译句子的早期产生更自信的预测，但是，在长句子的翻译上，reverse之后比原来句子上训练的LSTM要好得多，这表明LSTM中reverse输入的结果具有更好的memory利用率。</p>
+</li>
+<li><p>训练细节。LSTM是非常好训练的。使用deep LSTMs带有4层，隐藏层维度1000，1000维word embedding。因此，deep LSTM使用8000个实数表示一个句子。论文发现deep LSTMs是significantly优于shallow LSTMs。使用原始的softmax在80000单词上。参数量384M。其余的细节列举如下：</p>
+<ul>
+<li>初始化所有的参数在-0.08~0.08的uniform分布</li>
+<li>使用SGD without momentum，固定学习率0.7，在5 epochs后，开始减半学习率每半个epoch，论文的模型一共训练了7.5 epochs。</li>
+<li>尽管LSTM趋向于没有梯度消失问题，但是还是有梯度爆炸的可能。因此我们强迫一个硬性限制使得梯度在[10,25]之间scaling。</li>
+<li>每个句子长度不同，但是大多数句子长度是在20到30之间，只有一些句子是很长的（length&gt;100）,为了不让计算资源浪费，我们确保一个batch的所有的句子长度尽可能相同，能够使训练速度加倍。</li>
+</ul>
+</li>
+<li><p>并行化。C++实现的deep LSTM，在单GPU上处理速度约为1700 words per second。文章使用8-GPU并行处理，每一层被不同的GPU计算，剩下的4个GPU计算softmax，最终能够达到6300 words per second with minibatch of 128，训练大概占用10天。</p>
+</li>
+<li><p>实验结果。使用BLEU的变体做评价指标。在baseline上复现了33.3 score 在测试集上，另一个测试集WMT‘14系统上，复现得到37 score，文章提出的方法得到了接近最好的36.5 score。</p>
+</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-tab1-tab2.png" alt="image-20200401090017192"></p>
+<ul>
+<li>在长句子上的performance。意外地发现，LSTM在长句子上做得很好，下图展示了效果。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig3.png" alt="image-20200401090739287"></p>
+<ul>
+<li>模型分析。模型的一个特色就是可以转换一个单词序列为一个固定维度，下图可视化了这些学习的表示。这个图清晰地展示了这个表示是敏感的对于单词顺序，同时也是fairly不敏感的对于主动语态和被动语态的替换。使用PCA得到二维投影。</li>
+</ul>
+<p><img src="/assets/blogImg/seq2seq-fig2.png" alt="image-20200401091154526"></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>我们展示了一个大的deep LSTM，在一个有限的vocabulary和没有任何假设的前提上，在机器翻译上优于一个标准的SMT系统，which vocabulary没有限制。文章模型的成功可以应用到许多其他的序列学习任务上。</li>
+<li>我们很意外改善的扩展被得到通过reversing the words order 在source 句子，我们推断找到一个问题的最好的短期依赖是很重要的，因为他们优化学习问题非常简单。特别地，尽管文章没有训练标准RNN在non-reversed 在翻译问题上，文章仍然相信一个标准的RNN可以被容易地训练当source sentences are reversed（尽管没有通过实验验证）。</li>
+<li>我们也意外地发现LSTM的能力在翻译长句子。</li>
+<li>最重要的是，我们说明了一个简单的、直观的和相对未优化的方法能够优于SMT系统，因此进一步的工作可能会带来greater accuracies。这个结果说明我们的方法可能会很好的解决具有挑战性的seq2seq问题。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>文章解决的主要问题是一类变长到变长的seq2seq问题。</li>
+</ul>
+<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
+<li><p>提出了使用deep LSTMs做编码解码器的思想。</p>
+</li>
+<li><p>主要的思想，用一句话概括就是:</p>
+<p><strong><em>An encoder network condenses an input sequence into a vector, and a decoder network unfolds that vector into a new sequence.</em></strong> </p>
+</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>这篇文章也出现了rescore这个词，</li>
+<li>We also used the LSTM to rescore the 1000-best lists producedby the baseline system [29].  Torescore an n-best list, we computed the log probability <strong>of every hypothesis with our LSTM and tookan even average with their score and the LSTM’s score</strong>.？？？</li>
+<li>deep LSTM使用8000个实数表示一个句子。为什么</li>
+<li>这里需要讨论的一点是，为什么将输入倒序效果比正序好？参考2给出了见解，是因为对齐和关注点在逆序时更强的问题。</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><a href="https://www.jianshu.com/p/f5c2cc5b661c" target="_blank" rel="noopener">https://www.jianshu.com/p/f5c2cc5b661c</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/21272614" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21272614</a></li>
+<li><a href="https://mathpretty.com/10556.html（包含简单的实现）" target="_blank" rel="noopener">https://mathpretty.com/10556.html（包含简单的实现）</a></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">seq2seq</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MT</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">lstm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/08/nips05/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-emnlp03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/08/emnlp03/">论文阅读：Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/08/emnlp03/" class="archive-article-date">
+  	<time datetime="2020-04-08T02:56:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>基于RNN Encoder-Decoder的学习统计机器翻译的短语表示</li>
+<li>发表在EMNLP2014</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1406.1078" target="_blank" rel="noopener">https://arxiv.org/abs/1406.1078</a></li>
+<li>真正提出 Seq2Seq 的文章是《Sequence to Sequence Learning with Neural Networks》，但本篇《Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation》比前者更早使用了 Seq2Seq 模型来解决机器翻译的问题。</li>
+<li>该论文提出了 GRU 的基本结构，为后来的研究奠定了基础。</li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作是Kyunghyun Cho，是纽约大学计算机科学与数据科学助理教授。他是蒙特利尔大学博士后，导师是 Yoshua Bengio。他于2014年初在阿尔托大学获得博士和硕士学位。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>(说明深度学习的有效性和在文章领域的可用性)深度学习在很多领域都展示出了great成功，比如…。在统计机器翻译（SMT）上，深度神经网络也有promising的结果，比如…。</li>
+<li>（说出自己文章的关注点，和主要的解决方法）这篇文章关注新颖的神经网络结构，能够用来作为一个conventional parase-based SMT系统的一部分。本文提出的结构叫做RNN Encoder-Decoder，encoder将一个变长的source序列编码为一个固定长度的向量，解码器map该向量为一个变长的target序列。这两个网络联合训练最大化conditional probability of target sequence given source sequence。此外，文章提出了一个sophisticate隐藏单元为了改善memory容量和训练的简易型。</li>
+<li>（说明模型的目标和评测方法）提出的RNN Encoder-Decoder带有一个新颖的隐藏单元被empirically评估在翻译英语到法语的任务上。文章训练模型学习翻译概率从英语短语到相应的法语短语上。<strong>模型被使用作为标准的 phrase-based SMT的一部分</strong>，打分每一个phrase pair in the phrase table。评估任务reveal RNN Encoder-Decoder改善了翻译性能。</li>
+<li>（文章的实验结果）文章qualitatively分析了训练的RNN Encoder-Decoder 通过比较短语得分和已经存在的翻译模型。定性的分析展示了RNN Encoder-Decoder捕捉语言规律在phrase table是更好的，间接地展示了quantitative 改善在全部的翻译性能上。模型更深远的分析reveals RNN Encoder-Decoder 学习到了一个短语的连续空间表示，能够保存短语的语义和语法结构。</li>
+</ul>
+<h4 id="RNN-Encoder-Decoder模型结构"><a href="#RNN-Encoder-Decoder模型结构" class="headerlink" title="RNN Encoder-Decoder模型结构"></a>RNN Encoder-Decoder模型结构</h4><ul>
+<li><strong>Preliminary：RNN网络</strong>，由一个隐藏状态h和一个可选的输出y组成，在一个变长的序列$x=(x_1,x_2,…,x_T)$。每一个时间step t，隐藏层$h_{\left \langle t \right \rangle}$,被更新$h_t=f(h_{t-1},x_t)$，$f$是一个非线性激活函数。所以可以使用softmax基于当前step的隐藏状态得到输出词的概率分布（多项式分布），从学习到的分布可是很简单的采样出一个序列。</li>
+<li><strong>RNN Encoder-Decoder</strong>，输入长度$T$，输入序列是$x$，输出长度$T’$，输出序列是$y$，RNN读每个symbol of an input sequence x sequentially。序列的结尾由一个特殊地end-of-sequence符号表示，隐藏状态是一个summary c在整个序列上。编码和解码阶段有很大的不同。文章描述的模型结构如图所示。两个RNN组件联合训练最大化似然概率。两种使用方式，一种是根据输入序列输出一个输出序列，另一种是给定输入序列x和输出序列y可以预测发生的概率。</li>
+</ul>
+<p><img src="/assets/blogImg/rnn_encoder_decoder.png" alt="image-20200324194624385"></p>
+<ul>
+<li>能够记忆和遗忘的隐藏单元。文章基于LSTM隐藏单元的motivated，提出了一种novel单元类型，更加简单和易于实现，如下图所示。$[.]_j$表示一个向量的第j个元素，$z_j$是更新门，$r_j$是重置门。更新门控制着多少信息来自于之前的hidden state，相当于控制着长时记忆。因为每个隐藏单元（就是一个元素）都有独立的reset gate 和 update gate，所以，每个hidden unit都会捕捉到不同时间范围的依赖关系。实验结果表明如果使用不加任何gate的tanh，不能够得到有意义的结果。<br><img src="/assets/blogImg/rnn_encoder_decoder2.png" alt="image-20200324200318249"><h4 id="统计机器翻译"><a href="#统计机器翻译" class="headerlink" title="统计机器翻译"></a>统计机器翻译</h4></li>
+<li>统计机器翻译SMT，是找到一个翻译f given a source sentence，使p(f|e)概率最大化，p(e|f)叫做翻译模型，p(f)叫做语言模型。</li>
+<li>2002年介绍的phrase-based SMT架构，翻译模型log p(e|f)被分解为source和target中匹配短语的翻译概率。</li>
+<li>2003年提出神经网络语言模型。神经网络在SMT上被广泛应用。</li>
+<li>使用RNN Encoder-Decoder打分短语对。<strong>这里不太了解，什么是phrase-based SMT架构</strong>，我的理解就是以短语为单位，短语表本身有一个统计信息的表，使用RNN Encoder-Decoder重新打分。</li>
+<li>相关方法：机器翻译中的神经网络。很多引用和介绍，跳过。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li>文章评估方法在英语/法语翻译任务上，在WMT14 workshop上。</li>
+<li>双语corpora组成。The  bilingual corpora include Europarl (61M words), news commentary  (5.5M),  UN  (421M),  and  two  crawled corpora  of  90M  and  780M  words  respectively.</li>
+<li>除了给定的corpora，还爬取了新闻材料712M words。</li>
+<li>直接concatenation往往不会获取最好的performance。Instead，应该focus on 更相关的subset。本文使用其他文章提出的<strong>selection method</strong>，选择了418M words的subset作为语言模型的corpora，选择了348M words 的subset作为RNN Encoder-Decoder的训练corpora。使用newstest2013和2013作为数据selection和权重tuning with MERT，newstest2014作为测试集。每个set都有超过70k words和一个独立的参考翻译。</li>
+<li>使用top 15000 words作为vocabulary，其他的单词都使用[UNK]表示。</li>
+<li>baseline是phrase-based SMT，指标是BLEU，开发集和测试集分别得到了30.64和33.3 分数。</li>
+</ul>
+<p><img src="/assets/blogImg/rnn_encoder_decoder3.png" alt="image-20200325150750940"></p>
+<ul>
+<li><p>RNN Encoder-Decoder有1000个隐藏单元，隐藏单元和输入$x_t$之间使用lower-rank 矩阵（我理解的就是embedding），输出矩阵类似，使用rank 100的矩阵。RNN Encoder-Decoder的详情在附录页。</p>
+</li>
+<li><p>后面的没有太看懂。</p>
+</li>
+</ul>
+<h4 id="附录：RNN-Encoder-Decoder"><a href="#附录：RNN-Encoder-Decoder" class="headerlink" title="附录：RNN Encoder-Decoder"></a>附录：RNN Encoder-Decoder</h4><ul>
+<li>这部分介绍了RNN Encoder-Decoder的细节。</li>
+<li>源phrase 为 $X=(x_1,x_2,…,x_N)$，目标phrase为$Y=(y_1,y_2,…,y_M)$。每个phrase使用one-hot编码。</li>
+<li>每个源phrase被编码为500-dimensional 向量，隐藏层使用1000个隐藏单元。</li>
+<li>这部分介绍的很详细，一看就懂。</li>
+</ul>
+<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
+<li>为了解决一类变长到变长序列的问题。</li>
+</ul>
+<h4 id="使用的主要方法"><a href="#使用的主要方法" class="headerlink" title="使用的主要方法"></a>使用的主要方法</h4><ul>
+<li>提出了RNN Encoder-Decoder结构。</li>
+<li>提出一种类似LSTM的GRU结构，并且具有比LSTM更少的参数，更不容易过拟合。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>本篇论文算是为 Seq2Seq 的研究开了先河，而且其提出的 GRU 结构也为后来的研究做好了铺垫，得到了广泛应用，非常值得一读。</li>
+<li>在文章中，提出了一种新型神经网络架构，称为RNN Encoder-Decoder，它能学习将一个任意长度的序列映射到另一个任意长度序列（可能来自不同数据集）。</li>
+<li>所提出的RNN Encoder-Decoder能够给一对序列（以条件概率表示）打分或产生给定源序列的目标序列。</li>
+<li>随着新架构，我们提出了一个新颖的hidden unit，包括一个复位门和一个更新门，自适应地控制每个hidden unit在读取/生成序列时记住或遗忘多少。</li>
+<li>文章用统计机器翻译的任务评估了所提出的模型，其中使用RNN Encoder-Decoder对短语表中的每个短语对进行评分。定性上，我们能够表明新模型能够很好地捕获短语对中的语言规律，并且RNN Encoder-Decoder能够生成符合语法规则的目标短语。</li>
+<li>文章发现RNN Encoder-Decoder可以在BLEU分数方面提高整体翻译效果。 </li>
+<li>此外，发现RNN Encoder-Decoder的贡献正交于（orthogonal）SMT系统中神经网络的现有使用方法，因此可以同时使用RNN Encoder- Decoder和神经网络语言模型来提高性能。</li>
+<li>文章对训练完的模型的定性分析表明，它确实捕捉了多个层面的语言规律，例如词级和短语层面。 这表明可能会有更多自然语言相关的应用受益于RNN Encoder-Decoder。</li>
+<li>该架构具有巨大潜力可进一步改进和分析。 <strong>本文未研究的其中一种方法是让RNN Encoder-Decoder生成目标短语来代替整个或部分短语表。</strong>（没懂） </li>
+<li>另外，值得注意的是此模型并不局限于用在书面语言上，所以将该架构应用于语音转录等其他应用将是未来重要的研究。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>如何使用文章提出的RNN Encoder-Decoder进行短语对的重新打分？</li>
+<li>这里没有用到Attention。</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21279072" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21279072</a></li>
+<li><a href="https://cuiqingcai.com/5873.html" target="_blank" rel="noopener">https://cuiqingcai.com/5873.html</a></li>
+<li><a href="https://blog.csdn.net/u010555997/article/details/76474533" target="_blank" rel="noopener">https://blog.csdn.net/u010555997/article/details/76474533</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">emnlp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SMT</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/08/emnlp03/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nips04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1137,221 +1483,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-nips03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/nips03/">论文阅读：Semi-supervised Learning with Deep Generative Models </a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/25/nips03/" class="archive-article-date">
-  	<time datetime="2019-10-25T04:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>深度生成模型应用到半监督学习</li>
-<li>发表在NIPS2014，引用率1k+</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1406.5298" target="_blank" rel="noopener">https://arxiv.org/abs/1406.5298</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Durk Kingma, 阿姆斯特丹大学博士毕业，在谷歌大脑工作，主要从事机器学习的生成模型、变分推断和随机优化等方向，目前生活在旧金山，个人主页：<a href="http://www.dpkingma.com/" target="_blank" rel="noopener">http://www.dpkingma.com/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>将变分推断生成模型应用到半监督分类任务，在许多数据集的测试上达到了先进的水平。</li>
-</ul>
-<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
-<li>定义：带有标记的数据分布为$\tilde{p}_l(x,y)$,未标记的分布为$\tilde{p}_u(x)$，半监督学习的任务就是利用没有标签数据的属性信息和带有标签的数据使得实验优于只使用带标签的数据得到的性能。</li>
-<li>模型1，隐特征判别模型：（相当于VAE模型）$p(z)=N(z|0,I),p_\theta(x|z)=f(x;z,\theta)$，使用低维特征z作为特征进行分类任务。</li>
-<li>模型2，生成式半监督模型：提出一个概率模型，将标签y加入到隐变量z中，生成过程变成$p(y)=Cat(y|\pi);p(z)=N(z|0,I);p_\theta(x|y,z)=f(x;y,z,\theta)$，其中Cat为多项式分布，如果标签y不存在，则加入的变量就当做一个隐变量。对于无标签数据，可以使用后验分布$p_\theta(y|x)$预测无标签数据的类别。</li>
-<li>模型3，栈式生成半监督模型(模型1+模型2)：论文组合这两种方法，首先应用模型1学习一个隐特征$z_1$，随后应用模型2使用嵌入的$z_1$，代替原来的数据x。</li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li>Github链接：<a href="http://github.com/dpkingma/nips14-ssl" target="_blank" rel="noopener">http://github.com/dpkingma/nips14-ssl</a></li>
-<li>分类任务：在MNIST数字分类任务上，使用半监督的方法，在50000带有标签和没有标签的训练数据集合，并且变化有标签的数据从100到3000，确保所有类别的平衡性，每个类别都有相同数量的带标签的点。对于模型1，使用一个50维的隐变量z，MLPs使用两层，每层600个隐藏单元，使用softplus激活函数，在顶层，使用TSVM。对于模型2，也是用50维的z，MLPs使用一层隐藏层，每层500个神经元，softplus激活函数。实验结果如下：</li>
-</ul>
-<p><img src="/assets/blogImg/nlp03_1.png" alt="image-20191025094710189"></p>
-<ul>
-<li>条件生成：可以根据训练处理的z，调整隐变量y，使得输出相同风格的其他类别的数据。</li>
-</ul>
-<p><img src="/assets/blogImg/nips03_2.png" alt="image-20191025095348475"></p>
-<ul>
-<li>图片分类：实验结果，<img src="/assets/blogImg/nips03_3.png" alt="image-20191025095316080"></li>
-</ul>
-<h4 id="我对论文的理解"><a href="#我对论文的理解" class="headerlink" title="我对论文的理解"></a>我对论文的理解</h4><ul>
-<li>相当于VAE的一种变体，也可以说是CVAE的一种类型，将类别标签y加入到隐变量中得以实现风格转换，同时将原来的没有标签的数据的特征增强了有标签类型的隐变量的学习。</li>
-</ul>
-<h4 id="缺点和补充"><a href="#缺点和补充" class="headerlink" title="缺点和补充"></a>缺点和补充</h4><ul>
-<li>在类别数量呈线性增长的过程中，重新评估每个类别的生成可能性存在昂贵的代价。</li>
-<li>模型的扩展可以到多标签分类任务中。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">VAE</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">半监督</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">生成模型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/nips03/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-emnlp01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/21/emnlp01/">论文阅读：Controlled Text Generation for Data Augmentation in Intelligent Artificial Agents </a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/21/emnlp01/" class="archive-article-date">
-  	<time datetime="2019-10-21T03:21:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>智能人工代理中用于数据增强的受控文本生成</li>
-<li>发表在emnlp2019上</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1910.03487" target="_blank" rel="noopener">https://arxiv.org/abs/1910.03487</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Nikolaos Malandrakis，PhD student at University of Southern California。研究兴趣围绕自动从文本中提取信息，特别是在感知/行为信息上。个人主页：<a href="https://sail.usc.edu/~malandra/" target="_blank" rel="noopener">https://sail.usc.edu/~malandra/</a></li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>给定一些新功能的短语模板，生成新的语义相似的短语，扩大训练数据。</li>
-</ul>
-<h4 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h4><ol>
-<li>研究了在低资源情况下文本生成技术对NLU数据增强在s2s和VAE模型上的应用；</li>
-<li>在外部意图分类任务上验证新数据带来的提升。</li>
-</ol>
-<h4 id="使用的主要方法"><a href="#使用的主要方法" class="headerlink" title="使用的主要方法"></a>使用的主要方法</h4><ul>
-<li>文章没有提出新的方法，而是介绍了几种方法在该低资源下的文本生成的应用，介绍了s2s、VAE、CVAE和带有判别器的VAE，实验效果表明CVAE的效果最好。</li>
-</ul>
-<h4 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h4><ul>
-<li>这篇文章没有看得特别懂，简单了介绍了文章的架构，疑问也比较多，后面研究深入会回过头再看这篇文章。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLG</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/21/emnlp01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1474,6 +1605,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">词嵌入</a>
               </li>
              
@@ -1487,14 +1626,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">embedding</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1522,30 +1653,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">话题检测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">LDA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">表示学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">信息检索</a>
               </li>
              
@@ -1559,6 +1666,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">胶囊网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLG</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1622,6 +1737,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">话题检测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LDA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">表示学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -1647,6 +1778,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1678,19 +1813,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">反爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1699,6 +1822,26 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vae</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Bert</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1723,10 +1866,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文本对抗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1762,6 +1901,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">词向量</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
               </li>
              
@@ -1771,6 +1914,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1786,7 +1933,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1795,10 +1942,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1827,10 +1970,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文本分类</a>
               </li>
              
               <li class="article-tag-list-item">
