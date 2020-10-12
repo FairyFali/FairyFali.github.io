@@ -154,6 +154,197 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-acl04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/17/acl04/">论文阅读：Combating Adversarial Misspellings with Robust Word Recognition</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/17/acl04/" class="archive-article-date">
+  	<time datetime="2020-06-17T03:16:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>通过鲁棒单词识别器来防御对抗性拼写错误</li>
+<li>发表在ACL2019</li>
+<li>论文下载：<a href="https://arxiv.org/abs/1905.11268v1" target="_blank" rel="noopener">https://arxiv.org/abs/1905.11268v1</a></li>
+<li><a href="https://www.aclweb.org/anthology/P19-1561/" target="_blank" rel="noopener">https://www.aclweb.org/anthology/P19-1561/</a></li>
+<li>代码：<a href="https://github.com/danishpruthi/Adversarial-Misspellings" target="_blank" rel="noopener">https://github.com/danishpruthi/Adversarial-Misspellings</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Danish Pruthi（普鲁西），是卡内基梅隆大学计算机科学学院语言技术的博士研究生。由Graham Neubig 博士和Zachary C. Lipton 博士共同指导。研究目标是使机器能够理解和解释自然语言现象。为此，我致力于解释神经表示和模型。个人主页：<a href="https://www.cs.cmu.edu/~ddanish/" target="_blank" rel="noopener">https://www.cs.cmu.edu/~ddanish/</a></li>
+<li>Bhuwan Dhingra，在CMU的语言技术学院获得了博士学位。研究专注于自然语言处理，机器学习和知识表示。论文导师是William Cohen和Russ Salakhutdinov。在那之前，曾在IIT Kanpur从事电气工程学，在那里与Amitabha Mukerjee合作。在此期间，曾在美国圣地亚哥的高通研究部工作。个人主页：<a href="http://www.cs.cmu.edu/~bdhingra/" target="_blank" rel="noopener">http://www.cs.cmu.edu/~bdhingra/</a></li>
+<li>扎卡里（Zachary Chase Lipton），CMU运筹学与机器学习助理教授，个人主页：<a href="https://www.cmu.edu/tepper/faculty-and-research/faculty-by-area/profiles/lipton-zachary.html" target="_blank" rel="noopener">https://www.cmu.edu/tepper/faculty-and-research/faculty-by-area/profiles/lipton-zachary.html</a></li>
+<li>三名作者的主页里都有列出了他们的Research，可提供参考。</li>
+</ul>
+<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
+<li>论文解决了一个防御对抗性拼写错误的问题。 </li>
+</ul>
+<h4 id="论文提出了什么方法"><a href="#论文提出了什么方法" class="headerlink" title="论文提出了什么方法"></a>论文提出了什么方法</h4><ul>
+<li>提出一种防御措施，任务无关的，单词识别器模型，建立在RNN-based 半字符级别的单词识别器。</li>
+</ul>
+<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>为了防御对抗性拼写错误，我们提出了将单词识别模型放在下游分类器的前面。我们的单词识别器模型建立在RNN半字符结构上，介绍了集中新型backoff策略对于解决稀有的和未知的单词。经过训练可以识别因随机添加、删除、交换和键盘错误而损坏的单词，我们的方法实现了32%相对错误较少(3.3%绝对)在半字符模型上。尤其是，我们的pipeline可以是下游分类器具有鲁棒性，优于对抗训练和现有的拼写检查器。与针对情感分析进行了微调的BERT模型对抗，单一的对抗性选择字符攻击能够将准确率从90.3%降低至45.8%。我们的防御将准确率恢复到75%。意外地，更好地单词识别器并不总是意味着更好的鲁棒性。我们的分析表明，鲁棒性还取决于我们贡献的模型灵敏度。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（文本对抗的背景）尽管深度学习技术的快速发展在多种监督任务上，这些模型在数据分布方面仍然保持着脆弱的变化。即使在允许的变化仅限于几乎无法察觉的扰动的情况下，训练一个鲁棒性的模型仍然是一个开放的挑战。在发现了无法察觉的攻击可能导致图像识别模型错误分类之后(Szegedy et al., 2013)，出现了一个子领域，学者反复提出攻击和防御。</li>
+<li>（应用背景，提出问题）对于所有的兴趣在对抗计算机视觉，这些攻击是很少出现在学术研究之外。可是，对抗拼写错误构成了一个<strong>longstanding real-world problem</strong>长期存在的真实问题。垃圾邮件制造者不断轰炸电子邮件服务器，巧妙地拼写错误的单词以逃避垃圾邮件检测，同时保留电子邮件预期含义。再举一个例子，互联网上的审查制度促使社区采用类似的方法秘密交流。</li>
+<li>（提出解决的问题，拼写错误的背景）在这篇文章中，我们注意文本分类背景下的对抗选择的拼写错误，解决了以下攻击类型：删除、添加和交换单词内部字符。这些扰动被心理学家证明，人类能够理解替换了内部字符的文本，只要第一个和最后一个字符是不被扰动的。</li>
+<li>（文章主要内容1）首先，实验使用了BiLSTM和微调BERT，比较了四种不同的输入格式，word、char、word+char和word-piece，我们证明了对手可以使分类器的性能降低到通过随机猜测获得的性能。<strong>这仅仅需要替换两个字符每个句子</strong>。这些修改也许将单词变成一个不同的单词，或者是OOV单词UNK。所以，对抗性的编辑可以降低信息丰富的单词为UNK来降低单词级别的模型性能。直觉上，人们可能会怀疑word-piece和字符级别的模型会更不容易受到攻击，因为他们可以利用剩余的词上下文。但是我们的实验说明字符和word-piece级别的模型是更脆弱的。我们表明这是由于对手对这些模型进行细粒度操作的有效能力。在针对单词级别模型的情况下，对手主要扰动为UNK单词，而针对word-piece或字符级别模型，则每个字符级别的添加、删除和交换都会产生不同的输入，从而为对手提供了更多的选择。</li>
+<li>（文章主要内容2）第二，我们评价了包括数据增强和对抗训练在内的一线技术，表明他们在这里仅仅提供了<strong>边际收益</strong>，例如，在情感分类任务上实现了90.3精度的BERT模型，经过对抗选择1字符交换的攻击降低为64.1，只能通过对抗性训练恢复到69.2。</li>
+<li>（文章主要内容3，主要贡献）我们提出了一个任务无关的防御，带有一个单词识别器模型，能够预测一句话中的每个单词，给定一系列带有拼写错误的输入。单词识别器的输出构成了下游分类模型的输入。我们的单词识别器建立在RNN-based半字符级别。同时我们的单词识别器被训练在一个领域特定的文本，它们经常会预测为UNK在测试阶段，由于特定领域的词汇量很小。为了解决未被发现的单词和稀有单词，我们提出了几种backoff 后退策略，包括依靠训练在较大语料库上的通用单词识别器。使用我们的防御，BERT模型受到1交换字符攻击被恢复到88.3的准确率。</li>
+<li>（文章主要内容4）第四，我们提供了一个详细的质量分析，证明了仅仅单词错误识别率低是不能充分说明单词识别器得到了鲁棒性在下游任务。此外，我们提出了识别器模型提供很好程度的自由对攻击者是很重要的。我们提出了一个指标，叫做敏感度，研究了它的关系和鲁棒性经验性地。模型带有低敏感度和错误识别率是最鲁棒的。</li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>…</li>
+</ul>
+<h4 id="鲁棒单词识别器"><a href="#鲁棒单词识别器" class="headerlink" title="鲁棒单词识别器"></a>鲁棒单词识别器</h4><ul>
+<li>为了解决字符级对抗攻击，我们介绍了一个简单的两阶段方法，放置一个单词识别器$W$在下游任务分类器$C$之前。在这个模式下，所有的输入都经过这两部分。这个模块化的方法，W和C单独训练，提供了几个好处：（i）我们可以部署相同的单词识别模型在多个下游分类任务；和（ii）我们能够训练单词识别器在没有标签的大语料上。</li>
+<li>针对对抗性错误。两个重要的因素控制着鲁棒性：W的准确率和W的敏感度对于对抗性扰动在相同的输入上。我们下面详细讨论这些。</li>
+<li><strong>ScRNN带有Backoff策略</strong>。我们现在描述半字符RNNs对于单词识别器，解释它的限制和改善的技术。</li>
+<li>受到心理学的启发，提出了半字符RNN，即ScRNN，处理一个句子带有拼写错误的字符，预测正确的单词在每一步。令$s=\{ w_1,w_2,…,w_n \}$，为输入句子，每一个输入单词被表示通过拼接以下：(i)第一个字符的one-hot编码，(2)最后一个字符的one-hot表示，(iii)一个中间字符的袋，内部字符的表示为$\sum_{j=2}^{l-1}w_{ij}$。ScRNN对待第一个字符和最后一个字符单独地，中间字符顺序是不考虑的。每个单词的表示输入到BiLSTM中。每个序列步骤，训练目标是正确的对应的单词，模型通过交叉损失进行训练。</li>
+<li><strong>Backoff 策略</strong>。因为 Sakaguchi   et   al.(2017) 说明了单词识别器性能的强大，一个缺点他们的评估设置是他们仅仅攻击和评估训练词表的一部分单词子集。在这样一个设置，单词识别器性能是过分依赖所选的词表大小。可以设计模型来预测（正确地）仅选择几个单词，而忽略剩余的大多数单词，但仍达到100％的准确性。<strong>对于对抗性设置，稀有的和未知的单词尤为重要，因为它们为攻击者提供了机会</strong>。一个可靠的单词识别器应该能够解决这些情况。我们探索不同的backoff策略，当ScRNN预测为UNK时（对于稀有单词和未知词来说是常见的）：<ul>
+<li>Pass-through：不处理。</li>
+<li>Neutral：回退到中性单词，比如“a”，该单词在类之间的分布相似。</li>
+<li>Background：我们也考虑了一种依赖更大、更通用的语料库上训练的单词识别模型。图1描绘了这种情况。</li>
+<li><img src="/assets/blogImg/ScRNN-Background-fig1.png" alt="image-20200607153658232"></li>
+</ul>
+</li>
+<li>经验上，我们发现背景模型（本身）的准确率较差，这是因为训练了该模型可以预测大量的单词。因此，最好在领域内语料库上训练精确的前景模型并关注频繁的单词，然后针对稀有和未知单词求助于通用背景模型。接下来，我们说明了构建稳定的单词识别器的第二个考虑因素。<ul>
+<li>可以用完整的词汇量训练背景模型，以便背景模型永远不会预测UNK。</li>
+</ul>
+</li>
+<li><strong>模型敏感度</strong>。在计算机视觉中，一个重要的是因素确定对抗的成功是范数约束在扰动前后$||x-x’||_{\infty}&lt;\epsilon$。更高的阈值导致一个更高的误分类的机会。防御方法，比如quantization (Xuet  al.,  2017)  and  thermometer  encoding  (Buck-man et al., 2018) t，尝试通过是模型对输入的微小变化不变，来减少对手可用的扰动空间。</li>
+<li>在NLP中，我们经常得到一些不变形，例如对于单词级别的模型来说，字符级对手产生的大部分干扰都会导致UNK。如果模型本身对UNK具有鲁棒性，则对手几乎没有空间操纵单词。</li>
+<li>字符级别的模型尽管性能在许多任务上都很优秀，但是不会拥有这样的不变性。这样的字符不变形能够被攻击者应用。因此，为了限制不同输入的数量到分类器，我们希望降低不同的单词识别器输出的数量，该，而不仅仅是降低模型被欺骗的数量。我们贡献这个模型属性为<strong>敏感度</strong>。</li>
+<li>我们能够量化这个概念对于一个单词识别器$W$，期望输出唯一的输出当赋予一系列对抗性扰动。给定一个句子s，令$A(s)=s_1’,s_2’,…,s_n’$，贡献n个扰动在攻击类型A下，令V是一个函数，映射字符串到一个输入表示对于下游分类器。对于一个单词级别的模型，V会转换句子到一个word ids的序列，映射OOV单词到相同的UNK ID。鉴于，对于一个字符级别（或者单词+字符、word-piece）的模型，V会映射输入到一个字符 ids的序列。形式化，敏感度被定义为：</li>
+<li>$S_{W,V}^A = E_s[#_u(V\circ W(s_1’),…,V \circ W(s_n’))/n]$</li>
+<li>$V \circ W(s_i)$返回输入表示（下游分类器），$#_u(·)$表示不同值的计数。</li>
+<li>直觉上，一个高的敏感度值会导致一个低鲁棒性在下游分类器中，因为对手有更多的自由度攻击分类器。因此，当使用单词识别器作为防御，谨慎的做法是设计一个具有低错误率和低敏感度的系统。但是，正如我们要演示的那样，在灵敏度和错误率之间通常要进行权衡。</li>
+<li><strong>综合对抗攻击</strong>。假设我们给定一个分类器$C$，映射自然语言句子$s \in S$到一个标签。对手是一个函数$A$，映射一个句子到扰动的版本$\{ s_1’,s_2’,…,s_n’ \}$，我们定义分类器C的鲁棒性为：</li>
+<li>$R_{C,A} = E_s[\underset{s’ \in A(s)}{min} 1[C(s’)=y]]$ or</li>
+<li>$R_{C,A} = E_s[\underset{s’ \in A(s)}{min} 1[C(W(s’))=y]]$</li>
+<li>其中y表示真实标签。实际上，一个真实的对手仅仅查询分类器几次，因此$R_{C,A}$表示最差的对抗性能。生成对抗样本的方法，比如 HotFlip (Ebrahimi et al., 2018b)，关注于有效的算法找到上述的min。改善$R_{C,A}$意味着针对这些方法的更好的鲁棒性。</li>
+<li>允许的扰动A(s)，我们探索四中类别的字符级别的编辑：（1）交换，（2）删除，（3）替换，（4）插入。都是对内部字符进行操作的。为了确保不影响人类理解的能力，我们仅仅允许编辑内部字符，不会扰动停用词和少于4个字符的单词。</li>
+<li>攻击策略。对于1字符攻击，我们尝试所有可能的扰动直到找到一个对抗使模型预测错误。对于2字符攻击，我们贪心地编辑1字符攻击中置信度最低的，然后尝试对其余单词进行扰动。可以类似的方式执行更高阶的攻击。贪心策略减少了获得高阶攻击所需的计算量，复杂度是$O(l^m)$，但是同时也意味着鲁棒性得分是分类器真正鲁棒性的上限。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><strong>单词错误更正</strong>。数据：我们评估这个拼写校正器在SST数据上，由8544个电影评论组成，带有一个16k单词的词表。背景模型使用IMDB电影数据，由54K电影评论和78K单词的词表组成。两个数据集不共享任何评论。拼写校正模型评估在纠错错误拼写的能力。测试集由评论组成，其中每个单词（长度大于等于4）被攻击一次。在所有攻击设置，我们在每句话的攻击中混合了所有攻击。这个和真实世界最相似。</li>
+<li>实验设置。除了单词识别模型，我们还比较了After The Deadline（ATD），一个开源的拼写检查器<ul>
+<li><a href="https://www.afterthedeadline.com/" target="_blank" rel="noopener">https://www.afterthedeadline.com/</a></li>
+<li>我们发现ATD是最好的免费可用的纠正器，和Hunspell</li>
+<li><a href="http://hunspell.github.io/" target="_blank" rel="noopener">http://hunspell.github.io/</a></li>
+<li>相比，因为考虑了上下文。</li>
+</ul>
+</li>
+<li>对于ScRNN模型，我们使用一个单层的BiLSTM，隐藏层尺寸为50，输入表示由198维组成，是单独字符编码（66维）的三倍。我们将单词上限设置为10K单词，当backoff到背景模型时，使用78470单词的整个词汇量。为了训练这个网络，我们会根据所有攻击类型破坏电影评论，即对每个单词应用4中攻击类型之一，并尝试通过交叉熵来重建原始单词。</li>
+<li>结果。我们计算了单词错误率（WER）在表2，注意ATD预测不正确的11.2单词每100个单词，然而，所有的ScRNN的变体都表现的更好。最好的变体是背景模型，这里错误率降低了32%相比于朴素的ScRNN模型带有pass-through策略。我们能够归因于改善的性能到测试集中5.25的集外词，在训练集中看不到，因此只能使用更大的语料库才能恢复，但是直接训练在大语料库上是较差的，8.7%是因为单词频率不同。</li>
+<li><img src="/assets/blogImg/ScRNN-Background-tab1.png" alt="image-20200609135912063"></li>
+<li><strong>对抗攻击的鲁棒性</strong>。我们使用语义分析和短语检测用作下游任务，因为对于这两个任务，1-2个字符的编辑不会更改输出标签。</li>
+<li>实验设置。对于情感分类，我们系统地研究字符级别的对抗攻击在两种架构和四种不同的输入格式的效果。第一种架构编码输入句子到一个embeddings序列，使用BiLSTM处理，第一个和最后一个状态被输入到softmax层来预测输入的情感。我们考虑三种输入格式：（1）只使用单词，单词embeddings 64维，隐藏层使用64；（2）只使用字符，字符维度32，隐藏层使用64；（3）单词+字符，使用前两种的拼接，维度为64+32，隐藏层使用128。第二种架构使用微调的BERT模型，带有输入格式为word-piece。这个模型由最先进的性能在几个NLP任务上，包括情感分析。所有的模型被训练和评估在句子级别的SST数据集。</li>
+<li>我们也考虑paraphrase detection任务。我们利用微调的BERT，训练和评估在MRPC数据集。</li>
+<li>基线防御策略。两个常见的方法对于解决对抗性样本包括（1）数据增强（DA）和（2）对抗性训练（Adv）。在DA中，训练的模型被微调通过增强训练集通过随机攻击一个字符。在对抗性训练中，训练的模型被微调使用额外的对抗样本，对新的模型产生新的对抗样本，进行训练，直到在开发集的对抗准确率不再提高。</li>
+<li>结果。在表3中，我们检查了情感模型的鲁棒性在每一个攻击和防御方法。在没有攻击和防御的情况下，BERT最好90.3%，其次是word+char80.5%，word 79.2%，char 70.3%。但是，甚至单字符攻击（有选择的对抗）是灾难性的，导致一个重大的降低的性能of 46%，57%，59%和33%。<ul>
+<li>这几个降低的数也没对上啊？</li>
+</ul>
+</li>
+<li><img src="/assets/blogImg/ScRNN-Background-tab3.png" alt="image-20200609144212071"></li>
+<li>直觉上，我们也许会认为word-piece和字符级别的模型会更鲁棒对于攻击，因为他们还可以利用其余的上下文。可是，我们发现他们是更受怀疑的。为了了解为什么，注意单词beautiful能够被替换为UNK在单词级别或者一些存在的词，但是，word-piece和字符级别的模型会把它当做一个字符组合不同地。这提供了更多的变体，攻击者能够利用这个变体。相似的原因，add和替换攻击都能够产生一个更大的威胁比交换和删除攻击。不同模型的鲁棒性排序为：word&gt;word+char&gt;char~word-piece，攻击效率排序：添加&gt;替换&gt;删除&gt;交换。</li>
+<li>接下来，我们仔细查看了防御方法的有效性。可以从表3看出，DA和Adv方法不是很有效。我们发现尽管一个很低的训练错误，这些模型不能够泛化攻击在新的单词在测试阶段。ATD拼写错误校正器是最有效率的在替换攻击上，但是在其他攻击方面也是很差的，尤其是add攻击。</li>
+<li>ScRNN模型带有pass-through策略提供了更好地保护，将攻击精确率的对抗精度恢复到5%的范围内。它在其他攻击类别下也有效，并且可以在word-piece模型中减少21%的对抗效果，在字符模型中减少了19%，在单词和单词+字符模型中的对抗效果超过4.5%。这说明了，对于模型鲁棒性，单词错误校正的直接训练比DA和Adv间接训练更有效。</li>
+<li>我们发现此外的收获通过使用背景模型拥有更低的WER，但是，它的增益在所有其他设置中并不能始终如一地转换，因为较低的WER是必需的，但不是充分的，除了较低的错误率外，我们发现可靠的防御应该为攻击者提供最少的攻击选择，即应该具有较低的敏感性。正如4.3节中提到的，由于将UNK映射到固定的中性词，灵敏度最低。因此，对于所有4个模型，它在大多数攻击类型上都具有最高的鲁棒性。</li>
+<li>表4说明了BERT的准确率在200个样本，在MRPC的开发集上，在不同的攻击和防御策略。再次，我们发现简单的1-2字符攻击能够带来BERT的准确率下降。单词级别模型能够提供一个有效的防御，pass-through和neutral能够恢复最多。同时中性词在2字符时更有效。由于修改了某些拼写正确的单词，因此在无攻击情况下会损害性能。由于两种变体已经有效，因此我们没有为此任务训练背景模型。</li>
+<li><img src="/assets/blogImg/ScRNN-Background-tab4.png" alt="image-20200609154237039"></li>
+<li><strong>理解模型敏感度</strong>。</li>
+<li>实验设置。为了研究模型敏感度，对于每一个句子，我们扰动一个随机选择的词并且替换它使用所有可能的情况在一个给定的攻击类型。输入到单词识别器中，我们计算输出不同句子的数量。如果下游分类器对两个校正的映射不同，则认为是unique的。</li>
+<li>结果。中性词backoff策略有最低的敏感度，如表5所示。这是期望的，因为它放回了一个修正的中性词，只要ScRNN预测一个UNK，因此降低了unique的数量。开放式词表（即 字符、单词+字符，word-piece）下游分类器以不同的方式考虑字符的每个unique组合，而纯词分类器内部对所有OOV词进行相同的处理。因此，对于char-only、word-only和word-piece模型，pass-through策略是更敏感的比背景模型。<ul>
+<li>表5的下半部分应该只做了字符的。</li>
+</ul>
+</li>
+<li><img src="/assets/blogImg/ScRNN-Background-tab5.png" alt="image-20200609160609373"></li>
+<li>理想情况下，一个更好的防御是一个带有低敏感度和低WER。实际上，我们发现一个低错误率常常伴随着敏感度的开销。我们通过图2展示了两者的trade-off。通常，敏感度是这两个因素中最主要的因素，因为所考虑的变体的错误率相当低。</li>
+<li><img src="/assets/blogImg/ScRNN-Background-fig2.png" alt="image-20200609163625598"></li>
+<li>人类的可理解性。我们验证情感是否通过字符级攻击得以保留。在一个有50项攻击（分类器会分类错误）和50个原来评论的人类研究中，注意到分别保留了48和49个观点。</li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>随着字符和单词输入在现代NLP管道中变得司空见惯，值得强调一下它们增加的漏洞。 我们表明，最少的攻击可以将分类器的准确性降低到随机猜测的水平。 我们建议使用单词识别作为对此的一种保护措施，并在基于RNN的半字符单词识别器的基础上进行。 我们发现，当用作防御机制时，最准确的单词识别模型并不总是最强大，可以抵抗对抗攻击。 此外，我们强调需要控制这些模型的灵敏度以实现高鲁棒性。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>marginal benefits边际收益是什么？</li>
+<li>使用$\circ$符号通常表示一个复合函数。</li>
+<li>$\alpha_1p(1)log(p(1)/p(0))+\alpha_2p(0)log(p(0)/p(1))$</li>
+</ul>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://www.cnblogs.com/shona/p/11391315.html" target="_blank" rel="noopener">https://www.cnblogs.com/shona/p/11391315.html</a></li>
+<li></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">防御</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/17/acl04/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-security02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2256,225 +2447,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-iclr02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/08/iclr02/">论文阅读：Neural Machine Translation by Jointly Learning to Align and Translate</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/08/iclr02/" class="archive-article-date">
-  	<time datetime="2020-04-08T03:11:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>联合学习对齐和翻译的神经机器翻译</li>
-<li><strong>该论文第一次将注意力机制引入了NLP领域</strong></li>
-<li>发表于ICLR2015，第一次提交是2014年</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">https://arxiv.org/abs/1409.0473</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li><p>一作Dzmitry Bahdanau（德米特里·巴赫达瑙），2009~2013在Belarusian State University，2013~2015年在Jacobs University Bremen，2015-至今，在蒙特利尔大学读博士，师从Yoshua Bengio。其中2014年6月到2014年8月在蒙特利尔大学做实习研究生。应该是这个期间和文章的三作Yoshua Bengio合作了这篇文章。个人主页：<a href="http://rizar.github.io/about/" target="_blank" rel="noopener">http://rizar.github.io/about/</a></p>
-</li>
-<li><p>二作Cho是之前阅读的《Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation》的一作。</p>
-</li>
-</ul>
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>神经机器翻译是最近提出的一个方法，和传统统计机器翻译不同，神经机器翻译目标是建立一个独立的神经网络能够联合调整以最大化翻译性能。</li>
-<li>这个最近提出的模型通常属于一个encoder-decoders系列，编码一个源句子到一个固定长度的隐向量，然后解码器根据隐向量生成翻译。<ul>
-<li><em>Encoder-Decoder是Cho那篇论文提出的，Seq2Seq和end-to-end是ilya那篇论文提出的，但是他们都是一个东西。</em></li>
-</ul>
-</li>
-<li>这篇文章conjecture 使用固定长度的向量是一个bottleneck在改善基本的Encoder-Decoder结构上，并且提出了拓展这个方法借助于允许一个模型自动 <strong>(soft-)search</strong> source句子的部分在预测目标词时，不必明确地将这些部分形成<strong>hard segment</strong>。</li>
-<li>借助于这个方法，文章实现了一个翻译，性能和已存在的state-of-the-art phrase-based系统进行比较，在English-to-French翻译任务上。而且，qualitative 分析reveal <strong>(soft-)alignments</strong> 在这个模型中和我们的intuition非常吻合。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（介绍背景）神经机器翻译是一个新兴的方法，最近被 Kalchbrenner and Blunsom (2013), Sutskeveret al.(2014) and Choet al.(2014b)提出。和传统机器翻译由许多小的sub-components组成和tuned separately不同，神经机器翻译尝试建立和训练一个独立的、大的神经网络，能够读一个句子并且输出一个正确的翻译。</li>
-<li>（介绍之前的核心方法）大多数提出的神经机器翻译模型都属于Encoder-Decoder (Sutskeveret al., 2014; Choet al., 2014a)。（<em>之前看的cho和ilya的文章</em>）把source句子通过编码器编码为一个固定的隐向量，再根据隐向量解码出target句子。</li>
-<li>（介绍挑战，之前模型的不足，Motivation）Encoder-Decoder的一个潜在问题就是需要压缩所有的信息到一个fixed-length vector。这使得神经网络处理长句子时有困难，特别是比训练集句子更长的句子。Cho et al.(2014b) 展示了基本的Encoder-Decoder deteriorates rapidly 当句子长度增长时。</li>
-<li>（文章提出的解决办法）为了解决这个问题，文章提出了一种对Encoder-Decoder的扩展，能够联合学习align和翻译。每次生成单词时，都会(soft-)search一系列源句子中的positions，能够集中最多的相关的信息。这个模型预测目标单词基于<strong>context</strong> vectors，和source positioins相关的向量和所有之前生成的目标单词。</li>
-<li><p>（进一步解释方法，和之前方法的不同，相比的优势，解决的挑战）这个方法和基本的Encoder-Decoder最重要的不同在于它没有尝试编码整个输出句子到一个单独的固定长度的向量。Instead，它编码输入句子到一个向量序列并且适应性地选择这个序列的一个子集在解码翻译时。这使得神经翻译模型不需要将源句子的所有信息squash为fixed-length向量。我们展示了这个方法可能更好地cope 长句子。</p>
-</li>
-<li><p>（实验和实验定性结论）文章展示了提出的方法联合学习对齐和翻译significantly改善了翻译performance相比于基本的Encoder-Decoder方法。这个改善在长句子上是更明显的，但是在所有长度的句子上都有一定的改善。在English-to-French翻译任务上，提出的方法和phrase-based系统比较。而且，定性的分析reveal提出的模型找到了语言上合理的 <strong>(soft-)alignment</strong> 在source 句子和target句子之间。</p>
-</li>
-</ul>
-<h4 id="回顾：神经机器翻译"><a href="#回顾：神经机器翻译" class="headerlink" title="回顾：神经机器翻译"></a>回顾：神经机器翻译</h4><ul>
-<li>首先介绍了之前神经机器翻译相关的一些主要相关背景。</li>
-<li>然后作者提出了一个通用的Encoder-Decoder模型，如下：<ul>
-<li>input sentence $x=(x_1, …,x_{t_x})$</li>
-<li>编码为一个context向量$c$</li>
-<li>使用RNN编码 $h_t = f(x_t, h_{t-1}),h_t \in R^n$，$f$是一个nonelinear函数，在ilya论文中使用LSTM</li>
-<li>是通过隐变量确定的一个context向量，$c = q(\{h_1, …,h_{T_x}\})$，$q$是一个非线性函数，在ilya论文中$q(\{h_1,…,h_T\})=h_T$</li>
-<li>编码器预测下一个单词$y_{t’}$ given context vector $c$ and 所有的之前预测的单词${y_1,…,y_{t’-1}}$</li>
-<li>解码器定义了翻译概率$y$分解为了联合概率$p(y)=\Pi_{t=1}^T p(y_t|\{y_1,…,y_{t-1}\},c)$</li>
-<li>使用RNN每一个条件概率被定义为$p(y_t|\{y_1,…,y_{t-1}\},c)=g(y_{t-1},s_t,c)$，$g$是一个非线性函数，$s_t$是解码RNN的隐状态。</li>
-</ul>
-</li>
-</ul>
-<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
-<li>文章提出了一个新颖的神经机器翻译。使用双向RNN作为编码器和解码器，解码器模仿搜索在解码翻译阶段。<ul>
-<li><em>解码器是单向的吗？</em>是的。</li>
-</ul>
-</li>
-<li>解码器：通用描述。$p(y_i|\{y_1,…,y_{i-1}\},x)=g(y_{i-1},s_i,c_i)$，$s_i=f(s_{i-1},y_{i-1},c_i)$，最重要是这里的解码阶段的context vector，每次都不相同。向量$c_i$由一系列annotations $(h_1, …,h_{T_x})$确定，$c_i=\sum_{j=1}^{T_x}\alpha_{ij}h_j$。权重$\alpha_{ij}$计算通过公式$\alpha_{ij}=\frac{exp(e_{ij})}{\sum_{k=1}^{T_x}exp(e_{ik})}$,$e_{ij}=a(s_{i-1}, h_j)$。$e_{ij}$叫做<strong>alignment model</strong>，评估输入位置j和输出位置i的匹配程度，分数值基于前一时刻的hidden state $s_{i-1}$。<ul>
-<li>对齐模型$a$使用feedforward neural network。<ul>
-<li><em>这里是怎么输入两个向量的？</em></li>
-</ul>
-</li>
-<li>注意：和传统机器翻译不同，对齐不是一个latent variable，这里alignment model直接计算一个soft alignment，它允许损失函数的梯度被backpropagated。这使得alignment model可以和整个翻译模型联合训练。<ul>
-<li><em>这里的soft alignment是什么意思？</em></li>
-</ul>
-</li>
-<li>$c_i$是一个expected annotation。</li>
-<li>概率$\alpha_{ij}$，或者它的associated <strong>energy</strong> $e_{ij}$，reflects annotation $h_j$关于之前的$s_{i-1}$的重要性在确定下一个状态$s_i$和生成的$y_i$。直觉上，这个实现是一个attention机制在解码器，解码器决定应该关注source的哪一部分，通过attention机制，缓解了编码器编码所有信息到一个fixed-length向量的负担。使用这种方法，信息可以散步在整个annotation 序列，由解码器有选择的retrieve。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/assets/blogImg/NMF-fig1.png" alt="image-20200404141137053"></p>
-<ul>
-<li>编码器：双向RNN for Annotation Sequences。文章提出每一个annotation不仅要之前的词，而且要后面的词。因此，文章提出了使用双向RNN（BiRNN， Schuster  and  Paliwal,  1997）。<ul>
-<li>BiRNN由前向和后向RNN组成，前向RNN$\vec{f}$按照输入顺序（从$x_1$到$x_{T_x}$）并且计算前向隐藏状态$(\vec{h_1},…,\vec{h_{T_x}})$，后向RNN$\overleftarrow{f}$,按照输入想干的顺序(从$x_{T_x}$到$x_1$)，计算后向隐藏状态$(\overleftarrow{h_1},…,\overleftarrow{h_{T_x}})$。</li>
-<li>文章得到一个annotation for 每一个单词$x_j$通过拼接前向和后向隐状态$h_j=\left [ \overrightarrow{h_j^\top};\overleftarrow{h_j^\top} \right ]$。</li>
-<li>图1说明了提出的模型。</li>
-</ul>
-</li>
-<li>结构选择。文本提出的模式是一个通用的框架，比如说，激活函数$f$可以自由的选择。本文的模型结构选择如下：<ul>
-<li>RNN的激活函数f使用Cho提出的gated hidden unit。也可以使用LSTM替代。</li>
-<li>使用一个single hidden layer of maxout units 和一个输出概率with softmax函数。</li>
-</ul>
-</li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li>和上两篇文章一样，都使用English-to-French WMT’14数据集。</li>
-<li>baseline为Cho的实验，phrase-based SMT。</li>
-<li>WMT‘14数据集：Europarl (61M words),  news commentary (5.5M), UN (421M) and two crawled corpora of 90M and 780M words respectively, totaling 850M words。</li>
-<li>复现论文是，同样采用Cho的方法，使用348M words的子集。</li>
-<li>使用news-test-2012 and news-test-2013 to make a development (validation) set, and evaluate the models on the testset (news-test-2014) from WMT ’14, which consists of 3003 sentences not present in the training data.</li>
-<li>经过tokenization之后，文章使用top 30000 频率的单词作为shortlist（就是vocabulary），不在这里面的使用[UNK]代替。没有使用任何其他的预处理，比如小写或者词干还原。</li>
-<li>训练了两种模型。第一种是Cho提出的RNN Encoder-Decoder（RNNenc），另一个是本文提出的模型，文章叫做RNNsearch。每个模型训练两次，第一次是长度不超过30个单词的句子（RNNenc-30，RNNsearch-30），然后是长度不超过50个单词的句子。</li>
-<li>编码器和解码器都有1000 hidden units。RNNsearch的编码器由前向和后向 RNN组成，每一个都是1000 hidden units，解码器也是1000 hidden units。两种情景下，我们使用多层网络 with a single maxout hidden layer 用来计算目标单词的条件概率。</li>
-<li>我们使用minibatch SGD算法 with Adadelta 训练每个模型。minibatch有80个句子。文章训练每个模型需要大概5天的时间。</li>
-<li>更细节的结构和训练过程，在文章的附录A和B里。</li>
-</ul>
-<h4 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h4><ul>
-<li>Quantitative定量分析。下表展示了使用BLEU的翻译performance。RNNsearch超过了RNNenc，更重要的是，RNNsearch的性能和conventional phrase-based 翻译系统（Moses）性能相当。最后一列是没有UNK的句子的翻译performance，并且不允许翻译中出现UNK当使用 no unknown时。</li>
-</ul>
-<p><img src="/assets/blogImg/NMF-tab1.png" alt="image-20200404155548563"></p>
-<ul>
-<li>文章conjecture basic Encoder-Decoder方法的限制在处理长句子时表现不佳是因为只使用一个fixed-length context vector。</li>
-<li>下图中，可以看出RNNenc的性能随着句子的增长而极度下降。换句话说，RNNsearch-30和RNNsearch-50在句子长度方面更加健壮。特别是RNNsearch-50，当句子长度达到甚至超过50时也没有出现性能deterioration。</li>
-</ul>
-<p><img src="/assets/blogImg/NMF-fig2.png" alt="image-20200404160623742"></p>
-<ul>
-<li>从表1中可以看出，RNNsearch-30表现优于RNNenc-50，可以说明RNNsearch相比RNNenc模型的优势。</li>
-<li>Qualitative定性分析。提出的方法提供了一个直观的方式to inspect (soft-)alignment 在生成的翻译和source之间。这被完成通过可视化annotation weights $\alpha_{ij}$。如下图所示。矩阵的每一行indicate 和annotation的权重，（0~1之间的灰度值，1为白色）。从这里我们可以看出source中的哪些位置在翻译的时候是更重要的。<br><img src="/assets/blogImg/NMF-fig3.png" alt="image-20200404161510550"></li>
-<li>可以发现source和翻译之间的alignments是monotonic单调的。每个矩阵的对角都有很强烈的权重。文章也发现了一些non-monotonic非单调的alignments。在例子a中我们可以看到英语和法语的形容词和名词之间的顺序是不同的。</li>
-<li>和hard-alignment相反，soft-alignment是有显著的优势。比如说，the source phrase [the man] which was translated into [l’ homme].  hard-alignment会映射[the] to [l’], [man] to [homme]。这对翻译来说不是有益的，因为一个词必须考虑之后的单词来确定该单词是否应该翻译为[le],[la],[les]还是[l’]。soft-alignment解决了这个问题。一个额外的好处 of soft-alignment是它自然地解决了source和target之间长度不匹配的问题，不需要一个counter-intuitive反直觉的方式映射一些词to nowhere (see, e.g., Chapters 4and 5 of Koehn, 2010)。</li>
-<li>长句子方面的定性分析。通过几个句子的例子，比较说明了论文提出的方法RNNsearch方法相比RNNenc方法在处理长句子方面的可靠性。</li>
-<li>在文章附录C中提供了一些长句子上的例子，分别生成由RNNenc-50，RNNsearch-50和Google翻译 alone with the reference translations。</li>
-</ul>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
-<li>文章猜测basic Encoder-Decoder使用fixed-length context vector是有问题的在处理长句子翻译时。</li>
-<li>本文提出了一个新颖的模型来解决这个问题。扩展了基本的Encoder-Decoder让模型在翻译目标词时能够(soft-)search一系列输入词，这使得模型不需要生成一个fixed-length context vector，以及能够使模型能够更多地关注和翻译词相关的输入词上。和传统机器翻译也不同，一个系统不需要多个pieces，包括alignment。</li>
-<li>把本文提出的方法叫做RNNsearch，在English-to-French翻译任务上，实验结果说明了提出的RNNsearch由于conventional Encoder-Decoder模型（RNNenc），不管句子长度多长都更加robust。从(soft-)alignment定性分析中，我们都可以看出target word都能正确的对齐到source中的relevant words，annotations。</li>
-<li>更重要的是，提出的模型和已经存在的phrase-based SMT相当。这是一个惊人的结果，作者认为这里提出的结构是向更好的机器翻译和自然语言处理迈出的有希望的一步。</li>
-<li>未来面临的挑战是如何更好地处理未知和稀有词。这对于模型能够更广泛地使用并且和先进的机器翻译模型的性能竞争是必需的。</li>
-</ul>
-<h4 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h4><ul>
-<li>认为basic Encoder-Decoder在机器翻译任务上对长句子的处理不到位的情况是因为fixed-length context vector的存在。论文提出了一个新颖的模型结构来解决这个问题。</li>
-</ul>
-<h4 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h4><ul>
-<li>提出的方法主要是抛弃中间的fixed-length context vector，根据翻译的target动态的关注source句子中的部分词，这样就不需要每次预测都用到全部的信息了，不需要一个向量来压缩信息，解决了更长的信息保留问题。（也就是对应的Attention机制，文中也有提到一句）</li>
-<li>本文使用encoder的所有hidden state(annotations)的加权平均来表示context。</li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>文章出现了context这个词，这里的context是什么意思？是位置信息吗？context的定义也成为了一个非常有意思的研究点，RNN是一种思路，CNN同样也是一种思路，简单的word embedding是一种思路，交叉起来RNN+CNN也是一种思路，将word替换成char也可以作为一种思路，都可以探索。这段话摘抄来自于参考资料2，<em>这里我没有太理解这些思路是什么意思？</em></li>
-<li><em>文章没有明显的说明使用了Attention。</em>感觉alignment model 就是Attention。后面说了。</li>
-<li>soft alignment是什么意思？</li>
-<li>解码器是单向还是双向？应该是单向的。</li>
-<li>文章中出现了energy这个词。</li>
-<li>maxout是什么意思?当k=1时，和MLP等价。</li>
-<li>multilayer network是一个多层网络的专有名词。</li>
-<li>RNN是一个有偏的模型，越靠后的单词在last state中占有的“比例”越高。本文得到了相对来说为了得到无偏的state，使用了BiRNN。</li>
-</ul>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
-<li><a href="https://www.jianshu.com/p/8d6341ded7eb" target="_blank" rel="noopener">https://www.jianshu.com/p/8d6341ded7eb</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/21287807" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21287807</a></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Attention</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">encoder-decoder</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NMT</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">alignment</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/08/iclr02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -2605,22 +2577,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2633,15 +2589,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2658,6 +2618,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2745,6 +2709,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -2758,18 +2730,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2809,15 +2769,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2865,6 +2837,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -2874,14 +2854,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2897,18 +2869,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -2921,7 +2881,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2930,10 +2906,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2962,6 +2934,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNE</a>
               </li>
              
               <li class="article-tag-list-item">

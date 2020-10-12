@@ -154,6 +154,211 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-arxiv01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/12/arxiv01/">论文阅读：Defense against Adversarial Attacks in NLP via Dirichlet Neighborhood Ensemble</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/12/arxiv01/" class="archive-article-date">
+  	<time datetime="2020-10-12T07:22:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>通过狄利克雷邻居集成防御NLP上的对抗性攻击</li>
+<li>2020年6月，预印版文章</li>
+<li>论文下载：<a href="https://arxiv.org/pdf/2006.11627.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/2006.11627.pdf</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>Yi Zhou，</li>
+<li>Xiaoqing Zheng，<a href="http://homepage.fudan.edu.cn/zhengxq/" target="_blank" rel="noopener">郑骁庆 | Xiaoqing Zheng</a>，毕业于浙江大学计算机科学与技术学院，获博士学位，之后开始在复旦大学计算机科学技术学院任教</li>
+<li>Cho-Jui Hsieh，是UCLA计算机科学的助理教授。个人主页：<a href="http://web.cs.ucla.edu/~chohsieh/" target="_blank" rel="noopener">http://web.cs.ucla.edu/~chohsieh/</a></li>
+<li>Kai-wei Chang，UCLA-CS助理教授，个人主页：<a href="http://web.cs.ucla.edu/~kwchang/" target="_blank" rel="noopener">http://web.cs.ucla.edu/~kwchang/</a></li>
+<li>Xuanjing Huang，黄萱菁，复旦大学博士生导师、教授</li>
+</ul>
+<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
+<li><p>论文提出了一种最新的基于随机平滑的防御方法，之前的方法存在以下挑战：</p>
+</li>
+<li><p>传统的对抗训练能力仅仅更新一个同义词的embedding（凸包的顶点），会歪曲这些embeddings的相对位置，因此变得更慢和更不稳定。</p>
+</li>
+<li>由于难以通过深层神经网络传播凸包，有人使用区间边界传播（IBP）计算了非常松散的外部边界。 结果，凸包可能包含不相关的单词，并导致干净数据的性能显着下降。</li>
+<li></li>
+</ul>
+<h4 id="论文提出了什么方法"><a href="#论文提出了什么方法" class="headerlink" title="论文提出了什么方法"></a>论文提出了什么方法</h4><ul>
+<li>方法：狄利克雷邻居集成（DNE）</li>
+<li>使用的同义词是：论文的说法是follow Jia，所以应该是Counter-fitting</li>
+<li>Baselines：对抗训练、IBP和随机平滑的朴素实现</li>
+<li>有没有使用攻击策略：遗传算法（使用语言模型和不使用语言模型）和PWWS</li>
+<li>发现DNE使用一系列相似单词的embeddings会被共同更新在一个合作的方式。相比之下，之前的方法固定单词向量（例如在可验证防御）或者单独地更新单词词向量（例如对抗性训练）。我们相信这是为什么DNE导致更鲁棒的NLP模型的一个关键的原因。</li>
+<li>文中提到了遗传算法攻击的不足在于使用LM排除不符合上下文的单词，平均排除了65%的单词，这对选择空间的影响非常大。因此使用GA带有LM和不带有LM两种攻击方式。</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>尽管神经网络在许多NLP任务上都实现了突出的性能，但是他们对于对抗样本仍然是脆弱的。本文，我们提出了狄利克雷邻居集成（DNE），一个为了防御基于同义词攻击的用于训练鲁棒模型的随机平滑方法。在训练期间，DNE通过从单词及其同义词所跨越的凸包中采样输入句子中每个单词的嵌入向量来形成虚拟句子（说明不是真正的句子），并使用训练数据对它们进行扩充。通过这样一种方式，模型对于对抗攻击是鲁棒的，同时保持了原始训练数据的性能。DNE是对于网络结构不不可知的，对于NLP应用的大型模型是不可知的。通过广泛的实验，我们验证了我们的方法在不同网络体系结构和多个数据集上的显着优势，始终优于最近提出的防御方法。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>尽管神经网络是有效的但是对于有目的的制造用来欺骗模型的对抗样本是脆弱的。为了解决这个问题，近年来对抗攻击和防御这些攻击已经吸引了极大的关注度。在NLP的背景下，由于它们的离散特性，生成文本的对抗样本已经展示为一个相比于图像和语音更具有挑战性的任务。可是最近的一些研究已经展示出了深度神经网络在NLP任务上的脆弱性，包括阅读理解系统、文本分类、机器翻译、对话系统和依赖解析。这些方法通常通过在某些语义和句法约束下替换，加扰和擦除字符或单词来攻击NLP模型。 特别地，它们中的大多数通过在输入文本中用其同义词替换单词来构造对抗性样本，以最大程度地增加预测误差，同时保持对抗性样本的流畅性和自然性。在这个研究中，我们考虑到了这样一种基于单词替换的威胁模型（威胁模型一般指使用黑盒还是白盒），并且讨论防御这种攻击的策略。</li>
+<li>对抗防御的的目标是为了学习一个有能力在clean和对抗样本上实现高测试准确率。对抗训练是最成功的防御方法之一，在训练期间，他们通过近似最大化预测损失的同义词替换单词，通过在这些对抗样本上训练，模型是对这些扰动鲁棒的。但是，单词的单词向量及其同义词之间的相对位置在训练期间会动态变化，因为它们的嵌入是独立更新的。这个逐点保证变得不充分，结果模型展示出对于强烈攻击的脆弱性。另一方面，最近的几个可验证防御方法已经被提出改善对抗训练，通过验证一个单词及其同义词的嵌入所形成的凸包内的性能。但是，由于难以通过深层神经网络传播凸包，他们使用区间边界传播（IBP）计算了非常松散的外部边界。 结果，凸包可能包含不相关的单词，并导致干净数据的性能显着下降。</li>
+<li>本文，我们提出了一个狄利克雷邻居集成方法（DNE）为了创建虚拟句子，通过混合原始单词的embedding和它们对应的同义词。通过训练这些虚拟句子，模型能够增强对于单词替换的扰动的鲁棒性。具体地，我们的方法在一个单词形成的凸包中采样一个embedding向量，来确保这样一个区域的鲁棒性。和IBP进行对比，在创建虚拟句子时，我们的方法可以更好地表示同义词的子空间。然后将梯度指导的优化器应用于在凸包内搜索更有价值的对抗点，并且可以将该框架扩展到高阶邻居（同义词）以进一步增强鲁棒性。 在推理期间，再次使用相同的Dirichlet采样技术，将虚拟句子上的预测分数相加，以获得鲁棒的输出。</li>
+<li>通过广泛的实验在多种模型结构（BOW，CNN，LSTM和Attention-based）和多种数据集，我们展示出DNE一致性地实现了更好的性能在clean和对抗样本和已存在的防御方法相比。通过进行一个详细的分析，我们发现DNE使用一系列相似单词的embeddings会被共同更新在一个合作的方式。相比之下，之前的方法固定单词向量（例如在可验证防御）或者更新单词词向量单独地（例如对抗性训练）。我们相信这是一个关键的原因为什么DNE导致更鲁棒的NLP模型。而且，不像可验证防御，提出的方法是容易实现的并且能够继承到已存在的神经网络包括大型结构比如BERT。</li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>在文本领域，根据许多最近的研究，对抗训练在许多领域使最成功的防御。一个Goodfellow提出的<strong>FGSM</strong>方法生成图像领域的对抗样本，他们展示了通过加入高质量的对抗样本机器学习模型的鲁棒性和泛化性可以得到改善。Miyato提出了一个<strong>类FGSM</strong>的文本对抗训练方法，通过应用单词embeddings的扰动而不是原始输入。Sato扩展了这个工作为了改善可解释性，通过将扰动的方向约束到单词嵌入空间中的现有单词来提高<strong>可解释性</strong>。给定一个单词，通过从单词到其最近邻居的单位向量的加权和来计算方向。Barham[2]提出了一种稀疏投影梯度下降（<strong>SPGD</strong>）方法，通过将扰动投影到具有最高余弦相似度的附近字词嵌入的方向上，对扰动施加稀疏约束。</li>
+<li>Zhang和Yang应用几种噪声类型扰动到输入词嵌入，比如高斯、伯努利和对抗性噪声，为了缓解NLP模型的过拟合问题。对于对抗性噪声，在最大增加损失函数的方向上增加了扰动。Zhu [46]提出了一种新颖的对抗训练算法，称为<strong>FreeLB</strong>（自由大批量），该算法将对抗性干扰添加到单词嵌入中，并使输入样本周围不同区域内的对抗性损失最小化。他们使用基于梯度的方法将范数界的对抗性扰动添加到输入句子的嵌入中，并在这种范式约束下使用多样化的对抗性样本来扩大批量大小。 但是，他们关注的是对泛化的影响，而不是针对对抗性攻击的鲁棒性。</li>
+<li>尽管对抗性训练能够经验性地防御攻击算法，训练模型经常仍然不能够生存于另一个复杂的攻击。最近一系列可验证防御已经被提出，提供了鲁棒保证到一些特定类型的攻击。比如，Jia和Huang使用一个边界技术，IBP，为了形式化验证一个模型的鲁棒性抵御单词替换扰动。Shi提出了第一个鲁棒验证方法对于transformers通过IBP-类型的技术。但是，这些防御措施通常会导致任意网络的上限松动，并导致更高的clean 准确率的成本。而且，大多数技术需要结构知识和仍然难以扩展到复杂的预测管道。</li>
+<li>在图片领域，随机已经展示出了克服了许多这些障碍通过基于IBP的防御。经验上，Xie展示了随机调整和填充输入能够改善鲁棒性。Liu提出了增加高斯噪声在输入层和CNN的中间层在训练期间和推断期间，来改善鲁棒性。Lecuyer提供了一个这个方法的可验证保证，后来被Cohen极大的改善。所得的算法称为随机平滑，已广泛用于验证图像分类器的l2鲁棒性。 据我们所知，这些随机平滑方法尚未在NLP模型中使用，主要原因是文本中的对抗性样本通常是通过基于单词替换的扰动而不是小的lp范数生成的。 实验表明，将单词随机扰乱为其同义词在实践中效果较差。所提出的算法可被视为对NLP模型的一种随机防御，其中我们的主要贡献是表明确保模型在区域内正常工作是很重要的，在一个单词及其同义词的嵌入所形成的凸包中，而不是仅仅确保模型在离散扰动下是好的。 此外，我们表明该方法可以与对抗训练相结合，以进一步提高经验鲁棒性。</li>
+</ul>
+<h4 id="3-方法"><a href="#3-方法" class="headerlink" title="3.方法"></a>3.方法</h4><ul>
+<li>令f是基础分类器映射句子x到标签y。我们考虑每一个单词$x_i$在句子x，我们给定一个同义词集合$S(x_i)$包括$x_i$本身，其中我们知道替代$x_i$通过$S(x_i)$不会改变句子语义的，follow Robin Jia。我们放宽一个离散点集（单词和同义词）到一个凸包，由所有这些点的词嵌入扩张组成，表示为$C(x_i)$。我们假设凸包内的任意扰动会保持语义不变，在凸包内基于随机采样定义一个平滑分类器$g(x)$。在训练期间，基础分类器使用嵌入空间的虚拟数据增强训练，每一个$x_i$被替换为凸包内的一个点，使用提出的采样算法，描述在后文。一种新颖的对抗训练算法也用于使NLP模型能够防御在单词替换的所有组合中搜索最坏情况的强烈攻击。 在推理期间，采用了类似的采样策略，并使用<strong>CBW-D集成算法[10]</strong>计算最终预测。</li>
+<li>注意精确计算f分类x每一个类别的概率是不可能的，因此我们使用一个蒙特卡洛算法来评估$g(x)$。如图1（a）说明，对于一个数据句子x，我们采样k个样本，运行k个噪声扰动的版本$\hat{x}$通过基础分类器$f(\hat{x})$，其中$\hat{x}$是通过替换每一个词$x_j$的嵌入为从$C(x_j)$的Dirichlet分布中随机采样的一个点。如果类别y在最大权重中出现在类别分布$\hat{x}$中，则平滑分类器g（x）返回y。 接下来，我们介绍所提出算法的每个组件。<ul>
+<li>$\hat{x}$是从每一个$C(x_j)$采样出来的扰动样本。</li>
+</ul>
+</li>
+<li>3.1Dirichlet 邻居采样</li>
+<li>x的随机扰动本质上是组合的，因此训练将始终将x的任何扰动标记为y的基本分类器f要求检查指数数量级的预测。为了更好地反映那些基于离散单词替换的扰动，我们从凸包中使用Dirichlet分布采样这些点。这使<strong>我们能够控制预期点与凸包的任何顶点之间的距离</strong>。如果采样点非常接近顶点（即单词），它将模拟基于单词替换的扰动，在该扰动中选择顶点来替换原始顶点。 从C（xi）采样的任何点都是$S(x_i)$嵌入的凸组合：</li>
+<li>$\nu(x_i)=\sum_{x_j \in S(x_i)}  \beta_j \cdot x_j$（1）</li>
+<li>其中，$\beta_j \ge 0, \sum_j \beta_j=1$，并且向量$\beta$组成于从狄利克雷分布采样的权重：</li>
+<li>$\beta_1,…,\beta_, \sim Dir(\alpha_1,…,\alpha_m)$</li>
+<li>其中m是$S(x_i)$的数量，狄利克雷分布通过$\alpha$向量参数化，用来控制$S(x_i)$贡献到生成向量$\nu(x_i)$的程度。有两个极端的情况，如果$\alpha = 0$，仅仅$S(x_i)$中的一个单词被采样替代$x_i$，如果$\alpha = \infty$,结果为所有embeddings的平均值。</li>
+<li><img src="/assets/blogImg/DNE_fig1.png" alt="image-20200929204610644"></li>
+<li>3.2训练基础分类器使用两跳邻居</li>
+<li>为了平滑分类器$g$正确地和鲁棒地分类x的对抗样本，f需要一致地分类$\hat{x}$对于每一个训练样本x。在图1（b），我们说明了通过考虑一个有一个单词$x_i$的句子，以及单词的同义词集合，展示为蓝色圆圈。围绕单词xi的输入扰动（带有蓝色边框的五边形，在此处投影为2d）周围的C（xi）凸包。假设单词$x_i$被替换为$x_j$，噪声扰动的样本会画为$C(x_j)$代替$C(x_i)$，如果$C(x_j)$和$C(x_i)$的交集是小的，我们不能期望f能够一致的分类$x_j$和$x_i$。因此，我们扩展$C(x_i)$到所有$S(x_i)$和所有的$S(x_j),x_j \in S(x_i)$的凸包，即一跳和两跳邻居，表示为$B(x_i)$。</li>
+<li>这些扩展会轻微地损害原始数据的性能。回顾不同的$\alpha$值，能够用来控制一跳和两跳邻居的贡献程度来生成$\tilde{x}$。在我们的实现中，我们让两跳邻居的权重是少于一跳邻居的一半当计算$\tilde{x}$根据计算公式1时，来降低对clean数据的影响。我们使用$B(x_i)$表示扩展的$C(x_i)$凸包,$\tilde{x}$表示虚拟样本由$B(x_i)$中采样的狄利克雷分布的替代embedding。<ul>
+<li>$\tilde{x}$是从$B(x_i)$生成的。</li>
+</ul>
+</li>
+<li>基础分类器被训练通过最小化使用虚拟数据增强的交叉熵损失通过梯度下降。我们假设基础分类器来自于$f(x)=\arg\max_{c \in Y} s_c(x)$,其中每一个$s_c(x)$是打分函数对于类别c，也是，神经网络softmax层之前的输出。我们的目标是最大化log概率，f分类每一个$\tilde{x}$为x的标签。令D为一个有n个实例的训练集，每一个是(x,y)对：</li>
+<li>$\sum_{\forall (x,y) \in D} \log P_{\tilde{x}}(f(\tilde{x})=y) = \sum_{\forall (x,y) \in D} \log E_{\tilde{x}} 1[ \arg\max_{c \in Y} s_c(\tilde{x})=y ]$（3）</li>
+<li>softmax函数可以看做一个连续的可微的argmax的近似：</li>
+<li>$1[argmax_{x \in Y} \approx \frac{exp(s_y(\tilde{x}))}{\sum_{c \in Y} exp(s_c(\tilde{x}))}]$（4）</li>
+<li>$Y = \mathcal{Y}$</li>
+<li>根据log的凹性和Jensen不等式，目标是近似下界为</li>
+<li>$\sum_{\forall(x,y) \in D} E_{\tilde{x}} [log \frac{exp(s_y(\tilde{x}))}{\sum_{c \in Y} exp(s_c(\tilde{x}))}]$(5)</li>
+<li>这也是带有虚拟数据增强的负的交叉熵损失。最大化公式5近似最大化公式3.</li>
+<li>因为虚拟数据点被定义在公式1，是一个$S(x_i)$中embeddings的线性组合，后向传播会传播梯度到所有的embeddings，带着非零的梯度，因此允许更新所有的这些embeddings同时在一个合作的方式，当更新参数时，如图1所示，整个绿色的凸包会被更新在每一次迭代。作为对比，<strong>传统的对抗训练能力仅仅更新一个同义词的embedding（凸包的顶点），会歪曲这些embeddings的相对位置，因此变得更慢和更不稳定</strong>。这是为什么单词嵌入是固定的在可验证防御的训练期间（Robin and Huang）。尽管单词嵌入能够被预训练，固定的embeddings使他们不可能被特定的任务微调，也许会损害性能。</li>
+<li>3.3对抗训练</li>
+<li>为了实现更高的鲁棒性和不变形到凸包的任何区域，我们提出了组合对抗训练和狄利克雷采样为了实现更好的不同区域在凸包$B(x_i)$。任意从$B(x_i)$采样的点被表示为顶点embeddings的凸组合，这样可以确保在使用任何优化方法搜索整个凸包的最坏情况时，一系列点始终停留在同一B（xi）内。<ul>
+<li>？？？</li>
+</ul>
+</li>
+<li>假设虚拟样本$\tilde{x}$被一个输入文本x生成，我们搜索下一个对抗样本为了最大化模型的预测错误通过更新每一个向量$\beta=exp(\eta)$通过以下公式，他们中的每一个被用来表示从$B(x_i)$采样的点。</li>
+<li>$\eta \leftarrow \eta - \epsilon \left | \frac{\partial  log p(\tilde{x}, y)}{\partial \eta} \right |_2, p(\tilde{x}, y)=\frac{exp(s_y(\tilde{x}))}{\sum_{c \in Y} exp(s_c(\tilde{x}))}$(6)</li>
+<li>其中$\epsilon$是步长。为了确保更新的$\beta$仍然满足$\beta_j \ge 0$和$\sum_j \beta_j = 1$,我们序列化地应用对数和softmax函数到$\beta$，在它被画到$Dir(\alpha)$之后。请注意，softmax（log（β））=β，并且在我们的实现中将更新η而不是β。 通过仅更新η，等式（1）中定义的表示还确保了在通过梯度指导的优化方法搜索B（xi）上的最坏情况时，一系列点保持在同一凸包的内部。</li>
+<li>如图1b，我们应用多次更新小的步长，红色点表示数据点生成在每次迭代通过添加梯度指导的扰动到它们的前一个。当训练基础分类器f时，我们添加所有的虚拟样本，通过每次搜索得到的，即所有的红色圆圈的样本点进入训练集为了更好地探索不同x周围的不同区域。</li>
+<li>3.4集成方法</li>
+<li>正如上面提到的，如果基础分类器f是一个神经网络，它不可能精确地计算f分类x作为每一个类别的概率。遵循计算机视觉的随机防御，我们使用蒙特卡洛算法评估g(x)。给定一个输入句子x，通过基础分类器$f(\hat{x})$,我们画出k个$\hat{x}$个蒙特卡洛样本通过运行k个噪声扰动,每一个$\hat{x}$被创建通过替代每一个单词的embedding为一个通过从C(x_i)的狄利克雷分布随机采样的点，（不是从扩展的凸包B(x_i)当测试时）。</li>
+<li>我们通过对所有随机创建的$\hat{x}$的softmax概率向量进行加权平均来组合预测，并将该平均向量的argmax作为最终预测。 我们选择使用CBW-D [10]计算那些权重。 其背后的想法是赋予更多权重对其结果更有信心的预测。 CBW-D计算权重w是softmax分布的最大值与其他值之间的差的函数，如下所示：</li>
+<li>$w=\sum_{c \in Y, c \ne y} (p(\hat{x}, y) - p(\hat{x}, c))^r$</li>
+<li>其中，y是在一个预测中的有最大预测概率的标签，r是在初步实验中使用交叉验证的超参数调整。</li>
+</ul>
+<h4 id="4-实验"><a href="#4-实验" class="headerlink" title="4.实验"></a>4.实验</h4><ul>
+<li>我们进行文本分类实现和自然语言推理任务的实验在多个数据集上，不同的模型结构（BOW,CNN,LSTM,和Attention-based）被用来评估我们的Dirichlet Neighborhood Ensemble（DNE）和其他防御方法，在两个最近的攻击方法上。Ren提出一个贪心算法，叫做概率权重单词显著性PWWS，对于基于同义词的文本对抗攻击。单词替换顺序考虑单词显著性和预测概率。Alzantot开发了一个遗传算法攻击，叫做GA，生成语法上和语义上相似的对抗样本，他们也使用LM排除掉不适合上下文的候选替换单词。可是，不像PWWS，排除一些候选单词根据LM会极大地降低候选替换词的数量（65%平均）。为了公平的比较，我们报告了在GA攻击下的鲁棒性，带有和不带有LM的情况。对于每一个数据集，我们测量准确率通过两种攻击，PWWS和GA在1000个随机选择的测试样本。我们主要比较了对抗训练（ADV）和IBP方法。前者可以通过在训练阶段添加对抗性样本来提高模型的鲁棒性，而不会在干净输入数据上造成太大损失。后者展示出更强的鲁棒性对于单词替换的扰动比训练在数据增强。为了证明将原始单词的嵌入与其同义词混合在一起要比单纯地用其同义词替换单词更好，我们开发了一个强有力的基线，用RAN表示.RAN训练的模型将每个输入句子的损坏副本作为输入， 句子中的每个单词都会被其同义词之一随机替换。 在推理时间中，使用相同的随机替换，并合并预测分数以获得输出。 可以将RAN视为将随机平滑应用于NLP模型的朴素方法。</li>
+<li>4.1 文本分类任务</li>
+<li>我们实验在两个文本分类数据集：IMDB和AG新闻数据集AGNEWS。IMDB有50000条电影评论对于2值情感分类，AGNEWS组成大约30000新闻文章属于4类。我们实现了3个模型对于这些文本分类任务。BOW平均处理单词嵌入对于每一个单词在输入，然后经过一个前馈神经网络带有100维隐藏状态得到一个最终的logit。其他的两种模型是类似的，除了运行一个CNN或者一个两层的LSTM在单词嵌入上，所有模型被训练在交叉熵损失，他们的超参数被调整在验证集。实现的细节在附录A.1.</li>
+<li>在表1，我们陈述了clean accuracy CLN和在两种攻击下的准确率在IMDB在三种模型下。我们使用GA-LM表示GA-based的攻击，排除不适合上下文的候选单词在LM的帮助下，ORIG为可以像往常一样训练模型的测试和对抗准确率，而无需使用任何防御方法。</li>
+<li><img src="/assets/blogImg/DNE_tab1.png" alt="image-20200930173019414"></li>
+<li>正如表1所示，DNE(k=16)由于ADV和IBP在clean数据，相应的表现得好于竞争者在不同的结构，对于文本分类LSTM相对更脆弱的性比喻BOW和CNN，在强壮的GA攻击，LSTM的ORIG，ADV，IBP和RAN降低到0%，32%，64.3%和8.1%相应地，LSTM被DNE训练仍然能够达到77.2%的准确率。AGNEWS的结果被报告在表2，我们能够发现相似的趋势。任何模型在AGNEWS都表现出了更鲁棒的结果，因为句子的平均差望都IMDB要长于AGNeWS。更长的句子允许对抗样本应用更多的单词基于替换的扰动到样本。通常，DNE执行效果更好相比于INP和ADV在clean数据，同时在其他场景表现更好，仅仅有一个例外是CNN在GA-LM，IBP效果更好。对于两个数据集的结果都显示了DNE实现了更好的clean和robust准确率和已存在的防御方法相比。</li>
+<li>4.2自然语言推理任务</li>
+<li>我们进行我们的实验在SNLI语料，这是一个570,000个英语句子对（前提和假设）的集合，这些句子对被手动标记为平衡分类，并带有必然性，矛盾性和中立性。我们也实现3个模型对于这个任务。BOW模型分别编码前提和假设，通过求和单词向量，然后到一个两层的前馈神经网络。其他的两个模型是类似的，除了运行在一个可分解的Attention DecomAtt或者BERT在单词向量生成句子表示，使用Attention在前提和假设之间，用来计算每个单词在两个句子中更丰富的表示。所有的模型被训练使用交叉熵，他们的超参数被调整在验证集，见附录A.2。</li>
+<li>报告在表3，DNE通常表现得更好比其他方法在鲁棒性准确率上同时在clean数据上有更少的性能下降。银冠我们提出的baseline RAN(k=16)实现了一个稍微高的准确率，仅仅1%的不同在BERT在PWWS攻击，它的准确率迅速下降到27%在更复杂的GA攻击，DNE仍然产生了61.6%的准确率。SNLU的结果展示了DNE能够应用到基于attention-based的模型想DecomAtt和BERT。我们留下了IBP with BERT因为基于IBP的方法不能应用到BERT。</li>
+<li><img src="/assets/blogImg/DNE_tab3.png" alt="image-20200930173040514"></li>
+<li>4.3 狄利克雷分布的参数的有效性</li>
+<li>回顾狄利克雷分布被参数化为$\alpha$,给定一个单词$x_i$不同的$\alpha$值用来控制1跳和2跳邻居来贡献生成虚拟对抗样本，也确定了从C到B(x_i)的大小。我了降低clean准确率的2跳影响，我们让期望的2跳的权重是1跳权重的$\lambda \in (0,0.5]$倍。我们尝试一些不同的$\alpha$值和$\lambda$值在IMDB来理解如何选择影响性能。如表4所示，我发现如果$\alpha$值被固定，$\lambda$的值越大，模型越鲁棒，同时clean数据上表现越差。一个小的$\alpha$值似乎是更可取的，允许我们更好的模拟离散单词替换扰动。</li>
+<li><img src="/assets/blogImg/DNE_tab4.png" alt="image-20200930175813532"></li>
+<li>4.4消融实验</li>
+<li>我们进行了一个消融实验在DNE在IMDB，为了分析鲁棒性和泛化性。w/o EXPANSION第二行表示给定任意单词$x_i$在一个句子里我们生成虚拟样本通过C采样而不是扩展的B在训练期间。DNE的变体训练没有使用对抗训练算法在3.3节描述的被表示为w/o ADV-TRAIN.如果单个点更新策略被应用来训练DNE，我们仍然使用相同的梯度指导得到优化方法来找到对抗样本在B，但是找到的对抗样本表示为$x_i + \Delta$，其中$\Delta$是距离，通过这些表示更新在训练期间代替同义词的embeddings组合叫做w/o COORD-UPD。 我们也报道在最后行为结果预测没有使用集成方法（即k=1）。</li>
+<li>正如表5所示，在干净的数据上，DNE变体之间的精度差异可以忽略不计。 以下是按重要性从高到低顺序提高模型鲁棒性的关键组成部分：从扩展凸包B（xi）进行采样，与对抗训练相结合，一起更新词嵌入，并使用集成来获得预测。 我们还观察到，攻击方法越强，这些组件越有效。</li>
+</ul>
+<h4 id="5-结论"><a href="#5-结论" class="headerlink" title="5.结论"></a>5.结论</h4><ul>
+<li>在这项研究中，我们针对NLP模型开发了一种新颖的防御算法，以在不牺牲其在干净数据上的性能的前提下，大幅提高鲁棒性的准确性。 该方法具有广泛的适用性，通用性，可扩展性，并且可以毫不费力地将其合并到任何神经网络中。 还提出了一个新颖的对抗训练算法，该算法使NLP模型能够防御在单词替换的所有组合中搜索最坏情况的强烈攻击。通过广泛的实验，我们证明了经过对抗训练的平滑分类器在不同网络体系结构上的IMDB，AGNEWS和SNLI上，在性能上始终优于所有现有的经验和可验证防御，从而为抵御文本对抗攻击建立了最新技术。</li>
+</ul>
+<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
+<li>convex hull 凸包</li>
+<li>原始的Dirichlet分布是一个五边形，如果同样都在五边形内找到扰动样本，直观上不会鲁棒，因为交集的面积很小，所以采样从一个两跳的五边形，而扰动在原始的五边形上。</li>
+</ul>
+<h4 id="获得文章"><a href="#获得文章" class="headerlink" title="获得文章"></a>获得文章</h4><ul>
+<li>Towards robust neural networks via random self-ensemble. 2018</li>
+<li>Mitigating Adversarial Effects Through Randomization, 2018</li>
+<li>Certified robustness to adversarial examples with differential privacy. 2019</li>
+<li>Defense against adversarial images using web-scale nearest-neighbor search, 2019 CVPR</li>
+<li>Robust physical-world attacks on deep learning models，2018</li>
+<li>攻击方法：Generating Natural Language Adversarial Examples through Probability Weighted Word Saliency， 2019</li>
+<li>语言模型：One billion word benchmark for measuring progress in statistical language modeling，2018</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随机平滑</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">防御</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">鲁棒训练</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DNE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/12/arxiv01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-aaai02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -175,7 +380,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准</li>
+<li>BERT真的很鲁棒吗？ 自然语言攻击文本分类和蕴含的强大基准</li>
 <li>发表在AAAI2020</li>
 <li>论文下载：<a href="https://aaai.org/ojs/index.php/AAAI/article/view/6311" target="_blank" rel="noopener">https://aaai.org/ojs/index.php/AAAI/article/view/6311</a></li>
 <li>Code：<a href="https://github.com/jind11/TextFooler" target="_blank" rel="noopener">https://github.com/jind11/TextFooler</a><ul>
@@ -184,8 +389,8 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Di Jin，毕业<a href="https://www.csail.mit.edu/" target="_blank" rel="noopener">CSAIL</a>在麻省理工学院，监督由教授 <a href="http://groups.csail.mit.edu/medg/people/psz/home/Pete_MEDG_site/Home.html" target="_blank" rel="noopener">Peter Szolovits</a> at the <a href="http://groups.csail.mit.edu/medg/" target="_blank" rel="noopener">Clinical Decision Making Group</a>。很快加入Amazon Alexa AI，和<a href="https://scholar.google.com/citations?user=GMcL_9kAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dilek Hakkani-Tur</a>担任对话系统的研究科学家。个人主页：<a href="https://jind11.github.io/，GitHub：https://github.com/jind11" target="_blank" rel="noopener">https://jind11.github.io/，GitHub：https://github.com/jind11</a></li>
-<li>Zhijing Jin，香港大学本科毕业，我的本科研究论文是由香港大学的高本杰教授指导的。是一名NLP研究员和有效的利他主义者。目前正在与Amazon AI进行研究，很快将在2020年秋季在Max Planck Institute的Bernhard Schoelkopf博士开始。个人主页：<a href="https://zhijing-jin.com/fantasy/" target="_blank" rel="noopener">https://zhijing-jin.com/fantasy/</a></li>
+<li>Di Jin，毕业<a href="https://www.csail.mit.edu/" target="_blank" rel="noopener">CSAIL</a>在麻省理工学院，指导老师是教授 <a href="http://groups.csail.mit.edu/medg/people/psz/home/Pete_MEDG_site/Home.html" target="_blank" rel="noopener">Peter Szolovits</a> at the <a href="http://groups.csail.mit.edu/medg/" target="_blank" rel="noopener">Clinical Decision Making Group</a>。很快加入Amazon Alexa AI，和<a href="https://scholar.google.com/citations?user=GMcL_9kAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dilek Hakkani-Tur</a>担任对话系统的研究科学家。个人主页：<a href="https://jind11.github.io/，GitHub：https://github.com/jind11" target="_blank" rel="noopener">https://jind11.github.io/，GitHub：https://github.com/jind11</a></li>
+<li>Zhijing Jin，香港大学本科毕业，本科研究论文是由香港大学的高本杰教授指导的。是一名NLP研究员和利他主义者。目前正在与Amazon AI进行研究，很快将在2020年秋季在Max Planck Institute的Bernhard Schoelkopf博士开始。个人主页：<a href="https://zhijing-jin.com/fantasy/" target="_blank" rel="noopener">https://zhijing-jin.com/fantasy/</a></li>
 <li>Joey Tianyi Zhou，周天一。是新加坡A * STAR高性能计算研究所（IHPC）的科学家，PI和组经理。个人主页：<a href="https://joeyzhouty.github.io/" target="_blank" rel="noopener">https://joeyzhouty.github.io/</a></li>
 <li>Peter Szolovits，个人主页：<a href="https://www.csail.mit.edu/person/peter-szolovits" target="_blank" rel="noopener">https://www.csail.mit.edu/person/peter-szolovits</a></li>
 </ul>
@@ -207,7 +412,7 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
 <li><strong>问题形式化</strong></li>
-<li>给你的能给一个语料，N个句子，$\mathcal{X} = \{ X_1,X_2,..,X_N \}$，和一个相应的N个标签的集合$\mathcal{Y}=\{ Y_1,Y_2,…,Y_N \}$，我们有一个预训练模型$F:\mathcal{X} \rightarrow \mathcal{Y}$，映射输入文本空间$\mathcal{X}$到标签空间$\mathcal{Y}$。</li>
+<li>给定一个语料，N个句子，$\mathcal{X} = \{ X_1,X_2,..,X_N \}$，和一个相应的N个标签的集合$\mathcal{Y}=\{ Y_1,Y_2,…,Y_N \}$，我们有一个预训练模型$F:\mathcal{X} \rightarrow \mathcal{Y}$，映射输入文本空间$\mathcal{X}$到标签空间$\mathcal{Y}$。</li>
 <li>对于一个句子X，一个可用的对抗样本$X_{adv}$应该满足一下需求：</li>
 <li>$F(X_{adv}) \ne F(X), and  Sim(X_{adv},X)\ge\epsilon$（1）</li>
 <li>其中Sim为$\mathcal{X} \times \mathcal{X} \rightarrow (0,1)$是一个相似度函数，$\epsilon$是最小的相似度。在自然语言领域，Sim经常是一个语义和语法的度量。</li>
@@ -1812,197 +2017,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-acl04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/acl04/">论文阅读：Combating Adversarial Misspellings with Robust Word Recognition</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/17/acl04/" class="archive-article-date">
-  	<time datetime="2020-06-17T03:16:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>通过鲁棒单词识别器来防御对抗性拼写错误</li>
-<li>发表在ACL2019</li>
-<li>论文下载：<a href="https://arxiv.org/abs/1905.11268v1" target="_blank" rel="noopener">https://arxiv.org/abs/1905.11268v1</a></li>
-<li><a href="https://www.aclweb.org/anthology/P19-1561/" target="_blank" rel="noopener">https://www.aclweb.org/anthology/P19-1561/</a></li>
-<li>代码：<a href="https://github.com/danishpruthi/Adversarial-Misspellings" target="_blank" rel="noopener">https://github.com/danishpruthi/Adversarial-Misspellings</a></li>
-</ul>
-<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Danish Pruthi（普鲁西），是卡内基梅隆大学计算机科学学院语言技术的博士研究生。由Graham Neubig 博士和Zachary C. Lipton 博士共同指导。研究目标是使机器能够理解和解释自然语言现象。为此，我致力于解释神经表示和模型。个人主页：<a href="https://www.cs.cmu.edu/~ddanish/" target="_blank" rel="noopener">https://www.cs.cmu.edu/~ddanish/</a></li>
-<li>Bhuwan Dhingra，在CMU的语言技术学院获得了博士学位。研究专注于自然语言处理，机器学习和知识表示。论文导师是William Cohen和Russ Salakhutdinov。在那之前，曾在IIT Kanpur从事电气工程学，在那里与Amitabha Mukerjee合作。在此期间，曾在美国圣地亚哥的高通研究部工作。个人主页：<a href="http://www.cs.cmu.edu/~bdhingra/" target="_blank" rel="noopener">http://www.cs.cmu.edu/~bdhingra/</a></li>
-<li>扎卡里（Zachary Chase Lipton），CMU运筹学与机器学习助理教授，个人主页：<a href="https://www.cmu.edu/tepper/faculty-and-research/faculty-by-area/profiles/lipton-zachary.html" target="_blank" rel="noopener">https://www.cmu.edu/tepper/faculty-and-research/faculty-by-area/profiles/lipton-zachary.html</a></li>
-<li>三名作者的主页里都有列出了他们的Research，可提供参考。</li>
-</ul>
-<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
-<li>论文解决了一个防御对抗性拼写错误的问题。 </li>
-</ul>
-<h4 id="论文提出了什么方法"><a href="#论文提出了什么方法" class="headerlink" title="论文提出了什么方法"></a>论文提出了什么方法</h4><ul>
-<li>提出一种防御措施，任务无关的，单词识别器模型，建立在RNN-based 半字符级别的单词识别器。</li>
-</ul>
-<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
-<li>为了防御对抗性拼写错误，我们提出了将单词识别模型放在下游分类器的前面。我们的单词识别器模型建立在RNN半字符结构上，介绍了集中新型backoff策略对于解决稀有的和未知的单词。经过训练可以识别因随机添加、删除、交换和键盘错误而损坏的单词，我们的方法实现了32%相对错误较少(3.3%绝对)在半字符模型上。尤其是，我们的pipeline可以是下游分类器具有鲁棒性，优于对抗训练和现有的拼写检查器。与针对情感分析进行了微调的BERT模型对抗，单一的对抗性选择字符攻击能够将准确率从90.3%降低至45.8%。我们的防御将准确率恢复到75%。意外地，更好地单词识别器并不总是意味着更好的鲁棒性。我们的分析表明，鲁棒性还取决于我们贡献的模型灵敏度。</li>
-</ul>
-<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
-<li>（文本对抗的背景）尽管深度学习技术的快速发展在多种监督任务上，这些模型在数据分布方面仍然保持着脆弱的变化。即使在允许的变化仅限于几乎无法察觉的扰动的情况下，训练一个鲁棒性的模型仍然是一个开放的挑战。在发现了无法察觉的攻击可能导致图像识别模型错误分类之后(Szegedy et al., 2013)，出现了一个子领域，学者反复提出攻击和防御。</li>
-<li>（应用背景，提出问题）对于所有的兴趣在对抗计算机视觉，这些攻击是很少出现在学术研究之外。可是，对抗拼写错误构成了一个<strong>longstanding real-world problem</strong>长期存在的真实问题。垃圾邮件制造者不断轰炸电子邮件服务器，巧妙地拼写错误的单词以逃避垃圾邮件检测，同时保留电子邮件预期含义。再举一个例子，互联网上的审查制度促使社区采用类似的方法秘密交流。</li>
-<li>（提出解决的问题，拼写错误的背景）在这篇文章中，我们注意文本分类背景下的对抗选择的拼写错误，解决了以下攻击类型：删除、添加和交换单词内部字符。这些扰动被心理学家证明，人类能够理解替换了内部字符的文本，只要第一个和最后一个字符是不被扰动的。</li>
-<li>（文章主要内容1）首先，实验使用了BiLSTM和微调BERT，比较了四种不同的输入格式，word、char、word+char和word-piece，我们证明了对手可以使分类器的性能降低到通过随机猜测获得的性能。<strong>这仅仅需要替换两个字符每个句子</strong>。这些修改也许将单词变成一个不同的单词，或者是OOV单词UNK。所以，对抗性的编辑可以降低信息丰富的单词为UNK来降低单词级别的模型性能。直觉上，人们可能会怀疑word-piece和字符级别的模型会更不容易受到攻击，因为他们可以利用剩余的词上下文。但是我们的实验说明字符和word-piece级别的模型是更脆弱的。我们表明这是由于对手对这些模型进行细粒度操作的有效能力。在针对单词级别模型的情况下，对手主要扰动为UNK单词，而针对word-piece或字符级别模型，则每个字符级别的添加、删除和交换都会产生不同的输入，从而为对手提供了更多的选择。</li>
-<li>（文章主要内容2）第二，我们评价了包括数据增强和对抗训练在内的一线技术，表明他们在这里仅仅提供了<strong>边际收益</strong>，例如，在情感分类任务上实现了90.3精度的BERT模型，经过对抗选择1字符交换的攻击降低为64.1，只能通过对抗性训练恢复到69.2。</li>
-<li>（文章主要内容3，主要贡献）我们提出了一个任务无关的防御，带有一个单词识别器模型，能够预测一句话中的每个单词，给定一系列带有拼写错误的输入。单词识别器的输出构成了下游分类模型的输入。我们的单词识别器建立在RNN-based半字符级别。同时我们的单词识别器被训练在一个领域特定的文本，它们经常会预测为UNK在测试阶段，由于特定领域的词汇量很小。为了解决未被发现的单词和稀有单词，我们提出了几种backoff 后退策略，包括依靠训练在较大语料库上的通用单词识别器。使用我们的防御，BERT模型受到1交换字符攻击被恢复到88.3的准确率。</li>
-<li>（文章主要内容4）第四，我们提供了一个详细的质量分析，证明了仅仅单词错误识别率低是不能充分说明单词识别器得到了鲁棒性在下游任务。此外，我们提出了识别器模型提供很好程度的自由对攻击者是很重要的。我们提出了一个指标，叫做敏感度，研究了它的关系和鲁棒性经验性地。模型带有低敏感度和错误识别率是最鲁棒的。</li>
-</ul>
-<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
-<li>…</li>
-</ul>
-<h4 id="鲁棒单词识别器"><a href="#鲁棒单词识别器" class="headerlink" title="鲁棒单词识别器"></a>鲁棒单词识别器</h4><ul>
-<li>为了解决字符级对抗攻击，我们介绍了一个简单的两阶段方法，放置一个单词识别器$W$在下游任务分类器$C$之前。在这个模式下，所有的输入都经过这两部分。这个模块化的方法，W和C单独训练，提供了几个好处：（i）我们可以部署相同的单词识别模型在多个下游分类任务；和（ii）我们能够训练单词识别器在没有标签的大语料上。</li>
-<li>针对对抗性错误。两个重要的因素控制着鲁棒性：W的准确率和W的敏感度对于对抗性扰动在相同的输入上。我们下面详细讨论这些。</li>
-<li><strong>ScRNN带有Backoff策略</strong>。我们现在描述半字符RNNs对于单词识别器，解释它的限制和改善的技术。</li>
-<li>受到心理学的启发，提出了半字符RNN，即ScRNN，处理一个句子带有拼写错误的字符，预测正确的单词在每一步。令$s=\{ w_1,w_2,…,w_n \}$，为输入句子，每一个输入单词被表示通过拼接以下：(i)第一个字符的one-hot编码，(2)最后一个字符的one-hot表示，(iii)一个中间字符的袋，内部字符的表示为$\sum_{j=2}^{l-1}w_{ij}$。ScRNN对待第一个字符和最后一个字符单独地，中间字符顺序是不考虑的。每个单词的表示输入到BiLSTM中。每个序列步骤，训练目标是正确的对应的单词，模型通过交叉损失进行训练。</li>
-<li><strong>Backoff 策略</strong>。因为 Sakaguchi   et   al.(2017) 说明了单词识别器性能的强大，一个缺点他们的评估设置是他们仅仅攻击和评估训练词表的一部分单词子集。在这样一个设置，单词识别器性能是过分依赖所选的词表大小。可以设计模型来预测（正确地）仅选择几个单词，而忽略剩余的大多数单词，但仍达到100％的准确性。<strong>对于对抗性设置，稀有的和未知的单词尤为重要，因为它们为攻击者提供了机会</strong>。一个可靠的单词识别器应该能够解决这些情况。我们探索不同的backoff策略，当ScRNN预测为UNK时（对于稀有单词和未知词来说是常见的）：<ul>
-<li>Pass-through：不处理。</li>
-<li>Neutral：回退到中性单词，比如“a”，该单词在类之间的分布相似。</li>
-<li>Background：我们也考虑了一种依赖更大、更通用的语料库上训练的单词识别模型。图1描绘了这种情况。</li>
-<li><img src="/assets/blogImg/ScRNN-Background-fig1.png" alt="image-20200607153658232"></li>
-</ul>
-</li>
-<li>经验上，我们发现背景模型（本身）的准确率较差，这是因为训练了该模型可以预测大量的单词。因此，最好在领域内语料库上训练精确的前景模型并关注频繁的单词，然后针对稀有和未知单词求助于通用背景模型。接下来，我们说明了构建稳定的单词识别器的第二个考虑因素。<ul>
-<li>可以用完整的词汇量训练背景模型，以便背景模型永远不会预测UNK。</li>
-</ul>
-</li>
-<li><strong>模型敏感度</strong>。在计算机视觉中，一个重要的是因素确定对抗的成功是范数约束在扰动前后$||x-x’||_{\infty}&lt;\epsilon$。更高的阈值导致一个更高的误分类的机会。防御方法，比如quantization (Xuet  al.,  2017)  and  thermometer  encoding  (Buck-man et al., 2018) t，尝试通过是模型对输入的微小变化不变，来减少对手可用的扰动空间。</li>
-<li>在NLP中，我们经常得到一些不变形，例如对于单词级别的模型来说，字符级对手产生的大部分干扰都会导致UNK。如果模型本身对UNK具有鲁棒性，则对手几乎没有空间操纵单词。</li>
-<li>字符级别的模型尽管性能在许多任务上都很优秀，但是不会拥有这样的不变性。这样的字符不变形能够被攻击者应用。因此，为了限制不同输入的数量到分类器，我们希望降低不同的单词识别器输出的数量，该，而不仅仅是降低模型被欺骗的数量。我们贡献这个模型属性为<strong>敏感度</strong>。</li>
-<li>我们能够量化这个概念对于一个单词识别器$W$，期望输出唯一的输出当赋予一系列对抗性扰动。给定一个句子s，令$A(s)=s_1’,s_2’,…,s_n’$，贡献n个扰动在攻击类型A下，令V是一个函数，映射字符串到一个输入表示对于下游分类器。对于一个单词级别的模型，V会转换句子到一个word ids的序列，映射OOV单词到相同的UNK ID。鉴于，对于一个字符级别（或者单词+字符、word-piece）的模型，V会映射输入到一个字符 ids的序列。形式化，敏感度被定义为：</li>
-<li>$S_{W,V}^A = E_s[#_u(V\circ W(s_1’),…,V \circ W(s_n’))/n]$</li>
-<li>$V \circ W(s_i)$返回输入表示（下游分类器），$#_u(·)$表示不同值的计数。</li>
-<li>直觉上，一个高的敏感度值会导致一个低鲁棒性在下游分类器中，因为对手有更多的自由度攻击分类器。因此，当使用单词识别器作为防御，谨慎的做法是设计一个具有低错误率和低敏感度的系统。但是，正如我们要演示的那样，在灵敏度和错误率之间通常要进行权衡。</li>
-<li><strong>综合对抗攻击</strong>。假设我们给定一个分类器$C$，映射自然语言句子$s \in S$到一个标签。对手是一个函数$A$，映射一个句子到扰动的版本$\{ s_1’,s_2’,…,s_n’ \}$，我们定义分类器C的鲁棒性为：</li>
-<li>$R_{C,A} = E_s[\underset{s’ \in A(s)}{min} 1[C(s’)=y]]$ or</li>
-<li>$R_{C,A} = E_s[\underset{s’ \in A(s)}{min} 1[C(W(s’))=y]]$</li>
-<li>其中y表示真实标签。实际上，一个真实的对手仅仅查询分类器几次，因此$R_{C,A}$表示最差的对抗性能。生成对抗样本的方法，比如 HotFlip (Ebrahimi et al., 2018b)，关注于有效的算法找到上述的min。改善$R_{C,A}$意味着针对这些方法的更好的鲁棒性。</li>
-<li>允许的扰动A(s)，我们探索四中类别的字符级别的编辑：（1）交换，（2）删除，（3）替换，（4）插入。都是对内部字符进行操作的。为了确保不影响人类理解的能力，我们仅仅允许编辑内部字符，不会扰动停用词和少于4个字符的单词。</li>
-<li>攻击策略。对于1字符攻击，我们尝试所有可能的扰动直到找到一个对抗使模型预测错误。对于2字符攻击，我们贪心地编辑1字符攻击中置信度最低的，然后尝试对其余单词进行扰动。可以类似的方式执行更高阶的攻击。贪心策略减少了获得高阶攻击所需的计算量，复杂度是$O(l^m)$，但是同时也意味着鲁棒性得分是分类器真正鲁棒性的上限。</li>
-</ul>
-<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
-<li><strong>单词错误更正</strong>。数据：我们评估这个拼写校正器在SST数据上，由8544个电影评论组成，带有一个16k单词的词表。背景模型使用IMDB电影数据，由54K电影评论和78K单词的词表组成。两个数据集不共享任何评论。拼写校正模型评估在纠错错误拼写的能力。测试集由评论组成，其中每个单词（长度大于等于4）被攻击一次。在所有攻击设置，我们在每句话的攻击中混合了所有攻击。这个和真实世界最相似。</li>
-<li>实验设置。除了单词识别模型，我们还比较了After The Deadline（ATD），一个开源的拼写检查器<ul>
-<li><a href="https://www.afterthedeadline.com/" target="_blank" rel="noopener">https://www.afterthedeadline.com/</a></li>
-<li>我们发现ATD是最好的免费可用的纠正器，和Hunspell</li>
-<li><a href="http://hunspell.github.io/" target="_blank" rel="noopener">http://hunspell.github.io/</a></li>
-<li>相比，因为考虑了上下文。</li>
-</ul>
-</li>
-<li>对于ScRNN模型，我们使用一个单层的BiLSTM，隐藏层尺寸为50，输入表示由198维组成，是单独字符编码（66维）的三倍。我们将单词上限设置为10K单词，当backoff到背景模型时，使用78470单词的整个词汇量。为了训练这个网络，我们会根据所有攻击类型破坏电影评论，即对每个单词应用4中攻击类型之一，并尝试通过交叉熵来重建原始单词。</li>
-<li>结果。我们计算了单词错误率（WER）在表2，注意ATD预测不正确的11.2单词每100个单词，然而，所有的ScRNN的变体都表现的更好。最好的变体是背景模型，这里错误率降低了32%相比于朴素的ScRNN模型带有pass-through策略。我们能够归因于改善的性能到测试集中5.25的集外词，在训练集中看不到，因此只能使用更大的语料库才能恢复，但是直接训练在大语料库上是较差的，8.7%是因为单词频率不同。</li>
-<li><img src="/assets/blogImg/ScRNN-Background-tab1.png" alt="image-20200609135912063"></li>
-<li><strong>对抗攻击的鲁棒性</strong>。我们使用语义分析和短语检测用作下游任务，因为对于这两个任务，1-2个字符的编辑不会更改输出标签。</li>
-<li>实验设置。对于情感分类，我们系统地研究字符级别的对抗攻击在两种架构和四种不同的输入格式的效果。第一种架构编码输入句子到一个embeddings序列，使用BiLSTM处理，第一个和最后一个状态被输入到softmax层来预测输入的情感。我们考虑三种输入格式：（1）只使用单词，单词embeddings 64维，隐藏层使用64；（2）只使用字符，字符维度32，隐藏层使用64；（3）单词+字符，使用前两种的拼接，维度为64+32，隐藏层使用128。第二种架构使用微调的BERT模型，带有输入格式为word-piece。这个模型由最先进的性能在几个NLP任务上，包括情感分析。所有的模型被训练和评估在句子级别的SST数据集。</li>
-<li>我们也考虑paraphrase detection任务。我们利用微调的BERT，训练和评估在MRPC数据集。</li>
-<li>基线防御策略。两个常见的方法对于解决对抗性样本包括（1）数据增强（DA）和（2）对抗性训练（Adv）。在DA中，训练的模型被微调通过增强训练集通过随机攻击一个字符。在对抗性训练中，训练的模型被微调使用额外的对抗样本，对新的模型产生新的对抗样本，进行训练，直到在开发集的对抗准确率不再提高。</li>
-<li>结果。在表3中，我们检查了情感模型的鲁棒性在每一个攻击和防御方法。在没有攻击和防御的情况下，BERT最好90.3%，其次是word+char80.5%，word 79.2%，char 70.3%。但是，甚至单字符攻击（有选择的对抗）是灾难性的，导致一个重大的降低的性能of 46%，57%，59%和33%。<ul>
-<li>这几个降低的数也没对上啊？</li>
-</ul>
-</li>
-<li><img src="/assets/blogImg/ScRNN-Background-tab3.png" alt="image-20200609144212071"></li>
-<li>直觉上，我们也许会认为word-piece和字符级别的模型会更鲁棒对于攻击，因为他们还可以利用其余的上下文。可是，我们发现他们是更受怀疑的。为了了解为什么，注意单词beautiful能够被替换为UNK在单词级别或者一些存在的词，但是，word-piece和字符级别的模型会把它当做一个字符组合不同地。这提供了更多的变体，攻击者能够利用这个变体。相似的原因，add和替换攻击都能够产生一个更大的威胁比交换和删除攻击。不同模型的鲁棒性排序为：word&gt;word+char&gt;char~word-piece，攻击效率排序：添加&gt;替换&gt;删除&gt;交换。</li>
-<li>接下来，我们仔细查看了防御方法的有效性。可以从表3看出，DA和Adv方法不是很有效。我们发现尽管一个很低的训练错误，这些模型不能够泛化攻击在新的单词在测试阶段。ATD拼写错误校正器是最有效率的在替换攻击上，但是在其他攻击方面也是很差的，尤其是add攻击。</li>
-<li>ScRNN模型带有pass-through策略提供了更好地保护，将攻击精确率的对抗精度恢复到5%的范围内。它在其他攻击类别下也有效，并且可以在word-piece模型中减少21%的对抗效果，在字符模型中减少了19%，在单词和单词+字符模型中的对抗效果超过4.5%。这说明了，对于模型鲁棒性，单词错误校正的直接训练比DA和Adv间接训练更有效。</li>
-<li>我们发现此外的收获通过使用背景模型拥有更低的WER，但是，它的增益在所有其他设置中并不能始终如一地转换，因为较低的WER是必需的，但不是充分的，除了较低的错误率外，我们发现可靠的防御应该为攻击者提供最少的攻击选择，即应该具有较低的敏感性。正如4.3节中提到的，由于将UNK映射到固定的中性词，灵敏度最低。因此，对于所有4个模型，它在大多数攻击类型上都具有最高的鲁棒性。</li>
-<li>表4说明了BERT的准确率在200个样本，在MRPC的开发集上，在不同的攻击和防御策略。再次，我们发现简单的1-2字符攻击能够带来BERT的准确率下降。单词级别模型能够提供一个有效的防御，pass-through和neutral能够恢复最多。同时中性词在2字符时更有效。由于修改了某些拼写正确的单词，因此在无攻击情况下会损害性能。由于两种变体已经有效，因此我们没有为此任务训练背景模型。</li>
-<li><img src="/assets/blogImg/ScRNN-Background-tab4.png" alt="image-20200609154237039"></li>
-<li><strong>理解模型敏感度</strong>。</li>
-<li>实验设置。为了研究模型敏感度，对于每一个句子，我们扰动一个随机选择的词并且替换它使用所有可能的情况在一个给定的攻击类型。输入到单词识别器中，我们计算输出不同句子的数量。如果下游分类器对两个校正的映射不同，则认为是unique的。</li>
-<li>结果。中性词backoff策略有最低的敏感度，如表5所示。这是期望的，因为它放回了一个修正的中性词，只要ScRNN预测一个UNK，因此降低了unique的数量。开放式词表（即 字符、单词+字符，word-piece）下游分类器以不同的方式考虑字符的每个unique组合，而纯词分类器内部对所有OOV词进行相同的处理。因此，对于char-only、word-only和word-piece模型，pass-through策略是更敏感的比背景模型。<ul>
-<li>表5的下半部分应该只做了字符的。</li>
-</ul>
-</li>
-<li><img src="/assets/blogImg/ScRNN-Background-tab5.png" alt="image-20200609160609373"></li>
-<li>理想情况下，一个更好的防御是一个带有低敏感度和低WER。实际上，我们发现一个低错误率常常伴随着敏感度的开销。我们通过图2展示了两者的trade-off。通常，敏感度是这两个因素中最主要的因素，因为所考虑的变体的错误率相当低。</li>
-<li><img src="/assets/blogImg/ScRNN-Background-fig2.png" alt="image-20200609163625598"></li>
-<li>人类的可理解性。我们验证情感是否通过字符级攻击得以保留。在一个有50项攻击（分类器会分类错误）和50个原来评论的人类研究中，注意到分别保留了48和49个观点。</li>
-</ul>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
-<li>随着字符和单词输入在现代NLP管道中变得司空见惯，值得强调一下它们增加的漏洞。 我们表明，最少的攻击可以将分类器的准确性降低到随机猜测的水平。 我们建议使用单词识别作为对此的一种保护措施，并在基于RNN的半字符单词识别器的基础上进行。 我们发现，当用作防御机制时，最准确的单词识别模型并不总是最强大，可以抵抗对抗攻击。 此外，我们强调需要控制这些模型的灵敏度以实现高鲁棒性。</li>
-</ul>
-<h4 id="备注和疑问"><a href="#备注和疑问" class="headerlink" title="备注和疑问"></a>备注和疑问</h4><ul>
-<li>marginal benefits边际收益是什么？</li>
-<li>使用$\circ$符号通常表示一个复合函数。</li>
-<li>$\alpha_1p(1)log(p(1)/p(0))+\alpha_2p(0)log(p(0)/p(1))$</li>
-</ul>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://www.cnblogs.com/shona/p/11391315.html" target="_blank" rel="noopener">https://www.cnblogs.com/shona/p/11391315.html</a></li>
-<li></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文本对抗</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">防御</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/17/acl04/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2133,22 +2147,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -2161,15 +2159,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2186,6 +2188,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2273,6 +2279,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -2286,18 +2300,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2337,15 +2339,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2393,6 +2407,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -2402,14 +2424,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2425,18 +2439,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -2449,7 +2451,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2458,10 +2476,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2490,6 +2504,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNE</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="fairyfali.github.io">
   <title>论文阅读：Is BERT Really Robust? A Strong Baseline forNatural Language Attack on Text Classification and Entailment | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="论文题目 BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，监督由教授 Peter Szo">
+  <meta name="description" content="论文题目 BERT真的很鲁棒吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，指导老师是教授 Peter S">
 <meta name="keywords" content="Bert,文本分类,攻击">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文阅读：Is BERT Really Robust? A Strong Baseline forNatural Language Attack on Text Classification and Entailment">
 <meta property="og:url" content="fairyfali.github.io/2020/09/28/aaai02/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="论文题目 BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，监督由教授 Peter Szo">
+<meta property="og:description" content="论文题目 BERT真的很鲁棒吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，指导老师是教授 Peter S">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta property="og:image" content="/assets/blogImg/TextFooler_alg1.png">
 <meta property="og:image" content="/assets/blogImg/TextFooler_eq2.png">
 <meta property="og:image" content="/assets/blogImg/TextFooler_tab1.png">
 <meta property="og:image" content="/assets/blogImg/TextFooler_tab2.png">
 <meta property="og:image" content="/assets/blogImg/TextFooler_tab3.png">
-<meta property="og:updated_time" content="2020-09-28T01:57:11.615Z">
+<meta property="og:updated_time" content="2020-09-30T08:59:25.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Is BERT Really Robust? A Strong Baseline forNatural Language Attack on Text Classification and Entailment">
-<meta name="twitter:description" content="论文题目 BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，监督由教授 Peter Szo">
+<meta name="twitter:description" content="论文题目 BERT真的很鲁棒吗？ 自然语言攻击文本分类和蕴含的强大基准 发表在AAAI2020 论文下载：https://aaai.org/ojs/index.php/AAAI/article/view/6311 Code：https://github.com/jind11/TextFooler Keras    论文作者 Di Jin，毕业CSAIL在麻省理工学院，指导老师是教授 Peter S">
 <meta name="twitter:image" content="/assets/blogImg/TextFooler_alg1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
@@ -180,7 +180,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
-<li>BERT真的很健壮吗？ 自然语言攻击文本分类和蕴含的强大基准</li>
+<li>BERT真的很鲁棒吗？ 自然语言攻击文本分类和蕴含的强大基准</li>
 <li>发表在AAAI2020</li>
 <li>论文下载：<a href="https://aaai.org/ojs/index.php/AAAI/article/view/6311" target="_blank" rel="noopener">https://aaai.org/ojs/index.php/AAAI/article/view/6311</a></li>
 <li>Code：<a href="https://github.com/jind11/TextFooler" target="_blank" rel="noopener">https://github.com/jind11/TextFooler</a><ul>
@@ -189,8 +189,8 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
-<li>Di Jin，毕业<a href="https://www.csail.mit.edu/" target="_blank" rel="noopener">CSAIL</a>在麻省理工学院，监督由教授 <a href="http://groups.csail.mit.edu/medg/people/psz/home/Pete_MEDG_site/Home.html" target="_blank" rel="noopener">Peter Szolovits</a> at the <a href="http://groups.csail.mit.edu/medg/" target="_blank" rel="noopener">Clinical Decision Making Group</a>。很快加入Amazon Alexa AI，和<a href="https://scholar.google.com/citations?user=GMcL_9kAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dilek Hakkani-Tur</a>担任对话系统的研究科学家。个人主页：<a href="https://jind11.github.io/，GitHub：https://github.com/jind11" target="_blank" rel="noopener">https://jind11.github.io/，GitHub：https://github.com/jind11</a></li>
-<li>Zhijing Jin，香港大学本科毕业，我的本科研究论文是由香港大学的高本杰教授指导的。是一名NLP研究员和有效的利他主义者。目前正在与Amazon AI进行研究，很快将在2020年秋季在Max Planck Institute的Bernhard Schoelkopf博士开始。个人主页：<a href="https://zhijing-jin.com/fantasy/" target="_blank" rel="noopener">https://zhijing-jin.com/fantasy/</a></li>
+<li>Di Jin，毕业<a href="https://www.csail.mit.edu/" target="_blank" rel="noopener">CSAIL</a>在麻省理工学院，指导老师是教授 <a href="http://groups.csail.mit.edu/medg/people/psz/home/Pete_MEDG_site/Home.html" target="_blank" rel="noopener">Peter Szolovits</a> at the <a href="http://groups.csail.mit.edu/medg/" target="_blank" rel="noopener">Clinical Decision Making Group</a>。很快加入Amazon Alexa AI，和<a href="https://scholar.google.com/citations?user=GMcL_9kAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dilek Hakkani-Tur</a>担任对话系统的研究科学家。个人主页：<a href="https://jind11.github.io/，GitHub：https://github.com/jind11" target="_blank" rel="noopener">https://jind11.github.io/，GitHub：https://github.com/jind11</a></li>
+<li>Zhijing Jin，香港大学本科毕业，本科研究论文是由香港大学的高本杰教授指导的。是一名NLP研究员和利他主义者。目前正在与Amazon AI进行研究，很快将在2020年秋季在Max Planck Institute的Bernhard Schoelkopf博士开始。个人主页：<a href="https://zhijing-jin.com/fantasy/" target="_blank" rel="noopener">https://zhijing-jin.com/fantasy/</a></li>
 <li>Joey Tianyi Zhou，周天一。是新加坡A * STAR高性能计算研究所（IHPC）的科学家，PI和组经理。个人主页：<a href="https://joeyzhouty.github.io/" target="_blank" rel="noopener">https://joeyzhouty.github.io/</a></li>
 <li>Peter Szolovits，个人主页：<a href="https://www.csail.mit.edu/person/peter-szolovits" target="_blank" rel="noopener">https://www.csail.mit.edu/person/peter-szolovits</a></li>
 </ul>
@@ -212,7 +212,7 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
 <li><strong>问题形式化</strong></li>
-<li>给你的能给一个语料，N个句子，$\mathcal{X} = \{ X_1,X_2,..,X_N \}$，和一个相应的N个标签的集合$\mathcal{Y}=\{ Y_1,Y_2,…,Y_N \}$，我们有一个预训练模型$F:\mathcal{X} \rightarrow \mathcal{Y}$，映射输入文本空间$\mathcal{X}$到标签空间$\mathcal{Y}$。</li>
+<li>给定一个语料，N个句子，$\mathcal{X} = \{ X_1,X_2,..,X_N \}$，和一个相应的N个标签的集合$\mathcal{Y}=\{ Y_1,Y_2,…,Y_N \}$，我们有一个预训练模型$F:\mathcal{X} \rightarrow \mathcal{Y}$，映射输入文本空间$\mathcal{X}$到标签空间$\mathcal{Y}$。</li>
 <li>对于一个句子X，一个可用的对抗样本$X_{adv}$应该满足一下需求：</li>
 <li>$F(X_{adv}) \ne F(X), and  Sim(X_{adv},X)\ge\epsilon$（1）</li>
 <li>其中Sim为$\mathcal{X} \times \mathcal{X} \rightarrow (0,1)$是一个相似度函数，$\epsilon$是最小的相似度。在自然语言领域，Sim经常是一个语义和语法的度量。</li>
@@ -351,6 +351,15 @@ var _hmt = _hmt || [];
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/10/12/arxiv01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          论文阅读：Defense against Adversarial Attacks in NLP via Dirichlet Neighborhood Ensemble
+        
+      </div>
+    </a>
   
   
     <a href="/2020/09/15/emnlp04/" id="article-nav-older" class="article-nav-link-wrap">
@@ -513,22 +522,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -541,15 +534,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">CVAE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+                <a href="javascript:void(0)" class="js-tag color5">对话系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,6 +563,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,6 +654,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主题模型</a>
               </li>
              
@@ -666,18 +675,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">对抗学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,15 +714,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,6 +782,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ICLR</a>
               </li>
              
@@ -782,14 +799,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CBOW</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NMT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">alignment</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,18 +814,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
@@ -829,7 +826,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">MT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">lstm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -838,10 +851,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">fine-tune</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,6 +879,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Char-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNE</a>
               </li>
              
               <li class="article-tag-list-item">
