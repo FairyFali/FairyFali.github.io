@@ -154,6 +154,210 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iclr01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/16/iclr01/">论文阅读：Efficient Estimation of Word Representations in Vector Space</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/16/iclr01/" class="archive-article-date">
+  	<time datetime="2019-09-16T05:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h3><ul>
+<li>有效的向量空间上的词表示</li>
+<li>发表在ICLR2013，会伴上没有评级，深度学习领域的顶级会议</li>
+<li>论文下载：<a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1301.3781.pdf</a></li>
+</ul>
+<h3 id="作者简介"><a href="#作者简介" class="headerlink" title="作者简介"></a>作者简介</h3><ul>
+<li>Tomas Mikolov（托马斯·米科洛夫），在布尔诺理工大学获得计算机科学博士学位，从事于机器学习领域。目前工作于facebook，2014年前在约翰霍普金斯大学，蒙特利尔大学，微软和谷歌做过访问学者。在embedding方面做出了杰出的贡献。(<a href="https://en.wikipedia.org/wiki/Tomas_Mikolov" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Tomas_Mikolov</a>)<br><img src="/assets/blogImg/iclr01-Tomas_Mikolov.jpg" alt="图片"></li>
+<li>本篇论文是在谷歌工作期间发表。</li>
+</ul>
+<h3 id="解决的主要问题"><a href="#解决的主要问题" class="headerlink" title="解决的主要问题"></a>解决的主要问题</h3><ul>
+<li>学习高质量的词向量，不仅能够在相似单词的表示上相近，而且能够达到多种程度的相似，比如能够达到表示空间的子空间能够代表单词部分的相似度。</li>
+</ul>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><ul>
+<li>许多NLP任务都把单词作为原子单元，因为他们只是把单词作为一个索引，没有考虑单词之间的相似性。这样的选择有几个好处，简单、健壮，简单的模型在大数据集上的性能优于复杂的模型在小数据集上。比如说，N-gram模型，现在可以在万亿级单词的数据集上进行训练。</li>
+<li>但是简单的技术在许多任务上有局限性。比如说，自动语音识别的相关领域的性能通常由高质量的转录语音数据决定（单词通常只有百万级）；机器翻译中，存在的语料库仅仅存在十亿级的单词数量。因此，存在一些场景，仅仅简单地扩展基本技术不会带来重大的进展，因此需要关注更高级的技术。</li>
+<li>随着机器学习技术的进步，可以在更大的数据集上训练更复杂的模型，并且可以胜过简单的模型。比如最成功的的概念是使用分布式表示单词。比如，基于神经网络的语言模型优于N-gram 模型。</li>
+<li>论文的目的：<ul>
+<li>介绍学习高质量的单词向量从十亿级大数据集中，百万级词典中。</li>
+<li>评估向量表示结果的质量，不仅仅是相似的词有相似的表示，而且，单词能有多个维度的相似。令人惊讶的是，单词的相似性还可以使用单词偏移技术，做代数运算，比如vector(‘king’)-vector(‘man’)+vector(‘woman’)和vector(‘woman’)是最接近的。</li>
+<li>在这篇文章中，尝试最大化单词之间的线性规律的准确率来开发新的模型结构。</li>
+<li>设计了一个新的综合测试集，用于评估句法和语义规律，并且表明可以高精度地学习这些规律。</li>
+<li>讨论了训练时间和准确性和单词向量的维度和数据量的关系。</li>
+</ul>
+</li>
+<li>之前的工作：<ul>
+<li>单词的连续性向量表示有一个很长的历史。一个流行的模型结构NNLM被提出，一个前向神经网络带有一个非线性隐藏层被用来学习单词向量表示。这个工作已经被很多人关注。</li>
+<li>另外一个有趣的NNLM结构被提出，单词向量第一次学习使用神经网络带有单个隐藏层。这个单词向量被用来训练NNLM。即使不构建完整的NNLM也可以学习单词向量。本论文也是扩展次体系结构，并只关注于使用简单模型学习单词向量。</li>
+<li>后来展示出单词向量能极大地改善和简化许多NLP任务。单词向量本身的评估也在不同的模型结构和语料上进行，其中一些结果可以直接用在将来的研究中。可是，就我们所知，这些结构计算代价昂贵。</li>
+</ul>
+</li>
+</ul>
+<h3 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h3><ul>
+<li>LSA和LDA也被用来学习单词连续性表示。本文中聚焦于神经网络的单词学习。</li>
+<li>为了比较不同模型的结构，定义了<strong>模型复杂性</strong>，就是参数数量。接下来，论文尝试使准确率最大化，同时使计算复杂度最小化。</li>
+<li>对于所有的下面的模型，<strong>训练复杂度</strong>都正比于$O=E\times T\times Q$，E是训练轮数epoches，T是训练集中的单词数量，Q是根据模型结构的定义。一般地，E取3~50，T上限是10亿。所有的模型都被训练使用随机梯度下降和反向传播。</li>
+<li>前馈神经网络语言模型(NNLM)<ul>
+<li>NNLM的目的是最大化$f(w_t,w_{t−1},…,w_{t−n+2},w_{t−n+1})=p(w_t∣w_1^{t−1})$。</li>
+<li>由输入，投影，隐藏，输出层组成。输入层，N个之前的单词使用onehot编码$N\times V$，V是词典大小，输入层被投影到一个投影层P，P的维度$N \times D$，共享投影矩阵$C \in R^{V\times D}$，投影层到隐藏层的使用全连接，参数矩阵$H \in R^{H \times (N \times D)}$，激活函数使用tanh，隐藏层的维度是$H$，隐藏层到输出层的参数矩阵$U \in R^{|V| \times H}$，如果输入层到输出层有连接的话，增加一个参数矩阵$W \in R^{|V|\times D}$，最后的预测函数为$y=b+Wx+Utanh(d+Hx)$，所以对于每一个训练例子计算复杂度为$Q=N\times D+N\times D\times H + H\times V$。一般地，N=10，D为500~2000，H为500~1000。所以计算复杂度主要体现在$H\times V$。但是可以使用二进制树的表示让V变为log(V)。此时计算复杂度就体现在$N\times D\times H$。</li>
+<li>本论文就是用hierarchical softmax方法。所以说NNLM的计算时间大多数体现在隐藏层上。</li>
+<li>本文后面也提出一种不具有隐藏层的架构。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/nnlm.png" alt="这里写图片描述"></p>
+<ul>
+<li>循环神经网络语言模型（RNNLM）<ul>
+<li>克服了NNLM的需要特定文本长度的限制；</li>
+<li>没有投影层，只有输入层，隐藏层和输出层；<strong>不理解为什么没有投影层</strong>。</li>
+<li>训练复杂度是$Q=H\times H + H \times V$。隐藏层维度H，词典大小V。</li>
+</ul>
+</li>
+<li>新Log线性模型<ul>
+<li>提出了两种新颖的模型结构来学习分布式单词表示，并尝试最小化计算复杂性。</li>
+<li>新的结构利用了NNLM两个成功的地方，第一，词向量被学习使用简单的模型，第二，训练N-gram NNLM在单词分布式表示的基础上。</li>
+<li>CBOW（Continuous Bag-of-Words Model）提出的第一个结构和NNLM类似，非线性隐藏层被移除，并且投影层共享（不仅仅是投影矩阵）；所有单词投影到同一个位置（求平均），我们称呼这个模型叫做词袋模型，因为不考虑单词的顺序。使用历史单词和将来的单词来预测中间单词。</li>
+<li>Skip-gram（Continuous Skip-gram Model）是提出的第二个模型。代替预测当前单词基于上下文，他尝试最大化基于一个词对于另一个词的分类，在指定的range内，记做C。我们选择C=5或者10，我们再随机选择一个R in range<1;c>，使用R个单词从历史中和将来中作为正确的标签，也就是说需要$R\times 2$个单词类别。</1;c></li>
+</ul>
+</li>
+</ul>
+<p><img src="/assets/blogImg/iclr01-model.png" alt="图片"></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>简单直观的质量评估是观察单词之间的相似度，比如France和Italy是更相似的。本文提出了更多不同类型的相似性比较，比如，单词big更相似于bigger，出乎意料的是，这个问题可以通过简单的代数操作执行，X=v(‘biggest’)-v(‘big’)+v(‘small’)，然后我们找到和X cosine距离最相近的单词作为答案。</p>
+<p>最后，当训练high 维度单词向量在a large amount of data上时，结果向量可以被使用回答在微妙的语义关系的问题，比如城市和国家的关系，巴黎对于法国就像柏林对于德国。</p>
+<ul>
+<li>任务定义。文章定义了5种类型的语义问题，和9种类型的语法问题。下表展示类每个类别。总之，一共存在8869个语义问题和10675个语法问题。构建问题的过程分为两步，第一步挑选相似单词手动地，第二步从这些单词对中随机挑选两对构成一个问题。只有当返回的相近的最相似的单词和正确答案相同时，才算正确。</li>
+</ul>
+<p><img src="/assets/blogImg/iclr01-table1.png" alt="image-20200318084959396"></p>
+<ul>
+<li>文章使用Google News corpus训练word vectors。这个corpus包含了6B tokens，限制vocabulary大小为1 million 最常出现的单词。训练时间会非常长，<strong>文章首先使用了一个数据子集训练，vocabulary 30k，使用CBOW的结果在表2中</strong>。可以看到增加维度或者增加数据类型都可以得到diminishing改善。</li>
+</ul>
+<p><img src="/assets/blogImg/iclr01-table2.png" alt="image-20200318090501351"></p>
+<ul>
+<li>模型结构的比较。首先我们比较了两种不同的模型结构，使用相同训练集和单词dimension of 640. 训练数据由LDC corpus组成。比较的模型是RNNLM，需要在CPU训练8周，NNLM使用并行训练。表3展示了单词向量在RNNLM中Syntactic问题中更好，NNLM比RNNLM表现更好。CBOW表现更好比NNLM在syntactic问题上，在语义问题上相似。最后Skip-gram结果在syntactic问题上比CBOW稍差，但是比另外的其他比较模型都好。</li>
+</ul>
+<p><img src="/assets/blogImg/iclr01-table3.png" alt="image-20200318091546960"></p>
+<ul>
+<li>大规模的并行训练。</li>
+<li>微软研究句子补全挑战。</li>
+</ul>
+<h3 id="做出的主要贡献"><a href="#做出的主要贡献" class="headerlink" title="做出的主要贡献"></a>做出的主要贡献</h3><ul>
+<li><p>作者提出了两种新颖的模型结构用来计算单词的连续向量表示从非常大的数据集上。在16亿单数的数据集上训练需要不到1天的时间。训练出的单词可以体现出单词在句法和语义上的相似性。</p>
+</li>
+<li><p>文章设计了一个测试集The test set is available at:www.fit.vutbr.cz/̃imikolov/rnnlm/word-test.v1.txt；</p>
+</li>
+<li>对训练好的词向量公开。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://ronan.collobert.com/senna/</span><br><span class="line">http://metaoptimize.com/projects/wordreprs/</span><br><span class="line">http://www.fit.vutbr.cz/ ̃imikolov/rnnlm/</span><br><span class="line">http://ai.stanford.edu/ ̃ehhuang/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>提出了两种模型结构CBOW和skip-gram。</li>
+<li>讨论了维度和训练数据量如何影响训练时间和准确率。</li>
+<li>源码地址：The code is available at <a href="https://code.google.com/p/word2vec/" target="_blank" rel="noopener">https://code.google.com/p/word2vec/</a></li>
+</ul>
+<h3 id="提出的主要方法"><a href="#提出的主要方法" class="headerlink" title="提出的主要方法"></a>提出的主要方法</h3><ul>
+<li>CBOW（Continuous Bag-of-Words Model）<ul>
+<li>类似于NNLM，存在输入层，为目标词周围的词，移除了非线性隐藏层（因为NNLM的参数主要在这部分），投影层的参数被所有输入的单词共享，如图，输入到投影层参数的数量为$D\times N$，投影层到输出层的参数数量为$D\times log(V)$，训练得到映射矩阵C；</li>
+</ul>
+</li>
+<li>skip-gram<ul>
+<li>类似于CBOW，不同的是根据一个词预测周围词，周围词需要通过采样得到，采样范围是C，采样数量是R，一共采样2R个词作为训练，每一个输出的词都对应一套参数，即每一个单词的输出相当于经过一个网络，一套参数包括$D+D\times log(v)$的参数量。</li>
+</ul>
+</li>
+<li>实验方法：在语义上和语法上进行相似单词的问答，包括8869语义问题和10675语法问题，距离输出计算余弦相似度最近的单词是预测答案，每种问答提出一个问答对，得到的结果和答案完全一致算正确。Skip-gram得到的实验结果更准确，但是训练时间更长(CBOW的训练时间为1天，Skip-gram的训练时间为3天)。同时还对比了增加数据量和增加维度对训练时间和准确率的影响，增加维度会提高更多的训练时间，准确度相差不大。<br><img src="/assets/blogImg/iclr01-model.png" alt="图片"></li>
+</ul>
+<h3 id="缺点和不足"><a href="#缺点和不足" class="headerlink" title="缺点和不足"></a>缺点和不足</h3><ul>
+<li>以单词为单位进行实验，没有测试开始说的单词表示的一部分能不能表示单词部分的相似度情况。</li>
+</ul>
+<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><ul>
+<li>log-bilinear model是什么意思？</li>
+<li>投影层P的维度为什么是N×D？</li>
+<li>skip-gram的采样时如何做的，为什么复杂度是C×，不是R×？</li>
+<li>8周的训练时间是所有模型的吗？</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">词嵌入</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">embedding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Skip-gram</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ICLR</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">word2vec</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CBOW</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/16/iclr01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-jmlr01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1323,6 +1527,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MRC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">对抗训练</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">叙事性事件链</a>
               </li>
              
@@ -1343,11 +1563,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
+                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1364,10 +1588,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">时空社交媒体挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Colab</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1427,18 +1647,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">JMLR</a>
               </li>
              
@@ -1451,15 +1659,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">事件预测</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SGNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">异构图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">五子棋</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,6 +1680,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">无监督学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1515,27 +1739,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">强化学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">TensorFlow</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">VAE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">半监督</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">生成模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">智能爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1615,18 +1827,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">attention</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">seq2seq</a>
               </li>
              
@@ -1639,11 +1839,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">防御</a>
+                <a href="javascript:void(0)" class="js-tag color5">self-attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">attention</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Layer Normalization</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1683,11 +1891,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DNE</a>
+                <a href="javascript:void(0)" class="js-tag color3">防御</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">综述</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DNE</a>
               </li>
              
               <li class="article-tag-list-item">
