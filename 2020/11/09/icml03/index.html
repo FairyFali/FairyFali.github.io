@@ -6,19 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="fairyfali.github.io">
-  <title>Tag: 爬虫 | FairyFali&#39;s Blog</title>
+  <title>论文阅读：Certified Adversarial Robustness via Randomized Smoothing | FairyFali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="梦想做一名科研工作者">
-<meta name="keywords" content="机器学习,信息检索">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FairyFali&#39;s Blog">
-<meta property="og:url" content="fairyfali.github.io/tags/爬虫/index.html">
+  <meta name="description" content="论文题目 通过随机平滑的可信对抗鲁棒性 发表在ICML2019 论文下载：http://proceedings.mlr.press/v97/cohen19c.html Code：http://github.com/locuslab/smoothing Supplementary：http://proceedings.mlr.press/v97/cohen19c/cohen19c-supp.pdf">
+<meta name="keywords" content="随机平滑,可验证半径,鲁棒性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读：Certified Adversarial Robustness via Randomized Smoothing">
+<meta property="og:url" content="fairyfali.github.io/2020/11/09/icml03/index.html">
 <meta property="og:site_name" content="FairyFali&#39;s Blog">
-<meta property="og:description" content="梦想做一名科研工作者">
+<meta property="og:description" content="论文题目 通过随机平滑的可信对抗鲁棒性 发表在ICML2019 论文下载：http://proceedings.mlr.press/v97/cohen19c.html Code：http://github.com/locuslab/smoothing Supplementary：http://proceedings.mlr.press/v97/cohen19c/cohen19c-supp.pdf">
 <meta property="og:locale" content="人工智能,机器学习,信息检索,前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:image" content="/assets/blogImg/certified_fig1.png">
+<meta property="og:image" content="/assets/blogImg/certified_fig1.png">
+<meta property="og:image" content="/assets/blogImg/certified_tab1.png">
+<meta property="og:image" content="/assets/blogImg/certified_theorem1.png">
+<meta property="og:image" content="/assets/blogImg/certified_theorem2.png">
+<meta property="og:image" content="/assets/blogImg/certified_fig4.png">
+<meta property="og:image" content="/assets/blogImg/certified_alg1.png">
+<meta property="og:image" content="/assets/blogImg/certified_fig6.png">
+<meta property="og:image" content="/assets/blogImg/certified_fig8.png">
+<meta property="og:updated_time" content="2020-11-09T06:35:35.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FairyFali&#39;s Blog">
-<meta name="twitter:description" content="梦想做一名科研工作者">
+<meta name="twitter:title" content="论文阅读：Certified Adversarial Robustness via Randomized Smoothing">
+<meta name="twitter:description" content="论文题目 通过随机平滑的可信对抗鲁棒性 发表在ICML2019 论文下载：http://proceedings.mlr.press/v97/cohen19c.html Code：http://github.com/locuslab/smoothing Supplementary：http://proceedings.mlr.press/v97/cohen19c/cohen19c-supp.pdf">
+<meta name="twitter:image" content="/assets/blogImg/certified_fig1.png">
   
     <link rel="alternative" href="/atom.xml" title="FairyFali&#39;s Blog" type="application/atom+xml">
   
@@ -152,60 +163,260 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-icml03" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/08/nsid01/" class="archive-article-date">
-  	<time datetime="2019-12-08T11:44:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/08/nsid01/">论文阅读：The Architecture and Implementation of an Extensible Web Crawler</a>
+    <h1 class="article-title" itemprop="name">
+      论文阅读：Certified Adversarial Robustness via Randomized Smoothing
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/11/09/icml03/" class="archive-article-date">
+  	<time datetime="2020-11-09T06:33:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="论文题目"><a href="#论文题目" class="headerlink" title="论文题目"></a>论文题目</h4><ul>
+<li>通过随机平滑的可信对抗鲁棒性</li>
+<li>发表在ICML2019</li>
+<li>论文下载：<a href="http://proceedings.mlr.press/v97/cohen19c.html" target="_blank" rel="noopener">http://proceedings.mlr.press/v97/cohen19c.html</a></li>
+<li>Code：<a href="http://github.com/locuslab/smoothing" target="_blank" rel="noopener">http://github.com/locuslab/smoothing</a></li>
+<li>Supplementary：<a href="http://proceedings.mlr.press/v97/cohen19c/cohen19c-supp.pdf" target="_blank" rel="noopener">http://proceedings.mlr.press/v97/cohen19c/cohen19c-supp.pdf</a></li>
+</ul>
+<h4 id="论文作者"><a href="#论文作者" class="headerlink" title="论文作者"></a>论文作者</h4><ul>
+<li>一作Jeremy Cohen（杰里米·科恩），是CMU机器学习系的二年级博士学位学生。在读研究生之前，在Spotify工作了两年，在此之前，在普林斯顿大学主修计算机科学。导师是Zico Kolter。个人主页：<a href="http://www.cs.cmu.edu/~jeremiac/" target="_blank" rel="noopener">http://www.cs.cmu.edu/~jeremiac/</a></li>
+<li>二作Elan Rosenfeld，CMU博士，领英主页：<a href="https://www.linkedin.com/in/elan-rosenfeld-875a6577/" target="_blank" rel="noopener">https://www.linkedin.com/in/elan-rosenfeld-875a6577/</a></li>
+<li>三作Zico Kolter（齐科·科特尔），CMU计算机科学系教授，个人主页：<a href="http://zicokolter.com/，其中，包括Eric" target="_blank" rel="noopener">http://zicokolter.com/，其中，包括Eric</a> Wong，Elan Rosenfeld，在鲁棒性方面都有研究。</li>
+</ul>
+<h4 id="论文解决了什么问题"><a href="#论文解决了什么问题" class="headerlink" title="论文解决了什么问题"></a>论文解决了什么问题</h4><ul>
+<li>大多数启发式的鲁棒训练模型方法都被展示出不能防御强大的攻击方法。可验证鲁棒性研究一个分类器在x周围的某个集合内是预测不变的。目前存在的大多数可验证方法不能扩展神经网络到大型的和表达能力强的模型，像ImageNet。之前提出的基于随机平滑的可证明方法是松散的。</li>
+</ul>
+<h4 id="提出了什么方法"><a href="#提出了什么方法" class="headerlink" title="提出了什么方法"></a>提出了什么方法</h4><ul>
+<li>我们使用随机平滑技术，将任意一个基础分类器f映射到一个新的平滑分类器g，平滑分类器在l2范数上是可验证鲁棒的。g被定义为是f最可能分类随机变量$N(x,\sigma^2I)$的一个分类器，也就是说g返回随机高斯f最可能的预测，如果f在高斯噪声下最可能分类x和x的真实标签相同，那么平滑分类器g在x点是分类正确的。随机平滑有一个缺点，不能够精确计算输出期望值，因此提出使用蒙特卡洛算法。</li>
+<li><img src="/assets/blogImg/certified_fig1.png" alt="image-20200724160623268"></li>
+<li>虽然存在缺点，但是它仍然有非常吸引人的优势：可适用于任意基础分类器。</li>
+<li>理论证明了两个定理：可信半径定理和扰动限制定理。给定一个样本x对应真实标签$c_A$，计算得到一个半径R，任意$\left | \delta \right |_2 &lt; R$, $g(x+\delta)=c_A$。前提是f具有一定的鲁棒性。</li>
+<li>证明精华版：$g(x)=c_A$，我们知道f分类$N(x,\sigma^2I)$为$c_A$，这引出了一个问题，所有可能的分类器f，哪一个会使f分类$N(x+\delta, \sigma^2I)$分类为$c_A$最低呢？根据Neyman-Pearson引理，worst-case f*是一个线性分类器，决策面是垂直于扰动$\delta$。f*分类$N(x+\delta, \sigma^2I)$为概率$\Phi(\Phi^{-1}(\underline{p_A})-\frac{||\delta||_2}{\sigma})$，等价于$||\delta||_2 &lt; \sigma \Phi^{-1}(p_A)$.</li>
+<li>可改善的地方：为了使基础分类器具有一定鲁棒性，他们提出训练基础分类器使用高斯数据增强的方法。因此更好的训练方法可以被选择，比如对抗训练。我们选择直接训练平滑分类器。</li>
+</ul>
+<h3 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h3><h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><ul>
+<li>我们展示了如何将任何分类器转换为在高斯噪音下分类好的另一个分类器，是可验证地鲁棒对于对抗性扰动在l2范数下（研究任务的意义）。尽管随机平滑技术已经被提出了，但是我们是第一个提供一个严格的分析，建立一个紧密的联系在l2鲁棒性和高斯噪声之间（已有的方法，动机）。我们使用这个技术训练ImageNet分类器，例如可验证的top-1准确率49%在对抗性扰动为l2范数少于0.5的情况下（模型优点）。平滑是唯一可验证的鲁棒分类方法，已证明在全分辨率Imagenet上可行。在较小规模的数据集上，可以证明采用可验证的L2鲁棒性的竞争方法是可行的，而平滑处理则可以提供更高的可验证准确率（优点）。该方法的经验成功表明，在预测时基于随机化的可证明方法是未来研究对抗性分类的有前途的方向。</li>
+</ul>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>（研究背景，focus）现代图片分类器实现高精度但是不是鲁棒的，在小的、有选择的对抗性扰动。给定一个图片x正确分类，一个对抗能够制造一个对抗性扰动$\delta$，人眼看上去是类似的，神经网络分类器是不同的，错误的类别。许多工作已经提出了启发性方法对于训练分类器，目的是对于扰动的鲁棒性。可是大多数这些启发性工作已经被展示出失败防御有效的对抗样本。作为响应，一系列针对<strong>Certifiable robustness 可信鲁棒性</strong>对分类器进行研究，其在任何点x的预测在x周围的某个集合内都可证明是恒定的。在大多数这些工作中，鲁棒的分类器采用了神经网络的形式。 不幸的是，所有现有的用于证明神经网络鲁棒性的方法都难以扩展到足够大且表达能力强的网络来解决像ImageNet这样的问题。</li>
+<li>（使用的具体方法）在这篇文章中，我们分析了一个操作，我们称之为<strong>随机平滑（randomized smoothing）</strong>转换任何任意分类器f到一个新的平滑分类器g，是可信鲁棒在l2范数。g(x)返回f最可能的预测在x的随机高斯噪声范围。</li>
+<li>（方法随机平滑的特点）如果基础分类器f是最可能分类$N(x, \sigma^2I)$为x的标签，然后平滑分类器g会是正确的在x。但是光滑分类器g会拥有一个期望的属性，原来的分类器缺失的：g在x周围的l2球内是不变的，更高的概率f对于$N(x, \sigma^2I)$的预测。概率越高，x周围的l2半径越大。如图1所示。</li>
+<li><img src="/assets/blogImg/certified_fig1.png" alt="image-20200724160623268"></li>
+<li>（其他的主要工作）Lecuyer等人 2019提出随机平滑作为一个证明的对抗性防御，使用它训练第一个可证明鲁棒性分类器对于ImageNet。后来，Li等人也证明了一个更强壮的鲁棒保证。可是，这些保证都是宽松的，某种意义上来说光滑分类器g是可证明地总是比保证指标更鲁棒。本文，<strong>我们证明了第一个严格鲁棒性保证对于随机平滑</strong>。我们的分析说明了使用高斯噪声的平滑，在l2范数下，自然会导致可信的鲁棒性。</li>
+<li>（缺点）随机平滑有一个主要的缺陷。如果f是一个神经网络，不可能精确地计算概率，因此，他不可能精确地评估光滑分类器g或者精确计算半径。代替地，我们使用蒙特卡洛算法对于两个任务。</li>
+<li>尽管存在这个缺陷，随机平滑享受这几个优势在其他的可证明鲁棒性分类器：不需要分类器架构的假设，易于实现和理解，允许使用任意大的神经网络作为基础分类器。作为对比，其他的可信防御没有扩展到大的网络。的确，平滑化是唯一经过认证的对抗性防御措施，在全分辨率ImageNet分类任务中已证明是可行的。</li>
+<li>我们使用随机平滑训练先进的可信l2鲁棒ImageNet分类器；如表1。我们还证明，在较小规模的数据集（如CIFAR-10和SHVN）中，可以使用竞争性的确定的l2鲁棒性方法，随机平滑可以提供更好的认证精度，这既因为它可以使用较大的网络，又因为它不限制 基本分类器的表现力。</li>
+<li><img src="/assets/blogImg/certified_tab1.png" alt="image-20200722155301953"></li>
+</ul>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><ul>
+<li>许多工作已经提出了对于对抗性扰动鲁棒的分类器。这些方法被划分为经验性防御和可信防御。</li>
+<li>经验性防御。大多数成功的经验性防御是对抗性训练，通常使用PGD，不幸的是，通常无法确定经验上强的分类器的预测是否对对抗性扰动真正鲁棒，最多可以说的是，特定攻击不能够找到具体攻击。为了摆脱这种猫捉老鼠的游戏，越来越多的工作集中在具有正式保证的防御上。</li>
+<li>可信防御。一个分类器是可信鲁棒的如果任何输入x，能够得到一个保证，分类器的预测是恒定的在一些集合内，通常是l2或者$l_\infty$球。这个领域的大多数情况，都是基于神经网络分类器。一些工作提出了用于证明通用训练网络的鲁棒性的算法，而另一些工作则提出了鲁棒的训练方法和互补的证明机制。</li>
+</ul>
+<h4 id="随机平滑"><a href="#随机平滑" class="headerlink" title="随机平滑"></a>随机平滑</h4><ul>
+<li><p>考虑一个分类问题$\mathbb{R}^d \rightarrow Y$。随机平滑是一个方法构建一个新的光滑的分类器g从一个任意分类器f。当查询x时，光滑分类器g返回f更可能的标签：</p>
+</li>
+<li><p>$g(x)=\underset{c \in Y}{argmax} \mathbb{P}(f(x+\varepsilon )=c), \varepsilon \sim N(0,\sigma^2I)$ (1)</p>
+</li>
+<li><p>噪声水平$\sigma$是一个超参数，控制着鲁棒性和准确率之间的平衡。</p>
+</li>
+<li><p>我们会首先介绍我们的鲁棒认证对于平滑分类器g。然后，由于不可能精确地评估g在x处的预测或证明g在x周围的鲁棒性，因此我们将为这两个以任意高概率成功完成的任务提供蒙特卡洛算法。</p>
+</li>
+<li><p><strong>3.1 鲁棒性保证</strong></p>
+</li>
+<li><p>假设基础分类器f分类$\mathcal{N}(x,\sigma^2I)$，最可能的类别$c_A$ 对应概率为$p_A$，第二个类别概率是$p_B$. 我们主要的结果是光滑分类器g，是鲁棒的在x附近，在l2半径$R=\frac{\sigma}{2}(\Phi^{-1}(p_A)-\Phi^{-1}(p_B))$,这个结果也成立如果我们替换$p_A$为一个下界$\underline{p_A}$,替代$p_B$为一个上界$\overline{p_B}$。</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.distributions.normal <span class="keyword">import</span> Normal</span><br><span class="line">m = Normal(torch.tensor([<span class="number">0.0</span>]), torch.tensor([<span class="number">1.0</span>]))</span><br><span class="line">In : m.icdf(torch.tensor(<span class="number">1.</span>))</span><br><span class="line">Out: tensor([inf])</span><br><span class="line">In : m.icdf(torch.tensor(<span class="number">0.9</span>))</span><br><span class="line">Out: tensor([<span class="number">1.2816</span>])</span><br><span class="line">In : m.cdf(<span class="number">0</span>)</span><br><span class="line">Out: tensor([<span class="number">0.5000</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定理1：</p>
+</li>
+<li><p><img src="/assets/blogImg/certified_theorem1.png" alt="image-20200722165844998"></p>
+</li>
+<li><p>我们可以从定理1中发现：定理1没有任何假设，所示适合深度架构；可信半径R是大的当：噪声水平$\sigma$高，top class高，其他class低；可信半径趋近于$\infty$当$\underline{p_A}$趋近于1和$\overline{p_B}$趋近于0.</p>
+</li>
+<li><p>定理2：</p>
+</li>
+<li><p><img src="/assets/blogImg/certified_theorem2.png" alt="image-20200722171606763"></p>
+</li>
+<li><p>定理2证明高斯平滑自然会产生l2鲁棒性：如果我们不对基分类器做出除类概率（2）以外的任何假设，那么高斯平滑分类器可证明其鲁棒性的扰动集恰好是l2球。</p>
+</li>
+<li><p><strong>噪声水平能够随着图片像素扩展</strong>。因为我们的公式3不依赖数据维度d，但是我们会担心随机平滑是更少地有效的对于高分辨率图片。如图4所示，可以看出分辨率越高，平滑可以使用更大的$\sigma$，导致更大的可信半径。</p>
+</li>
+<li><p><img src="/assets/blogImg/certified_fig4.png" alt="image-20200724161517091"></p>
+</li>
+<li><p><strong>3.2 实际算法</strong></p>
+</li>
+<li><p>我们现在陈述实际的蒙特卡洛算法，为了评估g(x)和验证g在x附近的鲁棒性。更多的细节在附录C。</p>
+</li>
+<li><p>预测（返回鲁棒标签）。评估平滑分类器的预测g(x)需要确定类别$c_A$,如伪代码中Predict所示。$n_A$越大，二项分布$B(n_A,n_A+n_B,0.5)$越小，所以$\alpha$是一个任意小的一个概率。follow Hung &amp; Fithian (2019) 工作。</p>
+</li>
+<li><p><img src="/assets/blogImg/certified_alg1.png" alt="image-20200722222017860"></p>
+</li>
+<li><p>可信性（计算半径，返回鲁棒标签）。评估和证明g在x附近的鲁棒性需要不仅确定类别$f(x+\varepsilon)$的$c_A$，而且要估计下界和上界。一个简单的方法是在伪代码的certify中：首先，使用一个小的数量的样本来自于$f(x+\varepsilon)$猜测$c_A$;然后使用一个大数量样本估计下界；然后简单的上界等于1-下界。$n &lt;&lt; n_0$。</p>
+</li>
+<li><p>函数LowerConfBound(k, n, 1-a)返回一个二项分布$k \sim Binomial(n,p)$单向置信区间下界。二项分布p的区间估计。</p>
+</li>
+<li><p><strong>确定一个大的半径需要非常多采样的样本</strong>。</p>
+</li>
+<li><p><strong>训练基础分类器</strong>。过程在附录F中。However, we suspect that there may be room to improve upon this training scheme, perhaps by training thebase classifier so as to maximize the smoothed classifier’scertified accuracy at some tunable radius r.</p>
+</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><ul>
+<li><p>附录D证明了如何转换近似可信准确率为一个真实可信准确率的下界。附录H.2说明了当$\alpha$很小时，差别可以忽略不计。</p>
+</li>
+<li><p>指标使用approximate certified test set accuracy。</p>
+</li>
+<li>超参数$\alpha=0.001,n_0=100,n=100000$</li>
+<li>下图展示了可信准确率是一个r的函数，随着r的增大，降低直到到达一个点，会垂直下降到0。<strong>出现这种下降的原因是，对于每个噪声水平σ和样本数n，当n个样本全部被f分类为同一类别时，我们可以高概率地证明半径存在硬上限。</strong></li>
+<li><img src="/assets/blogImg/certified_fig6.png" alt="image-20200724172207165"></li>
+<li>在每个实验我们训练几个平滑分类器，每个都对应一个不同的$\sigma$。在CIFAR-10中，我们的基本的分类器是一个110层的残差网络；每个样本需要占用15s，英伟达RTX2080Ti。在ImageNet，我们的基础的分类器是一个ResNet-50；每个样本占用110s。我们certified full CIFAR-10测试集和500样本来自于ImageNet测试集。</li>
+<li>图6画出了可信准确率，带有不同的$\sigma$。$\sigma$控制着鲁棒性和准确率的平衡。当$\sigma$很小时，小的半径能够认证为高的准确率，但是大的半径不能被认证。当$\sigma$很大时，大的半径能够被认证，但是小的半径被认证为一个低的准确率。</li>
+<li>图8（左）画出了认证准确率使用定理1，和类似的方法的对比实验。可以看出我们的实验结果更严格。图8中，说明了如何认证半径会改变使用更多或者更少的采样n。最后图8右，画出了认证准确率随着$\alpha$的变化，发现对它是不敏感的。</li>
+<li><img src="/assets/blogImg/certified_fig8.png" alt="image-20200724175107471"></li>
+</ul>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ul>
+<li>定理2确立了用高斯噪声进行平滑处理自然会赋予l2范式以对抗性鲁棒性：如果我们对除f（x +ε）分布以外的基本分类器一无所知，则证明该平滑分类器具有鲁棒性的扰动集恰好是l2球。 我们怀疑使用其他噪声分布进行平滑处理可能会导致类似的自然鲁棒性保证，如其他lp范数球之类的其他扰动集。</li>
+<li>我们有力的经验结果表明，随机平滑是未来研究对抗性稳健分类的有希望的方向。 大多数经验方法（除PGD对抗训练之外）均已被“打破”，并且尚未证明基于证明神经网络分类器的可证明方法可扩展到现代规模的网络。 对于大型表达神经网络的决策边界，以任何复杂的方式进行推理似乎在计算上都是不可行的。 随机平滑解决了这个问题：平滑分类器本身并不是神经网络，尽管它利用了神经网络基础分类器的判别能力。 为了使平滑的分类器鲁棒，只需简单地使基本分类器在噪声下就可以很好地分类。 这样，随机平滑将对抗性鲁棒分类的未解决问题减少到监督学习的相对解决域。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随机平滑</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">可验证半径</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">鲁棒性</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:fairyfali.github.io/2020/11/09/icml03/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/11/08/aaai03/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">论文阅读：A Robust Adversarial Training Approach to Machine Reading Comprehension</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -228,9 +439,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
