@@ -198,7 +198,8 @@
 <li>A General problem and Measure: 1) KGs are still far from complete. And the high manual costs of discovering new triples bring about Link Prediction. Knowledge graph embeddings (KGE) had drawn considerable attention very recently as a means to overcome this problem.</li>
 <li>The Core problem: KGE models achieve performance improvements by excessively increasing the embedding dimensions, which may cause <strong>enormous training costs</strong> and require more <strong>storage space</strong>. Several research efforts have drawn attention to this research issue by either improving the low-dimensional models (such as 8 or 32 dimensions), or compressing pre-trained high-dimensional models. However, the former cannot utilize the high-accuracy knowledge from high-dimensional models, and the latter suffers from high pre-training costs and cannot continue training when the KG is modified. <strong>Knowledge Distillation (KD)</strong> is a technology distilling ‘soft labels’ from a pre-trained big model (teacher) to train a small one (student).</li>
 <li>A General problem: Reducing the embedding dimensions can significantly save storage space. However, small embedding dimensions lead to low representation capability, limiting the prediction accuracy of the KGE model.</li>
-<li>The core problem: Conventional knowledge distillation methods are mostly used for the classification problem. However, the link prediction task is a <strong>learning to rank</strong> problem, which is usually learned by distinguishing the target entity with randomly negative samples.<span id="more"></span></li>
+<li>The core problem: Conventional knowledge distillation methods are mostly used for the classification problem. However, the link prediction task is a <strong>learning to rank</strong> problem, which is usually learned by distinguishing the target entity with randomly negative samples.<span id="more"></span>
+</li>
 </ul>
 <h4 id="Ideas-and-Proposed-Main-Methods"><a href="#Ideas-and-Proposed-Main-Methods" class="headerlink" title="Ideas and Proposed Main Methods"></a>Ideas and Proposed Main Methods</h4><ul>
 <li>Method: <strong>Knowledge Distillation (KD)</strong> is a technology distilling ‘soft labels’ from a pre-trained big model (teacher) to train a small one (student). This paper proposed a knowledge distillation framework, <strong>Multi-teacher knowledge Distillation for knowledge graph Embeddings (MulDE)</strong>.</li>
@@ -214,9 +215,9 @@
 <p>In my opinion, the trick of <em>iterative distillation</em> is normal and not worth mentioning. the Junior component, i.e. the student, generates top-K candidates and the Senior component generates resultant soft labels, which are pretty good.</p>
 </blockquote>
 </li>
-<li>Model Framework:<br> <img src="/blogImg/MulDE-fig2.png" alt="image-20220128132316467"><ul>
+<li>Model Framework:<br><img src="/blogImg/MulDE-fig2.png" alt="image-20220128132316467"><ul>
 <li>I) Teachers: They employ 4 different hyperbolic KGE models as teachers, including TransH, RefH, and RotH, and DisMult.</li>
-<li>II) The Junior component: can be any existing KGE model. After training, it can make predictions faster than high-dimensional models and achieve similar precision. It selects top-K candidates to every teacher model, and Senior component returns soft labels. They design two parts of supervision: Soft Label Loss (KL divergence) and Hard Label Loss (Binary cross-entropy loss). Junior Loss can be formulated by weighted sum of $\mathcal{L}<em>{Soft}$ and $\mathcal{L}</em>{Hard}$.</li>
+<li>II) The Junior component: can be any existing KGE model. After training, it can make predictions faster than high-dimensional models and achieve similar precision. It selects top-K candidates to every teacher model, and Senior component returns soft labels. They design two parts of supervision: Soft Label Loss (KL divergence) and Hard Label Loss (Binary cross-entropy loss). Junior Loss can be formulated by weighted sum of $\mathcal{L}_{Soft}$ and $\mathcal{L}_{Hard}$.</li>
 <li>III) The Senior component: to integrate score sequences from teachers and generate soft labels. There are two parts of input, top-K Junior scores and multiple score sequences from the teachers, (totally $m+1$ sequences, $m$ is the number of teachers). a) the First trick is <strong>Relation-specific Scaling Mechanism</strong>. It makes every teacher model contribute to the relations that the model is good at. They define a trainable scaling matrix with size $N_r \times m$. All scores in a sequence are adjusted in proportion. Using another BCE loss to train the scaling matrix. b) the Second trick is <strong>Contrast Attention Mechanism</strong>. It avoids a disparate soft label to block the training process. Therefore, at the early period of model training, Senior is encouraged to generate soft labels having a similar distribution with Junior’s scores.<blockquote>
 <p>This paper especially emphasize that both teachers and the Junior component cannot access the triples in the validation and test sets, including the negative sampling process.<br>In this paper, they point out the convergence speed of MulDE is faster, which obviously reduce the total training times. But in my similar experiments, the training speed is rather slow due to the calculations of soft labels and the selection of top-K candidates.</p>
 </blockquote>
@@ -425,7 +426,7 @@
     </div>
     <script>
 	var yiliaConfig = {
-		mathjax: true,
+		mathjax: [object Object],
 		isHome: false,
 		isPost: true,
 		isArchive: false,
@@ -683,20 +684,5 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
