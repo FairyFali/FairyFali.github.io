@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fairyfali.github.io">
-  <title>Tag: KD | Fali&#39;s Blog</title>
+  <title>Summary of IB-related papers | Fali&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Fali&#39;s Blog">
-<meta property="og:url" content="http://fairyfali.github.io/tags/KD/index.html">
+  <meta name="description" content="1. Distilling Robust and Non-Robust Features in Adversarial Examples by Information Bottleneck通过信息瓶颈蒸馏鲁棒和非鲁棒特征。 目标：找到隐层的鲁棒特征。 发表在NIPS 2021。引用了Ilyas的“Adversarial examples are not bugs, are features”: 对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Summary of IB-related papers">
+<meta property="og:url" content="http://fairyfali.github.io/2022/10/16/summary-ib/index.html">
 <meta property="og:site_name" content="Fali&#39;s Blog">
+<meta property="og:description" content="1. Distilling Robust and Non-Robust Features in Adversarial Examples by Information Bottleneck通过信息瓶颈蒸馏鲁棒和非鲁棒特征。 目标：找到隐层的鲁棒特征。 发表在NIPS 2021。引用了Ilyas的“Adversarial examples are not bugs, are features”: 对">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fairyfali.github.io/blogImg/image-20221015122737802.png">
+<meta property="article:published_time" content="2022-10-16T04:27:37.000Z">
+<meta property="article:modified_time" content="2022-10-16T04:30:01.942Z">
 <meta property="article:author" content="Fali Wang">
+<meta property="article:tag" content="summary">
+<meta property="article:tag" content="IB">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fairyfali.github.io/blogImg/image-20221015122737802.png">
   
     <link rel="alternative" href="/atom.xml" title="Fali&#39;s Blog" type="application/atom+xml">
   
@@ -152,68 +160,213 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-summary-ib" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/29/www1/" class="archive-article-date">
-  	<time datetime="2022-01-30T01:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/29/www1/">[Paper Reading] MulDE: Multi-teacher Knowledge Distillation for Low-dimensional Knowledge Graph Embeddings</a>
+    <h1 class="article-title" itemprop="name">
+      Summary of IB-related papers
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/10/16/summary-ib/" class="archive-article-date">
+  	<time datetime="2022-10-16T04:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-Distilling-Robust-and-Non-Robust-Features-in-Adversarial-Examples-by-Information-Bottleneck"><a href="#1-Distilling-Robust-and-Non-Robust-Features-in-Adversarial-Examples-by-Information-Bottleneck" class="headerlink" title="1. Distilling Robust and Non-Robust Features in Adversarial Examples by Information Bottleneck"></a>1. Distilling Robust and Non-Robust Features in Adversarial Examples by Information Bottleneck</h4><p>通过信息瓶颈蒸馏鲁棒和非鲁棒特征。</p>
+<p>目标：找到隐层的鲁棒特征。</p>
+<p>发表在NIPS 2021。引用了Ilyas的“Adversarial examples are not bugs, are features”: 对抗样本来自于数据集中脆弱的特征（即，非鲁棒特征）。本文发现的问题和挑战：如何弄清楚对抗脆弱性的来源？通过信息瓶颈技术能够将中间层的特征划分为鲁棒特征和非鲁棒特征：通过在中间层（某一层）添加噪声变量$\sigma$, 代表每一个特征的抗干扰能力，设计损失函数只更新噪声变量。最终学习到的噪声变量能够代表特征的鲁棒程度，大于阈值的噪声变量对应的特征为鲁棒特征，反而为非鲁棒特征。<strong>论文通过特征可视化和对抗样本和非鲁棒特征的关系说明了非鲁棒特征是对抗样本的主要原因</strong>。</p>
+<p>有点属于追赶潮流/可解释性的idea，也有点类似于啃硬骨头。因为使用了IB来解释对抗样本的来源。</p>
+<p>这篇文章已经实现了很好的防御效果。</p>
+<p>我称呼这篇文章的方法为Non-robust Feature Distiller。</p>
+<p>This paper is published at NIPS 2021. It cited Ilyas’ paper “Adversarial examples are not bugs, are features”: adversarial examples are arisen from brittle features in the dataset (i.e. non-robust features). The problem and challenge this paper found is how to figure out the source of adversarial brittleness? By IB, they can dichotomize the features in an intermediate layer into robust and robust parts. Through adding noise variable $\sigma$, which represents the tolerance of features, they design a loss function only updating noise variable. The learned noise variable can represent the tolerance against perturbations. Through feature visualization and the correlation between adversarial examples and non-robust features, they have revealed that easily manipulated property of non-robust features is the primary cause of adversarial examples.</p>
+<h4 id="2-Revisiting-Hilbert-Schmidt-Information-Bottleneck-for-Adversarial-Robustness"><a href="#2-Revisiting-Hilbert-Schmidt-Information-Bottleneck-for-Adversarial-Robustness" class="headerlink" title="2. Revisiting Hilbert-Schmidt Information Bottleneck for Adversarial Robustness"></a>2. Revisiting Hilbert-Schmidt Information Bottleneck for Adversarial Robustness</h4><p>重新审视对抗鲁棒性的希尔伯特-施密特信息瓶颈。</p>
+<p>目标：对抗鲁棒性。</p>
+<p>发表在NIPS 2021。提出的挑战是：之前的HSIC仅仅用来替代VIB，但是没有在对抗性鲁棒性下使用。因此本文提出使用HSIC作为正则化因子改善对抗鲁棒性。本文提出使用HSIC，一种MI的替代方法，作为一种正则化因子加入到神经网络的训练过程中，最小化HSIC(X,Z)，最大化HSIC(Z,Y)，Z是隐层并应用到所有隐层，能够增强模型的对抗鲁棒性。</p>
+<p>理论证明了最小化HSIC(X,Z)能够抑制模型输出的变化和在对抗攻击下的扰动带来的变化。</p>
+<p>本文的IDEA属于方法结合。</p>
+<p>提出的方法在对抗鲁棒性上提升很小。</p>
+<h4 id="3-INFOBERT-IMPROVING-ROBUSTNESS-OF-LANGUAGE-MODELS-FROM-AN-INFORMATION-THEORETIC-PERSPECTIVE"><a href="#3-INFOBERT-IMPROVING-ROBUSTNESS-OF-LANGUAGE-MODELS-FROM-AN-INFORMATION-THEORETIC-PERSPECTIVE" class="headerlink" title="3. INFOBERT: IMPROVING ROBUSTNESS OF LANGUAGE MODELS FROM AN INFORMATION THEORETIC PERSPECTIVE"></a>3. INFOBERT: IMPROVING ROBUSTNESS OF LANGUAGE MODELS FROM AN INFORMATION THEORETIC PERSPECTIVE</h4><p>INFOBERT：从信息论的角度提高语言模型的鲁棒性。发表在ICLR 2021。</p>
+<p>目标：BERT的鲁棒性。</p>
+<p>IDEA类型：追赶潮流。</p>
+<p>挑战：无。</p>
+<p>本文提出一个能够改进语言模型鲁棒性的方法。该方法基于信息瓶颈。由两个IB正则化项组成：$I(X_i; T_i)$和$I(T_i; Z)$。关于I(X; T)的近似，没有用变分方法，而是用了另外一种方法。关于I(T;Z)的近似，又用了另外一种方法。使用基于单词的攻击作为对抗训练和模型中寻找非鲁棒特征和无用特征的模块。</p>
+<p>为什么不用变分方法？</p>
+<p>动机不清晰。</p>
+<h4 id="4-Compressing-Neural-Networks-using-the-Variational-Information-Bottleneck"><a href="#4-Compressing-Neural-Networks-using-the-Variational-Information-Bottleneck" class="headerlink" title="4. Compressing Neural Networks using the Variational Information Bottleneck"></a>4. Compressing Neural Networks using the Variational Information Bottleneck</h4><p>使用变分信息瓶颈压缩神经网络。发表在ICML 2018。</p>
+<p>目标：模型压缩。</p>
+<p>IDEA类型：追赶潮流。</p>
+<p>没有提出挑战。但是提供了理论证明。本文利用VIB能够提取冗余信息的能力，将MI添加到每一层神经层上，在每一个隐层输出上乘上一个高斯分布。理论证明了如果$\mu/\sigma$很小，则该特征对应的神经元都可以被剪枝。</p>
+<h4 id="5-Adversarial-Information-Bottleneck"><a href="#5-Adversarial-Information-Bottleneck" class="headerlink" title="5. Adversarial Information Bottleneck"></a>5. Adversarial Information Bottleneck</h4><p>对抗信息瓶颈。发表在IEEE Transactions on Neural Networks and Learning Systems 2022。</p>
+<p>目标：模型鲁棒性和搜索最优IB控制因子$\beta^*$。<br>IDEA类型：模糊。<br>没有提出挑战。提供了一个类比VIB的计算IB的方法：在估计MI(X, Z)上使用了一个min max的优化公式，具体忽略。称min max为对抗（这很迷惑我，我以为的对抗是针对于对抗性攻击目的的方法）。有三个地方值得记录：1. 图1表示的a Markov chain and obeys the data processing inequality (DPI)。说明了最小化MI(X, Z)的作用。2. 实验中用IB Curve说明了MI(X, Z)和MI(Z, Y)的关系。3. 说明了$\beta$的选择非常影响模型鲁棒性和clean accuracy的表现。<br>不值得一看。</p>
+<h4 id="6-Specializing-Word-Embeddings-for-Parsing-by-Information-Bottleneck"><a href="#6-Specializing-Word-Embeddings-for-Parsing-by-Information-Bottleneck" class="headerlink" title="6. Specializing Word Embeddings (for Parsing) by Information Bottleneck"></a>6. Specializing Word Embeddings (for Parsing) by Information Bottleneck</h4><p>通过信息瓶颈专门化词嵌入（用于句法解析器）。发表在EMNLP 2019。一作Xiang Lisa Li, 来自Johns Hopkins University。</p>
+<p>目标：针对目标任务的词嵌入压缩。</p>
+<p>IDEA类型：追赶潮流。</p>
+<p>挑战：没有具体的挑战，提出如何找到fine-tuning之前在预训练embedding中任务特定的信息。因此本文提出使用VIB压缩embedding中句法分析器特定的信息T，从而替代fine-tune方法。具体地，损失函数为</p>
+<p><img src="/blogImg/image-20221015122737802.png" alt="image-20221015122737802"></p>
+<p>其中，最大化I(Y;T)和最小化I(X;T)是IB的常规操作，$I(T_i; X|\hat{X}_i)$是为了尽可能让$T_i$仅仅从对应的单词向量中压缩，而不压缩上下文相关的信息。这样一种压缩方法有几个好处：1. 更少的可能性过拟合，因为它fit更少的参数比微调；2. IB更快地训练；3. VIB 超越了单纯的降维到固定的低维，因为它还避免了对压缩表示中可用维度的不必要使用，通过随机性模糊了不需要的容量。4. 在高维压缩中仍然有效。<br>疑问：这里到底要压缩到低维，还是高维？</p>
+<h4 id="7-InfoAT-Improving-Adversarial-Training-Using-the-Information-Bottleneck-Principle"><a href="#7-InfoAT-Improving-Adversarial-Training-Using-the-Information-Bottleneck-Principle" class="headerlink" title="7. InfoAT: Improving Adversarial Training Using the Information Bottleneck Principle"></a>7. InfoAT: Improving Adversarial Training Using the Information Bottleneck Principle</h4><p>InfoAT：利用信息瓶颈原理改进对抗训练。发表在IEEE Transactions on Neural Networks and Learning Systems 2022。一作是Mengting Xu。</p>
+<p>目标：模型鲁棒性。</p>
+<p>IDEA类型：弥补不足，Pilot experiment。</p>
+<p>挑战：找到hard example困难。本文提出不是所有的样本对对抗训练过程的贡献都是相同的，有些样本更容易被攻击，称之为hard example。但是，找到这些hard example是困难的。本文发现更容易被攻击的正常样本的I(x, z)更大。这是因为互信息越大，隐藏表示空间包含的冗余特征和非鲁棒特征就越多，因此越容易被攻击。因此在对抗训练中增加一项正则化项: $I(x_i, z_i) 1(h(x_i)\ne h(\hat{x}_i))$。最小化能够被攻击的正常样本的I(x, z)，能够减少这种现象。此外，本文提到了Ilyas的非鲁棒特征在预测正确标签的对抗样本中被过滤掉了，因此希望最大化$I(\hat{x}_i’; \hat{z}_i’)$。在搜索对抗样本的过程，为了避免搜索到局部最优的对抗样本，最大化$l(h_\theta(x_i’), y_i) + \lambda I(x_i;z_i)1(h(x_i’ \ne h(x_i)))$。</p>
+<p>值得学习的是，这篇文章用loss surface来说明提出的方法InfoAT对抗训练的有效性。对方法的有效性不是来自于gradient obfuscation (不知道是什么)也进行了详尽的解释。还简短地提到了非监督情况下，无标签数据对InfoAT的贡献，以及InfoAT能够在无标签数据的加强下实现比同类型方法更好的效果。</p>
+<p>值得一看。</p>
+<h4 id="8-Extracting-robust-and-accurate-features-via-a-robust-information-bottleneck"><a href="#8-Extracting-robust-and-accurate-features-via-a-robust-information-bottleneck" class="headerlink" title="8. Extracting robust and accurate features via a robust information bottleneck"></a>8. Extracting robust and accurate features via a robust information bottleneck</h4><p>通过鲁棒信息瓶颈提取鲁棒和准确的特征。发表在 IEEE Journal on Selected Areas in Information Theory 2020。一作是Ankit Pensia。</p>
+<p>目标：模型鲁棒性。</p>
+<p>IDEA类型：方法组合。</p>
+<p>挑战：无。</p>
+<p>本文很长。提出了衡量相关性和鲁棒性的方法。使用I(Y; T)测量相关性，使用Fisher information测量鲁棒性。目标函数为$\inf -I(T; Y) + \beta \Phi(T|X)$。I(X; T)可以被省略。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thank you for buying me candy<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">WWW</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">summary</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">KD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">KG</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fairyfali.github.io/2022/10/16/summary-ib/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/01/29/www1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[Paper Reading] MulDE: Multi-teacher Knowledge Distillation for Low-dimensional Knowledge Graph Embeddings</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +389,9 @@
 	var yiliaConfig = {
 		mathjax: [object Object],
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
