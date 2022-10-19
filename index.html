@@ -154,6 +154,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-summary-compression-robustness" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/19/summary-compression-robustness/">Summary of Integrating Compression with Adversarial Robustness</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/19/summary-compression-robustness/" class="archive-article-date">
+  	<time datetime="2022-10-19T05:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>按照时间顺序，从前到后的文章。</p>
+<h4 id="1-Adversarial-Robustness-vs-Model-Compression-or-Both"><a href="#1-Adversarial-Robustness-vs-Model-Compression-or-Both" class="headerlink" title="1. Adversarial Robustness vs. Model Compression, or Both?"></a>1. Adversarial Robustness vs. Model Compression, or Both?</h4><ul>
+<li>对抗性鲁棒性与模型压缩，还是两者兼而有之？发表在ICCV 2019。一作Shaokai Ye, 清华大学。AdvPrune。</li>
+<li>有代码，Code is available at <a target="_blank" rel="noopener" href="https://github.com/yeshaokai/Robustness-Aware-Pruning-ADMM">https://github.com/yeshaokai/Robustness-Aware-Pruning-ADMM</a> .</li>
+<li>可能是第一个考虑压缩和鲁棒组合的文章。</li>
+<li>挑战：1. 对抗训练需要更大的模型容量，限制了在resource-constrained应用中使用。有理论保证工作说明鲁棒性和稀疏性的关系。2. 不兼容是很常见的，如何保证兼容？</li>
+<li>目标：实现同时地加权剪枝和对抗训练。无需大模型，直接开始训练。</li>
+<li>方法：<br><img src="/blogImg/image-20221019013751948.png" alt="image-20221019013751948"><br>$g_i(\theta_i)=0$ if $\theta_i \in S_i \space $else$ \space +\infty$.<br>使用ADMM求解。</li>
+<li>算法：<br><img src="/blogImg/image-20221019014337110.png" alt="image-20221019014337110"><br>和后文是相同的方法，是下一篇文章的一个特例。</li>
+<li>优点：无需事先训练大模型。</li>
+</ul>
+<h4 id="Model-Compression-with-Adversarial-Robustness-A-Unified-Optimization-Framework"><a href="#Model-Compression-with-Adversarial-Robustness-A-Unified-Optimization-Framework" class="headerlink" title="Model Compression with Adversarial Robustness: A Unified Optimization Framework"></a>Model Compression with Adversarial Robustness: A Unified Optimization Framework</h4><ul>
+<li>具有对抗鲁棒性的模型压缩：一个统一的优化框架。发表在NeurIPS 2019. 一作Shupeng Gui, Uni of Rochester. ATMC。和上一篇文章是同时完成的，稍晚。</li>
+<li>有代码，The codes are publicly available at: <a target="_blank" rel="noopener" href="https://github.com/shupenggui/ATMC">https://github.com/shupenggui/ATMC</a>.</li>
+<li>挑战：1. 在压缩中检查鲁棒性的工作很少。<br>有三种模型压缩方法：Pruning，Factorization（矩阵分解），Quantization（二值）。本文是第一个联合三种压缩方法的通用方法，关注对抗训练。</li>
+<li>方法：<br><img src="/blogImg/image-20221019012057194.png" alt="image-20221019012057194"><br>其中$\theta=\{ U^l, V^l,C^l \}_{l=1}^L$. 求解方法使用ADMM。</li>
+<li>算法：<br><img src="/blogImg/image-20221019012239037.png" alt="image-20221019012239037"></li>
+<li>优点：考虑了多种压缩方法的结合。无需事先训练大模型。</li>
+<li>缺点：使用对抗样本。不通用，只针对对抗训练。只适用于CNN。</li>
+</ul>
+<h4 id="HYDRA-Pruning-Adversarially-Robust-Neural-Networks"><a href="#HYDRA-Pruning-Adversarially-Robust-Neural-Networks" class="headerlink" title="HYDRA: Pruning Adversarially Robust Neural Networks"></a>HYDRA: Pruning Adversarially Robust Neural Networks</h4><ul>
+<li>HYDRA：修剪对抗性鲁棒神经网络。发表在NeurIPS 2020。一作Vikash Sehwag, Princeton Uni.</li>
+<li>有代码，<a target="_blank" rel="noopener" href="https://github.com/inspire-group/compactness-robustness">https://github.com/inspire-group/compactness-robustness</a></li>
+<li>挑战：1. 之前的方法没有泛化到多种类型，包括可验证鲁棒性，的鲁棒训练目标上。2. 方法上，随机初始化importance score不可行。</li>
+<li>核心思想：让剪枝知道对抗的存在，即，剪枝的目的是为了实现鲁棒目标，让鲁棒目标决定哪些连接被剪掉。（之前的方法不是吗？）</li>
+<li>问题：给定一个大模型，可鲁棒可不鲁棒，压缩成一个鲁棒的小模型。pruning after training.</li>
+<li>方法：$\hat{m}=\arg\min_{m\in \{ 0,1 \}^N} \mathbb{E}_{(x,y)\sim D}[L_{pruning}({pretrain}\odot m, x, y)]$ s.t. $| m |_0 \le k$<br>其中，$L_{pretrain}$是根据鲁棒目标的变化而变化。m的初始化非常关键，文章提出了scaled initialization。如何求解m呢？算法如下：<br><img src="/blogImg/image-20221019004913885.png" alt="image-20221019004913885"><br>一个有意思的组合是，pre-trained model使用$L_{benign}$，压缩过程使用$L_{ver}$，这样能够从普通模型中压缩出具有更好可验证鲁棒性的模型。<br>Baseline：LWM-based 方法，他们不关心训练目标，只关心找到lowest weight magnitude的连接。前面两篇文章Adv-ADMM。和作者自己的另一个方法Adv-LWM。</li>
+<li>缺点：1. 需要微调。2. 不能集成IB鲁棒训练。3. 剪枝和鲁棒糅合、不可分。</li>
+<li>优点：通用性，所有鲁棒训练方法都能集成进去。后面的RobustT是这篇文章的一种特殊情况。</li>
+</ul>
+<h4 id="Adversarially-Robust-and-Explainable-Model-Compression-with-On-Device-Personalization-for-Text-Classification"><a href="#Adversarially-Robust-and-Explainable-Model-Compression-with-On-Device-Personalization-for-Text-Classification" class="headerlink" title="Adversarially Robust and Explainable Model Compression with On-Device Personalization for Text Classification"></a>Adversarially Robust and Explainable Model Compression with On-Device Personalization for Text Classification</h4><ul>
+<li>用于文本分类的设备上个性化的对抗性鲁棒和可解释模型压缩。预印版文章，2021.</li>
+<li>文章一般，想实现的东西太多了，实验不充分。</li>
+<li>没有代码。</li>
+<li>挑战：CNN的压缩不能完全覆盖NLP任务。</li>
+<li>第一个在NLP上考虑同时实现压缩和鲁棒的工作。在训练模式上有创新，如下图，指出在移动设备上运行大模型是不可行的，因此在云上预训练一个大模型，然后使用考虑鲁棒性的压缩方法进行压缩，最后在移动设备上用户的隐私数据上进行微调。特别地指出这里提出了对LSTM模型的压缩。<br><img src="/blogImg/image-20221018222931855.png" alt="image-20221018222931855"></li>
+<li>方法：压缩方面借助知识蒸馏；鲁棒方面借助GCE（感觉有点弱）。</li>
+<li>优点：考虑了LSTM的压缩。压缩和鲁棒同时进行。给定的模型无需鲁棒。</li>
+</ul>
+<h4 id="Robust-Lottery-Tickets-for-Pre-trained-Language-Models"><a href="#Robust-Lottery-Tickets-for-Pre-trained-Language-Models" class="headerlink" title="Robust Lottery Tickets for Pre-trained Language Models"></a>Robust Lottery Tickets for Pre-trained Language Models</h4><ul>
+<li>预训练语言模型的鲁棒彩票。发表在ACL 2021。一作是Rui Zheng, Fudan Uni。RobustT。</li>
+<li>有代码，<a target="_blank" rel="noopener" href="https://github.com/ruizheng20/robust_ticket。">https://github.com/ruizheng20/robust_ticket。</a></li>
+<li>挑战：Lottery Tickets是不鲁棒的。直接微调剪枝后的模型，不能产生理想的鲁棒性。</li>
+<li>目标：在微调非鲁棒PLMs的过程中，找到robust PLM tickets。</li>
+<li>本文是第一个尝试robust wining tickets for PLMs。注意，本文不是严格的剪枝，而是寻找robust winning tickets的过程，不会改变模型参数值。</li>
+<li>方法：找到二值mask矩阵$m$，每一个参数对应一个二值，0为舍弃，1为保留。使用对抗损失来指导优化过程。因为离散的二值矩阵不可微，因此使用一个hard concrete distribution来近似。二值矩阵近似的$l_0$范数用$R(m)$来表示。对抗损失函数为$\min_m \mathbb{E}_{(x,y)\sim D} \max_{| \delta | \le \epsilon} \mathcal{L}(f(x + \delta; m \odot \theta), y) + R(m)$. 内层最大化使用PGD实现，外层可微。</li>
+<li>Baseline: InfoBERT, FreeLB。</li>
+<li>优点：1. 目标函数中同时考虑剪枝和鲁棒性，需要给定非鲁棒PLMs。</li>
+<li>给出了一个分类，pre-train模式：给定一个鲁棒大模型，剪枝并考虑鲁棒性地训练到一个鲁棒小模型，和in-train模式：给定一个非鲁棒大模型，剪枝或者选择并鲁棒训练到一个小模型。</li>
+<li>缺点：在对抗训练过程中，需要使用对抗样本。</li>
+</ul>
+<h4 id="Pruning-Adversarially-Robust-Neural-Networks-without-Adversarial-Examples"><a href="#Pruning-Adversarially-Robust-Neural-Networks-without-Adversarial-Examples" class="headerlink" title="Pruning Adversarially Robust Neural Networks without Adversarial Examples"></a>Pruning Adversarially Robust Neural Networks without Adversarial Examples</h4><ul>
+<li>在没有对抗性示例的情况下修剪对抗性鲁棒神经网络。预印版论文，2022.10.9。一作是Tong Jian, NEU。</li>
+<li>有代码，Code is available at <a target="_blank" rel="noopener" href="https://github.com/neu-spiral/PwoA/">https://github.com/neu-spiral/PwoA/</a>.</li>
+<li>挑战：1. 已有的工作依赖对抗样本，对抗样本的生成非常耗时，因此训练过程时间成本很高。剪枝本身也是一个耗时的方法，因此两者结合更加影响效率。2. 对抗剪枝的过程需要随着对抗训练策略的变化而变化。3. 直接剪枝鲁棒模型无法得到理想的效果。</li>
+<li>本文提出一个将稠密和对抗鲁棒的模型剪枝而无需额外的对抗训练。这和实际中的场景是一致的：研究者A开源一个鲁棒的大模型，研究者B在自己的数据集上仅仅利用良性样本高效剪枝到保持鲁棒性和准确性的小模型。</li>
+<li>方法：$\min_\theta \mathcal{L}(\theta)$ s.t. $\theta_l \in S_l, l=1, \cdots,L, S_l=\{\theta_l | \space | \theta |_0 \le \alpha_l \}$<br>其中，$\theta$是已经训练好的鲁棒大模型的参数。设计损失函数为两部分。第一部分来自于蒸馏，为了保留鲁棒性：$\mathcal{L}_D(\theta) = \tau^2\mathbb{E}_X[\text{KL}(h_\theta^\tau(X), T^\tau(X))]$。另一部分来自于HSIC as a Regualerizer (HB) $\mathcal{L}_H(\theta) = \lambda_x\sum_{l=1}^L \text{HSIC}(X, Z_l) - \lambda_y\sum_{l=1}^L \text{HSIC}(Y, Z_l)$。</li>
+<li>求解方法借鉴于ADDM。</li>
+<li>算法：<br><img src="/blogImg/image-20221018212758188.png" alt="image-20221018212758188"><br>Baselines：Sehwag HYDRA, Ye AdvPrune. </li>
+<li>不足：只是针对于CNN结构。</li>
+<li>优点：与预训练鲁棒模型的方法无关。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">summary</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robustness</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">compression</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/19/summary-compression-robustness/">Expand full article >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-summary-ib" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -507,6 +650,14 @@ MathJax.Hub.Queue(function() {
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KG</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">robustness</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">compression</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -662,22 +813,5 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 </html>
