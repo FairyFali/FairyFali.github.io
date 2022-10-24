@@ -154,6 +154,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-emnlp-abhijith" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/24/emnlp-abhijith/">Supervised and Unsupervised Methods for Robust Separation of Section Titles and Prose Text in Web Documents</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/24/emnlp-abhijith/" class="archive-article-date">
+  	<time datetime="2022-10-24T14:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Title"><a href="#Title" class="headerlink" title="Title"></a>Title</h4><ul>
+<li>Supervised and Unsupervised Methods for Robust Separation of Section Titles and Prose Text in Web Documents</li>
+<li>Web 文档中章节标题和散文文本的鲁棒分离的有监督和无监督方法</li>
+<li>Published at EMNLP 2018.</li>
+</ul>
+<h4 id="Authors"><a href="#Authors" class="headerlink" title="Authors"></a>Authors</h4><ul>
+<li>Abhijith Athreya Mysore Gopinath, IST of PSU</li>
+<li>Shomir Wilson, IST of PSU</li>
+<li>Norman Sadeh, CMU</li>
+</ul>
+<h4 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h4><ul>
+<li>Web text is an immense resource for NLP-area researchers, but its typographic structure is not fully used.  </li>
+<li>However, most current methods of web text extraction do not separate titles from prose text, leading to lose the internal organization. We think this organization can provide useful input to a variety of NLP tasks. For example, in QA, this information can facilitate finding most relevant sections to search for answers. In IR, we can match the search terms with the sections first, followed by a search on the prose texts. </li>
+</ul>
+<h4 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge"></a>Challenge</h4><ul>
+<li>However, detecting the titles and prose segments in an HTML document is difficult for two reasons. Firstly, the flexibility of HTML could be represented in multiple ways. Secondly, it is difficult to distinguish necessary information from the rest of the HTML, including links, tags, and page headers and footers. </li>
+</ul>
+<h4 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h4><ul>
+<li>ASDUS (Automatic Segment Detection using Unsupervised and Supervised learning). </li>
+<li>DI (domain-independent) Approach: </li>
+</ul>
+<ol>
+<li>text collection. using jsoup to parse the HTML and extracting [(xpath, text), …].</li>
+<li>feature extraction and clustering. extract features which aids in differentiating titles from prose text, including own text length, next text length, number of punctuation symbols, number of sentences, number of stop words, number of discourse cues, number of named entity slots, and number of words with capitalized initial letter. 什么叫discourse cues?显式的篇章标记比如p和共指链长度的和。什么叫named entity slots?应该是命名实体类别。Features have two classes, text length and others. K-means clustering into two mutually exclusive subsets, title cluster (which is close to the origin) and prose cluster. 哪里用到了结构化，除了显式的标题p。</li>
+<li>Segment Identification: overlap score is calculated by measuring the overlap between the lemmatized form of words belonging to the current text and the lemmatized form of words from the next text segment. texts with overlap scores exceeding the threshold and the corresponding XPaths are added to the list of candidates. </li>
+<li>Simplified Version Generation: 简化形式，tag of each title is h2, tag of each prose text between two titles is p. For last segment, the prose text immediately following the title is added. For others, if unigram overlap scores exceed threshold, adding else removing. </li>
+</ol>
+<ul>
+<li>DD (domain-dependent) Approach:</li>
+</ul>
+<ol>
+<li>feature extraction and training: 感觉作者没有写清楚，annotate each HTML tag with one of three labels: title, prose, and unrelated. 手动标注。We build two embedding models, each text in one tag calculates one score using these two embedding models, called t-score (title) and p-score (prose) and text length. 三个特征，train a FFN to classify text. </li>
+</ol>
+<ul>
+<li>other steps are same.</li>
+</ul>
+<h4 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h4><ul>
+<li>Lack of the matched data, so authors manually create a new corpus consisting of web documents and annotated versions. The dataset consisted of three sets of web documents: 152 website privacy policies, terms of service from 200 random sites, various web pages from top 2~4 links in searching various topics: news, sports, etc.. Among them, privacy policies are manually annotated and are used for DD. </li>
+<li>Metric: precision, recall, and F-1. coverage.</li>
+<li>comparing the simplified output of ASDUS with the sanitized version. The output is considered as correct only when the system identify the title and prose section. </li>
+<li>coverage is the percentage of original text reproduced in the output. </li>
+<li>Result 1: </li>
+<li>DI:<br><img src="/blogImg/image-20221024081002504.png" alt="image-20221024081002504"></li>
+<li>Analysis 1: Near-perfect recall is due to the robust method of learning XPaths of all titles coupled with the clustering method. </li>
+<li>Analysis 2: Precision is slightly lower because some prose texts with short lengths are wrongly classified as titles.</li>
+<li>Ablation study:<br><img src="/blogImg/image-20221024081551515.png" alt="image-20221024081551515"></li>
+<li>removing one different feature and evaluate the results. </li>
+<li>Analysis : The removal of discourse markers and named entity slots resulted in the least decrease in performance, and the greatest decrease came from removing text length.</li>
+<li>DD:<br><img src="/blogImg/image-20221024081709802.png" alt="image-20221024081709802"></li>
+<li>Analysis 1: higher precision owning to the similarity between titles in the same domain and differences between title and prose text. Conversely, the usage of embeddings makes the model sensitive to variation, resulting in rejecting many ground-truth titles, leading lower recall and coverage. </li>
+<li>Two models are complementary. DD approach contribute towards precision even if label-required, DI approach contribute towards recall. </li>
+</ul>
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><ul>
+<li>The two methods presented in this paper are effective in identifying the title and prose texts of segments of HTML pages. The DI approach, with its high coverage, is desirable when the penalty for losing text is high. The DD approach can be used in situations where precision is prioritized over recall. In the future, we intend to build upon our methods and enable automatic detection of sub-headers. This would lead to the identification of hierarchical organization of the text, which provides a novel approach to generate web ontologies. Further, we have planned to generate titles for prose text essentially creating micro-summaries of text, a relatively unexplored area.</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/10/24/emnlp-abhijith/">Expand full article >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-summary-compression-robustness" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -665,6 +793,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">compression</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
               </li>
             
             <div class="clearfix"></div>
