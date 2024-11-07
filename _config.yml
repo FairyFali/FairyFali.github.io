@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Fali's Page"
+title                    : "Fali Wang's Homepage"
 title_separator          : "-"
 name                     : &name "Fali Wang"
 description              : &description "First-year Student at Penn State"
@@ -80,7 +80,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Fali"
+  name             : "Fali Wang"
   avatar           : "profile.jpg"
   bio              : "Bio"
   location         : "University Park, PA"
@@ -103,7 +103,7 @@ author:
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         :
-  orcid            : "http://orcid.org/xxx"
+  orcid            : "https://orcid.org/0009-0000-8321-6365"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
