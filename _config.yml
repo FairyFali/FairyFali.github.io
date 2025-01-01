@@ -10,10 +10,10 @@ locale                   : "en-US"
 title                    : "Fali Wang's Homepage"
 title_separator          : "-"
 name                     : &name "Fali Wang"
-description              : &description "First-year Student at Penn State"
+description              : &description "Ph.D. student at IST, The Pennsylvania State University"
 url                      : https://fairyfali.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "fairyfali.github.io"
+repository               : "junjie-xu/junjie-xu.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Fali Wang"
   avatar           : "profile.jpg"
-  bio              : "Bio"
+  bio              : "Ph.D. student at IST, The Pennsylvania State University"
   location         : "University Park, PA"
   employer         :
   # pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
