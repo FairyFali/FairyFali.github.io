@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm Fali Wang, a 3rd Ph.D. student in the College of [Information Sciences and Technology](https://ist.psu.edu) at [The Pennsylvania State University](https://www.psu.edu/). I'm advised by Prof. [Suhang Wang](https://suhangwang.ist.psu.edu/). I received my Master's Degree from the University of Chinese Academy of Sciences and my Bachelor's Degree from Northeast Forestry University. 
+Hi! I'm Fali Wang, a third-year Ph.D student in the College of [Information Sciences and Technology](https://ist.psu.edu) at [The Pennsylvania State University](https://www.psu.edu/). I'm advised by Prof. [Suhang Wang](https://suhangwang.ist.psu.edu/). I received my Master's Degree from the University of Chinese Academy of Sciences and my Bachelor's Degree from Northeast Forestry University. 
 
 My research interests include LLM Knowledge, Knowledge Graphs, Graph Learning, Small Language Models, and their intersections. 
 
