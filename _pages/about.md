@@ -14,13 +14,14 @@ My research interests include LLM Knowledge, Knowledge Graphs, Graph Learning, S
 
 
 ## News
-* 01/2025: Give a talk to Amazon, [[slides]](/files/SLMs_Survey_Slides.pdf)
+* 01/2025: Give an SLM talk at WWW, [[slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)
+* 04/2025: Give an SLM talk to Amazon, [[slides]](/files/SLMs_Survey_Slides.pdf)
 * 12/2024: Start a new position as an Applied Scientist Intern at Amazon, Palo Alto.
 * 11/2024: Lead and release a comprehensive survey on Small Language Models (SLMs Survey). [[Paper]](https://arxiv.org/abs/2411.03350) [[Github]](https://github.com/FairyFali/SLMs-Survey).  
 * 11/2024: Pass my Comprehensive Exam.
-* 09/2023: Start a new position as a Visiting Intern at NEC Lab, Printon.
+* 09/2023: Start a new position as a Visiting Intern at NEC Lab, Princeton.
 * 05/2022: Pass my Qualifying Exam and become a Ph.D. candidate.
-* 08/2022: Start my Ph.D. career at Penn State Univeristy.
+* 08/2022: Start my Ph.D. career at Penn State University.
 
 ## Pre-print
 1. A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness. **Fali Wang**, Zhiwei Zhang, Xianren Zhang, Zongyu Wu, Tzuhao Mo, Qiuhao Lu, Wanjing Wang, Rui Li, Junjie Xu, Xianfeng Tang, Qi He, Yao Ma, Ming Huang, Suhang Wang. [[Paper](https://arxiv.org/abs/2411.03350)]
