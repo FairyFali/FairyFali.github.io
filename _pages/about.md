@@ -14,7 +14,8 @@ My research interests include LLM Knowledge, Knowledge Graphs, Graph Learning, S
 
 
 ## News
-* 04/2025: Give an SLM talk at WWW, [[slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)
+* 04/2025: Give an SLM talk at [WWW LLM For E-Commerce Workshop
+](https://llm4ecommerce.github.io/schedule/), [[slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)
 * 01/2025: Give an SLM talk to Amazon, [[slides]](/files/SLMs_Survey_Slides.pdf)
 * 12/2024: Start a new position as an Applied Scientist Intern at Amazon, Palo Alto.
 * 11/2024: Lead and release a comprehensive survey on Small Language Models (SLMs Survey). [[Paper]](https://arxiv.org/abs/2411.03350) [[Github]](https://github.com/FairyFali/SLMs-Survey).  
