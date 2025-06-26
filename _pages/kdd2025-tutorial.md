@@ -1,9 +1,9 @@
 ---
 layout: archive
-title: ""
+title: " "
 permalink: /kdd2025-tutorial/
 author_profile: true
-redirect_from:
+redirect_from: 
   - /kdd2025_tutorial
   - /kdd25_tutorial
   - /kdd25-tutorial
