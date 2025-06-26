@@ -59,3 +59,14 @@ Website: https://FairyFali.github.io/
 <br/>
 <br/>
 <br/>
+
+## BibTeX
+```
+@article{wang2024comprehensive,
+  title={A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness},
+  author={Wang, Fali and Zhang, Zhiwei and Zhang, Xianren and Wu, Zongyu and Mo, Tzuhao and Lu, Qiuhao and Wang, Wanjing and Li, Rui and Xu, Junjie and Tang, Xianfeng and others},
+  journal={arXiv preprint arXiv:2411.03350},
+  year={2024}
+}
+```
+
