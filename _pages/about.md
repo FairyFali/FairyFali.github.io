@@ -35,12 +35,16 @@ My research interests include LLM Knowledge, Knowledge Graphs, Graph Learning, S
 ## Journal Paper  
 1. Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine. **Fali Wang**, JiLong Bian, FengMing Zhang, Lin Ge, Hui Ma, GuangJun Chen. Journal of Northeast Forestry University
 
+# Organizer
+1. KDD 2025 Tutorial: A Tutorial on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness [[link]](https://fairyfali.github.io/kdd2025-tutorial/)
+2. KDD 2025 Workshop: The 2nd Workshop on Large Language Models for E-Commerce [[link]](https://kdd2025llm4ecommerce.github.io/)
+
 ## Teaching
 Teaching Assistant, DS 420: Network Analytics, PSU, Fall 2024  
 
 ## Service
 * Guest editor of ACM Transactions on Intelligent Systems and Technology.
-* Reviewers of ACL, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, TIST.
+* Reviewers of ACL, EMNLP, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, TIST.
 
 
 
