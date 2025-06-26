@@ -1,10 +1,12 @@
 ---
 layout: archive
 title: "KDD2025 Tutorial"
-permalink: /kdd25-tutorial/
+permalink: /kdd2025-tutorial/
 author_profile: true
 redirect_from:
   - /kdd2025_tutorial
+  - /kdd25_tutorial
+  - /kdd25-tutorial
 ---
 
 <center>
