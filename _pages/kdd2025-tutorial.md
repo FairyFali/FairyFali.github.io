@@ -60,39 +60,39 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 ## Authors
 
-<img align="left" src="graphics/Fali Wang.jpg" alt="Fali Wang" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/Fali Wang.jpg" alt="Fali Wang" style="width: 200px; margin-right: 50px;" />
 <b>Fali Wang</b>, Ph.D. student, Informatics, Penn State University.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/tofill.png" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/tofill.png" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
 <b>Minhua Lin</b>, Ph.D. student, Informatics, PSU. .
 <br style="clear: both;" />
 
-<img align="left" src="graphics/yaoma.jpg" alt="Yao Ma" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/yaoma.jpg" alt="Yao Ma" style="width: 200px; margin-right: 50px;" />
 <b>Yao Ma</b>, Assistant Professor, Department of Computer Science, Rensselaer Polytechnic Institute.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/Wang-Suhang.jpg" alt="Suhang Wang" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/Wang-Suhang.jpg" alt="Suhang Wang" style="width: 200px; margin-right: 50px;" />
 <b>Suhang Wang</b>, Associate Professor, College of IST, Penn State University.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/huiliu.jpg" alt="Hui Liu" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/huiliu.jpg" alt="Hui Liu" style="width: 200px; margin-right: 50px;" />
 <b>Hui Liu</b>, Applied Scientist, Amazon.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/qihe.jpg" alt="Qi He" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/qihe.jpg" alt="Qi He" style="width: 200px; margin-right: 50px;" />
 <b>Qi He</b>
 <br style="clear: both;" />
 
-<img align="left" src="graphics/xianfengtang.jpg" alt="Xianfeng Tang" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/xianfengtang.jpg" alt="Xianfeng Tang" style="width: 200px; margin-right: 50px;" />
 <b>Xianfeng Tang</b>, Applied Scientist, Amazon.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/jiliang.jpg" alt="Jiliang Tang" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/jiliang.jpg" alt="Jiliang Tang" style="width: 200px; margin-right: 50px;" />
 <b>Jiliang Tang</b>, Professor, Michigan State University.
 <br style="clear: both;" />
 
-<img align="left" src="graphics/jianpei.jpg" alt="Jian Pei" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/jianpei.jpg" alt="Jian Pei" style="width: 200px; margin-right: 50px;" />
 <b>Jian Pei</b>, Professor, Duke University.
 <br style="clear: both;" />
 
