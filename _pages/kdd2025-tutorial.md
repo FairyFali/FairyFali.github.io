@@ -52,11 +52,7 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 
 ## Slides
-* Introduction [to-fill-the-link-later]
-* Part I: SLM Architecture
-* Part II: Weak to Strong Methods
-* Part III: Trustworthiness 
-* Conclusion 
+[to-fill-link]
 
 ## Authors
 
