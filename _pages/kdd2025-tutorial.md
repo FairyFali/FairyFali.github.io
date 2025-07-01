@@ -20,7 +20,7 @@ Fali Wang<sup>1</sup>, Minhua Lin<sup>1</sup>, Yao Ma<sup>2</sup>, Hui Liu<sup>3
 4 Michigan State University<br/>
 5 Duke University<br/>
 Time: Aug 3, 2025 8:00 AM - 11:00 AM (EDT)<br/>
-Location: [to-fill-later], Toronto, Canada
+Location: The Metro Toronto Convention Centre on the 700 level, Toronto, Canada
 </center>
 
 ## Abstract
@@ -41,7 +41,15 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 4. Trustworthiness: SLM robustness in adversarial settings, jailbreak resistance, fairness, and privacy.
 
 ## Schedule
-[to-fill-later]
+
+- **Introduction**: 5 mins (8:00–8:05) — *Suhang Wang*
+- **Part I: LLM Foundations**: 20 mins (8:05–8:25) — *Suhang Wang*
+- **Part II: Architecture of SLMs**: 35 mins (8:25–9:00) — *Fali Wang*
+- **Coffee Break**: 15 mins (9:00–9:15)
+- **Part III: Weak to Strong Methods**: 45 mins (9:15–10:00) — *Fali Wang*
+- **Part IV: Trustworthiness of SLMs**: 45 mins (10:00–10:40) — *Minhua Lin*
+- **Conclusion + Q&A Session**: 15 mins (10:40–11:00) — *All*
+
 
 ## Slides
 * Introduction [to-fill-the-link-later]
@@ -52,7 +60,41 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 ## Authors
 
-<img align="left" img src="/images/Fali_Wang.jpeg" alt="Fali Wang" style="width: 200px;margin-right:50px;"/>**Fali Wang**, Ph.D. student, Informatics, PSU. His research focuses on the Intersection of graphs and LLMs, small language models.
+<img align="left" src="graphics/Fali Wang.jpg" alt="Fali Wang" style="width: 200px; margin-right: 50px;" />
+<b>Fali Wang</b>, Ph.D. student, Informatics, Penn State University.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/tofill.png" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
+<b>Minhua Lin</b>, Ph.D. student, Informatics, PSU. .
+<br style="clear: both;" />
+
+<img align="left" src="graphics/yaoma.jpg" alt="Yao Ma" style="width: 200px; margin-right: 50px;" />
+<b>Yao Ma</b>, Assistant Professor, Department of Computer Science, Rensselaer Polytechnic Institute.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/Wang-Suhang.jpg" alt="Suhang Wang" style="width: 200px; margin-right: 50px;" />
+<b>Suhang Wang</b>, Associate Professor, College of IST, Penn State University.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/huiliu.jpg" alt="Hui Liu" style="width: 200px; margin-right: 50px;" />
+<b>Hui Liu</b>, Applied Scientist, Amazon.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/qihe.jpg" alt="Qi He" style="width: 200px; margin-right: 50px;" />
+<b>Qi He</b>
+<br style="clear: both;" />
+
+<img align="left" src="graphics/xianfengtang.jpg" alt="Xianfeng Tang" style="width: 200px; margin-right: 50px;" />
+<b>Xianfeng Tang</b>, Applied Scientist, Amazon.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/jiliang.jpg" alt="Jiliang Tang" style="width: 200px; margin-right: 50px;" />
+<b>Jiliang Tang</b>, Professor, Michigan State University.
+<br style="clear: both;" />
+
+<img align="left" src="graphics/jianpei.jpg" alt="Jian Pei" style="width: 200px; margin-right: 50px;" />
+<b>Jian Pei</b>, Professor, Duke University.
+<br style="clear: both;" />
 
 Website: https://FairyFali.github.io/
 
