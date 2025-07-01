@@ -26,7 +26,7 @@ Location: The Metro Toronto Convention Centre on the 700 level, Toronto, Canada
 ## Abstract
 
 Large language models (LLMs) based on the Transformer architecture are powerful but face challenges with deployment, inference latency, and costly fine-tuning. 
-These limitations highlight the emerging potential of small language models (SLMs), which can either replace LLMs through innovative architectures and technologies, or assist them as efficient proxy or reward models.
+These limitations highlight the emerging potential of small language models (SLMs), which can either replace LLMs through innovative architectures and technologies or assist them as efficient proxies or reward models.
 Emerging architectures such as Mamba and xLSTM address the quadratic scaling of inference with window length in Transformers by enabling linear scaling.
 To maximize SLM performance, test-time compute scaling strategies reduce the performance gap with LLMs by allocating extra compute budget during test time.
 Beyond standalone usage, SLMs could also assist in LLMs via weak-to-strong learning, proxy tuning, and guarding, fostering secure and efficient LLM deployment. 
@@ -48,11 +48,11 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 - **Coffee Break**: 15 mins (9:00–9:15)
 - **Part III: Weak to Strong Methods**: 45 mins (9:15–10:00) — *Fali Wang*
 - **Part IV: Trustworthiness of SLMs**: 45 mins (10:00–10:40) — *Minhua Lin*
-- **Conclusion + Q&A Session**: 15 mins (10:40–11:00) — *All*
+- **Conclusion + Q&A Session**: 20 mins (10:40–11:00) — *All*
 
 
 ## Slides
-[to-fill-link]
+[[Link]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf)
 
 ## Authors
 
