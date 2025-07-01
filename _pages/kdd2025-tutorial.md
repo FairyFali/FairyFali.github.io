@@ -47,8 +47,8 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 - **Part II: Architecture of SLMs**: 35 mins (8:25–9:00) — *Fali Wang*
 - **Coffee Break**: 15 mins (9:00–9:15)
 - **Part III: Weak to Strong Methods**: 45 mins (9:15–10:00) — *Fali Wang*
-- **Part IV: Trustworthiness of SLMs**: 45 mins (10:00–10:40) — *Minhua Lin*
-- **Conclusion + Q&A Session**: 20 mins (10:40–11:00) — *All*
+- **Part IV: Trustworthiness of SLMs**: 45 mins (10:00–10:45) — *Minhua Lin*
+- **Conclusion + Q&A Session**: 15 mins (10:45–11:00) — *All*
 
 
 ## Slides
