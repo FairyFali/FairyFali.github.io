@@ -61,7 +61,7 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 Website: https://FairyFali.github.io/
 <br style="clear: both;" />
 
-<img align="left" src="/images/tofill.png" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
+<img align="left" src="/images/minhua.jpeg" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
 <b>Minhua Lin</b> is senior Ph.D. candidate in informatics at the Pennsylvania State University (PSU), under the supervision of Dr. Suhang Wang and Dr. Xiang Zhang. Before joining PSU, he earned his B.E. degree in Computer Science from Huazhong University of Sciences and Technology in 2021. His research primarily focuses on large language models, graph learning, trustworthy AI, and their intersections.
 <br style="clear: both;" />
 
