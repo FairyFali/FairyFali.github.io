@@ -52,7 +52,9 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 
 ## Slides
-[[Link]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf)
+[[Slides Link]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf) (unfinished)
+
+A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness [[Survey paper]](/files/KDD_Tutorial_SLM_Camera_Ready.pdf)
 
 ## Authors
 
