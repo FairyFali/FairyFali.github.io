@@ -20,7 +20,7 @@ Fali Wang<sup>1</sup>, Minhua Lin<sup>1</sup>, Yao Ma<sup>2</sup>, Hui Liu<sup>3
 4 Michigan State University<br/>
 5 Duke University<br/>
 Time: Aug 3, 2025 8:00 AM - 11:00 AM (EDT)<br/>
-Location: The Metro Toronto Convention Centre on the 700 level, Toronto, Canada
+Location: The Metro Toronto Convention Centre on the 700 level, Room 713 A, Toronto, Canada
 </center>
 
 ## Abstract
