@@ -52,7 +52,7 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 
 ## Slides and Survey Paper
-[[Slides]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf) (unfinished)
+[[Slides]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf)
 
 A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness [[Survey paper]](/files/KDD_Tutorial_SLM_Camera_Ready.pdf)
 
@@ -64,7 +64,7 @@ Website: https://FairyFali.github.io/
 <br style="clear: both;" />
 
 <img align="left" src="/images/minhua.jpeg" alt="Minhua Lin" style="width: 200px; margin-right: 50px;" />
-<b>Minhua Lin</b> is senior Ph.D. candidate in informatics at the Pennsylvania State University (PSU), under the supervision of Dr. Suhang Wang and Dr. Xiang Zhang. Before joining PSU, he earned his B.E. degree in Computer Science from Huazhong University of Sciences and Technology in 2021. His research primarily focuses on large language models, graph learning, trustworthy AI, and their intersections.
+<b>Minhua Lin</b> is a senior Ph.D. candidate in informatics at the Pennsylvania State University (PSU), under the supervision of Dr. Suhang Wang and Dr. Xiang Zhang. Before joining PSU, he earned his B.E. degree in Computer Science from Huazhong University of Sciences and Technology in 2021. His research primarily focuses on large language models, graph learning, trustworthy AI, and their intersections.
 <br style="clear: both;" />
 
 <img align="left" src="/images/yaoma.jpg" alt="Yao Ma" style="width: 200px; margin-right: 50px;" />
