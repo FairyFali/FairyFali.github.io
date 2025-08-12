@@ -52,9 +52,11 @@ This tutorial covers recent progress in Small Language Models (SLMs) in the era 
 
 
 ## Slides and Survey Paper
-[[Slides]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf)
+Slides are here [[Slides]](/files/SLMs_Survey_Slides_for_KDD_Tutorial.pdf)
 
-A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness [[Survey paper]](/files/KDD_Tutorial_SLM_Camera_Ready.pdf)
+A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness [[Tutorial Survey Paper]](/files/KDD_Tutorial_SLM_Camera_Ready.pdf)
+
+Related survey paper: A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness [[Comprehensive Survey Paper]](https://arxiv.org/abs/2411.03350)
 
 ## Authors
 
@@ -101,6 +103,26 @@ Website: https://FairyFali.github.io/
 <br/>
 
 ## BibTeX
+If our survey is useful for your research, please kindly cite:
+```
+@inproceedings{10.1145/3711896.3736563,
+author = {Wang, Fali and Lin, Minhua and Ma, Yao and Liu, Hui and He, Qi and Tang, Xianfeng and Tang, Jiliang and Pei, Jian and Wang, Suhang},
+title = {A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness},
+year = {2025},
+isbn = {9798400714542},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3711896.3736563},
+doi = {10.1145/3711896.3736563},
+booktitle = {Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+pages = {6173–6183},
+numpages = {11},
+keywords = {small language models, trustworthiness, weak-to-strong},
+location = {Toronto ON, Canada},
+series = {KDD '25}
+}
+```
+
 ```
 @article{wang2024comprehensive,
   title={A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness},
@@ -109,4 +131,6 @@ Website: https://FairyFali.github.io/
   year={2024}
 }
 ```
+
+
 
