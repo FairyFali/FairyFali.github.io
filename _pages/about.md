@@ -63,10 +63,13 @@ My research interests include:
    **Fali Wang**, Tianxiang Zhao, Suhang Wang  
    [[📄 Paper](https://arxiv.org/pdf/2401.10394)]
 
-5. **De-co: A two-step spelling correction model for combating adversarial typos** _(ISPA 2020)_    
+5. **Macrobert: Maximizing certified region of bert to adversarial word substitutions** _(DASFAA 2021)_    
+  **Fali Wang**, Zheng Lin, Zhengxiao Liu, Mingyu Zheng, Lei Wang, Daren Zha
+
+6. **De-co: A two-step spelling correction model for combating adversarial typos** _(ISPA 2020)_    
   Zhengxiao Liu, **Fali Wang (Corresponding author)**, Zheng Lin, Lei Wang, Zhiyi Yin
 
-6. **NarGNN: Narrative graph neural networks for new script event prediction problem** _(ISPA 2020)_    
+7. **NarGNN: Narrative graph neural networks for new script event prediction problem** _(ISPA 2020)_    
   Shuang Yang, **Fali Wang (Corresponding author)**, Daren Zha, Cong Xue, Zhihao Tang
 
 ---
