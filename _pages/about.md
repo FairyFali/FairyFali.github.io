@@ -18,7 +18,7 @@ My research interests include:
 ---
 
 ## 📰 News
-
+- **08/2025** - SLMs Survey paper has been accepted for publication in the ACM TIST. 
 - **08/2025** - Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
 - **04/2025** — Gave an invited SLM talk at [WWW LLM for E-Commerce Workshop](https://llm4ecommerce.github.io/schedule/) [[📑 Slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)  
 - **01/2025** — Gave an invited SLM talk at Amazon [[📑 Slides]](/files/SLMs_Survey_Slides.pdf)  
@@ -35,13 +35,9 @@ My research interests include:
 
 ### 📝 Pre-prints
 
-1. **A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness**  
-   **Fali Wang**, Zhiwei Zhang, Xianren Zhang, Zongyu Wu, Tzuhao Mo, Qiuhao Lu, Wanjing Wang, Rui Li, Junjie Xu, Xianfeng Tang, Qi He, Yao Ma, Ming Huang, Suhang Wang  
-   [[📄 Paper](https://arxiv.org/abs/2411.03350)]
-
-2. **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks**  
+1. **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks**  
    **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
-   [[📄 Paper](https://arxiv.org/abs/2508.00890)]
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2508.00890)]
 
 ---
 
@@ -76,7 +72,12 @@ My research interests include:
 
 ### 📚 Journal Papers
 
-1. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
+1. **A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness**  
+   **Fali Wang**, Zhiwei Zhang, Xianren Zhang, Zongyu Wu, Tzuhao Mo, Qiuhao Lu, Wanjing Wang, Rui Li, Junjie Xu, Xianfeng Tang, Qi He, Yao Ma, Ming Huang, Suhang Wang  
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2411.03350)]
+   *ACM Transactions on Intelligent Systems and Technology* — Accepted, forthcoming publication
+
+2. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
    **Fali Wang**, JiLong Bian, FengMing Zhang, Lin Ge, Hui Ma, GuangJun Chen  
    *Journal of Northeast Forestry University*
 
