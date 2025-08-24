@@ -10,7 +10,7 @@ redirect_from:
 # 👋 Hi, I am **Fali Wang**  
 
 I am a third-year Ph.D. student in the [College of Information Sciences and Technology](https://ist.psu.edu) at [The Pennsylvania State University](https://www.psu.edu/), advised by Prof. [Suhang Wang](https://suhangwang.ist.psu.edu/).  
-I received my **M.S.** from the University of Chinese Academy of Sciences and **B.S.** from Northeast Forestry University.  
+<!-- I received my **M.S.** from the University of Chinese Academy of Sciences and **B.S.** from Northeast Forestry University.   -->
 
 My research interests include:  
 **LLM Knowledge**, **Knowledge Graphs**, **Graph Learning**, **Small Language Models (SLMs)**, and their intersections.  
