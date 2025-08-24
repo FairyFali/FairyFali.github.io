@@ -18,8 +18,8 @@ My research interests include:
 ---
 
 ## 📰 News
-- **08/2025** - SLMs Survey paper has been accepted for publication in the ACM TIST. 
-- **08/2025** - Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
+- **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST. 
+- **08/2025** — Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
 - **04/2025** — Gave an invited SLM talk at [WWW LLM for E-Commerce Workshop](https://llm4ecommerce.github.io/schedule/) [[📑 Slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)  
 - **01/2025** — Gave an invited SLM talk at Amazon [[📑 Slides]](/files/SLMs_Survey_Slides.pdf)  
 - **12/2024** — Started as an **Applied Scientist Intern** at Amazon, Palo Alto  
