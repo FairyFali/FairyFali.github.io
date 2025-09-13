@@ -99,7 +99,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 ---
 
 ## 🤝 Service
-- **Guest Editor** — *ACM Transactions on Intelligent Systems and Technology (TIST)*  
+<!-- - **Guest Editor** — *ACM Transactions on Intelligent Systems and Technology (TIST)*  -->
 - **Reviewer** — ACL, EMNLP, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, TIST  
 
 ---
