@@ -20,7 +20,8 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 ---
 
 ## 📰 News
-- **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST. 
+- **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 as a Poster [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
+- **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST [[🔗 Link](https://dl.acm.org/doi/10.1145/3768165)]. 
 - **08/2025** — Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
 - **04/2025** — Gave an invited SLM talk at [WWW LLM for E-Commerce Workshop](https://llm4ecommerce.github.io/schedule/) [[📑 Slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)  
 - **01/2025** — Gave an invited SLM talk at Amazon [[📑 Slides]](/files/SLMs_Survey_Slides.pdf)  
@@ -37,37 +38,38 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ### 📝 Pre-prints
 
-1. **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks**  
-   **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
-   [[📄 arXiv Preprint](https://arxiv.org/abs/2508.00890)]
 
 ---
 
 ### 🎤 Conference Papers
 
-1. **A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness** *(KDD 2025)*  
++ **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks** (Just Accepted by NIPS 2025 Poster)  
+   **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2508.00890)]
+
++ **A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness** *(KDD 2025)*  
    **Fali Wang**, Minhua Lin, Yao Ma, Hui Liu, Qi He, Xianfeng Tang, Jiliang Tang, Jian Pei, Suhang Wang  
    [[📄 Paper](https://dl.acm.org/doi/abs/10.1145/3711896.3736563)]
 
-2. **InfuserKI: Enhancing Large Language Models with Knowledge Graphs via Infuser-Guided Knowledge Integration** *(EMNLP 2024)*  
++ **InfuserKI: Enhancing Large Language Models with Knowledge Graphs via Infuser-Guided Knowledge Integration** *(EMNLP 2024)*  
    **Fali Wang**, Runxue Bao, Suhang Wang, Wenchao Yu, Yanchi Liu, Wei Cheng, Haifeng Chen  
    [[📄 Paper](https://aclanthology.org/2024.findings-emnlp.209.pdf)]
 
-3. **HC-GST: Heterophily-aware Distribution Consistency-based Graph Self-training** *(CIKM 2024)*  
++ **HC-GST: Heterophily-aware Distribution Consistency-based Graph Self-training** *(CIKM 2024)*  
    **Fali Wang**, Tianxiang Zhao, Junjie Xu, Suhang Wang  
    [[📄 Paper](https://arxiv.org/pdf/2407.17787)]
 
-4. **Distribution Consistency-based Self-Training for Graph Neural Networks with Sparse Labels** *(WSDM 2024)*  
++ **Distribution Consistency-based Self-Training for Graph Neural Networks with Sparse Labels** *(WSDM 2024)*  
    **Fali Wang**, Tianxiang Zhao, Suhang Wang  
    [[📄 Paper](https://arxiv.org/pdf/2401.10394)]
 
-5. **Macrobert: Maximizing certified region of bert to adversarial word substitutions** _(DASFAA 2021)_    
++ **Macrobert: Maximizing certified region of bert to adversarial word substitutions** _(DASFAA 2021)_    
   **Fali Wang**, Zheng Lin, Zhengxiao Liu, Mingyu Zheng, Lei Wang, Daren Zha
 
-6. **De-co: A two-step spelling correction model for combating adversarial typos** _(ISPA 2020)_    
++ **De-co: A two-step spelling correction model for combating adversarial typos** _(ISPA 2020)_    
   Zhengxiao Liu, **Fali Wang (Corresponding author)**, Zheng Lin, Lei Wang, Zhiyi Yin
 
-7. **NarGNN: Narrative graph neural networks for new script event prediction problem** _(ISPA 2020)_    
++ **NarGNN: Narrative graph neural networks for new script event prediction problem** _(ISPA 2020)_    
   Shuang Yang, **Fali Wang (Corresponding author)**, Daren Zha, Cong Xue, Zhihao Tang
 
 ---
@@ -76,10 +78,11 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 1. **A Comprehensive Survey of Small Language Models in the Era of Large Language Models: Techniques, Enhancements, Applications, Collaboration with LLMs, and Trustworthiness**  
    **Fali Wang**, Zhiwei Zhang, Xianren Zhang, Zongyu Wu, Tzuhao Mo, Qiuhao Lu, Wanjing Wang, Rui Li, Junjie Xu, Xianfeng Tang, Qi He, Yao Ma, Ming Huang, Suhang Wang  
-   [[📄 arXiv Preprint](https://arxiv.org/abs/2411.03350)]
-   *ACM Transactions on Intelligent Systems and Technology* — Accepted, forthcoming publication
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2411.03350)]  
+   [[📄 Journal Paper](https://dl.acm.org/doi/10.1145/3768165)]  
+   *ACM Transactions on Intelligent Systems and Technology* — Just Accepted
 
-2. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
+3. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
    **Fali Wang**, JiLong Bian, FengMing Zhang, Lin Ge, Hui Ma, GuangJun Chen  
    *Journal of Northeast Forestry University*
 
