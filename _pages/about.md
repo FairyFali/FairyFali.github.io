@@ -38,13 +38,23 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 # 📄 Publications  
 
 ### 📝 Pre-prints
++ **GraphSkill: Documentation-Guided Hierarchical Retrieval-Augmented Coding for Complex Graph Reasoning**  
+  **Fali Wang**, Chenglin Weng, Xianren Zhang, Siyuan Hong, Hui Liu, Suhang Wang
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2603.06620)]
 
++ **A survey on collaborating small and large language models for performance, cost-effectiveness, cloud-edge privacy, and trustworthiness**  
+    **Fali Wang**, Jihai Chen, Shuhua Yang, Ali Al-Lawati, Linli Tang, Hui Liu, Suhang Wang
+    [[📄 arXiv Preprint](https://arxiv.org/abs/2510.13890)]
+
++ **Graphs for LLMs: A Survey of Graph-Assisted Large Language Models**  
+    Haitong Luo, **Fali Wang (co-first authors)**, Weiyao Zhang, Xianren Zhang, Zhiwei Zhang, Tianxiang Zhao, Minhua Lin, Jiahao Zhang, Hui Liu, Xianfeng Tang, Qi He, Suhang Wang, Xuying Meng, Yujun Zhang
+    [[📄 Preprint](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561)]
 
 ---
 
 ### 🎤 Conference Papers
 
-+ **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks** (Just Accepted by NIPS 2025 Poster)  
++ **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks** (NIPS 2025 Poster)  
    **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
    [[📄 arXiv Preprint](https://arxiv.org/abs/2508.00890)]
 
