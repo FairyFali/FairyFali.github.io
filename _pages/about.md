@@ -20,6 +20,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 ---
 
 ## 📰 News
+- **05/2026** — Started as an **Applied Sciences INTERN** at Microsoft, Redmond.   
 - **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 as a Poster [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
 - **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST [[🔗 Link](https://dl.acm.org/doi/10.1145/3768165)]. 
 - **08/2025** — Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
