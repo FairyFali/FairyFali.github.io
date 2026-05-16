@@ -13,7 +13,7 @@ I am a fourth-year Ph.D. student in the [College of Information Sciences and Tec
 <!-- I received my **M.S.** from the University of Chinese Academy of Sciences and **B.S.** from Northeast Forestry University.   -->
 
 My research interests include:  
-**LLM Knowledge**, **Knowledge Graphs**, **Graph Learning**, **Small Language Models (SLMs)**, **Test-time Scaling** and their intersections.  
+**LLM Knowledge**, **Knowledge Graphs**, **Graph Learning**, **Graph Reasoning**, **Small Language Models (SLMs)**, **Test-time Scaling** and their intersections.  
 
 Please reach out to fqw5095 at psu dot edu for research collaboration. 
 
@@ -21,6 +21,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ## 📰 News
 - **05/2026** — Started as an **Applied Sciences INTERN** at Microsoft, Redmond.   
+- **02/2026** — Graph-Assisted LLM Survey paper has been released and accepted by ACL 2026. [[🔗 Link](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561/v1)] [[💻 GitHub](https://github.com/FairyFali/Graph4LLM-Survey)]
 - **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 as a Poster [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
 - **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST [[🔗 Link](https://dl.acm.org/doi/10.1145/3768165)]. 
 - **08/2025** — Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
@@ -38,21 +39,22 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 # 📄 Publications  
 
 ### 📝 Pre-prints
-+ **GraphSkill: Documentation-Guided Hierarchical Retrieval-Augmented Coding for Complex Graph Reasoning**  
-  **Fali Wang**, Chenglin Weng, Xianren Zhang, Siyuan Hong, Hui Liu, Suhang Wang
-   [[📄 arXiv Preprint](https://arxiv.org/abs/2603.06620)]
 
 + **A survey on collaborating small and large language models for performance, cost-effectiveness, cloud-edge privacy, and trustworthiness**  
     **Fali Wang**, Jihai Chen, Shuhua Yang, Ali Al-Lawati, Linli Tang, Hui Liu, Suhang Wang
     [[📄 arXiv Preprint](https://arxiv.org/abs/2510.13890)]
 
-+ **Graphs for LLMs: A Survey of Graph-Assisted Large Language Models**  
-    Haitong Luo, **Fali Wang (co-first authors)**, Weiyao Zhang, Xianren Zhang, Zhiwei Zhang, Tianxiang Zhao, Minhua Lin, Jiahao Zhang, Hui Liu, Xianfeng Tang, Qi He, Suhang Wang, Xuying Meng, Yujun Zhang
-    [[📄 Preprint](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561)]
-
 ---
 
 ### 🎤 Conference Papers
++ **GraphSkill: Documentation-Guided Hierarchical Retrieval-Augmented Coding for Complex Graph Reasoning** (KDD 2026)  
+    **Fali Wang**, Chenglin Weng, Xianren Zhang, Siyuan Hong, Hui Liu, Suhang Wang
+   [[📄 arXiv Preprint](https://arxiv.org/abs/2603.06620)]
+
++ **Graphs for LLMs: A Survey of Graph-Assisted Large Language Models**  (ACL 2026 Findings)  
+    Haitong Luo, **Fali Wang (co-first authors)**, Weiyao Zhang, Xianren Zhang, Zhiwei Zhang, Tianxiang Zhao, Minhua Lin, Jiahao Zhang, Hui Liu, Xianfeng Tang, Qi He, Suhang Wang, Xuying Meng, Yujun Zhang
+    [[📄 Preprint](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561)]
+
 
 + **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks** (NIPS 2025 Poster)  
    **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
@@ -93,7 +95,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
    [[📄 Journal Paper](https://dl.acm.org/doi/10.1145/3768165)]  
    *ACM Transactions on Intelligent Systems and Technology* — Just Accepted
 
-3. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
+2. **Study and simulation of machining speed connection based on multi-axis linkage NC wood engraving machine** *(2018)*  
    **Fali Wang**, JiLong Bian, FengMing Zhang, Lin Ge, Hui Ma, GuangJun Chen  
    *Journal of Northeast Forestry University*
 
@@ -115,8 +117,8 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ## 🤝 Service
 <!-- - **Guest Editor** — *ACM Transactions on Intelligent Systems and Technology (TIST)*  -->
-- **Program Committee**: ICMR, Big Data
-- **Reviewer** — ICLR, ICML, KDD, ACL, EMNLP, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, TIST  
+- **Program Committee**: ICMR 2026, Big Data 2026, ACMMM 2026
+- **Reviewer** — ICLR, ICML, KDD, ACL, EMNLP, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, ACM TIST, ACM Computing Surveys
 
 ---
 
