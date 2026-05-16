@@ -44,6 +44,10 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
     **Fali Wang**, Jihai Chen, Shuhua Yang, Ali Al-Lawati, Linli Tang, Hui Liu, Suhang Wang
     [[📄 arXiv Preprint](https://arxiv.org/abs/2510.13890)]
 
++ **Generalizing Test-time Compute-optimal Scaling as an Optimizable Graph**  
+    **Fali Wang**, Jihai Chen, Shuhua Yang, Runxue Bao, Tianxiang Zhao, Zhiwei Zhang, Xianfeng Tang, Hui Liu, Qi He, Suhang Wang
+    [[📄 arXiv Preprint](https://arxiv.org/abs/2511.00086)]
+
 ---
 
 ### 🎤 Conference Papers
