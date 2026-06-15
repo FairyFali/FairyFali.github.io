@@ -20,7 +20,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 ---
 
 ## 📰 News
-- **05/2026** — Started as an **Applied Sciences INTERN** at Microsoft, Redmond.   
+- **05/2026** — Started as an **Applied Scientist INTERN** at Microsoft, Redmond.   
 - **02/2026** — Graph-Assisted LLM Survey paper has been released and accepted by ACL 2026. [[🔗 Link](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561/v1)] [[💻 GitHub](https://github.com/FairyFali/Graph4LLM-Survey)]
 - **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 as a Poster [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
 - **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST [[🔗 Link](https://dl.acm.org/doi/10.1145/3768165)]. 
