@@ -9,7 +9,7 @@ redirect_from:
 ---
 # 👋 Hi, I am **Fali Wang**  
 
-I am a fourth-year Ph.D. student in the [College of Information Sciences and Technology](https://ist.psu.edu) at [The Pennsylvania State University](https://www.psu.edu/), advised by Prof. [Suhang Wang](https://suhangwang.ist.psu.edu/).  
+I am a last-year Ph.D. student in the [College of Information Sciences and Technology](https://ist.psu.edu) at [The Pennsylvania State University](https://www.psu.edu/), advised by Prof. [Suhang Wang](https://suhangwang.ist.psu.edu/).  
 <!-- I received my **M.S.** from the University of Chinese Academy of Sciences and **B.S.** from Northeast Forestry University.   -->
 
 <span style="color:red"><strong>I plan to enter the 2026–2027 academic job market and apply for faculty and postdoctoral positions.</strong></span>
