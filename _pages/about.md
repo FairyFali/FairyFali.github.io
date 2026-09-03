@@ -117,14 +117,16 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ## 📚 Teaching
 - Teaching Assistant — **DS 420: Network Analytics**, PSU, Fall 2024
-- Teaching Assistant - **DS 305: Algorithmics**, PSU, Spring 2026
+- Teaching Assistant - **DS 305: Algorithmics**, PSU, Spring and Fall 2026
 
 ---
 
 ## 🤝 Service
-<!-- - **Guest Editor** — *ACM Transactions on Intelligent Systems and Technology (TIST)*  -->
-- **Program Committee**: ICMR 2026, Big Data 2026, ACMMM 2026
-- **Reviewer** — ICLR, ICML, KDD, ACL, EMNLP, MM, Big Data, CIKM, IJCAI, RecSys, WWW, SDM, ACM TIST, ACM Computing Surveys
+
+* **Web Chair** — KDD 2027
+* **Guest Editor** — *ACM Transactions on Intelligent Systems and Technology (TIST)*
+* **Program Committee Member** — ICMR 2026, IEEE BigData 2026, ACM MM 2026
+* **Reviewer** — ICLR, ICML, KDD, ACL, EMNLP, ACM MM, IEEE BigData, CIKM, IJCAI, RecSys, WWW, SDM, ACM TIST, ACM Computing Surveys
 
 ---
 
