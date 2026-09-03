@@ -15,7 +15,7 @@ I am a last-year Ph.D. student in the [College of Information Sciences and Techn
 <span style="color:red"><strong>I plan to enter the 2026–2027 academic job market and apply for faculty and postdoctoral positions.</strong></span>
 
 My research interests include:  
-**LLM Knowledge**, **Knowledge Graphs**, **Graph Learning**, **Graph Reasoning**, **Small Language Models (SLMs)**, **Test-time Scaling** and their intersections.  
+**Graph Learning**, **Small Language Models (SLMs)**, **Efficient LLMs** and their intersections.  
 
 Please reach out to fqw5095 at psu dot edu for research collaboration. 
 
