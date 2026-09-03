@@ -42,6 +42,10 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ### 📝 Pre-prints
 
++ **Unified Multi-Dimensional Benchmark for Complex Graph Reasoning in Large Language Models**    
+    **Fali Wang**, Ali Al-Lawati, Iliyas Bektas, Jinxuan Fang, Alek Melenski, Tianxiang Zhao, Yao Ma, Suhang Wang
+    [[📄 arXiv Preprint](https://arxiv.org/abs/2608.12391)]
+
 + **A survey on collaborating small and large language models for performance, cost-effectiveness, cloud-edge privacy, and trustworthiness**  
     **Fali Wang**, Jihai Chen, Shuhua Yang, Ali Al-Lawati, Linli Tang, Hui Liu, Suhang Wang
     [[📄 arXiv Preprint](https://arxiv.org/abs/2510.13890)]
