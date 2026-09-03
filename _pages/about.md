@@ -117,7 +117,7 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 
 ## 📚 Teaching
 - Teaching Assistant — **DS 420: Network Analytics**, PSU, Fall 2024
-- Teaching Assistant - **DS 305: Algorithmics**, PSU, Spring and Fall 2026
+- Teaching Assistant — **DS 305: Algorithmics**, PSU, Spring and Fall 2026
 
 ---
 
