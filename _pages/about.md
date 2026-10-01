@@ -22,9 +22,10 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
 ---
 
 ## 📰 News
+- **09/2026** — Amazon Intern work, AgentRE for generalizing test-time scaling as a graph, has been accepted by NIPS 2026 [[🔗 Link](https://arxiv.org/pdf/2511.00086)]. 
 - **05/2026** — Started as an **Applied Scientist INTERN** at Microsoft, Redmond.   
 - **02/2026** — Graph-Assisted LLM Survey paper has been released and accepted by ACL 2026. [[🔗 Link](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561/v1)] [[💻 GitHub](https://github.com/FairyFali/Graph4LLM-Survey)]
-- **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 as a Poster [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
+- **09/2025** — Amazon Intern work, AgentTTS for test-time scaling budget allocation, has been accepted by NIPS 2025 [[🔗 Link](https://arxiv.org/abs/2508.00890)]. 
 - **08/2025** — SLMs Survey paper has been accepted for publication in the ACM TIST [[🔗 Link](https://dl.acm.org/doi/10.1145/3768165)]. 
 - **08/2025** — Organized a Tutorial regarding SLMs [[🔗 Link](https://fairyfali.github.io/kdd2025-tutorial/)] and a Workshop on LLM4ECommerce [[🔗 Link](https://kdd2025llm4ecommerce.github.io/)]
 - **04/2025** — Gave an invited SLM talk at [WWW LLM for E-Commerce Workshop](https://llm4ecommerce.github.io/schedule/) [[📑 Slides]](/files/SLMs_Survey_Slides__Copy_for_WWW_.pdf)  
@@ -50,41 +51,43 @@ Please reach out to fqw5095 at psu dot edu for research collaboration.
     **Fali Wang**, Jihai Chen, Shuhua Yang, Ali Al-Lawati, Linli Tang, Hui Liu, Suhang Wang
     [[📄 arXiv Preprint](https://arxiv.org/abs/2510.13890)]
 
-+ **Generalizing Test-time Compute-optimal Scaling as an Optimizable Graph**  
-    **Fali Wang**, Jihai Chen, Shuhua Yang, Runxue Bao, Tianxiang Zhao, Zhiwei Zhang, Xianfeng Tang, Hui Liu, Qi He, Suhang Wang
-    [[📄 arXiv Preprint](https://arxiv.org/abs/2511.00086)]
 
 ---
 
 ### 🎤 Conference Papers
++ 
++ **Generalizing Test-time Compute-optimal Scaling as an Optimizable Graph**  
+    **Fali Wang**, Jihai Chen, Shuhua Yang, Runxue Bao, Tianxiang Zhao, Zhiwei Zhang, Xianfeng Tang, Hui Liu, Qi He, Suhang Wang
+    [[📄 NeurIPS 2026](https://arxiv.org/abs/2511.00086)]
+  
 + **GraphSkill: Documentation-Guided Hierarchical Retrieval-Augmented Coding for Complex Graph Reasoning** (KDD 2026)  
     **Fali Wang**, Chenglin Weng, Xianren Zhang, Siyuan Hong, Hui Liu, Suhang Wang
-   [[📄 arXiv Preprint](https://arxiv.org/abs/2603.06620)]
+   [[📄 KDD 2026](https://arxiv.org/abs/2603.06620)]
 
 + **Graphs for LLMs: A Survey of Graph-Assisted Large Language Models**  (ACL 2026 Findings)  
     Haitong Luo, **Fali Wang (co-first authors)**, Weiyao Zhang, Xianren Zhang, Zhiwei Zhang, Tianxiang Zhao, Minhua Lin, Jiahao Zhang, Hui Liu, Xianfeng Tang, Qi He, Suhang Wang, Xuying Meng, Yujun Zhang
-    [[📄 Preprint](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561)]
+    [[📄 ACL 2026](https://www.techrxiv.org/doi/full/10.36227/techrxiv.177162088.88045561)]
 
 
 + **AgentTTS: Large Language Model Agent for Test-time Compute-optimal Scaling Strategy in Complex Tasks** (NIPS 2025 Poster)  
    **Fali Wang**, Hui Liu, Zhenwei Dai, Jingying Zeng, Zhiwei Zhang, Zongyu Wu, Chen Luo, Zhen Li, Xianfeng Tang, Qi He, Suhang Wang  
-   [[📄 arXiv Preprint](https://arxiv.org/abs/2508.00890)]
+   [[📄 NeurIPS 2025](https://arxiv.org/abs/2508.00890)]
 
 + **A Survey on Small Language Models in the Era of Large Language Models: Architecture, Capabilities, and Trustworthiness** *(KDD 2025)*  
    **Fali Wang**, Minhua Lin, Yao Ma, Hui Liu, Qi He, Xianfeng Tang, Jiliang Tang, Jian Pei, Suhang Wang  
-   [[📄 Paper](https://dl.acm.org/doi/abs/10.1145/3711896.3736563)]
+   [[📄 KDD 2025](https://dl.acm.org/doi/abs/10.1145/3711896.3736563)]
 
 + **InfuserKI: Enhancing Large Language Models with Knowledge Graphs via Infuser-Guided Knowledge Integration** *(EMNLP 2024)*  
    **Fali Wang**, Runxue Bao, Suhang Wang, Wenchao Yu, Yanchi Liu, Wei Cheng, Haifeng Chen  
-   [[📄 Paper](https://aclanthology.org/2024.findings-emnlp.209.pdf)]
+   [[📄 EMNLP 2024](https://aclanthology.org/2024.findings-emnlp.209.pdf)]
 
 + **HC-GST: Heterophily-aware Distribution Consistency-based Graph Self-training** *(CIKM 2024)*  
    **Fali Wang**, Tianxiang Zhao, Junjie Xu, Suhang Wang  
-   [[📄 Paper](https://arxiv.org/pdf/2407.17787)]
+   [[📄 CIKM 2024](https://arxiv.org/pdf/2407.17787)]
 
 + **Distribution Consistency-based Self-Training for Graph Neural Networks with Sparse Labels** *(WSDM 2024)*  
    **Fali Wang**, Tianxiang Zhao, Suhang Wang  
-   [[📄 Paper](https://arxiv.org/pdf/2401.10394)]
+   [[📄 WSDM 2024](https://arxiv.org/pdf/2401.10394)]
 
 + **Macrobert: Maximizing certified region of bert to adversarial word substitutions** _(DASFAA 2021)_    
   **Fali Wang**, Zheng Lin, Zhengxiao Liu, Mingyu Zheng, Lei Wang, Daren Zha
