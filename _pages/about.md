@@ -267,7 +267,7 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 </div>
 
 <div class="fw-pub" id="pub-infuserki">
-  <div class="fw-pub-fig"><a href="https://aclanthology.org/2024.findings-emnlp.209.pdf"><img src="/images/papers/infuserki.png" alt="InfuserKI overview" onerror="this.closest('.fw-pub-fig').style.display='none'"></a></div>
+  <div class="fw-pub-fig"><a href="https://aclanthology.org/2024.findings-emnlp.209.pdf"><img src="/images/papers/InfuserKI.png" alt="InfuserKI overview" onerror="this.closest('.fw-pub-fig').style.display='none'"></a></div>
   <div class="fw-pub-body">
     <p class="fw-pub-title"><a href="https://aclanthology.org/2024.findings-emnlp.209.pdf">InfuserKI: Enhancing Large Language Models with Knowledge Graphs via Infuser-Guided Knowledge Integration</a></p>
     <p class="fw-pub-authors"><strong>Fali Wang</strong>, Runxue Bao, Suhang Wang, Wenchao Yu, Yanchi Liu, Wei Cheng, Haifeng Chen</p>
