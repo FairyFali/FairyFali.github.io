@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "Fali Wang"
-excerpt: "Fali Wang — Ph.D. candidate at Penn State working on efficient AI, test-time scaling, small language models, and graph learning."
+excerpt: "Fali Wang — Ph.D. candidate at Penn State working on efficient AI, graph learning, and trustworthy AI."
 author_profile: true
 redirect_from:
   - /about/
@@ -108,7 +108,9 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 <section class="fw-hero">
   <h1>👋 Hi, I am Fali Wang</h1>
 
-  <p>I am a last-year Ph.D. candidate in the <a href="https://ist.psu.edu">College of Information Sciences and Technology</a> at <a href="https://www.psu.edu/">The Pennsylvania State University</a>, advised by Prof. <a href="https://suhangwang.ist.psu.edu/">Suhang Wang</a> in the Data Science and Machine Learning Lab. Before Penn State, I received my M.Eng. from the University of Chinese Academy of Sciences and my B.Eng. from Northeast Forestry University.</p>
+  <p>I am a last-year Ph.D. candidate in the <a href="https://ist.psu.edu">College of Information Sciences and Technology</a> at <a href="https://www.psu.edu/">The Pennsylvania State University</a>, advised by Prof. <a href="https://suhangwang.ist.psu.edu/">Suhang Wang</a> in the Data Science and Machine Learning Lab. 
+    <!-- Before Penn State, I received my M.Eng. from the University of Chinese Academy of Sciences and my B.Eng. from Northeast Forestry University. -->
+    </p>
 
   <p>I have interned at <strong>Microsoft</strong> (Redmond), <strong>Amazon</strong> (Palo Alto), and <strong>NEC Laboratories America</strong> (Princeton), working on test-time scaling, efficient AI, and knowledge-enhanced LLMs.</p>
 
@@ -118,11 +120,11 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
   </div>
 
   <div class="fw-chips">
-    <a href="mailto:fqw5095@psu.edu">Email</a>
+    <a href="mailto:faliwang@psu.edu">Email</a>
     <a href="/files/CV_FALIWANG.pdf">CV</a>
     <a href="https://scholar.google.com/citations?user=myQcu6cAAAAJ&amp;hl=en">Google Scholar</a>
     <a href="https://github.com/FairyFali">GitHub</a>
-    <a href="https://twitter.com/FairyWFL">Twitter / X</a>
+    <!-- <a href="https://twitter.com/FairyWFL">Twitter / X</a> -->
     <a href="https://orcid.org/0009-0000-8321-6365">ORCID</a>
   </div>
 </section>
@@ -134,9 +136,10 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 
 <ul class="fw-ri">
   <li><strong>Efficient AI &amp; test-time scaling.</strong> Compute-optimal budget allocation at the task and query level, adaptive model routing, and agents that search scaling strategies for complex multi-stage tasks (<a href="#pub-agenttts">AgentTTS</a>, <a href="#pub-agentre">AgentRE</a>).</li>
-  <li><strong>Small language models.</strong> SLMs as efficient foundations for next-generation AI: capability enhancement under limited compute, SLM–LLM collaboration, and cloud-edge deployment with privacy and trustworthiness (<a href="#pub-slm-survey">SLM Survey</a>, <a href="#pub-slm-llm">SLM–LLM Collaboration Survey</a>).</li>
-  <li><strong>Agent-in-the-loop &amp; self-improving AI.</strong> Agents that iteratively optimize their own workflows — collaboration topology, model and role assignment, memory, and compute — by accumulating and reusing knowledge from prior trajectories and feedback.</li>
-  <li><strong>Graph learning &amp; graphs for LLMs.</strong> Graph self-training under distribution shift, LLM graph reasoning and its benchmarking, knowledge-graph-enhanced LLMs, and graph-enhanced retrieval-augmented generation (<a href="#pub-graphskill">GraphSkill</a>, <a href="#pub-graph4llm">Graphs for LLMs</a>, <a href="#pub-infuserki">InfuserKI</a>).</li>
+  <li><strong>Small language models.</strong> SLMs as efficient foundations for next-generation AI: capability enhancement under limited compute, SLM–LLM collaboration, and cloud-edge deployment with privacy and trustworthiness (<a href="#pub-slm-survey">SLM Survey</a>, <a href="#pub-slm-llm">SLM–LLM Collaboration</a>).</li>
+  <li><strong>Agent-in-the-loop &amp; self-improving AI.</strong> Agents that iteratively optimize their own workflows — collaboration topology, model and role assignment, memory, and compute — by accumulating and reusing knowledge from prior trajectories and feedback (<a href="#pub-agenttts">AgentTTS</a>, <a href="#pub-agentre">AgentRE</a>, <a href="#pub-dcgst">DC-GST</a>, <a href="#pub-hcgst">HC-GST</a>).</li>
+  <li><strong>Graph learning &amp; graphs for LLMs.</strong> Graph self-training under distribution shift, LLM graph reasoning and its benchmarking, knowledge-graph-enhanced LLMs, and graph-enhanced retrieval-augmented generation (<a href="#pub-dcgst">DC-GST</a>, <a href="#pub-hcgst">HC-GST</a>, <a href="#pub-graphskill">GraphSkill</a>, <a href="#pub-graph4llm">Graphs for LLMs</a>, <a href="#pub-infuserki">InfuserKI</a>).</li>
+    <li><strong>Trustworthy AI.</strong> Robustness, security, privacy, and reliability across language models and graph learning: distribution shift and robustness in GNNs, certified robustness of BERT, backdoor attacks and defenses, machine unlearning, privacy risks in vision-language models, hallucination mitigation, and vulnerabilities in RAG and cloud-edge AI systems (<a href="#">MacroBERT</a><a href="#pub-dcgst">DC-GST</a>, <a href="#pub-hcgst">HC-GST</a>, <a href="#pub-infuserki">InfuserKI</a>, <a href="#pub-slm-llm">SLM–LLM Collaboration</a>).</li>
 </ul>
 
 <!-- ============================== NEWS ============================== -->
