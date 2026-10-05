@@ -132,7 +132,9 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 <!-- ============================ RESEARCH ============================ -->
 <h2 id="research">Research Interests</h2>
 
-<p>I build <strong>efficient AI systems that allocate models and compute according to what each task actually needs</strong>, and study how graphs and language models can enhance each other. My work spans four connected directions:</p>
+<!-- <p>I build <strong>efficient AI systems that allocate models and compute according to what each task actually needs</strong>, and study how graphs and language models can enhance each other. My work spans four connected directions:</p> -->
+
+<p>I work on <strong>efficient and trustworthy AI</strong>: allocating models and compute to what each task actually needs, making language models and graph learners robust and reliable, and studying how graphs and LLMs can enhance each other. My work spans several connected directions:</p>
 
 <ul class="fw-ri">
   <li><strong>Efficient AI &amp; test-time scaling.</strong> Compute-optimal budget allocation at the task and query level, adaptive model routing, and agents that search scaling strategies for complex multi-stage tasks (<a href="#pub-agenttts">AgentTTS</a>, <a href="#pub-agentre">AgentRE</a>).</li>
