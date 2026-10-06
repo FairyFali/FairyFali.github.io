@@ -123,7 +123,7 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 
   <div class="fw-market">
     <strong>I plan to enter the 2026–2027 academic job market and apply for faculty and postdoctoral positions.</strong>
-    Please reach out to <code>fqw5095 [at] psu [dot] edu</code> for opportunities or research collaboration.
+    Please reach out to <code>faliwang [at] psu [dot] edu</code> for opportunities or research collaboration.
   </div>
 
   <div class="fw-chips">
