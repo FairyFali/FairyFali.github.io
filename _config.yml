@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Fali Wang"
   avatar           : "profile.jpg"
-  bio              : "Ph.D. student at IST, The Pennsylvania State University"
+  bio              : "Ph.D. candidate at IST, The Pennsylvania State University"
   location         : "University Park, PA"
   employer         :
   # pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=myQcu6cAAAAJ&hl=en"
-  email            : "fqw5095@psu.edu"
+  email            : "faliwang@psu.edu"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
