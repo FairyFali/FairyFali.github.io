@@ -90,11 +90,18 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
 
 /* ---- honors ---- */
 .fw-honors li { margin-bottom: .35rem; }
+
+  /* ---- back to top ---- */
+.fw-top { position: fixed; right: 1.25rem; bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: inherit; background: rgba(127,127,127,.18); border: 1px solid rgba(127,127,127,.35); backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,.12); text-decoration: none; z-index: 50; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s, transform .2s, visibility .2s; }
+.fw-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.fw-top:hover, .fw-top:focus-visible { border-color: currentColor; background: rgba(127,127,127,.3); }
+.fw-top svg { width: 20px; height: 20px; }
+@media (prefers-reduced-motion: reduce) { .fw-top { transition: none; } }
 </style>
 
 <div class="fw" markdown="0">
-
-<nav class="fw-nav" aria-label="Sections">
+<nav class="fw-nav" id="top" aria-label="Sections">
+<!-- <nav class="fw-nav" aria-label="Sections"> -->
   <a href="#news">News</a>
   <a href="#research">Research</a>
   <a href="#publications">Publications</a>
@@ -466,5 +473,27 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
   <img src="https://mapmyvisitors.com/map.png?d=YOUR_KEY&cl=ffffff" alt="Visitor map" style="max-width:100%;">
 </a>
      =================================================================== -->
+
+<p class="fw-small fw-muted" style="margin-top:2.5rem;">Visitor map</p>
+<a href="https://mapmyvisitors.com/web/1c8ny"  title="Visit tracker"><img src="https://mapmyvisitors.com/map.png?d=Skts3eL1Whr-UI-ADGnDUkDfnX65g8K4XcmdyGNJj68&cl=ffffff" /></a>
+
+<a href="#top" class="fw-top" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+<script>
+(function () {
+  var btn = document.querySelector('.fw-top');
+  if (!btn) return;
+  var toggle = function () { btn.classList.toggle('is-visible', window.scrollY > 400); };
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    btn.blur();
+  });
+})();
+</script>
 
 </div>
