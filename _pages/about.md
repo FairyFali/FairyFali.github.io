@@ -475,7 +475,8 @@ details.fw-fold summary { cursor: pointer; font-weight: 600; margin: .8rem 0 .4r
      =================================================================== -->
 
 <p class="fw-small fw-muted" style="margin-top:2.5rem;">Visitor map</p>
-<a href="https://mapmyvisitors.com/web/1c8ny"  title="Visit tracker"><img src="https://mapmyvisitors.com/map.png?d=Skts3eL1Whr-UI-ADGnDUkDfnX65g8K4XcmdyGNJj68&cl=ffffff" /></a>
+<!-- <a href="https://mapmyvisitors.com/web/1c8ny"  title="Visit tracker"><img src="https://mapmyvisitors.com/map.png?d=Skts3eL1Whr-UI-ADGnDUkDfnX65g8K4XcmdyGNJj68&cl=ffffff" /></a> -->
+<script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=Skts3eL1Whr-UI-ADGnDUkDfnX65g8K4XcmdyGNJj68'></script>
 
 <a href="#top" class="fw-top" aria-label="Back to top" title="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
